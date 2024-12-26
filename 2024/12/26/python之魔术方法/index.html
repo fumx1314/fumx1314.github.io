@@ -12,7 +12,7 @@
   <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_tq6stt6tcg';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};window.REIMU_CONFIG.code_block = {"expand":true};</script>
   
   <title>
-    tags |
+    python之魔术方法 |
     
     KL
   </title>
@@ -27,20 +27,19 @@
 
   
   
-    <meta name="description" content="世所谓英雄者，不以挫抑而灰心，不以失败而退怯">
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://example.com/tags/index.html">
+    <meta name="description" content="[TOC] 一、构造方法关键词： 1__init__  作用：可以直接在创建对象时对类中属性赋值 示例： 12345678class a:    name&#x3D;None#类中定义可不写    age&#x3D;None    def __init__(self,name,age):        self.name&#x3D;name        self.age&#x3D;agex&#x3D;a(&quot;小米&quot;,18)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python之魔术方法">
+<meta property="og:url" content="http://example.com/2024/12/26/python%E4%B9%8B%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="KL">
-<meta property="og:description" content="世所谓英雄者，不以挫抑而灰心，不以失败而退怯">
+<meta property="og:description" content="[TOC] 一、构造方法关键词： 1__init__  作用：可以直接在创建对象时对类中属性赋值 示例： 12345678class a:    name&#x3D;None#类中定义可不写    age&#x3D;None    def __init__(self,name,age):        self.name&#x3D;name        self.age&#x3D;agex&#x3D;a(&quot;小米&quot;,18)">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/banner.webp">
-<meta property="article:published_time" content="2024-12-07T14:33:05.000Z">
-<meta property="article:modified_time" content="2024-12-07T14:49:31.929Z">
+<meta property="article:published_time" content="2024-12-26T03:22:07.000Z">
+<meta property="article:modified_time" content="2024-12-26T03:40:05.383Z">
 <meta property="article:author" content="fuboy">
-<meta property="article:tag" content="博客">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="知识点">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/banner.webp">
   
   
     <link rel="alternate" href="/atom.xml" title="KL" type="application/atom+xml">
@@ -163,7 +162,7 @@
 <header id="header">
   
     
-      <img fetchpriority="high" src="/images/banner.webp" alt="tags">
+      <img fetchpriority="high" src="/images/banner.webp" alt="python之魔术方法">
     
   
   <div id="header-outer">
@@ -172,7 +171,7 @@
         
         
           <a href="/" id="logo">
-            <h1 data-aos="slide-up">tags</h1>
+            <h1 data-aos="slide-up">python之魔术方法</h1>
           </a>
         
       
@@ -188,17 +187,21 @@
 
         <div id="content">
           
-          <section id="main"><article id="努力-" class="h-entry article article-type-努力" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+          <section id="main"><article id="post-python之魔术方法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner" data-aos="fade-up">
     <div class="article-meta">
       <div class="article-date">
-  <a href="/tags/index.html" class="article-date-link" data-aos="zoom-in">
-    <time datetime="2024-12-07T14:33:05.000Z" itemprop="datePublished">2024-12-07</time>
-    <time style="display: none;" id="post-update-time">2024-12-07</time>
+  <a href="/2024/12/26/python%E4%B9%8B%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2024-12-26T03:22:07.000Z" itemprop="datePublished">2024-12-26</time>
+    <time style="display: none;" id="post-update-time">2024-12-26</time>
   </a>
 </div>
 
       
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/" data-aos="zoom-in">python</a>
+  </div>
+
 
     </div>
     <div class="hr-line"></div>
@@ -207,7 +210,18 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
       
-        
+        <p>[TOC]</p>
+<h2 id="一、构造方法"><a href="#一、构造方法" class="headerlink" title="一、构造方法"></a>一、构造方法</h2><p>关键词：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__init__</span><br></pre></td></tr></table></figure>
+
+<p>作用：可以直接在创建对象时对类中属性赋值</p>
+<p>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">a</span>:</span><br><span class="line">    name=<span class="literal">None</span><span class="comment">#类中定义可不写</span></span><br><span class="line">    age=<span class="literal">None</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,name,age</span>):</span><br><span class="line">        <span class="variable language_">self</span>.name=name</span><br><span class="line">        <span class="variable language_">self</span>.age=age</span><br><span class="line">x=a(<span class="string">&quot;小米&quot;</span>,<span class="number">18</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="二、字符串方法"><a href="#二、字符串方法" class="headerlink" title="二、字符串方法"></a>二、字符串方法</h2><p>关键字：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__str__</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
     <footer class="article-footer">
@@ -219,10 +233,33 @@
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="tag">知识点</a></li></ul>
+
 
     </footer>
   </div>
   
+  <nav id="article-nav" data-aos="fade-up">
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/images/banner.webp" data-sizes="auto" alt="python之面向对象" class="lazyload">
+        
+      
+      <a href="/2024/12/25/python%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          python之面向对象
+        
+      </h3>
+    </div>
+    
+  </nav>
+
 
 </article>
 
@@ -234,10 +271,19 @@
 </section>
           
             <aside id="sidebar">
-  <div class="sidebar-wrapper ">
+  <div class="sidebar-wrapper wrap-sticky">
     <div class="sidebar-wrap" data-aos="fade-up">
       
-        <div class="sidebar-author">
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">一、构造方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">二、字符串方法</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
   <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="fuboy" class="lazyload">
   <div class="sidebar-author-name">fuboy</div>
   <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
@@ -296,8 +342,13 @@
     
   
 </div>
-
+</div>
       
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
       
     </div>
   </div>
@@ -359,7 +410,16 @@
       <nav id="mobile-nav">
   <div class="sidebar-wrap">
     
-      <div class="sidebar-author">
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">一、构造方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">二、字符串方法</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
   <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="fuboy" class="lazyload">
   <div class="sidebar-author-name">fuboy</div>
   <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
@@ -418,9 +478,14 @@
     
   
 </div>
-
+</div>
     
   </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
   
 </nav>
 
