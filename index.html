@@ -207,24 +207,26 @@
     <div class="post-info">
       <div class="post-meta">
         <span><span class="icon-calendar"></span>2024-12-26</span>
-        <span><span class="icon-pencil"></span>71 字</span>
+        <span><span class="icon-pencil"></span>406 字</span>
         <span><span class="icon-clock"></span>1 分钟</span>
       </div>
       <h2 class="post-title">python之魔术方法</h2>
       <article class="post-article">
         
           [TOC]
-一、构造方法关键词：
+一、init()构造方法关键词：
 1__init__
 
 作用：可以直接在创建对象时对类中属性赋值
 示例：
 12345678class a:    name=None#类中定义可不写    age=None    def __init__(self,name,age):        self.name=name        self.age=agex=a(&amp;quot;小米&amp;quot;,18)
 
-二、字符串方法关键字：
+二、str()字符串方法关键字：
 1__str__
 
-
+此方法是当打印对象或者使用str()转换对象时被调用
+话不多说，上代码：
+12345678class person:    def _
         
       </article>
     </div>
@@ -367,7 +369,7 @@
     
       <div>
         <span class="icon-brush"></span>
-        317
+        652
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
         00:02
