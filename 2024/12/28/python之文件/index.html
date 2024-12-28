@@ -12,7 +12,7 @@
   <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_tq6stt6tcg';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};window.REIMU_CONFIG.code_block = {"expand":true};</script>
   
   <title>
-    正则表达式 |
+    python之文件 |
     
     KL
   </title>
@@ -27,18 +27,21 @@
 
   
   
-    <meta name="description" content="正则表达式正则表达式(regular expression)描述了一种字符串匹配的模式（pattern），可以用来检查一个串是否含有某种子串、将匹配的子串替换或者从某个串中取出符合某个条件的子串等。 1.行定位符行定位符用于规定匹配模式只能出现在行的开头或者结尾，“^”表示行的开始，”$”表示行的结尾 例如：^tm  和 tm$ 2.元字符除了”^”和”$”，还有很多常用的元字符，例如\bmr\w">
+    <meta name="description" content="一、open()函数语法：open(name,mode,encoding) name：是要打开的目标文件名的字符串（可以包含文件所在的具体路径） mode:设置打开文件的模式（访问模式):只读、写入、追加等。 encoding：编码格式（推荐使用utf-8） file&#x3D;open(‘python.txt’,’r’,encoding&#x3D;’’ UTF-8”) (encoding 的顺序">
 <meta property="og:type" content="article">
-<meta property="og:title" content="正则表达式">
-<meta property="og:url" content="http://example.com/2024/12/28/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.html">
+<meta property="og:title" content="python之文件">
+<meta property="og:url" content="http://example.com/2024/12/28/python%E4%B9%8B%E6%96%87%E4%BB%B6/index.html">
 <meta property="og:site_name" content="KL">
-<meta property="og:description" content="正则表达式正则表达式(regular expression)描述了一种字符串匹配的模式（pattern），可以用来检查一个串是否含有某种子串、将匹配的子串替换或者从某个串中取出符合某个条件的子串等。 1.行定位符行定位符用于规定匹配模式只能出现在行的开头或者结尾，“^”表示行的开始，”$”表示行的结尾 例如：^tm  和 tm$ 2.元字符除了”^”和”$”，还有很多常用的元字符，例如\bmr\w">
+<meta property="og:description" content="一、open()函数语法：open(name,mode,encoding) name：是要打开的目标文件名的字符串（可以包含文件所在的具体路径） mode:设置打开文件的模式（访问模式):只读、写入、追加等。 encoding：编码格式（推荐使用utf-8） file&#x3D;open(‘python.txt’,’r’,encoding&#x3D;’’ UTF-8”) (encoding 的顺序">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-12-28T05:55:27.000Z">
-<meta property="article:modified_time" content="2024-12-28T07:39:28.061Z">
+<meta property="og:image" content="http://example.com/python%E4%B9%8B%E6%96%87%E4%BB%B6/2ff4b2882837d7182a8f403c0e2e085c.png">
+<meta property="article:published_time" content="2024-12-28T11:05:10.000Z">
+<meta property="article:modified_time" content="2024-12-28T11:53:06.146Z">
 <meta property="article:author" content="fuboy">
-<meta property="article:tag" content="正则表达式">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="知识点">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/python%E4%B9%8B%E6%96%87%E4%BB%B6/2ff4b2882837d7182a8f403c0e2e085c.png">
   
   
     <link rel="alternate" href="/atom.xml" title="KL" type="application/atom+xml">
@@ -161,7 +164,7 @@
 <header id="header">
   
     
-      <img fetchpriority="high" src="/images/banner.webp" alt="正则表达式">
+      <img fetchpriority="high" src="/images/banner.webp" alt="python之文件">
     
   
   <div id="header-outer">
@@ -170,7 +173,7 @@
         
         
           <a href="/" id="logo">
-            <h1 data-aos="slide-up">正则表达式</h1>
+            <h1 data-aos="slide-up">python之文件</h1>
           </a>
         
       
@@ -186,19 +189,19 @@
 
         <div id="content">
           
-          <section id="main"><article id="post-正则表达式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+          <section id="main"><article id="post-python之文件" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner" data-aos="fade-up">
     <div class="article-meta">
       <div class="article-date">
-  <a href="/2024/12/28/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="article-date-link" data-aos="zoom-in">
-    <time datetime="2024-12-28T05:55:27.000Z" itemprop="datePublished">2024-12-28</time>
+  <a href="/2024/12/28/python%E4%B9%8B%E6%96%87%E4%BB%B6/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2024-12-28T11:05:10.000Z" itemprop="datePublished">2024-12-28</time>
     <time style="display: none;" id="post-update-time">2024-12-28</time>
   </a>
 </div>
 
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" data-aos="zoom-in">正则表达式</a>
+    <a class="article-category-link" href="/categories/python/" data-aos="zoom-in">python</a>
   </div>
 
 
@@ -209,94 +212,33 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
       
-        <h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><p>正则表达式(regular expression)描述了一种<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D&spm=1001.2101.3001.7020">字符串匹配</a>的模式（pattern），可以用来检查一个串是否含有某种子串、将匹配的子串替换或者从某个串中取出符合某个条件的子串等。</p>
-<h3 id="1-行定位符"><a href="#1-行定位符" class="headerlink" title="1.行定位符"></a>1.行定位符</h3><p>行定位符用于规定匹配模式只能出现在行的开头或者结尾，“^”表示行的开始，”$”表示行的结尾</p>
-<p>例如：<code>^tm</code>  和 <code>tm$</code></p>
-<h3 id="2-元字符"><a href="#2-元字符" class="headerlink" title="2.元字符"></a>2.元字符</h3><p>除了”^”和”$”，还有很多常用的元字符，例如<code>\bmr\w*\b</code>,两个\b表示匹配单词，*表示匹配0次或多次，\w表示匹配字母、数字、下划线或汉字，该正则表达式就表示匹配以字母”mr”开头的单词</p>
-<table>
-<thead>
-<tr>
-<th>元字符</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>.</td>
-<td>匹配除换行符以外的任意字符</td>
-</tr>
-<tr>
-<td>\w</td>
-<td>匹配字母、数字、下划线或汉字</td>
-</tr>
-<tr>
-<td>\s</td>
-<td>匹配任意的空白字符</td>
-</tr>
-<tr>
-<td>\d</td>
-<td>匹配数字</td>
-</tr>
-<tr>
-<td>\b</td>
-<td>匹配单词的开始或结束</td>
-</tr>
-<tr>
-<td>^</td>
-<td>匹配字符串的开始</td>
-</tr>
-<tr>
-<td>$</td>
-<td>匹配字符串的结束</td>
-</tr>
-</tbody></table>
-<h3 id="3-限定符"><a href="#3-限定符" class="headerlink" title="3.限定符"></a>3.限定符</h3><table>
-<thead>
-<tr>
-<th>限定符</th>
-<th>说明</th>
-<th>举例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>?</td>
-<td>匹配前面的字符零次或一次</td>
-<td>colou?r,该表达式可以匹配colour和color</td>
-</tr>
-<tr>
-<td>+</td>
-<td>匹配前面的字符一次或多次</td>
-<td>go+gle,该表达式可以匹配的范围从gogle到goo…gle</td>
-</tr>
-<tr>
-<td>*</td>
-<td>匹配前面的字符零次或多次</td>
-<td>go*gle,该表达式可以匹配的范围从ggle到goo…gle</td>
-</tr>
-<tr>
-<td>{n}</td>
-<td>匹配前面的字符n次</td>
-<td>go{2}gle,该表达式只匹配google</td>
-</tr>
-<tr>
-<td>{n,}</td>
-<td>匹配前面的字符最少n次</td>
-<td>go{2,}gle,该表达式可以匹配的范围从google到goo…gle</td>
-</tr>
-<tr>
-<td>{n,m}</td>
-<td>匹配前面的字符最少n次，最多m次</td>
-<td>employe{0,2}，该表达式可以匹配employ,employe,employee</td>
-</tr>
-</tbody></table>
-<h3 id="4-字符类"><a href="#4-字符类" class="headerlink" title="4.字符类"></a>4.字符类</h3><p>类如[a-zA-Z]、[asfsfas]</p>
-<h3 id="5-排除字符"><a href="#5-排除字符" class="headerlink" title="5.排除字符"></a>5.排除字符</h3><p>如果把”^”符放入[]中就表示排除</p>
-<p>例如<code>[^a-zA-Z]</code>就表示匹配不以字母开头的字符串</p>
-<h3 id="6-选择字符"><a href="#6-选择字符" class="headerlink" title="6.选择字符"></a>6.选择字符</h3><p><code>|</code></p>
-<p>该字符<strong>可以理解为“或”</strong>，匹配身份证的正则表达式可以写成如下方式：<br><code>(^\d&#123;15&#125;$)|(^\d&#123;18&#125;$)|(^\d&#123;17&#125;(\d|X\x)$)</code><br>该正则表达式的意思是匹配15位数字，或者18位数字，或者17位数字和最后一位（最后一位可以是数字，也可以是X或x）。</p>
-<h3 id="7-转义字符"><a href="#7-转义字符" class="headerlink" title="7.转义字符"></a>7.转义字符</h3><p><strong>正则表达式中的转义字符(<code>\</code>)将拥有特殊含义的”<code>?</code>“,”<code>.</code>“等字符转化成无特殊意义的普通字符</strong></p>
-<p>例如，我们匹配一个诸如127.0.0.1格式的ip地址，如果直接使用点字符:<code>[0-9]&#123;1,3&#125;(.[0-9]&#123;1,3&#125;)&#123; 3&#125;</code></p>
-<p>这显然不对，因为”.”可以匹配任意字符，所以我们要使用转义字符：<code>[0-9]&#123;1,3&#125;(\.[0-9]&#123;1,3&#125;)&#123;3&#125;</code></p>
-<h3 id="8-分组"><a href="#8-分组" class="headerlink" title="8.分组"></a>8.分组</h3><p>例如(.[0-9]{1,3}){ 3}就是把小括号中的分为一组，{3}就是操作三次</p>
+        <h1 id="一、open-函数"><a href="#一、open-函数" class="headerlink" title="一、open()函数"></a>一、open()函数</h1><p><strong>语法</strong>：open(name,mode,encoding)</p>
+<p><strong>name</strong>：是要打开的目标文件名的字符串（可以包含文件所在的具体路径）</p>
+<p><strong>mode</strong>:设置打开文件的模式（访问模式):只读、写入、追加等。</p>
+<p>encoding：编码格式（推荐使用utf-8）</p>
+<p>file&#x3D;open(‘python.txt’,’r’,encoding&#x3D;’’ UTF-8”)</p>
+<p>(encoding 的顺序不是第三位，所以不能用位置参数，用关键字参数直接指定)</p>
+<p>mode:</p>
+<p><img src="/./python%E4%B9%8B%E6%96%87%E4%BB%B6/2ff4b2882837d7182a8f403c0e2e085c.png"></p>
+<h1 id="二、读文件-read"><a href="#二、读文件-read" class="headerlink" title="二、读文件(read)"></a>二、读文件(read)</h1><h4 id="1-文件对象-read-number"><a href="#1-文件对象-read-number" class="headerlink" title="1.文件对象.read(number)"></a>1.文件对象.read(number)</h4><p>如果number没有，那将会读取文件中的全部数据</p>
+<p>注意：按理来说一个汉字三个字节，但read(n)会自动编析汉字，将其转换为汉字数</p>
+<h4 id="2-文件对象-readline"><a href="#2-文件对象-readline" class="headerlink" title="2.文件对象.readline()"></a>2.文件对象.readline()</h4><p>将会一行行读取</p>
+<h4 id="3-文件对象-readlines"><a href="#3-文件对象-readlines" class="headerlink" title="3.文件对象.readlines()"></a>3.文件对象.readlines()</h4><p>按行读取所有数据，结果为列表，一行为一个成员<br><code>[&#39;这里是第一行句子\n&#39;, &#39;这是是第二行句子\n&#39;, &#39;这里是第三行句子\n&#39;]</code></p>
+<h4 id="4-with"><a href="#4-with" class="headerlink" title="4.with"></a>4.with</h4><p><code>with + open(文件地址）as 函数名：</code><br>不需要你手动调用fs.close()<br><strong>自动帮你关闭文件</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(file=<span class="string">r&quot;a.txt&quot;</span>,mode=<span class="string">&quot;r&quot;</span>,encoding=<span class="string">&quot;utf-8&quot;</span>) <span class="keyword">as</span> fb:</span><br><span class="line">    ct = fb.read()</span><br><span class="line">    <span class="built_in">print</span>(ct)</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-for循环"><a href="#5-for循环" class="headerlink" title="5.for循环"></a>5.for循环</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">file=<span class="built_in">open</span>(文件,’r’,encoding=’utf-<span class="number">8</span>’)</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> file:</span><br><span class="line"> <span class="built_in">print</span>(f’&#123;line&#125;’)</span><br></pre></td></tr></table></figure>
+
+<p>每一个line变量，就记录了文件的一行数据</p>
+<h1 id="三、写文件"><a href="#三、写文件" class="headerlink" title="三、写文件"></a>三、写文件</h1><h4 id="1-mode-”w”：（w模式会清除原文件内容）"><a href="#1-mode-”w”：（w模式会清除原文件内容）" class="headerlink" title="1.mode&#x3D;”w”：（w模式会清除原文件内容）"></a>1.mode&#x3D;”w”：（w模式会清除原文件内容）</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(file=<span class="string">r&quot;a.txt&quot;</span>,mode=<span class="string">&quot;w&quot;</span>,encoding=<span class="string">&quot;utf-8&quot;</span>) <span class="keyword">as</span> fb:</span><br><span class="line">    fb.write(<span class="string">&quot;我是新写入的内容&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-mode-”a”-（a模式下-文件不存在会创建文件，文件存在会在文件的末尾追加写入）"><a href="#2-mode-”a”-（a模式下-文件不存在会创建文件，文件存在会在文件的末尾追加写入）" class="headerlink" title="2.mode&#x3D;”a”:（a模式下 文件不存在会创建文件，文件存在会在文件的末尾追加写入）"></a>2.mode&#x3D;”a”:（a模式下 文件不存在会创建文件，文件存在会在文件的末尾追加写入）</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(file=<span class="string">r&quot;a.txt&quot;</span>,mode=<span class="string">&quot;a&quot;</span>,encoding=<span class="string">&quot;utf-8&quot;</span>) <span class="keyword">as</span> fb: </span><br><span class="line">  fb.write(<span class="string">&quot;我是第二次写入的内容\n&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-存图"><a href="#3-存图" class="headerlink" title="3.存图"></a>3.存图</h4><p>c).写二进制文件:将图片二进制信息写入文件中，并存到本地。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests//使用requests来发送HTTP请求</span><br><span class="line">url = <span class="string">&#x27;图片链接&#x27;</span></span><br><span class="line">response = requests.get(url)</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;校花.jpg&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(response.content)</span><br></pre></td></tr></table></figure>
+
+<p>另外：file.close()关闭文件</p>
+<p>file.flush()刷新文件</p>
 
       
     </div>
@@ -309,7 +251,7 @@
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag">正则表达式</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="tag">知识点</a></li></ul>
 
 
     </footer>
@@ -317,35 +259,19 @@
   
   <nav id="article-nav" data-aos="fade-up">
     
-      <div class="article-nav-link-wrap article-nav-link-left">
-        
-          
-          
-            <img data-src="/avatar/background.jpg" data-sizes="auto" alt="python之封装、继承与多态" class="lazyload">
-          
-        
-        <a href="/2024/12/28/python%E4%B9%8B%E5%B0%81%E8%A3%85%E3%80%81%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/"></a>
-        <div class="article-nav-caption">前一篇</div>
-        <h3 class="article-nav-title">
-          
-            python之封装、继承与多态
-          
-        </h3>
-      </div>
-    
     
     <div class="article-nav-link-wrap article-nav-link-right">
       
         
         
-          <img data-src="/avatar/background.jpg" data-sizes="auto" alt="python之容器(元组、集合和字典)" class="lazyload">
+          <img data-src="/avatar/background.jpg" data-sizes="auto" alt="python之封装、继承与多态" class="lazyload">
         
       
-      <a href="/2024/12/27/python%E4%B9%8B%E5%AE%B9%E5%99%A8(%E5%85%83%E7%BB%84%E3%80%81%E9%9B%86%E5%90%88%E5%92%8C%E5%AD%97%E5%85%B8)/"></a>
+      <a href="/2024/12/28/python%E4%B9%8B%E5%B0%81%E8%A3%85%E3%80%81%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/"></a>
       <div class="article-nav-caption">后一篇</div>
       <h3 class="article-nav-title">
         
-          python之容器(元组、集合和字典)
+          python之封装、继承与多态
         
       </h3>
     </div>
@@ -370,7 +296,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%A1%8C%E5%AE%9A%E4%BD%8D%E7%AC%A6"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.行定位符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%85%83%E5%AD%97%E7%AC%A6"><span class="toc-number">1.0.2.</span> <span class="toc-text">2.元字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%99%90%E5%AE%9A%E7%AC%A6"><span class="toc-number">1.0.3.</span> <span class="toc-text">3.限定符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%AD%97%E7%AC%A6%E7%B1%BB"><span class="toc-number">1.0.4.</span> <span class="toc-text">4.字符类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%8E%92%E9%99%A4%E5%AD%97%E7%AC%A6"><span class="toc-number">1.0.5.</span> <span class="toc-text">5.排除字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E9%80%89%E6%8B%A9%E5%AD%97%E7%AC%A6"><span class="toc-number">1.0.6.</span> <span class="toc-text">6.选择字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6"><span class="toc-number">1.0.7.</span> <span class="toc-text">7.转义字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E5%88%86%E7%BB%84"><span class="toc-number">1.0.8.</span> <span class="toc-text">8.分组</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81open-%E5%87%BD%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">一、open()函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%AF%BB%E6%96%87%E4%BB%B6-read"><span class="toc-number">2.</span> <span class="toc-text">二、读文件(read)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%96%87%E4%BB%B6%E5%AF%B9%E8%B1%A1-read-number"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">1.文件对象.read(number)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%96%87%E4%BB%B6%E5%AF%B9%E8%B1%A1-readline"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">2.文件对象.readline()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%96%87%E4%BB%B6%E5%AF%B9%E8%B1%A1-readlines"><span class="toc-number">2.0.0.3.</span> <span class="toc-text">3.文件对象.readlines()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-with"><span class="toc-number">2.0.0.4.</span> <span class="toc-text">4.with</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-for%E5%BE%AA%E7%8E%AF"><span class="toc-number">2.0.0.5.</span> <span class="toc-text">5.for循环</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%86%99%E6%96%87%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">三、写文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-mode-%E2%80%9Dw%E2%80%9D%EF%BC%9A%EF%BC%88w%E6%A8%A1%E5%BC%8F%E4%BC%9A%E6%B8%85%E9%99%A4%E5%8E%9F%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%EF%BC%89"><span class="toc-number">3.0.0.1.</span> <span class="toc-text">1.mode&#x3D;”w”：（w模式会清除原文件内容）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-mode-%E2%80%9Da%E2%80%9D-%EF%BC%88a%E6%A8%A1%E5%BC%8F%E4%B8%8B-%E6%96%87%E4%BB%B6%E4%B8%8D%E5%AD%98%E5%9C%A8%E4%BC%9A%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%EF%BC%8C%E6%96%87%E4%BB%B6%E5%AD%98%E5%9C%A8%E4%BC%9A%E5%9C%A8%E6%96%87%E4%BB%B6%E7%9A%84%E6%9C%AB%E5%B0%BE%E8%BF%BD%E5%8A%A0%E5%86%99%E5%85%A5%EF%BC%89"><span class="toc-number">3.0.0.2.</span> <span class="toc-text">2.mode&#x3D;”a”:（a模式下 文件不存在会创建文件，文件存在会在文件的末尾追加写入）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%AD%98%E5%9B%BE"><span class="toc-number">3.0.0.3.</span> <span class="toc-text">3.存图</span></a></li></ol></li></ol></li></ol></li></ol>
       
   </div>
 </div>
@@ -506,7 +432,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%A1%8C%E5%AE%9A%E4%BD%8D%E7%AC%A6"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.行定位符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%85%83%E5%AD%97%E7%AC%A6"><span class="toc-number">1.0.2.</span> <span class="toc-text">2.元字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%99%90%E5%AE%9A%E7%AC%A6"><span class="toc-number">1.0.3.</span> <span class="toc-text">3.限定符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%AD%97%E7%AC%A6%E7%B1%BB"><span class="toc-number">1.0.4.</span> <span class="toc-text">4.字符类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%8E%92%E9%99%A4%E5%AD%97%E7%AC%A6"><span class="toc-number">1.0.5.</span> <span class="toc-text">5.排除字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E9%80%89%E6%8B%A9%E5%AD%97%E7%AC%A6"><span class="toc-number">1.0.6.</span> <span class="toc-text">6.选择字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6"><span class="toc-number">1.0.7.</span> <span class="toc-text">7.转义字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E5%88%86%E7%BB%84"><span class="toc-number">1.0.8.</span> <span class="toc-text">8.分组</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81open-%E5%87%BD%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">一、open()函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%AF%BB%E6%96%87%E4%BB%B6-read"><span class="toc-number">2.</span> <span class="toc-text">二、读文件(read)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%96%87%E4%BB%B6%E5%AF%B9%E8%B1%A1-read-number"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">1.文件对象.read(number)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%96%87%E4%BB%B6%E5%AF%B9%E8%B1%A1-readline"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">2.文件对象.readline()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%96%87%E4%BB%B6%E5%AF%B9%E8%B1%A1-readlines"><span class="toc-number">2.0.0.3.</span> <span class="toc-text">3.文件对象.readlines()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-with"><span class="toc-number">2.0.0.4.</span> <span class="toc-text">4.with</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-for%E5%BE%AA%E7%8E%AF"><span class="toc-number">2.0.0.5.</span> <span class="toc-text">5.for循环</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%86%99%E6%96%87%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">三、写文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-mode-%E2%80%9Dw%E2%80%9D%EF%BC%9A%EF%BC%88w%E6%A8%A1%E5%BC%8F%E4%BC%9A%E6%B8%85%E9%99%A4%E5%8E%9F%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%EF%BC%89"><span class="toc-number">3.0.0.1.</span> <span class="toc-text">1.mode&#x3D;”w”：（w模式会清除原文件内容）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-mode-%E2%80%9Da%E2%80%9D-%EF%BC%88a%E6%A8%A1%E5%BC%8F%E4%B8%8B-%E6%96%87%E4%BB%B6%E4%B8%8D%E5%AD%98%E5%9C%A8%E4%BC%9A%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%EF%BC%8C%E6%96%87%E4%BB%B6%E5%AD%98%E5%9C%A8%E4%BC%9A%E5%9C%A8%E6%96%87%E4%BB%B6%E7%9A%84%E6%9C%AB%E5%B0%BE%E8%BF%BD%E5%8A%A0%E5%86%99%E5%85%A5%EF%BC%89"><span class="toc-number">3.0.0.2.</span> <span class="toc-text">2.mode&#x3D;”a”:（a模式下 文件不存在会创建文件，文件存在会在文件的末尾追加写入）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%AD%98%E5%9B%BE"><span class="toc-number">3.0.0.3.</span> <span class="toc-text">3.存图</span></a></li></ol></li></ol></li></ol></li></ol>
       
   </div>
 </div>
