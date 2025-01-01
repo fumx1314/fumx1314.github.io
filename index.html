@@ -218,8 +218,8 @@
 （DBMS）：操纵和管理数据库的大型软件。
 SQL：操作关系型数据库的编程语言，是一套标准。
 打开Mysql: mysql -u root -p
- SQL简述
- 1.SQL的概述
+SQL简述
+1.SQL的概述
 Structure Query Language(结构化查询语言)简称SQL
 数据库管理系统可以通过SQL管理数据库；定义和操作数据，维护数据的完整性和安全性。
 mysql是一种关系型数据库，是建立在关系模型基础上，由多张相互连接的二维表（表格）组成的数据库
@@ -230,7 +230,7 @@ mysql特点：
 使用表存储数据，格式统一，便于维护。
 
 
-使用SQL语言操作，标准统一，
+使用SQL语言操作，标准统一，使用
         
       </article>
     </div>
@@ -260,19 +260,19 @@ mysql特点：
       <h2 class="post-title">python之异常</h2>
       <article class="post-article">
         
-           捕获常规异常
+          捕获常规异常
 语法：
 1234try：	可能发生错误的代码except:    如果发生错误执行的代码
- 捕获指定异常
+捕获指定异常
 语法:
 1234try:    可能发生异常的代码except 异常类型名 as 变量:    当捕获到该异常类型时，执行的代码
- 捕获多个异常
+捕获多个异常
 语法：
 1234try:    可能发生异常的代码except (异常类型1,类型2,...) as 变量:    如果捕获到该异常类型时,执行的代码
- 捕获所有异常
+捕获所有异常
 1234try:    可能发生异常的代码except Exception as 变量:    当捕获到该异常类型时，执行的代码
 例如
-12345678910111
+12345678910111213#
         
       </article>
     </div>
@@ -302,7 +302,7 @@ mysql特点：
       <h2 class="post-title">python之文件</h2>
       <article class="post-article">
         
-           open()函数
+          open()函数
 语法：open(name,mode,encoding)
 name：是要打开的目标文件名的字符串（可以包含文件所在的具体路径）
 mode:设置打开文件的模式（访问模式):只读、写入、追加等。
@@ -311,10 +311,10 @@ file=open(‘python.txt’,’r’,encoding=’’ UTF-8”)
 (encoding 的顺序不是第三位，所以不能用位置参数，用关键字参数直接指定)
 mode:
 
- 读文件(read)
- 文件对象.read(number)
+读文件(read)
+文件对象.read(number)
 如果number没有，那将会读取文件中的全部数据
-注意：按理来说一个汉字三个字节，但rea
+注意：按理来说一个汉字三个字节，但read(n
         
       </article>
     </div>
@@ -344,7 +344,7 @@ mode:
       <h2 class="post-title">python之基础语法</h2>
       <article class="post-article">
         
-           python语法的特点
+          python语法的特点
 
 
 每行代码后无需分号
@@ -359,14 +359,14 @@ mode:
 变量无需用数据类型关键词定义
 
 
- 基本语法
- 输入输出
+基本语法
+输入输出
 12a=input()#输入print(&amp;#x27;hi&amp;#x27;,a)#输出
 输出时如果print不在同一行，他们输出的结果也不在同一行
 例如：
 123456print(x)print(y)#想要不换行输出，可以在后面加end关键字print(x,end=&amp;quot; &amp;quot;)print(y,end=&amp;quot; &amp;quot;)#end等于什么，就表示输出语句后面跟的是什么
 如果想在输出语句中穿插变量：
-12a=&amp;quot;小明&amp;quot;pri
+12a=&amp;quot;小明&amp;quot;print(
         
       </article>
     </div>
@@ -396,10 +396,10 @@ mode:
       <h2 class="post-title">python之封装、继承与多态</h2>
       <article class="post-article">
         
-           封装
+          封装
 就是private(私有的)
 关键词:____(双下划线)
-1234567891011121314class phone:    __v=2    def __keep(self):        print(&amp;quot;让cpu以单核模式运行&amp;quot;)    def keep(self):        if(self.__v&amp;gt;=1):            print(&amp;quot;good&amp;quot;)        else :            print(&amp;quot;bad&amp;quot;)ph=phone()# 私有成员无法被类对象直接使用，但是可以被其他的成员使
+1234567891011121314class phone:    __v=2    def __keep(self):        print(&amp;quot;让cpu以单核模式运行&amp;quot;)    def keep(self):        if(self.__v&amp;gt;=1):            print(&amp;quot;good&amp;quot;)        else :            print(&amp;quot;bad&amp;quot;)ph=phone()# 私有成员无法被类对象直接使用，但是可以被其他的成员使用
         
       </article>
     </div>
@@ -430,15 +430,16 @@ mode:
       <article class="post-article">
         
           正则表达式(regular expression)描述了一种字符串匹配的模式（pattern），可以用来检查一个串是否含有某种子串、将匹配的子串替换或者从某个串中取出符合某个条件的子串等。
- 行定位符
+行定位符
 行定位符用于规定匹配模式只能出现在行的开头或者结尾，“^”表示行的开始，&amp;quot;$&amp;quot;表示行的结尾
 例如：^tm  和 tm$
- 元字符
+元字符
 除了&amp;quot;^“和”$&amp;quot;，还有很多常用的元字符，例如\bmr\w*\b,两个\b表示匹配单词，*表示匹配0次或多次，\w表示匹配字母、数字、下划线或汉字，该正则表达式就表示匹配以字母&amp;quot;mr&amp;quot;开头的单词
 
 
 
 元字符
+说
         
       </article>
     </div>
@@ -468,14 +469,14 @@ mode:
       <h2 class="post-title">python之容器(元组、集合和字典)</h2>
       <article class="post-article">
         
-           元组
+          元组
 元组(tuple)与列表类似，但元组是不可变的，可简单将其看作是不可变的列表，元组常用于保存不可修改的内容
- 元组的创建与访问（元组用圆括号）
+元组的创建与访问（元组用圆括号）
 123456t=(1,2,3,4)#t=(1,)定义元组时，如果元组中只有一个数据，这个元素后面也要加逗号print(t[1])print(t[-2])#访问t的倒数第二个元素#嵌套元组t=((1,2,3),(4,5,6))
 元组其实大部分内容都与列表类似
 本文只会谈及元组所拥有的特点与用法，与列表类似的部分会选择性跳过，不记得的可以访问我上一篇文章（字符串与列表）
- 修改与删除(del)
-上文讲到了，元组是不可修改的，所以我们只能采用重新赋值
+修改与删除(del)
+上文讲到了，元组是不可修改的，所以我们只能采用重新赋值的方式
         
       </article>
     </div>
@@ -505,16 +506,16 @@ mode:
       <h2 class="post-title">python之容器（字符串与列表）</h2>
       <article class="post-article">
         
-           字符串
- 字符串访问
+          字符串
+字符串访问
 首先我们定义一个字符串
 1s=&amp;quot;python&amp;quot;
 访问方式有多种，我们来看最常规的几种
 12345678#访问字符串中的单个字符print(s[i])#访问字符串中的字串print(s[i:j])#从s[i]到s[j-1]print(s[:j])#从s[0]到s[j-1]print(s[i:])#从s[i]到字符串末尾print(s[i:j:z])#从s[i]到s[j-1]以z步长截取#上述方法也叫切片
- 单个字符编码
+单个字符编码
 python使用ord()函数返回单个字符的编码，chr()函数把编码转成相应字符
 下面我们来演示一下
-123s=&amp;#x27;A&amp;#x
+123s=&amp;#x27;A&amp;#x27;
         
       </article>
     </div>
@@ -544,18 +545,18 @@ python使用ord()函数返回单个字符的编码，chr()函数把编码转成�
       <h2 class="post-title">python之魔术方法</h2>
       <article class="post-article">
         
-           init()构造方法
+          init()构造方法
 关键词：
 1__init__
 作用：可以直接在创建对象时对类中属性赋值
 示例：
 12345678class a:    name=None#类中定义可不写    age=None    def __init__(self,name,age):        self.name=name        self.age=agex=a(&amp;quot;小米&amp;quot;,18)
- str()字符串方法
+str()字符串方法
 关键字：
 1__str__
 此方法是当打印对象或者使用str()转换对象时被调用
 话不多说，上代码：
-12345678class person:    def __init__(s
+12345678class person:    def __init__(sel
         
       </article>
     </div>
@@ -585,14 +586,14 @@ python使用ord()函数返回单个字符的编码，chr()函数把编码转成�
       <h2 class="post-title">python之面向对象</h2>
       <article class="post-article">
         
-           类的定义
+          类的定义
 12class classname:    //内容
 
- 类的对象
+类的对象
 类对象支持两种操作：实例化和属性的引用
 简单来说就是调用类和访问类的属性和方法
 举个例子：
-12345678910class class1:   a=123   b=456    def hanshu(self):#类的方法后面会讲到        return &amp;quot;hello world&amp;quot;#创建一个对象，调用类x=class1()#访问类的属性和方法print(&amp;quot;class1类的属性a,b为：&amp;quot;,x.a,x.b)print(&amp;quot;class1类的方法输出结果为：&amp;quo
+12345678910class class1:   a=123   b=456    def hanshu(self):#类的方法后面会讲到        return &amp;quot;hello world&amp;quot;#创建一个对象，调用类x=class1()#访问类的属性和方法print(&amp;quot;class1类的属性a,b为：&amp;quot;,x.a,x.b)print(&amp;quot;class1类的方法输出结果为：&amp;quot;
         
       </article>
     </div>
