@@ -9,7 +9,7 @@
 
   
 
-  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_tq6stt6tcg';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};window.REIMU_CONFIG.code_block = {"expand":true};</script>
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_bq08450reo';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};window.REIMU_CONFIG.code_block = {"expand":true};</script>
   
   <title>
     python之封装、继承与多态 |
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
   
-    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_tq6stt6tcg.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_bq08450reo.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   
   
     
@@ -27,12 +27,12 @@
 
   
   
-    <meta name="description" content="封装 就是private(私有的) 关键词:____(双下划线) 1234567891011121314class phone:    __v&#x3D;2    def __keep(self):        print(&quot;让cpu以单核模式运行&quot;)    def keep(self):        if(self.__v&gt;&#x3D;1):            print(&amp;quo">
+    <meta name="description" content="封装 就是private(私有的) 关键词:____(双下划线) 1234567891011121314class phone:    __v&#x3D;2    def __keep(self):        print(&quot;让cpu以单核模式运行&quot;)    def keep(self):        if(self.__v&gt;&#x3D;1):            print(&amp;qu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python之封装、继承与多态">
 <meta property="og:url" content="http://example.com/2024/12/28/python%E4%B9%8B%E5%B0%81%E8%A3%85%E3%80%81%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/index.html">
 <meta property="og:site_name" content="KL">
-<meta property="og:description" content="封装 就是private(私有的) 关键词:____(双下划线) 1234567891011121314class phone:    __v&#x3D;2    def __keep(self):        print(&quot;让cpu以单核模式运行&quot;)    def keep(self):        if(self.__v&gt;&#x3D;1):            print(&amp;quo">
+<meta property="og:description" content="封装 就是private(私有的) 关键词:____(双下划线) 1234567891011121314class phone:    __v&#x3D;2    def __keep(self):        print(&quot;让cpu以单核模式运行&quot;)    def keep(self):        if(self.__v&gt;&#x3D;1):            print(&amp;qu">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-12-28T07:44:21.000Z">
 <meta property="article:modified_time" content="2025-01-01T09:02:57.389Z">
@@ -162,6 +162,9 @@
 </div>
 <header id="header">
   
+    <picture>
+      
+    </picture>
     
       <img fetchpriority="high" src="/images/banner.webp" alt="python之封装、继承与多态">
     
@@ -186,112 +189,8 @@
   </div>
 </header>
 
-        <div id="content">
-          
-          <section id="main"><article id="post-python之封装、继承与多态" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner" data-aos="fade-up">
-    <div class="article-meta">
-      <div class="article-date">
-  <a href="/2024/12/28/python%E4%B9%8B%E5%B0%81%E8%A3%85%E3%80%81%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/" class="article-date-link" data-aos="zoom-in">
-    <time datetime="2024-12-28T07:44:21.000Z" itemprop="datePublished">2024-12-28</time>
-    <time style="display: none;" id="post-update-time">2025-01-01</time>
-  </a>
-</div>
-
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/python/" data-aos="zoom-in">python</a>
-  </div>
-
-
-    </div>
-    <div class="hr-line"></div>
-    
-
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-      
-        <h2><span id="封装">封装</span></h2>
-<p>就是private(私有的)</p>
-<p>关键词:<code>____</code>(双下划线)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">phone</span>:</span><br><span class="line">    __v=<span class="number">2</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__keep</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;让cpu以单核模式运行&quot;</span>)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">keep</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable language_">self</span>.__v&gt;=<span class="number">1</span>):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;good&quot;</span>)</span><br><span class="line">        <span class="keyword">else</span> :</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;bad&quot;</span>)</span><br><span class="line">ph=phone()</span><br><span class="line"><span class="comment"># 私有成员无法被类对象直接使用，但是可以被其他的成员使用</span></span><br><span class="line"><span class="comment"># ph.__keep()</span></span><br><span class="line"><span class="comment"># print(ph.__v)</span></span><br><span class="line">ph.keep()</span><br></pre></td></tr></table></figure>
-<h2><span id="继承">继承</span></h2>
-<h3><span id="单继承">单继承</span></h3>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">phone2</span>:</span><br><span class="line">    a=<span class="literal">None</span></span><br><span class="line">    b=<span class="literal">None</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">x</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;1234&quot;</span>)</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">phone3</span>(<span class="title class_ inherited__">phone2</span>):<span class="comment">#此为继承,被继承的叫父类，继承的叫子类</span></span><br><span class="line">    c=<span class="literal">None</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">y</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;5678&quot;</span>)</span><br><span class="line">z=phone3()</span><br><span class="line">z.x()</span><br><span class="line">z.y()</span><br><span class="line"><span class="comment">#输出为</span></span><br><span class="line"><span class="number">1234</span></span><br><span class="line"><span class="number">5678</span></span><br></pre></td></tr></table></figure>
-<h3><span id="多继承">多继承</span></h3>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">phone4</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">a</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;1&quot;</span>)</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">phone5</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">b</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;2&quot;</span>)</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">phone6</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">c</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;3&quot;</span>)</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">phone7</span>(phone4,phone5,phone6):</span><br><span class="line">    <span class="keyword">pass</span><span class="comment">#补全语法的作用</span></span><br><span class="line">q=phone7()</span><br><span class="line">q.a()</span><br><span class="line">q.b()</span><br><span class="line">q.c()</span><br><span class="line"><span class="comment">#输出为</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
-<p>如果继承了2个类，调用两个父类中同名的方法和属性会怎么取值呢？<br>
-答：<strong>就近原则</strong>，他先找括号里面左边这个类，左边这个类找到了就不会再去找右边这个类，左边的类如果找不到就去右边这个类找。</p>
-<p>注意：如果demo这个类自己有这个方法，就不会再去父类里面找，如果demo这个类没有，才会去父类里面去找。</p>
-<h2><span id="多态">多态</span></h2>
-<p>定义一个父类和多个子类，每个子类中都有和父类中相同的方法，不同的子类在调用相同的方法，执行的时候产生不同的形态，这个叫多态。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;动物类&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;动物发出了声音&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span>(<span class="title class_ inherited__">Animal</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;猫类&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;喵 喵 喵 &#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span>(<span class="title class_ inherited__">Animal</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;狗类&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;汪 汪 汪 &#x27;</span>)</span><br><span class="line">dog=Dog()</span><br><span class="line">cat=Cat()</span><br><span class="line">dog.func()</span><br><span class="line">cat.func()</span><br><span class="line"><span class="comment">#输出为</span></span><br><span class="line"><span class="string">&#x27;汪 汪 汪 &#x27;</span></span><br><span class="line"><span class="string">&#x27;喵 喵 喵 &#x27;</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-      
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="tag">知识点</a></li></ul>
-
-
-    </footer>
-  </div>
-  
-  <nav id="article-nav" data-aos="fade-up">
-    
-      <div class="article-nav-link-wrap article-nav-link-left">
-        
-          
-          
-            <img data-src="../images/124691006_p0_master1200.jpg" data-sizes="auto" alt="python之基础语法" class="lazyload">
-          
-        
-        <a href="/2024/12/28/python%E4%B9%8B%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"></a>
-        <div class="article-nav-caption">前一篇</div>
-        <h3 class="article-nav-title">
-          
-            python之基础语法
-          
-        </h3>
-      </div>
-    
-    
-    <div class="article-nav-link-wrap article-nav-link-right">
-      
-        
-        
-          <img data-src="../images/124691006_p0_master1200.jpg" data-sizes="auto" alt="正则表达式" class="lazyload">
-        
-      
-      <a href="/2024/12/28/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"></a>
-      <div class="article-nav-caption">后一篇</div>
-      <h3 class="article-nav-title">
-        
-          正则表达式
-        
-      </h3>
-    </div>
-    
-  </nav>
-
-
-</article>
-
-
-
-
-
-
-</section>
-          
-            <aside id="sidebar">
+        <div id="content"  class="sidebar-right" >
+          <aside id="sidebar">
   
   
   <div class="sidebar-wrapper wrap-sticky">
@@ -301,7 +200,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">封装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text">单继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text">多继承</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">多态</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text"> 封装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text"> 继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text"> 单继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text"> 多继承</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text"> 多态</span></a></li></ol>
       
   </div>
 </div>
@@ -381,8 +280,112 @@
   </div>
 </aside>
 
+          <section id="main"><article id="post-python之封装、继承与多态" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2024/12/28/python%E4%B9%8B%E5%B0%81%E8%A3%85%E3%80%81%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2024-12-28T07:44:21.000Z" itemprop="datePublished">2024-12-28</time>
+    <time style="display: none;" id="post-update-time">2025-01-01</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/" data-aos="zoom-in">python</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h2><span id="封装"> 封装</span></h2>
+<p>就是private(私有的)</p>
+<p>关键词:<code>____</code>(双下划线)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">phone</span>:</span><br><span class="line">    __v=<span class="number">2</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__keep</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;让cpu以单核模式运行&quot;</span>)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">keep</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable language_">self</span>.__v&gt;=<span class="number">1</span>):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;good&quot;</span>)</span><br><span class="line">        <span class="keyword">else</span> :</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;bad&quot;</span>)</span><br><span class="line">ph=phone()</span><br><span class="line"><span class="comment"># 私有成员无法被类对象直接使用，但是可以被其他的成员使用</span></span><br><span class="line"><span class="comment"># ph.__keep()</span></span><br><span class="line"><span class="comment"># print(ph.__v)</span></span><br><span class="line">ph.keep()</span><br></pre></td></tr></table></figure>
+<h2><span id="继承"> 继承</span></h2>
+<h3><span id="单继承"> 单继承</span></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">phone2</span>:</span><br><span class="line">    a=<span class="literal">None</span></span><br><span class="line">    b=<span class="literal">None</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">x</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;1234&quot;</span>)</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">phone3</span>(<span class="title class_ inherited__">phone2</span>):<span class="comment">#此为继承,被继承的叫父类，继承的叫子类</span></span><br><span class="line">    c=<span class="literal">None</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">y</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;5678&quot;</span>)</span><br><span class="line">z=phone3()</span><br><span class="line">z.x()</span><br><span class="line">z.y()</span><br><span class="line"><span class="comment">#输出为</span></span><br><span class="line"><span class="number">1234</span></span><br><span class="line"><span class="number">5678</span></span><br></pre></td></tr></table></figure>
+<h3><span id="多继承"> 多继承</span></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">phone4</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">a</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;1&quot;</span>)</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">phone5</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">b</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;2&quot;</span>)</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">phone6</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">c</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;3&quot;</span>)</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">phone7</span>(phone4,phone5,phone6):</span><br><span class="line">    <span class="keyword">pass</span><span class="comment">#补全语法的作用</span></span><br><span class="line">q=phone7()</span><br><span class="line">q.a()</span><br><span class="line">q.b()</span><br><span class="line">q.c()</span><br><span class="line"><span class="comment">#输出为</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
+<p>如果继承了2个类，调用两个父类中同名的方法和属性会怎么取值呢？<br>
+答：<strong>就近原则</strong>，他先找括号里面左边这个类，左边这个类找到了就不会再去找右边这个类，左边的类如果找不到就去右边这个类找。</p>
+<p>注意：如果demo这个类自己有这个方法，就不会再去父类里面找，如果demo这个类没有，才会去父类里面去找。</p>
+<h2><span id="多态"> 多态</span></h2>
+<p>定义一个父类和多个子类，每个子类中都有和父类中相同的方法，不同的子类在调用相同的方法，执行的时候产生不同的形态，这个叫多态。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;动物类&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;动物发出了声音&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span>(<span class="title class_ inherited__">Animal</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;猫类&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;喵 喵 喵 &#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span>(<span class="title class_ inherited__">Animal</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;狗类&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;汪 汪 汪 &#x27;</span>)</span><br><span class="line">dog=Dog()</span><br><span class="line">cat=Cat()</span><br><span class="line">dog.func()</span><br><span class="line">cat.func()</span><br><span class="line"><span class="comment">#输出为</span></span><br><span class="line"><span class="string">&#x27;汪 汪 汪 &#x27;</span></span><br><span class="line"><span class="string">&#x27;喵 喵 喵 &#x27;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="tag">知识点</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
           
+          
+            <img data-src="../images/124691006_p0_master1200.jpg" data-sizes="auto" alt="python之基础语法" class="lazyload">
+          
+        
+        <a href="/2024/12/28/python%E4%B9%8B%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            python之基础语法
+          
+        </h3>
+      </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="../images/124691006_p0_master1200.jpg" data-sizes="auto" alt="正则表达式" class="lazyload">
+        
+      
+      <a href="/2024/12/28/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          正则表达式
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+</section>
         </div>
+        
+        
         <footer id="footer">
   <div style="width: 100%; overflow: hidden">
     <div class="footer-line"></div>
@@ -439,7 +442,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">封装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text">单继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text">多继承</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">多态</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text"> 封装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text"> 继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text"> 单继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text"> 多继承</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text"> 多态</span></a></li></ol>
       
   </div>
 </div>
@@ -576,11 +579,29 @@
 <div id="lazy-script">
   <div>
     
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "fuboy",
+          title: "python之封装、继承与多态",
+          url: "http://example.com/2024/12/28/python%E4%B9%8B%E5%B0%81%E8%A3%85%E3%80%81%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/",
+          excerpt: "",
+          description: "",
+          stripContent: " 封装 就是private(私有的) 关键词:____(双下划线) 1234567891011121314class phone:    __v=2    def __keep(self):        print(&amp;quot;让cpu以单核模式运行&amp;quot;)    def keep(self):        if(self.__v&amp;gt;=1):            print(&amp;quot;good&amp;quot;)        else :            print(&amp;quo",
+          date: "Sat Dec 28 2024 15:44:21 GMT+0800",
+          updated: "Wed Jan 01 2025 17:02:57 GMT+0800",
+          cover: "/images/banner.webp",
+        };
+      </script>
+       
+    
     
       
         
 <script src="/js/insert_highlight.js" data-pjax></script>
 
+        
       
     
     
@@ -634,7 +655,7 @@
   \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
                                                   
 `,'color: #ff5252;')
-    console.log('%c Theme.Reimu v' + '1.2.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.3.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
   </script>
   
 
