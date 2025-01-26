@@ -27,18 +27,17 @@
 
   
   
-    <meta name="description" content="类的定义 12class classname:    &#x2F;&#x2F;内容   类的对象 类对象支持两种操作：实例化和属性的引用 简单来说就是调用类和访问类的属性和方法 举个例子： 12345678910class class1:   a&#x3D;123   b&#x3D;456    def hanshu(self):#类的方法后面会讲到        return &quot;hello world&quot;#创建一个">
+    <meta name="description" content="类的定义12class classname:    &#x2F;&#x2F;内容   类的对象类对象支持两种操作：实例化和属性的引用 简单来说就是调用类和访问类的属性和方法 举个例子： 12345678910class class1:   a&#x3D;123   b&#x3D;456    def hanshu(self):#类的方法后面会讲到        return &quot;hello world&quot;#创建一个对象，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python之面向对象">
 <meta property="og:url" content="http://example.com/2024/12/25/python%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/index.html">
 <meta property="og:site_name" content="KL">
-<meta property="og:description" content="类的定义 12class classname:    &#x2F;&#x2F;内容   类的对象 类对象支持两种操作：实例化和属性的引用 简单来说就是调用类和访问类的属性和方法 举个例子： 12345678910class class1:   a&#x3D;123   b&#x3D;456    def hanshu(self):#类的方法后面会讲到        return &quot;hello world&quot;#创建一个">
+<meta property="og:description" content="类的定义12class classname:    &#x2F;&#x2F;内容   类的对象类对象支持两种操作：实例化和属性的引用 简单来说就是调用类和访问类的属性和方法 举个例子： 12345678910class class1:   a&#x3D;123   b&#x3D;456    def hanshu(self):#类的方法后面会讲到        return &quot;hello world&quot;#创建一个对象，">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-12-25T12:13:54.000Z">
-<meta property="article:modified_time" content="2024-12-26T03:21:07.531Z">
+<meta property="article:modified_time" content="2025-01-23T14:05:07.569Z">
 <meta property="article:author" content="fuboy">
 <meta property="article:tag" content="python">
-<meta property="article:tag" content="知识点">
 <meta name="twitter:card" content="summary">
   
   
@@ -200,7 +199,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text"> 类的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text"> 类的对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text"> 类的行为</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">类的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="toc-number">2.</span> <span class="toc-text">类的对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E8%A1%8C%E4%B8%BA"><span class="toc-number">3.</span> <span class="toc-text">类的行为</span></a></li></ol>
       
   </div>
 </div>
@@ -213,7 +212,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">10</div>
+    <div class="sidebar-state-number">13</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -221,7 +220,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">3</div>
+    <div class="sidebar-state-number">6</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -286,13 +285,13 @@
       <div class="article-date">
   <a href="/2024/12/25/python%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" class="article-date-link" data-aos="zoom-in">
     <time datetime="2024-12-25T12:13:54.000Z" itemprop="datePublished">2024-12-25</time>
-    <time style="display: none;" id="post-update-time">2024-12-26</time>
+    <time style="display: none;" id="post-update-time">2025-01-23</time>
   </a>
 </div>
 
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/python/" data-aos="zoom-in">python</a>
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/" data-aos="zoom-in">知识点</a>
   </div>
 
 
@@ -303,21 +302,27 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
       
-        <h2><span id="类的定义"> 类的定义</span></h2>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">classname</span>:</span><br><span class="line">    //内容</span><br></pre></td></tr></table></figure>
+        <h2 id="类的定义"><a href="#类的定义" class="headerlink" title="类的定义"></a>类的定义</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">classname</span>:</span><br><span class="line">    //内容</span><br></pre></td></tr></table></figure>
+
 <hr>
-<h2><span id="类的对象"> 类的对象</span></h2>
-<p>类对象支持两种操作：实例化和属性的引用</p>
+<h2 id="类的对象"><a href="#类的对象" class="headerlink" title="类的对象"></a>类的对象</h2><p>类对象支持两种操作：实例化和属性的引用</p>
 <p>简单来说就是调用类和访问类的属性和方法</p>
 <p>举个例子：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">class1</span>:</span><br><span class="line">   a=<span class="number">123</span></span><br><span class="line">   b=<span class="number">456</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">hanshu</span>(<span class="params">self</span>):<span class="comment">#类的方法后面会讲到</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;hello world&quot;</span></span><br><span class="line"><span class="comment">#创建一个对象，调用类</span></span><br><span class="line">x=class1()</span><br><span class="line"><span class="comment">#访问类的属性和方法</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;class1类的属性a,b为：&quot;</span>,x.a,x.b)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;class1类的方法输出结果为：&quot;</span>,x.hanshu())</span><br></pre></td></tr></table></figure>
+
+
+
 <p>输出结果为：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class1类的属性a,b为：123，456</span><br><span class="line">class1类的方法输出结果为：hello world</span><br></pre></td></tr></table></figure>
+
+
 <hr>
-<h2><span id="类的行为"> 类的行为</span></h2>
-<p>即类内部的函数，也叫成员方法</p>
+<h2 id="类的行为"><a href="#类的行为" class="headerlink" title="类的行为"></a>类的行为</h2><p>即类内部的函数，也叫成员方法</p>
 <p>我们来通过一个例子来了解它的用法：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">student</span>:</span><br><span class="line">    name=<span class="string">&quot;小米su7&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">xw</span>(<span class="params">self</span>):<span class="comment">#必须包含self</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;self.name&#125;</span>&quot;</span>)<span class="comment">#通过self才能访问到类里面的成员变量</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">xw2</span>(<span class="params">self,mag</span>):</span><br><span class="line">        printf(<span class="string">f&quot;hello <span class="subst">&#123;mag&#125;</span>&quot;</span>)</span><br><span class="line">student1=student()</span><br><span class="line">student1.xw()</span><br><span class="line">student1.xw2(<span class="string">&quot;小米14&quot;</span>)</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+
+
+
 
       
     </div>
@@ -331,7 +336,7 @@
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="tag">知识点</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
 
 
     </footer>
@@ -391,10 +396,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        12.7k
+        21.5k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        00:49
+        01:23
       </div>
     
     
@@ -426,7 +431,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text"> 类的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text"> 类的对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text"> 类的行为</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">类的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="toc-number">2.</span> <span class="toc-text">类的对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E8%A1%8C%E4%B8%BA"><span class="toc-number">3.</span> <span class="toc-text">类的行为</span></a></li></ol>
       
   </div>
 </div>
@@ -439,7 +444,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">10</div>
+    <div class="sidebar-state-number">13</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -447,7 +452,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">3</div>
+    <div class="sidebar-state-number">6</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -572,9 +577,9 @@
           url: "http://example.com/2024/12/25/python%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/",
           excerpt: "",
           description: "",
-          stripContent: " 类的定义 12class classname:    //内容   类的对象 类对象支持两种操作：实例化和属性的引用 简单来说就是调用类和访问类的属性和方法 举个例子： 12345678910class class1:   a=123   b=456    def hanshu(self):#类的方法后面会讲到        return &amp;quot;hello world&amp;quot;#创建一个对象，调用类x=class1()#访问类的属性和方法print(&amp;quot;class1类的属性a,",
+          stripContent: "类的定义12class classname:    //内容   类的对象类对象支持两种操作：实例化和属性的引用 简单来说就是调用类和访问类的属性和方法 举个例子： 12345678910class class1:   a=123   b=456    def hanshu(self):#类的方法后面会讲到        return &amp;quot;hello world&amp;quot;#创建一个对象，调用类x=class1()#访问类的属性和方法print(&amp;quot;class1类的属性a,b为：",
           date: "Wed Dec 25 2024 20:13:54 GMT+0800",
-          updated: "Thu Dec 26 2024 11:21:07 GMT+0800",
+          updated: "Thu Jan 23 2025 22:05:07 GMT+0800",
           cover: "/images/banner.webp",
         };
       </script>
