@@ -1,0 +1,970 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-CN"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_bq08450reo';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};window.REIMU_CONFIG.code_block = {"expand":true};</script>
+  
+  <title>
+    Linux基础操作 |
+    
+    KL
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_bq08450reo.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="linux主要特征 ：一切皆文件（目录、硬盘等都是文件）；硬件都在&#x2F;dev 目录，如硬盘、U盘为&#x2F;dev&#x2F;sd[a-d]； &#x2F;dev&#x2F;sr0（&#x2F;dev&#x2F;cdrom）是光驱的设备名（df命令查看），为设备文件，代表的是光驱本身，得把这个设备挂载到目录下（一般为&#x2F;mnt）(文件系统的临时挂载点)，才能对设备上的文件进行读">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux基础操作">
+<meta property="og:url" content="http://example.com/2025/02/01/%E5%91%BD%E4%BB%A4%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="KL">
+<meta property="og:description" content="linux主要特征 ：一切皆文件（目录、硬盘等都是文件）；硬件都在&#x2F;dev 目录，如硬盘、U盘为&#x2F;dev&#x2F;sd[a-d]； &#x2F;dev&#x2F;sr0（&#x2F;dev&#x2F;cdrom）是光驱的设备名（df命令查看），为设备文件，代表的是光驱本身，得把这个设备挂载到目录下（一般为&#x2F;mnt）(文件系统的临时挂载点)，才能对设备上的文件进行读">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/20250121124554593.png">
+<meta property="article:published_time" content="2025-02-01T06:15:24.000Z">
+<meta property="article:modified_time" content="2025-02-03T04:50:50.854Z">
+<meta property="article:author" content="fuboy">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/20250121124554593.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="KL" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <picture>
+      
+    </picture>
+    
+      <img fetchpriority="high" src="/images/banner.webp" alt="Linux基础操作">
+    
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">Linux基础操作</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content"  class="sidebar-right" >
+          <aside id="sidebar">
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">系统操作：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E4%B8%BB%E8%A6%81%E7%9B%AE%E5%BD%95"><span class="toc-number">2.</span> <span class="toc-text">Linux主要目录</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">1.&#x2F;</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-home"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">2.&#x2F;home</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-etc"><span class="toc-number">2.0.0.3.</span> <span class="toc-text">3.&#x2F;etc</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-bin"><span class="toc-number">2.0.0.4.</span> <span class="toc-text">4.&#x2F;bin</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C"><span class="toc-number">3.</span> <span class="toc-text">文件目录操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E7%9B%AE%E5%BD%95-cd"><span class="toc-number">3.1.</span> <span class="toc-text">切换目录(cd)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%9B%AE%E5%BD%95-ls"><span class="toc-number">3.2.</span> <span class="toc-text">查看目录(ls)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E7%9B%AE%E5%BD%95-pwd"><span class="toc-number">3.3.</span> <span class="toc-text">查看当前目录(pwd)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95-mkdir"><span class="toc-number">3.4.</span> <span class="toc-text">创建目录(mkdir)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%9B%AE%E5%BD%95-%E6%96%87%E4%BB%B6-rm"><span class="toc-number">3.5.</span> <span class="toc-text">删除目录&#x2F;文件(rm)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E7%9B%AE%E5%BD%95-mv"><span class="toc-number">3.6.</span> <span class="toc-text">修改目录(mv)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%B7%E8%B4%9D%E7%9B%AE%E5%BD%95-cp"><span class="toc-number">3.7.</span> <span class="toc-text">拷贝目录(cp)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C"><span class="toc-number">4.</span> <span class="toc-text">文件操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E5%A2%9E%E6%96%87%E4%BB%B6-touch"><span class="toc-number">4.1.</span> <span class="toc-text">新增文件(touch)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6-find"><span class="toc-number">4.2.</span> <span class="toc-text">查找文件(find)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9-cat%E3%80%81more%E3%80%81tac"><span class="toc-number">4.3.</span> <span class="toc-text">查看文件内容(cat、more、tac)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%A4%B4%E9%83%A8%E5%86%85%E5%AE%B9-head"><span class="toc-number">4.4.</span> <span class="toc-text">查看文件头部内容(head)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%B0%BE%E9%83%A8%E5%86%85%E5%AE%B9-tail"><span class="toc-number">4.5.</span> <span class="toc-text">查看文件尾部内容(tail)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E6%9C%AC%E8%A1%8C%E6%95%B0%E3%80%81%E5%AD%97%E6%95%B0%E3%80%81%E5%AD%97%E8%8A%82%E6%95%B0-wc"><span class="toc-number">4.6.</span> <span class="toc-text">查看文本行数、字数、字节数(wc)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E5%91%BD%E4%BB%A4%E7%9A%84%E7%A8%8B%E5%BA%8F%E6%96%87%E4%BB%B6-which"><span class="toc-number">4.7.</span> <span class="toc-text">查找命令的程序文件(which)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E6%90%9C%E7%B4%A2-grep"><span class="toc-number">4.8.</span> <span class="toc-text">文本搜索(grep)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%BE%91%E6%96%87%E4%BB%B6-vi%E3%80%81vim"><span class="toc-number">4.9.</span> <span class="toc-text">编辑文件(vi、vim)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%EF%BC%9Avim-%E6%96%87%E4%BB%B6%E5%90%8D"><span class="toc-number">4.9.1.</span> <span class="toc-text">启动：vim 文件名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E5%BC%8F%E5%88%87%E6%8D%A2%EF%BC%9A"><span class="toc-number">4.9.2.</span> <span class="toc-text">模式切换：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="toc-number">4.9.3.</span> <span class="toc-text">常见操作：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%AC%E5%AF%BC%E8%88%AA%EF%BC%88%E5%9C%A8%E6%99%AE%E9%80%9A%E6%A8%A1%E5%BC%8F%E4%B8%8B%EF%BC%89%EF%BC%9A"><span class="toc-number">4.9.3.1.</span> <span class="toc-text">1. 基本导航（在普通模式下）：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E7%BC%96%E8%BE%91%E6%96%87%E6%9C%AC%EF%BC%88%E5%9C%A8%E6%8F%92%E5%85%A5%E6%A8%A1%E5%BC%8F%E4%B8%8B%EF%BC%89%EF%BC%9A"><span class="toc-number">4.9.3.2.</span> <span class="toc-text">2. 编辑文本（在插入模式下）：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%88%A0%E9%99%A4%E3%80%81%E5%A4%8D%E5%88%B6%E3%80%81%E7%B2%98%E8%B4%B4%EF%BC%88%E5%9C%A8%E6%99%AE%E9%80%9A%E6%A8%A1%E5%BC%8F%E4%B8%8B%EF%BC%89%EF%BC%9A"><span class="toc-number">4.9.3.3.</span> <span class="toc-text">3. 删除、复制、粘贴（在普通模式下）：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E6%92%A4%E9%94%80%E5%92%8C%E9%87%8D%E5%81%9A%EF%BC%9A"><span class="toc-number">4.9.3.4.</span> <span class="toc-text">4. 撤销和重做：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E6%9F%A5%E6%89%BE%E5%92%8C%E6%9B%BF%E6%8D%A2%EF%BC%88%E5%9C%A8%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%E4%B8%8B%EF%BC%89%EF%BC%9A"><span class="toc-number">4.9.3.5.</span> <span class="toc-text">5. 查找和替换（在命令模式下）：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-%E4%BF%9D%E5%AD%98%E5%92%8C%E9%80%80%E5%87%BA%EF%BC%88%E5%9C%A8%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%E4%B8%8B%EF%BC%89%EF%BC%9A"><span class="toc-number">4.9.3.6.</span> <span class="toc-text">6. 保存和退出（在命令模式下）：</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E5%92%8C%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="toc-number">5.</span> <span class="toc-text">用户和权限管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#passwd%EF%BC%9A%E4%BF%AE%E6%94%B9%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81"><span class="toc-number">5.1.</span> <span class="toc-text">passwd：修改用户密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#useradd%EF%BC%9A%E6%B7%BB%E5%8A%A0%E6%96%B0%E7%94%A8%E6%88%B7"><span class="toc-number">5.2.</span> <span class="toc-text">useradd：添加新用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#userdel%EF%BC%9A%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7"><span class="toc-number">5.3.</span> <span class="toc-text">userdel：删除用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#usermod%EF%BC%9A%E4%BF%AE%E6%94%B9%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF"><span class="toc-number">5.4.</span> <span class="toc-text">usermod：修改用户信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#su%EF%BC%9A%E5%88%87%E6%8D%A2%E7%94%A8%E6%88%B7"><span class="toc-number">5.5.</span> <span class="toc-text">su：切换用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#groupadd%EF%BC%9A%E6%B7%BB%E5%8A%A0%E6%96%B0%E7%BB%84"><span class="toc-number">5.6.</span> <span class="toc-text">groupadd：添加新组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#groupmod%EF%BC%9A%E7%94%A8%E6%88%B7%E7%BB%84%E7%BC%96%E8%BE%91"><span class="toc-number">5.7.</span> <span class="toc-text">groupmod：用户组编辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#groupdel%EF%BC%9A%E7%94%A8%E6%88%B7%E7%BB%84%E5%88%A0%E9%99%A4"><span class="toc-number">5.8.</span> <span class="toc-text">groupdel：用户组删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#groups%EF%BC%9A%E6%9F%A5%E7%9C%8B%E7%94%A8%E6%88%B7%E6%89%80%E5%B1%9E%E7%9A%84%E7%BB%84"><span class="toc-number">5.9.</span> <span class="toc-text">groups：查看用户所属的组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#chmod%EF%BC%9A%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E6%88%96%E7%9B%AE%E5%BD%95%E7%9A%84%E6%9D%83%E9%99%90"><span class="toc-number">5.10.</span> <span class="toc-text">chmod：修改文件或目录的权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#chown%EF%BC%9A%E6%94%B9%E5%8F%98%E6%96%87%E4%BB%B6%E6%88%96%E7%9B%AE%E5%BD%95%E7%9A%84%E6%89%80%E6%9C%89%E8%80%85"><span class="toc-number">5.11.</span> <span class="toc-text">chown：改变文件或目录的所有者</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0%EF%BC%9Abash%E8%84%9A%E6%9C%AC-Shell"><span class="toc-number">6.</span> <span class="toc-text">练习：bash脚本(Shell)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%EF%BC%9A"><span class="toc-number">6.1.</span> <span class="toc-text">基础知识：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#if-then-else%EF%BC%9A"><span class="toc-number">6.2.</span> <span class="toc-text">if-then-else：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#test%E5%91%BD%E4%BB%A4%EF%BC%9A"><span class="toc-number">6.3.</span> <span class="toc-text">test命令：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for%E5%BE%AA%E7%8E%AF%EF%BC%9A"><span class="toc-number">6.4.</span> <span class="toc-text">for循环：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while%E5%BE%AA%E7%8E%AF%EF%BC%9A"><span class="toc-number">6.5.</span> <span class="toc-text">while循环：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-number">6.6.</span> <span class="toc-text">函数:</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
+  <div class="sidebar-author-name">fuboy</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">16</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">8</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+  
+  </div>
+</aside>
+
+          <section id="main"><article id="post-命令基础" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2025/02/01/%E5%91%BD%E4%BB%A4%E5%9F%BA%E7%A1%80/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-02-01T06:15:24.000Z" itemprop="datePublished">2025-02-01</time>
+    <time style="display: none;" id="post-update-time">2025-02-03</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/" data-aos="zoom-in">知识点</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <ul>
+<li><strong>linux主要特征</strong> ：一切皆文件（目录、硬盘等都是文件）；硬件都在&#x2F;dev 目录，如硬盘、U盘为&#x2F;dev&#x2F;sd[a-d]； &#x2F;dev&#x2F;sr0（&#x2F;dev&#x2F;cdrom）是光驱的设备名（df命令查看），为设备文件，代表的是光驱本身，得把这个设备挂载到目录下（一般为&#x2F;mnt）(文件系统的临时挂载点)，才能对设备上的文件进行读写等操作；</li>
+<li><strong>不懂的命令</strong> ：man 命令（查用法、全称），只记得关键词，可用man -k 关键词；</li>
+</ul>
+<h2 id="系统操作："><a href="#系统操作：" class="headerlink" title="系统操作："></a>系统操作：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">示例：root@app00:~# </span><br><span class="line">root    //用户名，root为超级用户</span><br><span class="line">@       //分隔符</span><br><span class="line">app00   //主机名称</span><br><span class="line">~       //当前所在目录，默认用户目录为~，会随着目录切换而变化，例如：（root@app00:/bin# ，当前位置在bin目录下）</span><br><span class="line">#       //表示当前用户是超级用户，普通用户为$，例如：（&quot;yao@app00:/root$&quot; ，表示使用用户&quot;yao&quot;访问/root文件夹）</span><br><span class="line">``       //反引号用于命令替换，包围的命令会被执行，假设你想把当前日期作为一个文件名来创建一个文件，可以使用反引号：</span><br><span class="line">touch `date +%Y-%m-%d`.反引号已经逐渐被 $() 语法替代，因为后者更具可读性和可维护性。</span><br><span class="line">&gt;		//重定向符，将符号左侧命令的结果覆盖写入符号右侧指定的文件--例echo hello &gt; test.txt</span><br><span class="line">&gt;&gt;		//重定向符，将符号左侧命令的结果追加写入符号右侧指定的文件--例echo hello &gt;&gt; test.txt</span><br><span class="line">|		//管道符，将左边的结果传给右边</span><br></pre></td></tr></table></figure>
+
+<p><em><strong>命令组成：</strong></em></p>
+<p>示例：<strong>命令 参数名 参数值</strong></p>
+<p><em><strong>切换用户：</strong></em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">su fu             //切换为用户&quot;fu&quot;,输入后回车需要输入该用户的密码</span><br><span class="line">exit                 //退出当前用户</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Linux主要目录"><a href="#Linux主要目录" class="headerlink" title="Linux主要目录"></a>Linux主要目录</h2><h5 id="1"><a href="#1" class="headerlink" title="1.&#x2F;"></a>1.&#x2F;</h5><p>根目录<br>在linux下有且只有一个根目录</p>
+<h5 id="2-home"><a href="#2-home" class="headerlink" title="2.&#x2F;home"></a>2.&#x2F;home</h5><p>系统默认的用户家目录</p>
+<h5 id="3-etc"><a href="#3-etc" class="headerlink" title="3.&#x2F;etc"></a>3.&#x2F;etc</h5><p>系统配置文件存放的目录</p>
+<h5 id="4-bin"><a href="#4-bin" class="headerlink" title="4.&#x2F;bin"></a>4.&#x2F;bin</h5><p>保存可执行二进制文件的目录，如常用的ls、tar、mv、cat等。</p>
+<h2 id="文件目录操作"><a href="#文件目录操作" class="headerlink" title="文件目录操作"></a>文件目录操作</h2><h3 id="切换目录-cd"><a href="#切换目录-cd" class="headerlink" title="切换目录(cd)"></a>切换目录(cd)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd /                 //切换到根目录</span><br><span class="line">cd /bin              //切换到根目录下的bin目录</span><br><span class="line">cd ../               //切换到上一级目录 或者使用命令：cd ..</span><br><span class="line">cd ~                 //切换到home目录</span><br><span class="line">cd -                 //切换到上次访问的目录</span><br><span class="line">cd xx(文件夹名)       //切换到本目录下的名为xx的文件目录，如果目录不存在报错</span><br><span class="line">cd /xxx/xx/x         //可以输入完整的路径，直接切换到目标目录，输入过程中可以使用tab键快速补全</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看目录-ls"><a href="#查看目录-ls" class="headerlink" title="查看目录(ls)"></a>查看目录(ls)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ls                   //查看当前目录下的所有目录和文件</span><br><span class="line">ls -a                //查看当前目录下的所有目录和文件（包括隐藏的文件）</span><br><span class="line">ls -l                //列表查看当前目录下的所有目录和文件（列表查看，显示更多信息），与命令&quot;ll&quot;效果一样</span><br><span class="line">ls -h					//列出文件大小等信息</span><br><span class="line">ls /bin              //查看指定目录下的所有目录和文件 </span><br></pre></td></tr></table></figure>
+
+<h3 id="查看当前目录-pwd"><a href="#查看当前目录-pwd" class="headerlink" title="查看当前目录(pwd)"></a>查看当前目录(pwd)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pwd                         //显示当前位置路径</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建目录-mkdir"><a href="#创建目录-mkdir" class="headerlink" title="创建目录(mkdir)"></a>创建目录(mkdir)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir tools          //在当前目录下创建一个名为tools的目录</span><br><span class="line">mkdir /bin/tools     //在指定目录下创建一个名为tools的目录</span><br><span class="line">mkdir -p a/b/c/d     //可以递归创建目录</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除目录-文件-rm"><a href="#删除目录-文件-rm" class="headerlink" title="删除目录&#x2F;文件(rm)"></a>删除目录&#x2F;文件(rm)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rm 文件名              //删除当前目录下的文件</span><br><span class="line">rm -f 文件名           //删除当前目录的的文件（不经询问强制删除）</span><br><span class="line">rm -r 文件夹名         //递归删除当前目录下此名的目录</span><br><span class="line">rm -rf 文件夹名        //递归删除当前目录下此名的目录（不询问）</span><br><span class="line">rm -rf *              //将当前目录下的所有目录和文件全部删除</span><br><span class="line">rm -rf /*             //将根目录下的所有文件全部删除【慎用！不要在root时执行，相当于格式化系统】</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改目录-mv"><a href="#修改目录-mv" class="headerlink" title="修改目录(mv)"></a>修改目录(mv)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mv 当前目录名 新目录名        //修改目录名，同样适用于文件操作</span><br><span class="line">mv /usr/tmp/tool /opt       //将/usr/tmp目录下的tool目录z转移到 /opt目录下面</span><br><span class="line">mv -r /usr/tmp/tool /opt    //递归剪切目录中所有文件和文件夹</span><br></pre></td></tr></table></figure>
+
+<h3 id="拷贝目录-cp"><a href="#拷贝目录-cp" class="headerlink" title="拷贝目录(cp)"></a>拷贝目录(cp)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/tmp/tool /opt       //将/usr/tmp目录下的tool目录复制到 /opt目录下面</span><br><span class="line">cp -r /usr/tmp/tool /opt    //递归复制目录中所有文件和文件夹</span><br></pre></td></tr></table></figure>
+
+<h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><h3 id="新增文件-touch"><a href="#新增文件-touch" class="headerlink" title="新增文件(touch)"></a>新增文件(touch)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch  a.txt         //在当前目录下创建名为a的txt文件（文件不存在），如果文件存在，将文件时间属性修改为当前系统时间</span><br></pre></td></tr></table></figure>
+
+<h3 id="查找文件-find"><a href="#查找文件-find" class="headerlink" title="查找文件(find)"></a>查找文件(find)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">按文件名查找 ：find 起始路径 -name &quot;被查找的文件名&quot;</span><br><span class="line">支持通配符(*)：find 起始路径 -name &quot;*test&quot; (以test结尾的文件名)--还有（test*、*test*）</span><br><span class="line">按文件大小查找：find 起始路径 -size +|-n[kMG]</span><br><span class="line">(+是大于，-是小于，n是文件大小，k是kb，M是Mb...)</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看文件内容-cat、more、tac"><a href="#查看文件内容-cat、more、tac" class="headerlink" title="查看文件内容(cat、more、tac)"></a>查看文件内容(cat、more、tac)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat a.txt //一屏到底</span><br><span class="line">tac a.txt //从文本最后一行开始显示</span><br><span class="line">more a.txt  //分页查看，按空格翻页，按“q”退出查看</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看文件头部内容-head"><a href="#查看文件头部内容-head" class="headerlink" title="查看文件头部内容(head)"></a>查看文件头部内容(head)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head [options] [file...]</span><br></pre></td></tr></table></figure>
+
+<p>默认用法：<code>head test.txt</code> &#x2F;&#x2F;查看文件前十行内容</p>
+<p><strong><code>-n NUM</code></strong>：指定显示的行数。</p>
+<p><strong><code>-c NUM</code></strong>：指定显示的字节数，而不是行数。</p>
+<p><strong><code>-q</code></strong>：不显示文件名。</p>
+<p><strong><code>-v</code></strong>：显示文件名。</p>
+<h3 id="查看文件尾部内容-tail"><a href="#查看文件尾部内容-tail" class="headerlink" title="查看文件尾部内容(tail)"></a>查看文件尾部内容(tail)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail [options] [file...]</span><br></pre></td></tr></table></figure>
+
+<p>默认用法：<code>tail test.txt</code> &#x2F;&#x2F;查看文件后十行内容</p>
+<p><strong><code>-n NUM</code></strong>：指定显示的行数。</p>
+<p><strong><code>-c NUM</code></strong>：指定显示的字节数，而不是行数。</p>
+<p><strong><code>-f</code></strong>：实时跟踪文件（”follow”），用于查看文件末尾的新内容。这个选项通常用于监控日志文件。</p>
+<p><strong><code>-F</code></strong>：与 <code>-f</code> 类似，但会在文件被截断或重新创建时自动重新打开文件。</p>
+<p><strong><code>-q</code></strong>：不显示文件名（对于多个文件时）。</p>
+<p><strong><code>-v</code></strong>：显示文件名</p>
+<h3 id="查看文本行数、字数、字节数-wc"><a href="#查看文本行数、字数、字节数-wc" class="headerlink" title="查看文本行数、字数、字节数(wc)"></a>查看文本行数、字数、字节数(wc)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">wc file_name        # 输出行数、字数和字节数</span><br><span class="line">wc -l file_name     # 只显示行数</span><br><span class="line">-l , --lines : 显示行数；</span><br><span class="line"></span><br><span class="line">-w , --words : 显示字数；</span><br><span class="line"></span><br><span class="line">-m , --chars : 显示字符数；</span><br><span class="line"></span><br><span class="line">-c , --bytes : 显示字节数；</span><br><span class="line"></span><br><span class="line">-L , --max-line-length : 显示最长行的长度；</span><br></pre></td></tr></table></figure>
+
+<h3 id="查找命令的程序文件-which"><a href="#查找命令的程序文件-which" class="headerlink" title="查找命令的程序文件(which)"></a>查找命令的程序文件(which)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">which 要查找的命令</span><br><span class="line">例which cd</span><br><span class="line">会输出命令本体所在的文件目录</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/../images/20250121124554593.png"></p>
+<h3 id="文本搜索-grep"><a href="#文本搜索-grep" class="headerlink" title="文本搜索(grep)"></a>文本搜索(grep)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">基本语法：grep [options] pattern [file...]</span><br></pre></td></tr></table></figure>
+
+<p><code>pattern</code>：需要匹配的模式，可以是<strong>普通文本</strong>或<strong>正则表达式</strong>。</p>
+<p><code>[file...]</code>：要搜索的一个或多个文件。如果没有指定文件，<code>grep</code> 会从标准输入读取数据。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">-i：忽略大小写。</span><br><span class="line">例如，grep -i &quot;hello&quot; file.txt 会匹配 hello、HELLO、HeLlO 等。</span><br><span class="line"></span><br><span class="line">-v：反向匹配，显示不包含模式的行。</span><br><span class="line">例如，grep -v &quot;error&quot; file.txt 会显示所有不包含 error 的行。</span><br><span class="line"></span><br><span class="line">-r 或 -R：递归搜索目录中的文件。</span><br><span class="line">例如，grep -r &quot;pattern&quot; /path/to/dir 会在指定目录及其子目录中的所有文件里搜索模式。</span><br><span class="line"></span><br><span class="line">-l：显示包含匹配模式的文件名（而不是具体的匹配内容）。</span><br><span class="line">例如，grep -l &quot;pattern&quot; *.txt 会显示所有包含 pattern 的文件名。</span><br><span class="line"></span><br><span class="line">-n：显示匹配行的行号。</span><br><span class="line">例如，grep -n &quot;pattern&quot; file.txt 会显示 pattern 所在的行号。</span><br><span class="line"></span><br><span class="line">-c：显示匹配模式的行数。</span><br><span class="line">例如，grep -c &quot;pattern&quot; file.txt 会显示 pattern 出现的次数。</span><br><span class="line"></span><br><span class="line">-w：只匹配整个单词。</span><br><span class="line">例如，grep -w &quot;is&quot; file.txt 会匹配 is，而不匹配 this 或 his。</span><br><span class="line"></span><br><span class="line">-x：匹配整行。</span><br><span class="line">例如，grep -x &quot;exact match&quot; file.txt 只会匹配整行内容完全等于 &quot;exact match&quot; 的行。</span><br><span class="line"></span><br><span class="line">-H：在输出中显示文件名（即使只有一个文件时也会显示文件名）。</span><br><span class="line">例如，grep -H &quot;pattern&quot; file.txt 会在输出中包含文件名。</span><br><span class="line"></span><br><span class="line">-A NUM：匹配后显示匹配行及其后面 NUM 行。</span><br><span class="line">例如，grep -A 3 &quot;pattern&quot; file.txt 会显示匹配行及其后面的 3 行内容。</span><br><span class="line"></span><br><span class="line">-B NUM：匹配前显示匹配行及其前面 NUM 行。</span><br><span class="line">例如，grep -B 2 &quot;pattern&quot; file.txt 会显示匹配行及其前面的 2 行内容。</span><br><span class="line"></span><br><span class="line">-C NUM：显示匹配行以及其前后 NUM 行。</span><br><span class="line">例如，grep -C 2 &quot;pattern&quot; file.txt 会显示匹配行及其前后 2 行内容。</span><br><span class="line"></span><br><span class="line">--color：高亮显示匹配的文本。</span><br><span class="line">例如，grep --color=auto &quot;pattern&quot; file.txt 会高亮显示所有匹配的 pattern。</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="编辑文件-vi、vim"><a href="#编辑文件-vi、vim" class="headerlink" title="编辑文件(vi、vim)"></a>编辑文件(vi、vim)</h3><p>vim是vi的升级版</p>
+<h4 id="启动：vim-文件名"><a href="#启动：vim-文件名" class="headerlink" title="启动：vim 文件名"></a>启动：vim 文件名</h4><p>（如果有则打开，没有则新建）</p>
+<p><strong>普通模式（Normal Mode）</strong>：默认模式，用于导航、删除、复制、粘贴、查找等操作。</p>
+<p><strong>插入模式（Insert Mode）</strong>：用于编辑文本，类似于普通的文本编辑器。</p>
+<p><strong>命令模式（Command Mode）</strong>：用于输入命令，例如保存、退出、搜索等。</p>
+<h4 id="模式切换："><a href="#模式切换：" class="headerlink" title="模式切换："></a>模式切换：</h4><ul>
+<li><strong>从普通模式进入插入模式</strong>：按 <code>i</code>、<code>I</code>（光标前）、<code>a</code>、<code>A</code>（光标后）、<code>o</code>（光标下方新行）、<code>O</code>（光标上方新行）等。</li>
+<li><strong>从插入模式返回普通模式</strong>：按 <code>Esc</code> 键。</li>
+<li><strong>从普通模式进入命令模式</strong>：按 <code>:</code>（冒号）。</li>
+</ul>
+<h4 id="常见操作："><a href="#常见操作：" class="headerlink" title="常见操作："></a>常见操作：</h4><h5 id="1-基本导航（在普通模式下）："><a href="#1-基本导航（在普通模式下）：" class="headerlink" title="1. 基本导航（在普通模式下）："></a>1. <strong>基本导航（在普通模式下）</strong>：</h5><ul>
+<li><code>h</code>：左移一个字符。</li>
+<li><code>j</code>：下移一行。</li>
+<li><code>k</code>：上移一行。</li>
+<li><code>l</code>：右移一个字符。</li>
+<li><code>w</code>：跳到下一个单词的开头。</li>
+<li><code>b</code>：跳到前一个单词的开头。</li>
+<li><code>0</code>：跳到当前行的开头。</li>
+<li><code>$</code>：跳到当前行的末尾。</li>
+<li><code>gg</code>：跳到文件的开头。</li>
+<li><code>G</code>：跳到文件的末尾。</li>
+<li><code>Ctrl+f</code>：向下翻一页。</li>
+<li><code>Ctrl+b</code>：向上翻一页</li>
+</ul>
+<h5 id="2-编辑文本（在插入模式下）："><a href="#2-编辑文本（在插入模式下）：" class="headerlink" title="2. 编辑文本（在插入模式下）："></a>2. <strong>编辑文本（在插入模式下）</strong>：</h5><ul>
+<li><code>i</code>：进入插入模式，在当前光标前插入。</li>
+<li><code>I</code>：进入插入模式，在行首插入。</li>
+<li><code>a</code>：进入插入模式，在当前光标后插入。</li>
+<li><code>A</code>：进入插入模式，在行尾插入。</li>
+<li><code>o</code>：进入插入模式，在当前行下插入新行。</li>
+<li><code>O</code>：进入插入模式，在当前行上插入新行。</li>
+<li><code>Esc</code>：退出插入模式，返回普通模式。</li>
+</ul>
+<h5 id="3-删除、复制、粘贴（在普通模式下）："><a href="#3-删除、复制、粘贴（在普通模式下）：" class="headerlink" title="3. 删除、复制、粘贴（在普通模式下）："></a>3. <strong>删除、复制、粘贴（在普通模式下）</strong>：</h5><ul>
+<li><code>x</code>：删除当前光标所在的字符。</li>
+<li><code>dd</code>：删除当前行。</li>
+<li><code>d</code> + <code>w</code>：删除一个单词。</li>
+<li><code>d</code> + <code>0</code>：删除从当前光标到行首的内容。</li>
+<li><code>d</code> + <code>$</code>：删除从当前光标到行尾的内容。</li>
+<li><code>yy</code>：复制当前行。</li>
+<li><code>y</code> + <code>w</code>：复制一个单词。</li>
+<li><code>p</code>：在光标后粘贴。</li>
+<li><code>P</code>：在光标前粘贴。</li>
+</ul>
+<h5 id="4-撤销和重做："><a href="#4-撤销和重做：" class="headerlink" title="4. 撤销和重做："></a>4. <strong>撤销和重做</strong>：</h5><ul>
+<li><code>u</code>：撤销上一步操作。</li>
+<li><code>Ctrl+r</code>：重做撤销的操作。</li>
+</ul>
+<h5 id="5-查找和替换（在命令模式下）："><a href="#5-查找和替换（在命令模式下）：" class="headerlink" title="5. 查找和替换（在命令模式下）："></a>5. <strong>查找和替换（在命令模式下）</strong>：</h5><ul>
+<li><code>/pattern</code>：向下查找 <code>pattern</code>。</li>
+<li><code>?pattern</code>：向上查找 <code>pattern</code>。</li>
+<li><code>n</code>：跳到下一个匹配。</li>
+<li><code>N</code>：跳到上一个匹配。</li>
+<li><code>:%s/old/new/g</code>：将文件中所有的 <code>old</code> 替换为 <code>new</code>（<code>g</code> 代表全局替换）。</li>
+<li><code>:s/old/new/g</code>：在当前行中替换所有的 <code>old</code> 为 <code>new</code>。</li>
+</ul>
+<h5 id="6-保存和退出（在命令模式下）："><a href="#6-保存和退出（在命令模式下）：" class="headerlink" title="6. 保存和退出（在命令模式下）："></a>6. <strong>保存和退出（在命令模式下）</strong>：</h5><ul>
+<li><code>:w</code>：保存文件。</li>
+<li><code>:q</code>：退出 <code>vim</code>。</li>
+<li><code>:wq</code> 或 <code>ZZ</code>：保存并退出 <code>vim</code>。</li>
+<li><code>:q!</code>：强制退出（不保存更改）。</li>
+<li><code>:x</code>：保存并退出（与 <code>:wq</code> 等效）。</li>
+</ul>
+<h2 id="用户和权限管理"><a href="#用户和权限管理" class="headerlink" title="用户和权限管理"></a>用户和权限管理</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/etc/passwd 存储**用户**的关键信息</span><br><span class="line">/etc/group 存储**用户组**的关键信息</span><br><span class="line">/etc/shadow 存储用户的**密码**信息</span><br><span class="line">主组：</span><br><span class="line">- 用户的初始组</span><br><span class="line">- 用户有且只能属于一个主组</span><br><span class="line">- 用户只能更换主组而不能删除主组（若主组为空，则系统会自动删除）</span><br><span class="line">- 用户创建的文件属于该用户的主组</span><br><span class="line">附加组：</span><br><span class="line">- 用户可以属于零个或多个附加组</span><br><span class="line">- 附加组可以直接被删除而无需关心是否所属于用户</span><br><span class="line">- 附加组可以新增和移除任意个所属用户</span><br><span class="line">- 用户被删除时所属附属组不会受影响</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>whoami</code></strong>：显示当前登录的用户名</p>
+<p><strong><code>id</code></strong>：显示显示用户的 UID、GID 及所属的组</p>
+<p><strong><code>who</code></strong>：命令用于查看当前所有登录系统的用户信息。</p>
+<hr>
+<h3 id="passwd：修改用户密码"><a href="#passwd：修改用户密码" class="headerlink" title="passwd：修改用户密码"></a><strong><code>passwd</code></strong>：修改用户密码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd  用户名  # 修改当前用户的密码</span><br></pre></td></tr></table></figure>
+
+<h3 id="useradd：添加新用户"><a href="#useradd：添加新用户" class="headerlink" title="useradd：添加新用户"></a><strong><code>useradd</code></strong>：添加新用户</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">useradd 选项 用户名</span><br><span class="line">-g：表示指定用户的用户主组，选项的值可以是用户组的id，也可以是组名</span><br><span class="line"></span><br><span class="line">-G：表示指定用户的用户附加组，选项的值可以是用户组的id，也可以是组名</span><br><span class="line"></span><br><span class="line">-u：uid，用户的id（用户的标识符），系统默认会从500之后按顺序分配uid，如果不想使用系统分配的，可以通过该选项自定义</span><br><span class="line"></span><br><span class="line">-c comment：添加注释</span><br><span class="line"></span><br><span class="line">-d:指定用户home路径，不指定则默认在/home/路径</span><br><span class="line">例：</span><br><span class="line">useradd -G 1001 -u 666 lisi</span><br><span class="line">添加选项，创建用户lisi，让 lisi 属于附加组1001（zhangsan的组id），设置用户id为666，主组由系统创建。</span><br></pre></td></tr></table></figure>
+
+<h3 id="userdel：删除用户"><a href="#userdel：删除用户" class="headerlink" title="userdel：删除用户"></a><strong><code>userdel</code></strong>：删除用户</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">userdel 选项 用户名</span><br><span class="line">-r：表示删除用户的同时，删除其家目录；</span><br><span class="line"></span><br><span class="line">删除zhangsan用户</span><br><span class="line">#userdel -r zhangsan</span><br></pre></td></tr></table></figure>
+
+<h3 id="usermod：修改用户信息"><a href="#usermod：修改用户信息" class="headerlink" title="usermod：修改用户信息"></a><strong><code>usermod</code></strong>：修改用户信息</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">usermod 选项 用户名 （Usermod：user modify，用户修改）</span><br><span class="line">-g：表示修改用户的用户主组，选项的值可以是用户组的id，也可以是组名</span><br><span class="line"></span><br><span class="line">-G：表示修改用户的用户附加组，选项的值可以是用户组的id，也可以是组名</span><br><span class="line"></span><br><span class="line">-u：uid，用户的id（用户的标识符）</span><br><span class="line"></span><br><span class="line">-l： 修改用户名</span><br><span class="line"></span><br><span class="line">1. 修改zhangsan用户主组为500，附加组改为501</span><br><span class="line">#usermod -g 1000 -G 1001 zhangsan</span><br><span class="line">2. 修改zhangsan用户用户名，改为wangwu</span><br><span class="line">#usermod -l wangwu zhangsan</span><br></pre></td></tr></table></figure>
+
+<h3 id="su：切换用户"><a href="#su：切换用户" class="headerlink" title="su：切换用户"></a><strong><code>su</code></strong>：切换用户</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">su [用户名]</span><br><span class="line">注意：</span><br><span class="line">a. 从root往普通用户切换不需要密码，但是反之则需要root密码；</span><br><span class="line">b. 切换用户之后前后的工作路径是不变的；</span><br><span class="line">c. 普通用户没有办法访问root用户家目录，但是反之则可以；</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="groupadd：添加新组"><a href="#groupadd：添加新组" class="headerlink" title="groupadd：添加新组"></a><strong><code>groupadd</code></strong>：添加新组</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">groupadd 选项 用户组名</span><br><span class="line">-g：表示选择自己设置一个自定义的用户组ID数字，如果自己不指定，则默认从500之后递增；</span><br><span class="line"></span><br><span class="line">使用groupadd指令创建一个新的用户组，命名为Administrators</span><br><span class="line">#groupadd Adminstrators</span><br></pre></td></tr></table></figure>
+
+<h3 id="groupmod：用户组编辑"><a href="#groupmod：用户组编辑" class="headerlink" title="groupmod：用户组编辑"></a><strong><code>groupmod</code></strong>：用户组编辑</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">groupmod 选项 用户组名</span><br><span class="line">-g：表示选择自己设置一个自定义的用户组ID数字</span><br><span class="line">-n：表示设置新的用户组的名称</span><br><span class="line"></span><br><span class="line">修改Administrators用户组，将组ID从502改成520，将名称改为admins</span><br><span class="line">groupmod -g 520 -n admins Administrators</span><br></pre></td></tr></table></figure>
+
+<h3 id="groupdel：用户组删除"><a href="#groupdel：用户组删除" class="headerlink" title="groupdel：用户组删除"></a><strong><code>groupdel</code></strong>：用户组删除</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">groupdel 用户组名</span><br><span class="line">注意：</span><br><span class="line">当如果需要删除一个组，但是这个组是某个用户的主组时，则不允许删除；如果确实需要删除，则先从组内移出所有用户。</span><br></pre></td></tr></table></figure>
+
+<h3 id="groups：查看用户所属的组"><a href="#groups：查看用户所属的组" class="headerlink" title="groups：查看用户所属的组"></a><strong><code>groups</code></strong>：查看用户所属的组</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groups user_name</span><br></pre></td></tr></table></figure>
+
+<hr>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">一、权限介绍</span><br><span class="line">1.读权限：</span><br><span class="line">对于文件夹来说，读权限影响用户是否能够列出目录结构</span><br><span class="line">对于文件来说，读权限影响用户是否可以查看文件内容</span><br><span class="line"></span><br><span class="line">2.写权限：</span><br><span class="line">对文件夹来说，写权限影响用户是否可以在文件夹下“创建/删除/复制到/移动到”文档</span><br><span class="line">对于文件来说，写权限影响用户是否可以编辑文件内容</span><br><span class="line"></span><br><span class="line">3.执行权限：</span><br><span class="line">一般都是对于文件来说，特别脚本文件。</span><br><span class="line"></span><br><span class="line">二、身份介绍</span><br><span class="line">Owner身份：文件所有者，默认为文档的创建者</span><br><span class="line"></span><br><span class="line">Group身份：与文件所有者同组的用户</span><br><span class="line"></span><br><span class="line">Others身份：其他人，相对于所有者所在组</span><br><span class="line"></span><br><span class="line">Root用户：超级用户，管理着普通用户，具有所有权限</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="chmod：修改文件或目录的权限"><a href="#chmod：修改文件或目录的权限" class="headerlink" title="chmod：修改文件或目录的权限"></a><strong><code>chmod</code></strong>：修改文件或目录的权限</h3><p><strong>注意：</strong></p>
+<blockquote>
+<p>如果想要给文档设置权限，操作者要么是<strong>root用户</strong>，要么就是<strong>文档的所有者</strong>。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">chmod 选项 权限信息 文档</span><br><span class="line">-R：递归设置权限 （当文档类型为文件夹的时候）</span><br><span class="line">权限信息：就是对该文档的不同身份使用者需要设置的权限信息</span><br><span class="line">文档：可以是文件，也可以是文件夹，可以是相对路径也可以是绝对路径。</span><br><span class="line"></span><br><span class="line">权限信息参数：</span><br><span class="line">给谁设置：</span><br><span class="line">u：表示所有者身份owner（user）</span><br><span class="line">g：表示给所有者同组用户设置（group）</span><br><span class="line">o：表示others，给其他用户设置权限</span><br><span class="line">a：表示all，给所有人（包含ugo部分）设置权限</span><br><span class="line">如果在设置权限的时候不指定给谁设置，则默认给所有用户设置</span><br><span class="line"></span><br><span class="line">权限字符：</span><br><span class="line">r：读</span><br><span class="line">w：写</span><br><span class="line">x：表示执行</span><br><span class="line">-：表示没有权限</span><br><span class="line"></span><br><span class="line">权限分配方式：</span><br><span class="line">+：表示给具体的用户新增权限（相对当前）</span><br><span class="line">-：表示删除用户的权限（相对当前）</span><br><span class="line">=：表示将权限设置成具体的值（注重结果）【赋值】</span><br><span class="line">给anaconda-ks.cfg文件（-rw-------.）设置权限，要求所有者拥有全部的权限，同组用户拥有读和执行权限，其他用户只读权限。</span><br><span class="line">#chmod u+x,g+rx,o+r anaconda-ks.cfg</span><br><span class="line">#chmod u=rwx,g=rx,o=r anaconda-ks.cfg</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">补充：</span><br><span class="line"></span><br><span class="line">可以使用root用户设置所有人都有执行权限，可以写成</span><br><span class="line">①#chmod +x anaconda-ks.cfg</span><br><span class="line">②#chmod a=x anaconda-ks.cfg</span><br><span class="line">③#chmod a+x anaconda-ks.cfg</span><br><span class="line">a意为all，可忽略</span><br></pre></td></tr></table></figure>
+
+<h3 id="chown：改变文件或目录的所有者"><a href="#chown：改变文件或目录的所有者" class="headerlink" title="chown：改变文件或目录的所有者"></a><strong><code>chown</code></strong>：改变文件或目录的所有者</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">chown -R username:groupname 文档路径</span><br><span class="line"></span><br><span class="line">将lib目录的所属用户和用户组改成codegoat24，并且包含其子目录</span><br><span class="line">#chown -R codegoat24:codegoat24 ./lib</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习：bash脚本-Shell"><a href="#练习：bash脚本-Shell" class="headerlink" title="练习：bash脚本(Shell)"></a>练习：bash脚本(Shell)</h2><p><strong>Bash脚本编写准则</strong></p>
+<p>在编写第一个脚本之前，在编写脚本时需要了解一些准则。</p>
+<ul>
+<li>所有的脚本都应以“#!&#x2F;bin&#x2F;bash”行开头。</li>
+<li>将每个命令放在新行上。</li>
+<li>每个注释都以#符号开头。</li>
+<li>命令用()括号括起来。</li>
+</ul>
+<p>该#!&#x2F;bin&#x2F;bash 语句是路径</p>
+<p>保存文件后，通过执行以下命令使其所有用户可执行：</p>
+<p>chmod +x  bashtest.sh</p>
+<p>现在，在终端使用以下命令运行它：</p>
+<p> .&#x2F;bashtest.sh</p>
+<h3 id="基础知识："><a href="#基础知识：" class="headerlink" title="基础知识："></a>基础知识：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">echo 语句        //输出再换行</span><br><span class="line">echo -n 语句     //输出不换行</span><br><span class="line">read a           //输入变量a</span><br><span class="line">readonly a       //只读变量a，只读变量就是常量，值不能改变</span><br><span class="line">unset a          //删除变量a</span><br><span class="line">&#x27;&#x27;和&quot;&quot;            //标识字符串</span><br><span class="line">declare -i a=42          //使用 declare 或 typeset 命令来声明整数变量</span><br><span class="line">a=(1 2 3 4 5)     //整数索引数组</span><br><span class="line"></span><br><span class="line">declare -A associative_array</span><br><span class="line">associative_array[&quot;name&quot;]=&quot;John&quot;</span><br><span class="line">associative_array[&quot;age&quot;]=30      //关联数组</span><br><span class="line"></span><br><span class="line">greeting=&quot;hello, &quot;$your_name&quot; !&quot;</span><br><span class="line">greeting_1=&quot;hello, $&#123;your_name&#125; !&quot;</span><br><span class="line">echo $greeting  $greeting_1        //双引号拼接字符串（单引号也可以）</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="if-then-else："><a href="#if-then-else：" class="headerlink" title="if-then-else："></a>if-then-else：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">if [[ 条件 ]]</span><br><span class="line">then</span><br><span class="line">&lt;执行一条指令&gt;</span><br><span class="line">else</span><br><span class="line">&lt;执行另一条指令/命令&gt;</span><br><span class="line">fi</span><br><span class="line">---------------------------</span><br><span class="line">if condition1</span><br><span class="line">then</span><br><span class="line">    command1</span><br><span class="line">elif condition2 </span><br><span class="line">then </span><br><span class="line">    command2</span><br><span class="line">else</span><br><span class="line">    commandN</span><br><span class="line">fi</span><br><span class="line">[...]条件判断语句中大于使用 -gt，小于使用 -lt,等于用-eq</span><br><span class="line">((...))可以直接使用&gt;&lt;=</span><br></pre></td></tr></table></figure>
+
+<h3 id="test命令："><a href="#test命令：" class="headerlink" title="test命令："></a>test命令：</h3><p><strong>数值：</strong></p>
+<table>
+<thead>
+<tr>
+<th>-eq</th>
+<th>等于则为真</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-ne</td>
+<td>不等于则为真</td>
+</tr>
+<tr>
+<td>-gt</td>
+<td>大于则为真</td>
+</tr>
+<tr>
+<td>-ge</td>
+<td>大于等于则为真</td>
+</tr>
+<tr>
+<td>-lt</td>
+<td>小于则为真</td>
+</tr>
+<tr>
+<td>-le</td>
+<td>小于等于则为真</td>
+</tr>
+</tbody></table>
+<p><strong>字符串：</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">&#x3D;</td>
+<td align="left">等于则为真</td>
+</tr>
+<tr>
+<td align="left">!&#x3D;</td>
+<td align="left">不相等则为真</td>
+</tr>
+<tr>
+<td align="left">-z 字符串</td>
+<td align="left">字符串的长度为零则为真</td>
+</tr>
+<tr>
+<td align="left">-n 字符串</td>
+<td align="left">字符串的长度不为零则为真</td>
+</tr>
+</tbody></table>
+<p><strong>文件测试：</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-e 文件名</td>
+<td align="left">如果文件存在则为真</td>
+</tr>
+<tr>
+<td align="left">-r 文件名</td>
+<td align="left">如果文件存在且可读则为真</td>
+</tr>
+<tr>
+<td align="left">-w 文件名</td>
+<td align="left">如果文件存在且可写则为真</td>
+</tr>
+<tr>
+<td align="left">-x 文件名</td>
+<td align="left">如果文件存在且可执行则为真</td>
+</tr>
+<tr>
+<td align="left">-s 文件名</td>
+<td align="left">如果文件存在且至少有一个字符则为真</td>
+</tr>
+<tr>
+<td align="left">-d 文件名</td>
+<td align="left">如果文件存在且为目录则为真</td>
+</tr>
+<tr>
+<td align="left">-f 文件名</td>
+<td align="left">如果文件存在且为普通文件则为真</td>
+</tr>
+<tr>
+<td align="left">-c 文件名</td>
+<td align="left">如果文件存在且为字符型特殊文件则为真</td>
+</tr>
+<tr>
+<td align="left">-b 文件名</td>
+<td align="left">如果文件存在且为块特殊文件则为真</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">num1=100</span><br><span class="line">num2=100</span><br><span class="line">if test $[num1] -eq $[num2]</span><br><span class="line">then</span><br><span class="line">    echo &#x27;两个数相等！&#x27;</span><br><span class="line">else</span><br><span class="line">    echo &#x27;两个数不相等！&#x27;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<h3 id="for循环："><a href="#for循环：" class="headerlink" title="for循环："></a>for循环：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">for Value in 1 2 3 4 5 .. N</span><br><span class="line">do</span><br><span class="line">instruction1</span><br><span class="line">instruction2</span><br><span class="line">instruction-N</span><br><span class="line">done</span><br><span class="line">或</span><br><span class="line">for VALUE in file1 file2 file3</span><br><span class="line">do</span><br><span class="line">instruction1 on $VALUE</span><br><span class="line">instruction2</span><br><span class="line">instruction-N</span><br><span class="line">done</span><br><span class="line">例：</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">在循环的每次迭代中读取一个工作日的名称</span></span><br><span class="line">for day in 星期一 星期二 星期三 星期四 星期五 星期六 星期日</span><br><span class="line">do</span><br><span class="line">echo &quot;$day&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h3 id="while循环："><a href="#while循环：" class="headerlink" title="while循环："></a>while循环：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">x=1</span><br><span class="line">while [ $x -le 7 ]</span><br><span class="line">do</span><br><span class="line">echo &quot;欢迎来到LinuxMi.com&quot;</span><br><span class="line">x=$(( $x + 1 ))</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数:"></a>函数:</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">语法</span><br><span class="line">function_name () &#123;</span><br><span class="line">&lt;instructions/commands&gt;</span><br><span class="line">[return ...]</span><br><span class="line">&#125;</span><br><span class="line">或</span><br><span class="line">function function_name &#123;</span><br><span class="line">&lt;instructions/commands&gt;</span><br><span class="line">[return ...]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">示例1</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">lmFunction () &#123;</span><br><span class="line">echo &quot;你好，我是第一个函数&quot;</span><br><span class="line">echo &quot;你好，我是第一个函数&quot;</span><br><span class="line">echo</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">echo &quot;这是第二个函数&quot;</span><br><span class="line">function lmCities () &#123;</span><br><span class="line">echo Hello $1</span><br><span class="line">&#125;</span><br><span class="line">lmFunction</span><br><span class="line">lmCities www.linuxmi.com //$1参数访问</span><br><span class="line">lmCities Linux迷,当年的大师兄</span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">1表示第一个参数，<span class="variable">$2</span>表示第二个...</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">示例2</span><br><span class="line">funWithReturn()&#123;</span><br><span class="line">    echo &quot;这个函数会对输入的两个数字进行相加运算...&quot;</span><br><span class="line">    echo &quot;输入第一个数字: &quot;</span><br><span class="line">    read aNum</span><br><span class="line">    echo &quot;输入第二个数字: &quot;</span><br><span class="line">    read anotherNum</span><br><span class="line">    echo &quot;两个数字分别为 $aNum 和 $anotherNum !&quot;</span><br><span class="line">    return $(($aNum+$anotherNum))</span><br><span class="line">&#125;</span><br><span class="line">funWithReturn</span><br><span class="line">echo &quot;输入的两个数字之和为 $? !&quot;</span><br><span class="line"></span><br><span class="line">函数返回值在调用该函数后通过$?来获得。</span><br><span class="line">注意：所有函数在使用前必须定义。这意味着必须将函数放在脚本开始部分，直至shell解释器首次发现它时，才可以使用。调用函数仅使用其函数名即可。</span><br><span class="line">注意： return 语句只能返回一个介于 0 到 255 之间的整数，而两个输入数字的和可能超过这个范围。</span><br><span class="line">要解决这个问题，您可以修改 return 语句，直接使用 echo 输出和而不是使用 return：</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="XSS-payload构造" class="lazyload">
+        
+        <a href="/2025/02/03/XSS-payload%E6%9E%84%E9%80%A0/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            XSS-payload构造
+          
+        </h3>
+      </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="../images/17373827994914.jpg" data-sizes="auto" alt="ISCC2016 Easy Gallery" class="lazyload">
+        
+      
+      <a href="/2025/01/25/ISCC2016%20Easy%20Gallery/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          ISCC2016 Easy Gallery
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+</section>
+        </div>
+        
+        
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2025
+      <span class="footer-info-sep rotate"></span>
+      fuboy
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        30.3k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        01:58
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">系统操作：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E4%B8%BB%E8%A6%81%E7%9B%AE%E5%BD%95"><span class="toc-number">2.</span> <span class="toc-text">Linux主要目录</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">1.&#x2F;</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-home"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">2.&#x2F;home</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-etc"><span class="toc-number">2.0.0.3.</span> <span class="toc-text">3.&#x2F;etc</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-bin"><span class="toc-number">2.0.0.4.</span> <span class="toc-text">4.&#x2F;bin</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C"><span class="toc-number">3.</span> <span class="toc-text">文件目录操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E7%9B%AE%E5%BD%95-cd"><span class="toc-number">3.1.</span> <span class="toc-text">切换目录(cd)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%9B%AE%E5%BD%95-ls"><span class="toc-number">3.2.</span> <span class="toc-text">查看目录(ls)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E7%9B%AE%E5%BD%95-pwd"><span class="toc-number">3.3.</span> <span class="toc-text">查看当前目录(pwd)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95-mkdir"><span class="toc-number">3.4.</span> <span class="toc-text">创建目录(mkdir)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%9B%AE%E5%BD%95-%E6%96%87%E4%BB%B6-rm"><span class="toc-number">3.5.</span> <span class="toc-text">删除目录&#x2F;文件(rm)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E7%9B%AE%E5%BD%95-mv"><span class="toc-number">3.6.</span> <span class="toc-text">修改目录(mv)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%B7%E8%B4%9D%E7%9B%AE%E5%BD%95-cp"><span class="toc-number">3.7.</span> <span class="toc-text">拷贝目录(cp)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C"><span class="toc-number">4.</span> <span class="toc-text">文件操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E5%A2%9E%E6%96%87%E4%BB%B6-touch"><span class="toc-number">4.1.</span> <span class="toc-text">新增文件(touch)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6-find"><span class="toc-number">4.2.</span> <span class="toc-text">查找文件(find)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9-cat%E3%80%81more%E3%80%81tac"><span class="toc-number">4.3.</span> <span class="toc-text">查看文件内容(cat、more、tac)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%A4%B4%E9%83%A8%E5%86%85%E5%AE%B9-head"><span class="toc-number">4.4.</span> <span class="toc-text">查看文件头部内容(head)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%B0%BE%E9%83%A8%E5%86%85%E5%AE%B9-tail"><span class="toc-number">4.5.</span> <span class="toc-text">查看文件尾部内容(tail)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E6%9C%AC%E8%A1%8C%E6%95%B0%E3%80%81%E5%AD%97%E6%95%B0%E3%80%81%E5%AD%97%E8%8A%82%E6%95%B0-wc"><span class="toc-number">4.6.</span> <span class="toc-text">查看文本行数、字数、字节数(wc)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E5%91%BD%E4%BB%A4%E7%9A%84%E7%A8%8B%E5%BA%8F%E6%96%87%E4%BB%B6-which"><span class="toc-number">4.7.</span> <span class="toc-text">查找命令的程序文件(which)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E6%90%9C%E7%B4%A2-grep"><span class="toc-number">4.8.</span> <span class="toc-text">文本搜索(grep)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%BE%91%E6%96%87%E4%BB%B6-vi%E3%80%81vim"><span class="toc-number">4.9.</span> <span class="toc-text">编辑文件(vi、vim)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%EF%BC%9Avim-%E6%96%87%E4%BB%B6%E5%90%8D"><span class="toc-number">4.9.1.</span> <span class="toc-text">启动：vim 文件名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E5%BC%8F%E5%88%87%E6%8D%A2%EF%BC%9A"><span class="toc-number">4.9.2.</span> <span class="toc-text">模式切换：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="toc-number">4.9.3.</span> <span class="toc-text">常见操作：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%AC%E5%AF%BC%E8%88%AA%EF%BC%88%E5%9C%A8%E6%99%AE%E9%80%9A%E6%A8%A1%E5%BC%8F%E4%B8%8B%EF%BC%89%EF%BC%9A"><span class="toc-number">4.9.3.1.</span> <span class="toc-text">1. 基本导航（在普通模式下）：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E7%BC%96%E8%BE%91%E6%96%87%E6%9C%AC%EF%BC%88%E5%9C%A8%E6%8F%92%E5%85%A5%E6%A8%A1%E5%BC%8F%E4%B8%8B%EF%BC%89%EF%BC%9A"><span class="toc-number">4.9.3.2.</span> <span class="toc-text">2. 编辑文本（在插入模式下）：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%88%A0%E9%99%A4%E3%80%81%E5%A4%8D%E5%88%B6%E3%80%81%E7%B2%98%E8%B4%B4%EF%BC%88%E5%9C%A8%E6%99%AE%E9%80%9A%E6%A8%A1%E5%BC%8F%E4%B8%8B%EF%BC%89%EF%BC%9A"><span class="toc-number">4.9.3.3.</span> <span class="toc-text">3. 删除、复制、粘贴（在普通模式下）：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E6%92%A4%E9%94%80%E5%92%8C%E9%87%8D%E5%81%9A%EF%BC%9A"><span class="toc-number">4.9.3.4.</span> <span class="toc-text">4. 撤销和重做：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E6%9F%A5%E6%89%BE%E5%92%8C%E6%9B%BF%E6%8D%A2%EF%BC%88%E5%9C%A8%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%E4%B8%8B%EF%BC%89%EF%BC%9A"><span class="toc-number">4.9.3.5.</span> <span class="toc-text">5. 查找和替换（在命令模式下）：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-%E4%BF%9D%E5%AD%98%E5%92%8C%E9%80%80%E5%87%BA%EF%BC%88%E5%9C%A8%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%E4%B8%8B%EF%BC%89%EF%BC%9A"><span class="toc-number">4.9.3.6.</span> <span class="toc-text">6. 保存和退出（在命令模式下）：</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E5%92%8C%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="toc-number">5.</span> <span class="toc-text">用户和权限管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#passwd%EF%BC%9A%E4%BF%AE%E6%94%B9%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81"><span class="toc-number">5.1.</span> <span class="toc-text">passwd：修改用户密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#useradd%EF%BC%9A%E6%B7%BB%E5%8A%A0%E6%96%B0%E7%94%A8%E6%88%B7"><span class="toc-number">5.2.</span> <span class="toc-text">useradd：添加新用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#userdel%EF%BC%9A%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7"><span class="toc-number">5.3.</span> <span class="toc-text">userdel：删除用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#usermod%EF%BC%9A%E4%BF%AE%E6%94%B9%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF"><span class="toc-number">5.4.</span> <span class="toc-text">usermod：修改用户信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#su%EF%BC%9A%E5%88%87%E6%8D%A2%E7%94%A8%E6%88%B7"><span class="toc-number">5.5.</span> <span class="toc-text">su：切换用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#groupadd%EF%BC%9A%E6%B7%BB%E5%8A%A0%E6%96%B0%E7%BB%84"><span class="toc-number">5.6.</span> <span class="toc-text">groupadd：添加新组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#groupmod%EF%BC%9A%E7%94%A8%E6%88%B7%E7%BB%84%E7%BC%96%E8%BE%91"><span class="toc-number">5.7.</span> <span class="toc-text">groupmod：用户组编辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#groupdel%EF%BC%9A%E7%94%A8%E6%88%B7%E7%BB%84%E5%88%A0%E9%99%A4"><span class="toc-number">5.8.</span> <span class="toc-text">groupdel：用户组删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#groups%EF%BC%9A%E6%9F%A5%E7%9C%8B%E7%94%A8%E6%88%B7%E6%89%80%E5%B1%9E%E7%9A%84%E7%BB%84"><span class="toc-number">5.9.</span> <span class="toc-text">groups：查看用户所属的组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#chmod%EF%BC%9A%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E6%88%96%E7%9B%AE%E5%BD%95%E7%9A%84%E6%9D%83%E9%99%90"><span class="toc-number">5.10.</span> <span class="toc-text">chmod：修改文件或目录的权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#chown%EF%BC%9A%E6%94%B9%E5%8F%98%E6%96%87%E4%BB%B6%E6%88%96%E7%9B%AE%E5%BD%95%E7%9A%84%E6%89%80%E6%9C%89%E8%80%85"><span class="toc-number">5.11.</span> <span class="toc-text">chown：改变文件或目录的所有者</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0%EF%BC%9Abash%E8%84%9A%E6%9C%AC-Shell"><span class="toc-number">6.</span> <span class="toc-text">练习：bash脚本(Shell)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%EF%BC%9A"><span class="toc-number">6.1.</span> <span class="toc-text">基础知识：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#if-then-else%EF%BC%9A"><span class="toc-number">6.2.</span> <span class="toc-text">if-then-else：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#test%E5%91%BD%E4%BB%A4%EF%BC%9A"><span class="toc-number">6.3.</span> <span class="toc-text">test命令：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for%E5%BE%AA%E7%8E%AF%EF%BC%9A"><span class="toc-number">6.4.</span> <span class="toc-text">for循环：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while%E5%BE%AA%E7%8E%AF%EF%BC%9A"><span class="toc-number">6.5.</span> <span class="toc-text">while循环：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-number">6.6.</span> <span class="toc-text">函数:</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
+  <div class="sidebar-author-name">fuboy</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">16</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">8</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.6/dist/index.umd.js" integrity="sha384-vkGvf25gm1C1PbcoD5dNfc137HzNL&#x2F;hr1RKA5HniJOaawtvUmH5lTVFgFAruE9Ge" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "fuboy",
+          title: "Linux基础操作",
+          url: "http://example.com/2025/02/01/%E5%91%BD%E4%BB%A4%E5%9F%BA%E7%A1%80/",
+          excerpt: "",
+          description: "",
+          stripContent: " linux主要特征 ：一切皆文件（目录、硬盘等都是文件）；硬件都在&amp;#x2F;dev 目录，如硬盘、U盘为&amp;#x2F;dev&amp;#x2F;sd[a-d]； &amp;#x2F;dev&amp;#x2F;sr0（&amp;#x2F;dev&amp;#x2F;cdrom）是光驱的设备名（df命令查看），为设备文件，代表的是光驱本身，得把这个设备挂载到目录下（一般为&amp;#x2F;mnt）(文件系统的临时挂载点)，才能对设备上的文件进行读写等操作； 不懂的命令 ：man 命令（查用法、全称），只记得关键词，可用man -k 关键词；  ",
+          date: "Sat Feb 01 2025 14:15:24 GMT+0800",
+          updated: "Mon Feb 03 2025 12:50:50 GMT+0800",
+          cover: "/images/banner.webp",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+
+
+
+
+
+
+
+
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.3.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+
+
+
+
+  </body>
+  </html>
+
