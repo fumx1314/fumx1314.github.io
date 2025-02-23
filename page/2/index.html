@@ -204,7 +204,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">16</div>
+    <div class="sidebar-state-number">24</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -212,7 +212,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">8</div>
+    <div class="sidebar-state-number">15</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -268,6 +268,319 @@
 
           <section id="main">
   
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/01/25/ISCC2016%20Easy%20Gallery/" aria-label="ISCC2016 Easy Gallery"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        
+        
+          <img data-src="../images/124691006_p0_master1200.jpg" data-sizes="auto" alt="ISCC2016 Easy Gallery" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-01-25</span>
+        <span><span class="icon-pencil"></span>246 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
+      </div>
+      <h2 class="post-title">ISCC2016 Easy Gallery</h2>
+      <article class="post-article">
+        
+           题目链接：Navbar Template for Bootstrap
+进入题目，先上传一个webshell试试
+&amp;lt;?php @eval($_POST[&amp;#39;mima&amp;#39;])?&amp;gt;
+
+但无论怎么尝试都会回显只能上传jpg和gif图片
+我们猜测只能上传图片马
+先制作一个gif图片马,上传
+
+上传成功了，告诉了我们图片id
+那接下来呢？
+
+view了也只是给我们看看奶龙动图，我们去网页源码找答案
+
+当我们在view页面点击submit时，给我们显示了一行路径，不用想，这就是我们上传之后文件所处路径
+这直接考到了我们文件包含的知识
+
+而数据又是以GET传参的，直接输入
+http:
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/01/23/buuctf-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-Upload/" aria-label="buuctf[极客大挑战]Upload"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="buuctf[极客大挑战]Upload" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-01-23</span>
+        <span><span class="icon-pencil"></span>450 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
+      </div>
+      <h2 class="post-title">buuctf[极客大挑战]Upload</h2>
+      <article class="post-article">
+        
+           这是一个文件上传漏洞
+
+一开始我是选择了&amp;lt;?php@eval(_POST[&amp;#39;mima&amp;#39;])?&amp;gt;的yijuhua.php文件进行上传，告诉我Not image(上传错误)
+将后缀改为jpg，改Content-Type: image/jpg，回显说存在&amp;lt;?
+我们将yijuhua.php内容改为没有&amp;lt;?的一句话木马&amp;lt;script language=&amp;quot;php&amp;quot;&amp;gt; @eval($_POST[&amp;#39;mima&amp;#39;]); &amp;lt;/script&amp;gt;，再次上传，还是上传失败
+我们将文件名修改为yijuhua.phtml，绕过
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/01/20/upload/" aria-label="upload"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="upload" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-01-20</span>
+        <span><span class="icon-pencil"></span>4.2k 字</span>
+        <span><span class="icon-clock"></span>15 分钟</span>
+      </div>
+      <h2 class="post-title">upload</h2>
+      <article class="post-article">
+        
+          在看题解的途中看到很详细的题解：pass-18:
+[点此跳转]:Upload-Lab第18关：巧用条件竞争，轻松绕过上传限制！ | CN-SEC 中文网
+此大佬的其他题解也很好
+
+Pass-01-前端JS绕过这是一个典型的前端绕过，因为它是通过js的弹窗显示的
+如图我们上传不了.php文件(一句话木马)
+
+法一：
+我们在上传php文件时bp抓包抓不到任何东西
+我们只需将构造的php文件（一句话木马)的后缀名改为.jpg|.png|.gif即可
+这样就能抓到包
+
+然后我们在抓到的数据包中将.png再改回.php再进行发送
+
+
+我们能看到文件已经上传成功，打开之后也是显示php的后缀，这说明我们的
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/01/08/SQL%E6%B3%A8%E5%85%A5/" aria-label="SQL注入"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="SQL注入" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-01-08</span>
+        <span><span class="icon-pencil"></span>4.3k 字</span>
+        <span><span class="icon-clock"></span>18 分钟</span>
+      </div>
+      <h2 class="post-title">SQL注入</h2>
+      <article class="post-article">
+        
+          SQL注入注入原理SQL注入是一种将SQL代码插入或添加到应用（用户）的输入参数中的攻击，之后再将这些参数传递给后台的sql服务器加以解析和执行。
+注入方法Sql注入的方式主要是直接将代码插入参数中，这些参数会被置入sql命令中加以执行。间接的攻击方式是将恶意代码插入字符串中，之后将这些字符串保存到数据库的数据表中或将其当成元数据。当将存储的字符串置入动态sql命令中时，恶意代码就将被执行。
+如何判断注入点？老办法：and 1&amp;#x3D;1 页面正常and 1&amp;#x3D;2 页面错误可能存在注入点
+新办法：select * from users where id&amp;#x3D;1daadda LI
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2024/12/28/mysql/" aria-label="mysql"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        
+        
+          <img data-src="../images/17369576223624.jpg" data-sizes="auto" alt="mysql" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2024-12-28</span>
+        <span><span class="icon-pencil"></span>6.2k 字</span>
+        <span><span class="icon-clock"></span>25 分钟</span>
+      </div>
+      <h2 class="post-title">mysql</h2>
+      <article class="post-article">
+        
+          [TOC]
+数据库（DB）：数据存储的仓库。 数据库管理系统
+（DBMS）：操纵和管理数据库的大型软件。
+ SQL：操作关系型数据库的编程语言，是一套标准。
+打开Mysql: mysql -u root -p
+SQL简述SQL的概述Structure Query Language(结构化查询语言)简称SQL
+数据库管理系统可以通过SQL管理数据库；定义和操作数据，维护数据的完整性和安全性。
+mysql是一种关系型数据库，是建立在关系模型基础上，由多张相互连接的二维表（表格）组成的数据库
+对大小写不敏感
+mysql特点：
+
+使用表存储数据，格式统一，便于维护。     
+
+使用SQL语言操作，标
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2024/12/28/python%E4%B9%8B%E5%BC%82%E5%B8%B8/" aria-label="python之异常"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/124691006_p0_master1200.jpg" data-sizes="auto" alt="python之异常" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2024-12-28</span>
+        <span><span class="icon-pencil"></span>431 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
+      </div>
+      <h2 class="post-title">python之异常</h2>
+      <article class="post-article">
+        
+          捕获常规异常语法：
+1234try：	可能发生错误的代码except:    如果发生错误执行的代码
+
+捕获指定异常语法:
+1234try:    可能发生异常的代码except 异常类型名 as 变量:    当捕获到该异常类型时，执行的代码
+
+捕获多个异常语法：
+1234try:    可能发生异常的代码except (异常类型1,类型2,...) as 变量:    如果捕获到该异常类型时,执行的代码
+
+捕获所有异常1234try:    可能发生异常的代码except Exception as 变量:    当捕获到该异常类型时，执行的代码
+
+例如
+12345678910111213#
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2024/12/28/python%E4%B9%8B%E6%96%87%E4%BB%B6/" aria-label="python之文件"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/17369576223624.jpg" data-sizes="auto" alt="python之文件" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2024-12-28</span>
+        <span><span class="icon-pencil"></span>517 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
+      </div>
+      <h2 class="post-title">python之文件</h2>
+      <article class="post-article">
+        
+          open()函数语法：open(name,mode,encoding)
+name：是要打开的目标文件名的字符串（可以包含文件所在的具体路径）
+mode:设置打开文件的模式（访问模式):只读、写入、追加等。
+encoding：编码格式（推荐使用utf-8）
+file&amp;#x3D;open(‘python.txt’,’r’,encoding&amp;#x3D;’’ UTF-8”)
+(encoding 的顺序不是第三位，所以不能用位置参数，用关键字参数直接指定)
+mode:
+
+读文件(read)文件对象.read(number)如果number没有，那将会读取文件中的全部数据
+注意：按理来说一个汉字三个字节，
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2024/12/28/python%E4%B9%8B%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" aria-label="python之基础语法"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="python之基础语法" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2024-12-28</span>
+        <span><span class="icon-pencil"></span>584 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
+      </div>
+      <h2 class="post-title">python之基础语法</h2>
+      <article class="post-article">
+        
+          python语法的特点
+每行代码后无需分号
+
+注意冒号
+
+注意缩进
+
+变量无需用数据类型关键词定义
+
+
+基本语法输入输出12a=input()#输入print(&amp;#x27;hi&amp;#x27;,a)#输出
+
+输出时如果print不在同一行，他们输出的结果也不在同一行
+例如：
+123456print(x)print(y)#想要不换行输出，可以在后面加end关键字print(x,end=&amp;quot; &amp;quot;)print(y,end=&amp;quot; &amp;quot;)#end等于什么，就表示输出语句后面跟的是什么
+
+如果想在输出语句中穿插变量：
+12a=&amp;quot;小明&amp;quot;print(f&amp;quo
+        
+      </article>
+    </div>
+  </div>
+</div>
   
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
@@ -342,150 +655,11 @@
   </div>
 </div>
   
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2024/12/27/python%E4%B9%8B%E5%AE%B9%E5%99%A8(%E5%85%83%E7%BB%84%E3%80%81%E9%9B%86%E5%90%88%E5%92%8C%E5%AD%97%E5%85%B8)/" aria-label="python之容器(元组、集合和字典)"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="python之容器(元组、集合和字典)" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-27</span>
-        <span><span class="icon-pencil"></span>1.4k 字</span>
-        <span><span class="icon-clock"></span>6 分钟</span>
-      </div>
-      <h2 class="post-title">python之容器(元组、集合和字典)</h2>
-      <article class="post-article">
-        
-          元组元组(tuple)与列表类似，但元组是不可变的，可简单将其看作是不可变的列表，元组常用于保存不可修改的内容
-元组的创建与访问（元组用圆括号）123456t=(1,2,3,4)#t=(1,)定义元组时，如果元组中只有一个数据，这个元素后面也要加逗号print(t[1])print(t[-2])#访问t的倒数第二个元素#嵌套元组t=((1,2,3),(4,5,6))
-
-元组其实大部分内容都与列表类似
-本文只会谈及元组所拥有的特点与用法，与列表类似的部分会选择性跳过，不记得的可以访问我上一篇文章（字符串与列表）
-修改与删除(del)上文讲到了，元组是不可修改的，所以我们只能采用重新赋值的方式操作
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2024/12/27/python%E4%B9%8B%E5%AE%B9%E5%99%A8(%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E5%88%97%E8%A1%A8)/" aria-label="python之容器（字符串与列表）"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/17369576223624.jpg" data-sizes="auto" alt="python之容器（字符串与列表）" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-27</span>
-        <span><span class="icon-pencil"></span>688 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
-      </div>
-      <h2 class="post-title">python之容器（字符串与列表）</h2>
-      <article class="post-article">
-        
-          字符串字符串访问首先我们定义一个字符串
-1s=&amp;quot;python&amp;quot;
-
-访问方式有多种，我们来看最常规的几种
-12345678#访问字符串中的单个字符print(s[i])#访问字符串中的字串print(s[i:j])#从s[i]到s[j-1]print(s[:j])#从s[0]到s[j-1]print(s[i:])#从s[i]到字符串末尾print(s[i:j:z])#从s[i]到s[j-1]以z步长截取#上述方法也叫切片
-
-单个字符编码python使用ord()函数返回单个字符的编码，chr()函数把编码转成相应字符
-下面我们来演示一下
-123s=&amp;#x27;A&amp;#x27;p
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2024/12/26/python%E4%B9%8B%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/" aria-label="python之魔术方法"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="python之魔术方法" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-26</span>
-        <span><span class="icon-pencil"></span>401 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
-      </div>
-      <h2 class="post-title">python之魔术方法</h2>
-      <article class="post-article">
-        
-          init()构造方法关键词：
-1__init__
-
-作用：可以直接在创建对象时对类中属性赋值
-示例：
-12345678class a:    name=None#类中定义可不写    age=None    def __init__(self,name,age):        self.name=name        self.age=agex=a(&amp;quot;小米&amp;quot;,18)
-
-str()字符串方法关键字：
-1__str__
-
-此方法是当打印对象或者使用str()转换对象时被调用
-话不多说，上代码：
-12345678class person:    def __init__(se
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2024/12/25/python%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" aria-label="python之面向对象"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="python之面向对象" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-25</span>
-        <span><span class="icon-pencil"></span>246 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
-      </div>
-      <h2 class="post-title">python之面向对象</h2>
-      <article class="post-article">
-        
-          类的定义12class classname:    //内容
-
-
-类的对象类对象支持两种操作：实例化和属性的引用
-简单来说就是调用类和访问类的属性和方法
-举个例子：
-12345678910class class1:   a=123   b=456    def hanshu(self):#类的方法后面会讲到        return &amp;quot;hello world&amp;quot;#创建一个对象，调用类x=class1()#访问类的属性和方法print(&amp;quot;class1类的属性a,b为：&amp;quot;,x.a,x.b)print(&amp;quot;class1类的方法输出结果为：&amp;quot;,
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
 
 
   <nav id="page-nav" data-aos="fade-up">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
   </nav>
 
 
@@ -514,10 +688,10 @@ str()字符串方法关键字：
     
       <div>
         <span class="icon-brush"></span>
-        30.3k
+        43.5k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        01:58
+        02:50
       </div>
     
     
@@ -553,7 +727,7 @@ str()字符串方法关键字：
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">16</div>
+    <div class="sidebar-state-number">24</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -561,7 +735,7 @@ str()字符串方法关键字：
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">8</div>
+    <div class="sidebar-state-number">15</div>
   </div>
 </div>
 <div class="sidebar-social">
