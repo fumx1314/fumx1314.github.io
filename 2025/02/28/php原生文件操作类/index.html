@@ -27,24 +27,24 @@
 
   
   
-    <meta name="description" content="我在做一个ctf新手题的时候遇到了此概念 这类概念在反序列化中用到相对多一点  例题 先看这题源码 1234567891011121314&lt;?phphighlight_file(&#x27;index.php&#x27;);# 我把flag藏在一个secret文件夹里面了，所以要学会遍历啊~error_reporting(0);$J1ng &#x3D; $_POST[&#x27;J&#x27;];$H">
+    <meta name="description" content="我在做一个ctf新手题的时候遇到了此概念 这类概念在反序列化中用到相对多一点 例题先看这题源码 1234567891011121314&lt;?phphighlight_file(&#x27;index.php&#x27;);# 我把flag藏在一个secret文件夹里面了，所以要学会遍历啊~error_reporting(0);$J1ng &#x3D; $_POST[&#x27;J&#x27;];$Ho">
 <meta property="og:type" content="article">
 <meta property="og:title" content="php原生文件操作类">
 <meta property="og:url" content="http://example.com/2025/02/28/php%E5%8E%9F%E7%94%9F%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E7%B1%BB/index.html">
 <meta property="og:site_name" content="KL">
-<meta property="og:description" content="我在做一个ctf新手题的时候遇到了此概念 这类概念在反序列化中用到相对多一点  例题 先看这题源码 1234567891011121314&lt;?phphighlight_file(&#x27;index.php&#x27;);# 我把flag藏在一个secret文件夹里面了，所以要学会遍历啊~error_reporting(0);$J1ng &#x3D; $_POST[&#x27;J&#x27;];$H">
+<meta property="og:description" content="我在做一个ctf新手题的时候遇到了此概念 这类概念在反序列化中用到相对多一点 例题先看这题源码 1234567891011121314&lt;?phphighlight_file(&#x27;index.php&#x27;);# 我把flag藏在一个secret文件夹里面了，所以要学会遍历啊~error_reporting(0);$J1ng &#x3D; $_POST[&#x27;J&#x27;];$Ho">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2025/02/28/images/20250228141106728.png">
-<meta property="og:image" content="http://example.com/2025/02/28/images/20250228141237437.png">
-<meta property="og:image" content="http://example.com/2025/02/28/images/20250228141842528.png">
-<meta property="og:image" content="http://example.com/2025/02/28/images/20250228142046559.png">
-<meta property="og:image" content="http://example.com/2025/02/28/images/20250228142103369.png">
+<meta property="og:image" content="http://example.com/images/20250228141106728.png">
+<meta property="og:image" content="http://example.com/images/20250228141237437.png">
+<meta property="og:image" content="http://example.com/images/20250228141842528.png">
+<meta property="og:image" content="http://example.com/images/20250228142046559.png">
+<meta property="og:image" content="http://example.com/images/20250228142103369.png">
 <meta property="article:published_time" content="2025-02-28T06:04:08.000Z">
 <meta property="article:modified_time" content="2025-02-28T06:27:45.809Z">
 <meta property="article:author" content="fuboy">
 <meta property="article:tag" content="php">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2025/02/28/images/20250228141106728.png">
+<meta name="twitter:image" content="http://example.com/images/20250228141106728.png">
   
   
     <link rel="alternate" href="/atom.xml" title="KL" type="application/atom+xml">
@@ -201,7 +201,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text"> 例题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#spl%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.</span> <span class="toc-text"> SPL介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#php%E5%8E%9F%E7%94%9F%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E7%B1%BB"><span class="toc-number">3.</span> <span class="toc-text"> PHP原生文件操作类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E9%81%8D%E5%8E%86%E7%9B%AE%E5%BD%95%E7%B1%BB"><span class="toc-number">3.1.</span> <span class="toc-text"> 可遍历目录类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-directoryiterator-%E7%B1%BB"><span class="toc-number">3.1.1.</span> <span class="toc-text"> 1. DirectoryIterator 类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-filesystemiterator-%E7%B1%BB"><span class="toc-number">3.1.2.</span> <span class="toc-text"> 2. FilesystemIterator 类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-globiterator-%E7%B1%BB"><span class="toc-number">3.1.3.</span> <span class="toc-text"> 3. GlobIterator 类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-number">3.1.4.</span> <span class="toc-text"> 注意：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6%E7%B1%BB"><span class="toc-number">3.2.</span> <span class="toc-text"> 可读取文件类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#splfileobject-%E7%B1%BB"><span class="toc-number">3.2.1.</span> <span class="toc-text"> SplFileObject 类</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">例题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SPL%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.</span> <span class="toc-text">SPL介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PHP%E5%8E%9F%E7%94%9F%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E7%B1%BB"><span class="toc-number">3.</span> <span class="toc-text">PHP原生文件操作类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E9%81%8D%E5%8E%86%E7%9B%AE%E5%BD%95%E7%B1%BB"><span class="toc-number">3.1.</span> <span class="toc-text">可遍历目录类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-DirectoryIterator-%E7%B1%BB"><span class="toc-number">3.1.1.</span> <span class="toc-text">1. DirectoryIterator 类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-FilesystemIterator-%E7%B1%BB"><span class="toc-number">3.1.2.</span> <span class="toc-text">2. FilesystemIterator 类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-GlobIterator-%E7%B1%BB"><span class="toc-number">3.1.3.</span> <span class="toc-text">3. GlobIterator 类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%EF%BC%9A"><span class="toc-number">3.1.4.</span> <span class="toc-text">注意：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6%E7%B1%BB"><span class="toc-number">3.2.</span> <span class="toc-text">可读取文件类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SplFileObject-%E7%B1%BB"><span class="toc-number">3.2.1.</span> <span class="toc-text">SplFileObject 类</span></a></li></ol></li></ol></li></ol>
       
   </div>
 </div>
@@ -214,7 +214,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">23</div>
+    <div class="sidebar-state-number">26</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -222,7 +222,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">15</div>
+    <div class="sidebar-state-number">16</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -304,43 +304,36 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
       
-        <p>我在做一个ctf新手题的时候遇到了此概念</p>
+        <p> 我在做一个ctf新手题的时候遇到了此概念</p>
 <p>这类概念在反序列化中用到相对多一点</p>
-<h2 id="例题"><a class="markdownIt-Anchor" href="#例题"></a> 例题</h2>
-<p>先看这题源码</p>
+<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><p>先看这题源码</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="string">&#x27;index.php&#x27;</span>);</span><br><span class="line"><span class="comment"># 我把flag藏在一个secret文件夹里面了，所以要学会遍历啊~</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="variable">$J1ng</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;J&#x27;</span>];</span><br><span class="line"><span class="variable">$Hong</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;H&#x27;</span>];</span><br><span class="line"><span class="variable">$Keng</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;K&#x27;</span>];</span><br><span class="line"><span class="variable">$Wang</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;W&#x27;</span>];</span><br><span class="line"><span class="variable">$dir</span> = <span class="keyword">new</span> <span class="variable">$Keng</span>(<span class="variable">$Wang</span>);</span><br><span class="line"><span class="keyword">foreach</span>(<span class="variable">$dir</span> <span class="keyword">as</span> <span class="variable">$f</span>) &#123;</span><br><span class="line">    <span class="keyword">echo</span>(<span class="variable">$f</span> . <span class="string">&#x27;&lt;br&gt;&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="keyword">new</span> <span class="variable">$J1ng</span>(<span class="variable">$Hong</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
 <p>经过查看题解得知，需要借助php原生类来解题</p>
 <p>先讲一下题解吧</p>
 <p>首先发现这里需要遍历一个对象，所以要找一个能遍历的原生类，这里用的是**<code>DirectoryIterator</code>**</p>
-<p>K先传入DirectoryIterator,W传入&quot;/&quot;</p>
-<p><img src="../images/20250228141106728.png" alt="image-20250228141106728" /></p>
+<p>K先传入DirectoryIterator,W传入”&#x2F;“</p>
+<p><img src="/../images/20250228141106728.png" alt="image-20250228141106728"></p>
 <p>题目说flag在secret中</p>
-<p>K传入DirectoryIterator，W传入/secret</p>
-<p><img src="../images/20250228141237437.png" alt="image-20250228141237437" /></p>
-<p>从KW中只能得到flag的路径，读取还是需要查询PHP中<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6&amp;spm=1001.2101.3001.7020">读取文件</a>的类是什么。经查询可以得到是**<code>SplFileObject</code>**类。再通过传入刚刚得到的flag文件的路径可以读取flag文件</p>
-<p>J=SplFileObject&amp;H=/secret/f11444g.php</p>
+<p>K传入DirectoryIterator，W传入&#x2F;secret</p>
+<p><img src="/../images/20250228141237437.png" alt="image-20250228141237437"></p>
+<p>从KW中只能得到flag的路径，读取还是需要查询PHP中<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6&spm=1001.2101.3001.7020">读取文件</a>的类是什么。经查询可以得到是**<code>SplFileObject</code>**类。再通过传入刚刚得到的flag文件的路径可以读取flag文件</p>
+<p>J&#x3D;SplFileObject&amp;H&#x3D;&#x2F;secret&#x2F;f11444g.php</p>
 <p>就能查看到源代码了</p>
-<h2 id="spl介绍"><a class="markdownIt-Anchor" href="#spl介绍"></a> SPL介绍</h2>
-<p>​        SPL就是Standard PHP Library的缩写。据手册显示，SPL是用于解决典型问题(standard problems)的一组接口与类的集合。打开手册，正如上面的定义一样，有许多封装好的类。因为是要解决典型问题，免不了有一些处理文件的</p>
+<h2 id="SPL介绍"><a href="#SPL介绍" class="headerlink" title="SPL介绍"></a>SPL介绍</h2><p>​        SPL就是Standard PHP Library的缩写。据手册显示，SPL是用于解决典型问题(standard problems)的一组接口与类的集合。打开手册，正如上面的定义一样，有许多封装好的类。因为是要解决典型问题，免不了有一些处理文件的</p>
 <p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_63231007/article/details/124740776">浅谈 php原生类的利用 1(文件操作类)_filesystemiterator-CSDN博客</a></p>
-<h2 id="php原生文件操作类"><a class="markdownIt-Anchor" href="#php原生文件操作类"></a> PHP原生文件操作类</h2>
-<h3 id="可遍历目录类"><a class="markdownIt-Anchor" href="#可遍历目录类"></a> 可遍历目录类</h3>
-<h4 id="1-directoryiterator-类"><a class="markdownIt-Anchor" href="#1-directoryiterator-类"></a> 1. DirectoryIterator 类</h4>
-<p>DirectoryIterator 类会创建一个指定目录的迭代器。当执行到echo函数时，会触发DirectoryIterator类中的 <code>__toString()</code> 方法，输出指定目录里面经过排序之后的第一个文件名：</p>
-<p><img src="../images/20250228141842528.png" alt="image-20250228141842528" /></p>
-<p><em><strong><strong>我们也可以配合</strong>glob://协议</strong>使用</em><em>模式匹配</em><em>来寻找我们想要的</em><em>文件路径</em>*：</p>
-<p><img src="../images/20250228142046559.png" alt="image-20250228142046559" /></p>
-<p><img src="../images/20250228142103369.png" alt="image-20250228142103369" /></p>
-<h4 id="2-filesystemiterator-类"><a class="markdownIt-Anchor" href="#2-filesystemiterator-类"></a> 2. FilesystemIterator 类</h4>
-<p>该类的使用方法与DirectoryIterator 类也是基本相同的：(子类与父类的关系)</p>
-<h4 id="3-globiterator-类"><a class="markdownIt-Anchor" href="#3-globiterator-类"></a> 3. GlobIterator 类</h4>
-<p><strong>GlobIterator 类</strong>也可以遍历一个文件目录，使用方法与前两个类也基本相似。但与上面略不同的是其行为类似于 glob()函数，可以通过模式匹配来寻找文件路径。使用这个类不需要额外写上glob://</p>
-<h4 id="注意"><a class="markdownIt-Anchor" href="#注意"></a> 注意：</h4>
-<p>Directorylterator类 与 FilesystemIterator 类当我们使用echo函数输出的时候，会触发这两个类中的 __toString() 方法，输出指定目录里面特定排序之后的第一个文件名。也就是说如果我们不循环遍历的话是不能看到指定目录里的全部文件的。而GlobIterator 类在一定程度上解决了这个问题。由于 GlobIterator 类支持<strong>直接通过模式匹配</strong>来寻找文件路径，也就是说假设我们知道一个文件名的一部分，我们可以通过该类的模式匹配找到其完整的文件名。例如：例题里我们知道了flag的文件名特征为 以f开头的.txt文件，因此我们可以通过 GlobIterator类来模式匹配：</p>
+<h2 id="PHP原生文件操作类"><a href="#PHP原生文件操作类" class="headerlink" title="PHP原生文件操作类"></a>PHP原生文件操作类</h2><h3 id="可遍历目录类"><a href="#可遍历目录类" class="headerlink" title="可遍历目录类"></a>可遍历目录类</h3><h4 id="1-DirectoryIterator-类"><a href="#1-DirectoryIterator-类" class="headerlink" title="1. DirectoryIterator 类"></a>1. DirectoryIterator 类</h4><p>DirectoryIterator 类会创建一个指定目录的迭代器。当执行到echo函数时，会触发DirectoryIterator类中的 <code>__toString()</code> 方法，输出指定目录里面经过排序之后的第一个文件名：</p>
+<p><img src="/../images/20250228141842528.png" alt="image-20250228141842528"></p>
+<p><em>*<em><strong>我们也可以配合</strong>glob:&#x2F;&#x2F;协议</em>*使用</em><em>模式匹配<strong>来寻找我们想要的</strong>文件路径*</em>：</p>
+<p><img src="/../images/20250228142046559.png" alt="image-20250228142046559"></p>
+<p><img src="/../images/20250228142103369.png" alt="image-20250228142103369"></p>
+<h4 id="2-FilesystemIterator-类"><a href="#2-FilesystemIterator-类" class="headerlink" title="2. FilesystemIterator 类"></a>2. FilesystemIterator 类</h4><p>该类的使用方法与DirectoryIterator 类也是基本相同的：(子类与父类的关系)</p>
+<h4 id="3-GlobIterator-类"><a href="#3-GlobIterator-类" class="headerlink" title="3. GlobIterator 类"></a>3. GlobIterator 类</h4><p><strong>GlobIterator 类</strong>也可以遍历一个文件目录，使用方法与前两个类也基本相似。但与上面略不同的是其行为类似于 glob()函数，可以通过模式匹配来寻找文件路径。使用这个类不需要额外写上glob:&#x2F;&#x2F;</p>
+<h4 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h4><p> Directorylterator类 与 FilesystemIterator 类当我们使用echo函数输出的时候，会触发这两个类中的 __toString() 方法，输出指定目录里面特定排序之后的第一个文件名。也就是说如果我们不循环遍历的话是不能看到指定目录里的全部文件的。而GlobIterator 类在一定程度上解决了这个问题。由于 GlobIterator 类支持<strong>直接通过模式匹配</strong>来寻找文件路径，也就是说假设我们知道一个文件名的一部分，我们可以通过该类的模式匹配找到其完整的文件名。例如：例题里我们知道了flag的文件名特征为 以f开头的.txt文件，因此我们可以通过 GlobIterator类来模式匹配：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$dir</span>=<span class="keyword">new</span> <span class="built_in">GlobIterator</span>(<span class="string">&quot;f*txt&quot;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$dir</span>;</span><br></pre></td></tr></table></figure>
-<h3 id="可读取文件类"><a class="markdownIt-Anchor" href="#可读取文件类"></a> 可读取文件类</h3>
-<h4 id="splfileobject-类"><a class="markdownIt-Anchor" href="#splfileobject-类"></a> SplFileObject 类</h4>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$dir=new SplFileObject(&quot;/flag.txt&quot;);</span><br><span class="line">echo $dir;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="可读取文件类"><a href="#可读取文件类" class="headerlink" title="可读取文件类"></a>可读取文件类</h3><h4 id="SplFileObject-类"><a href="#SplFileObject-类" class="headerlink" title="SplFileObject 类"></a>SplFileObject 类</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$dir=new SplFileObject(&quot;/flag.txt&quot;);</span><br><span class="line">echo $dir;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
 <p>直接输出文件内容</p>
 
       
@@ -366,13 +359,13 @@
     
     <div class="article-nav-link-wrap article-nav-link-right">
       
-        <img data-src="/../images/126839103p0master1200.jpg" data-sizes="auto" alt="爆破" class="lazyload">
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="php常用特性" class="lazyload">
       
-      <a href="/2025/02/23/%E7%88%86%E7%A0%B4/"></a>
+      <a href="/2025/02/24/php%E5%B8%B8%E7%94%A8%E7%89%B9%E6%80%A7/"></a>
       <div class="article-nav-caption">后一篇</div>
       <h3 class="article-nav-title">
         
-          爆破
+          php常用特性
         
       </h3>
     </div>
@@ -412,10 +405,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        37.9k
+        52.5k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        02:26
+        03:31
       </div>
     
     
@@ -447,7 +440,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text"> 例题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#spl%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.</span> <span class="toc-text"> SPL介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#php%E5%8E%9F%E7%94%9F%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E7%B1%BB"><span class="toc-number">3.</span> <span class="toc-text"> PHP原生文件操作类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E9%81%8D%E5%8E%86%E7%9B%AE%E5%BD%95%E7%B1%BB"><span class="toc-number">3.1.</span> <span class="toc-text"> 可遍历目录类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-directoryiterator-%E7%B1%BB"><span class="toc-number">3.1.1.</span> <span class="toc-text"> 1. DirectoryIterator 类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-filesystemiterator-%E7%B1%BB"><span class="toc-number">3.1.2.</span> <span class="toc-text"> 2. FilesystemIterator 类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-globiterator-%E7%B1%BB"><span class="toc-number">3.1.3.</span> <span class="toc-text"> 3. GlobIterator 类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-number">3.1.4.</span> <span class="toc-text"> 注意：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6%E7%B1%BB"><span class="toc-number">3.2.</span> <span class="toc-text"> 可读取文件类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#splfileobject-%E7%B1%BB"><span class="toc-number">3.2.1.</span> <span class="toc-text"> SplFileObject 类</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">例题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SPL%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.</span> <span class="toc-text">SPL介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PHP%E5%8E%9F%E7%94%9F%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E7%B1%BB"><span class="toc-number">3.</span> <span class="toc-text">PHP原生文件操作类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E9%81%8D%E5%8E%86%E7%9B%AE%E5%BD%95%E7%B1%BB"><span class="toc-number">3.1.</span> <span class="toc-text">可遍历目录类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-DirectoryIterator-%E7%B1%BB"><span class="toc-number">3.1.1.</span> <span class="toc-text">1. DirectoryIterator 类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-FilesystemIterator-%E7%B1%BB"><span class="toc-number">3.1.2.</span> <span class="toc-text">2. FilesystemIterator 类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-GlobIterator-%E7%B1%BB"><span class="toc-number">3.1.3.</span> <span class="toc-text">3. GlobIterator 类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%EF%BC%9A"><span class="toc-number">3.1.4.</span> <span class="toc-text">注意：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6%E7%B1%BB"><span class="toc-number">3.2.</span> <span class="toc-text">可读取文件类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SplFileObject-%E7%B1%BB"><span class="toc-number">3.2.1.</span> <span class="toc-text">SplFileObject 类</span></a></li></ol></li></ol></li></ol>
       
   </div>
 </div>
@@ -460,7 +453,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">23</div>
+    <div class="sidebar-state-number">26</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -468,7 +461,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">15</div>
+    <div class="sidebar-state-number">16</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -593,7 +586,7 @@
           url: "http://example.com/2025/02/28/php%E5%8E%9F%E7%94%9F%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E7%B1%BB/",
           excerpt: "",
           description: "",
-          stripContent: "我在做一个ctf新手题的时候遇到了此概念 这类概念在反序列化中用到相对多一点  例题 先看这题源码 1234567891011121314&amp;lt;?phphighlight_file(&amp;#x27;index.php&amp;#x27;);# 我把flag藏在一个secret文件夹里面了，所以要学会遍历啊~error_reporting(0);$J1ng = $_POST[&amp;#x27;J&amp;#x27;];$Hong = $_POST[&amp;#x27;H&amp;#x27;];$Keng = $_GET[&amp;#x27;K&amp;",
+          stripContent: " 我在做一个ctf新手题的时候遇到了此概念 这类概念在反序列化中用到相对多一点 例题先看这题源码 1234567891011121314&amp;lt;?phphighlight_file(&amp;#x27;index.php&amp;#x27;);# 我把flag藏在一个secret文件夹里面了，所以要学会遍历啊~error_reporting(0);$J1ng = $_POST[&amp;#x27;J&amp;#x27;];$Hong = $_POST[&amp;#x27;H&amp;#x27;];$Keng = $_GET[&amp;#x27;K&amp;#",
           date: "Fri Feb 28 2025 14:04:08 GMT+0800",
           updated: "Fri Feb 28 2025 14:27:45 GMT+0800",
           cover: "/../images/1737907114de8a.jpg",

@@ -204,7 +204,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">23</div>
+    <div class="sidebar-state-number">26</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -212,7 +212,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">15</div>
+    <div class="sidebar-state-number">16</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -272,33 +272,26 @@
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2024/12/27/python%E4%B9%8B%E5%AE%B9%E5%99%A8(%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E5%88%97%E8%A1%A8)/" aria-label="python之容器（字符串与列表）"></a>
+      <a class="post-link" href="/2024/12/28/python%E4%B9%8B%E5%B0%81%E8%A3%85%E3%80%81%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/" aria-label="python之封装、继承与多态"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/17369576223624.jpg" data-sizes="auto" alt="python之容器（字符串与列表）" class="lazyload">
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="python之封装、继承与多态" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-27</span>
-        <span><span class="icon-pencil"></span>689 字</span>
+        <span><span class="icon-calendar"></span>2024-12-28</span>
+        <span><span class="icon-pencil"></span>468 字</span>
         <span><span class="icon-clock"></span>2 分钟</span>
       </div>
-      <h2 class="post-title">python之容器（字符串与列表）</h2>
+      <h2 class="post-title">python之封装、继承与多态</h2>
       <article class="post-article">
         
-           字符串
- 字符串访问
-首先我们定义一个字符串
-1s=&amp;quot;python&amp;quot;
-访问方式有多种，我们来看最常规的几种
-12345678#访问字符串中的单个字符print(s[i])#访问字符串中的字串print(s[i:j])#从s[i]到s[j-1]print(s[:j])#从s[0]到s[j-1]print(s[i:])#从s[i]到字符串末尾print(s[i:j:z])#从s[i]到s[j-1]以z步长截取#上述方法也叫切片
- 单个字符编码
-python使用ord()函数返回单个字符的编码，chr()函数把编码转成相应字符
-下面我们来演示一下
-123s=&amp;#x27;A&amp;#x
+          封装就是private(私有的)
+关键词:____(双下划线)
+1234567891011121314class phone:    __v=2    def __keep(self):        print(&amp;quot;让cpu以单核模式运行&amp;quot;)    def keep(self):        if(self.__v&amp;gt;=1):            print(&amp;quot;good&amp;quot;)        else :            print(&amp;quot;bad&amp;quot;)ph=phone()# 私有成员无法被类对象直接使用，但是可以被其他的成员使用#
         
       </article>
     </div>
@@ -308,35 +301,41 @@ python使用ord()函数返回单个字符的编码，chr()函数把编码转成�
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2024/12/26/python%E4%B9%8B%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/" aria-label="python之魔术方法"></a>
+      <a class="post-link" href="/2024/12/28/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" aria-label="正则表达式"></a>
     
     
     <div class="post-cover-right">
       
-        <img data-src="/../images/126839103p0master1200.jpg" data-sizes="auto" alt="python之魔术方法" class="lazyload">
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="正则表达式" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-26</span>
-        <span><span class="icon-pencil"></span>403 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
+        <span><span class="icon-calendar"></span>2024-12-28</span>
+        <span><span class="icon-pencil"></span>1.7k 字</span>
+        <span><span class="icon-clock"></span>7 分钟</span>
       </div>
-      <h2 class="post-title">python之魔术方法</h2>
+      <h2 class="post-title">正则表达式</h2>
       <article class="post-article">
         
-           init()构造方法
-关键词：
-1__init__
-作用：可以直接在创建对象时对类中属性赋值
-示例：
-12345678class a:    name=None#类中定义可不写    age=None    def __init__(self,name,age):        self.name=name        self.age=agex=a(&amp;quot;小米&amp;quot;,18)
- str()字符串方法
-关键字：
-1__str__
-此方法是当打印对象或者使用str()转换对象时被调用
-话不多说，上代码：
-12345678class person:    def __init__(s
+          正则表达式(regular expression)描述了一种字符串匹配的模式（pattern），可以用来检查一个串是否含有某种子串、将匹配的子串替换或者从某个串中取出符合某个条件的子串等。
+行定位符行定位符用于规定匹配模式只能出现在行的开头或者结尾，“^”表示行的开始，”$”表示行的结尾
+例如：^tm  和 tm$
+元字符除了”^”和”$”，还有很多常用的元字符，例如\bmr\w*\b,两个\b表示匹配单词，*表示匹配0次或多次，\w表示匹配字母、数字、下划线或汉字，该正则表达式就表示匹配以字母”mr”开头的单词
+
+
+
+元字符
+说明
+
+
+
+.
+匹配除换行符以外的任意字符
+
+
+\w
+匹配字母、数
         
       </article>
     </div>
@@ -346,10 +345,116 @@ python使用ord()函数返回单个字符的编码，chr()函数把编码转成�
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2024/12/25/python%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" aria-label="python之面向对象"></a>
+      <a class="post-link" href="/2024/12/27/python%E4%B9%8B%E5%AE%B9%E5%99%A8(%E5%85%83%E7%BB%84%E3%80%81%E9%9B%86%E5%90%88%E5%92%8C%E5%AD%97%E5%85%B8)/" aria-label="python之容器(元组、集合和字典)"></a>
     
     
     <div class="post-cover-left">
+      
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="python之容器(元组、集合和字典)" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2024-12-27</span>
+        <span><span class="icon-pencil"></span>1.4k 字</span>
+        <span><span class="icon-clock"></span>6 分钟</span>
+      </div>
+      <h2 class="post-title">python之容器(元组、集合和字典)</h2>
+      <article class="post-article">
+        
+          元组元组(tuple)与列表类似，但元组是不可变的，可简单将其看作是不可变的列表，元组常用于保存不可修改的内容
+元组的创建与访问（元组用圆括号）123456t=(1,2,3,4)#t=(1,)定义元组时，如果元组中只有一个数据，这个元素后面也要加逗号print(t[1])print(t[-2])#访问t的倒数第二个元素#嵌套元组t=((1,2,3),(4,5,6))
+
+元组其实大部分内容都与列表类似
+本文只会谈及元组所拥有的特点与用法，与列表类似的部分会选择性跳过，不记得的可以访问我上一篇文章（字符串与列表）
+修改与删除(del)上文讲到了，元组是不可修改的，所以我们只能采用重新赋值的方式操作
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2024/12/27/python%E4%B9%8B%E5%AE%B9%E5%99%A8(%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E5%88%97%E8%A1%A8)/" aria-label="python之容器（字符串与列表）"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/17369576223624.jpg" data-sizes="auto" alt="python之容器（字符串与列表）" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2024-12-27</span>
+        <span><span class="icon-pencil"></span>688 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
+      </div>
+      <h2 class="post-title">python之容器（字符串与列表）</h2>
+      <article class="post-article">
+        
+          字符串字符串访问首先我们定义一个字符串
+1s=&amp;quot;python&amp;quot;
+
+访问方式有多种，我们来看最常规的几种
+12345678#访问字符串中的单个字符print(s[i])#访问字符串中的字串print(s[i:j])#从s[i]到s[j-1]print(s[:j])#从s[0]到s[j-1]print(s[i:])#从s[i]到字符串末尾print(s[i:j:z])#从s[i]到s[j-1]以z步长截取#上述方法也叫切片
+
+单个字符编码python使用ord()函数返回单个字符的编码，chr()函数把编码转成相应字符
+下面我们来演示一下
+123s=&amp;#x27;A&amp;#x27;p
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2024/12/26/python%E4%B9%8B%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/" aria-label="python之魔术方法"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/126839103p0master1200.jpg" data-sizes="auto" alt="python之魔术方法" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2024-12-26</span>
+        <span><span class="icon-pencil"></span>401 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
+      </div>
+      <h2 class="post-title">python之魔术方法</h2>
+      <article class="post-article">
+        
+          init()构造方法关键词：
+1__init__
+
+作用：可以直接在创建对象时对类中属性赋值
+示例：
+12345678class a:    name=None#类中定义可不写    age=None    def __init__(self,name,age):        self.name=name        self.age=agex=a(&amp;quot;小米&amp;quot;,18)
+
+str()字符串方法关键字：
+1__str__
+
+此方法是当打印对象或者使用str()转换对象时被调用
+话不多说，上代码：
+12345678class person:    def __init__(se
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2024/12/25/python%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" aria-label="python之面向对象"></a>
+    
+    
+    <div class="post-cover-right">
       
         <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="python之面向对象" class="lazyload">
       
@@ -363,14 +468,13 @@ python使用ord()函数返回单个字符的编码，chr()函数把编码转成�
       <h2 class="post-title">python之面向对象</h2>
       <article class="post-article">
         
-           类的定义
-12class classname:    //内容
+          类的定义12class classname:    //内容
 
- 类的对象
-类对象支持两种操作：实例化和属性的引用
+
+类的对象类对象支持两种操作：实例化和属性的引用
 简单来说就是调用类和访问类的属性和方法
 举个例子：
-12345678910class class1:   a=123   b=456    def hanshu(self):#类的方法后面会讲到        return &amp;quot;hello world&amp;quot;#创建一个对象，调用类x=class1()#访问类的属性和方法print(&amp;quot;class1类的属性a,b为：&amp;quot;,x.a,x.b)print(&amp;quot;class1类的方法输出结果为：&amp;quo
+12345678910class class1:   a=123   b=456    def hanshu(self):#类的方法后面会讲到        return &amp;quot;hello world&amp;quot;#创建一个对象，调用类x=class1()#访问类的属性和方法print(&amp;quot;class1类的属性a,b为：&amp;quot;,x.a,x.b)print(&amp;quot;class1类的方法输出结果为：&amp;quot;,
         
       </article>
     </div>
@@ -410,10 +514,10 @@ python使用ord()函数返回单个字符的编码，chr()函数把编码转成�
     
       <div>
         <span class="icon-brush"></span>
-        37.9k
+        52.5k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        02:26
+        03:31
       </div>
     
     
@@ -449,7 +553,7 @@ python使用ord()函数返回单个字符的编码，chr()函数把编码转成�
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">23</div>
+    <div class="sidebar-state-number">26</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -457,7 +561,7 @@ python使用ord()函数返回单个字符的编码，chr()函数把编码转成�
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">15</div>
+    <div class="sidebar-state-number">16</div>
   </div>
 </div>
 <div class="sidebar-social">
