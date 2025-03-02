@@ -27,12 +27,12 @@
 
   
   
-    <meta name="description" content="XSS与csrf对比xss：攻击者发现XSS漏洞——构造代码——发送给受害人——受害人打开——攻击者获取受害人的cookie——完成攻击csrf：攻击者发现CSRF漏洞——构造代码——发送给受害人——受害人打开——受害人执行代码——完成攻击 XSS容易发现，因为攻击者需要登陆后台完成攻击，管理员可以看到日志发现攻击者；而CSRF的攻击是管理员自己实现的，攻击者只负责构造代码。CSRF属于业务逻辑漏">
+    <meta name="description" content="XSS与csrf对比 xss：攻击者发现XSS漏洞——构造代码——发送给受害人——受害人打开——攻击者获取受害人的cookie——完成攻击 csrf：攻击者发现CSRF漏洞——构造代码——发送给受害人——受害人打开——受害人执行代码——完成攻击 XSS容易发现，因为攻击者需要登陆后台完成攻击，管理员可以看到日志发现攻击者；而CSRF的攻击是管理员自己实现的，攻击者只负责构造代码。 CSRF属于业">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Csrf">
 <meta property="og:url" content="http://example.com/2025/02/17/Csrf/index.html">
 <meta property="og:site_name" content="KL">
-<meta property="og:description" content="XSS与csrf对比xss：攻击者发现XSS漏洞——构造代码——发送给受害人——受害人打开——攻击者获取受害人的cookie——完成攻击csrf：攻击者发现CSRF漏洞——构造代码——发送给受害人——受害人打开——受害人执行代码——完成攻击 XSS容易发现，因为攻击者需要登陆后台完成攻击，管理员可以看到日志发现攻击者；而CSRF的攻击是管理员自己实现的，攻击者只负责构造代码。CSRF属于业务逻辑漏">
+<meta property="og:description" content="XSS与csrf对比 xss：攻击者发现XSS漏洞——构造代码——发送给受害人——受害人打开——攻击者获取受害人的cookie——完成攻击 csrf：攻击者发现CSRF漏洞——构造代码——发送给受害人——受害人打开——受害人执行代码——完成攻击 XSS容易发现，因为攻击者需要登陆后台完成攻击，管理员可以看到日志发现攻击者；而CSRF的攻击是管理员自己实现的，攻击者只负责构造代码。 CSRF属于业">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-02-17T10:44:16.000Z">
 <meta property="article:modified_time" content="2025-02-23T09:55:42.986Z">
@@ -195,7 +195,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS%E4%B8%8Ecsrf%E5%AF%B9%E6%AF%94"><span class="toc-number">1.</span> <span class="toc-text">XSS与csrf对比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Csrf-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0-%E6%94%BB%E5%87%BB%E6%80%9D%E6%83%B3"><span class="toc-number">2.</span> <span class="toc-text">Csrf(跨站请求伪造)攻击思想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Token"><span class="toc-number">3.</span> <span class="toc-text">Token</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%94%AF%E4%B8%80%E6%80%A7"><span class="toc-number">3.0.1.</span> <span class="toc-text">唯一性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B2%E6%AD%A2%E4%BC%AA%E9%80%A0%E8%AF%B7%E6%B1%82%EF%BC%9A"><span class="toc-number">3.0.2.</span> <span class="toc-text">防止伪造请求：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8E%E8%A1%A8%E5%8D%95%E6%88%96%E8%AF%B7%E6%B1%82%E5%85%B3%E8%81%94%EF%BC%9A"><span class="toc-number">3.0.3.</span> <span class="toc-text">与表单或请求关联：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98"><span class="toc-number">4.</span> <span class="toc-text">漏洞挖掘</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E9%98%B2%E5%BE%A1"><span class="toc-number">5.</span> <span class="toc-text">漏洞防御</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E9%AA%8C%E8%AF%81%E7%A0%81"><span class="toc-number">5.1.</span> <span class="toc-text">1、验证码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%9C%A8%E8%AF%B7%E6%B1%82%E5%9C%B0%E5%9D%80%E4%B8%AD%E6%B7%BB%E5%8A%A0-token-%E5%B9%B6%E9%AA%8C%E8%AF%81"><span class="toc-number">5.2.</span> <span class="toc-text">2、在请求地址中添加 token 并验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%AA%8C%E8%AF%81-HTTP-Referer-%E5%AD%97%E6%AE%B5"><span class="toc-number">5.3.</span> <span class="toc-text">3.验证 HTTP Referer 字段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-number">6.</span> <span class="toc-text">漏洞利用</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#xss%E4%B8%8Ecsrf%E5%AF%B9%E6%AF%94"><span class="toc-number">1.</span> <span class="toc-text"> XSS与csrf对比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#csrf%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0%E6%94%BB%E5%87%BB%E6%80%9D%E6%83%B3"><span class="toc-number">2.</span> <span class="toc-text"> Csrf(跨站请求伪造)攻击思想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#token"><span class="toc-number">3.</span> <span class="toc-text"> Token</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%94%AF%E4%B8%80%E6%80%A7"><span class="toc-number">3.0.1.</span> <span class="toc-text"> 唯一性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B2%E6%AD%A2%E4%BC%AA%E9%80%A0%E8%AF%B7%E6%B1%82"><span class="toc-number">3.0.2.</span> <span class="toc-text"> 防止伪造请求：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8E%E8%A1%A8%E5%8D%95%E6%88%96%E8%AF%B7%E6%B1%82%E5%85%B3%E8%81%94"><span class="toc-number">3.0.3.</span> <span class="toc-text"> 与表单或请求关联：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98"><span class="toc-number">4.</span> <span class="toc-text"> 漏洞挖掘</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E9%98%B2%E5%BE%A1"><span class="toc-number">5.</span> <span class="toc-text"> 漏洞防御</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%AA%8C%E8%AF%81%E7%A0%81"><span class="toc-number">5.1.</span> <span class="toc-text"> 1、验证码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%9C%A8%E8%AF%B7%E6%B1%82%E5%9C%B0%E5%9D%80%E4%B8%AD%E6%B7%BB%E5%8A%A0-token-%E5%B9%B6%E9%AA%8C%E8%AF%81"><span class="toc-number">5.2.</span> <span class="toc-text"> 2、在请求地址中添加 token 并验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E9%AA%8C%E8%AF%81-http-referer-%E5%AD%97%E6%AE%B5"><span class="toc-number">5.3.</span> <span class="toc-text"> 3.验证 HTTP Referer 字段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-number">6.</span> <span class="toc-text"> 漏洞利用</span></a></li></ol>
       
   </div>
 </div>
@@ -208,7 +208,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">22</div>
+    <div class="sidebar-state-number">23</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -216,7 +216,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">14</div>
+    <div class="sidebar-state-number">15</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -298,45 +298,61 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
       
-        <h2 id="XSS与csrf对比"><a href="#XSS与csrf对比" class="headerlink" title="XSS与csrf对比"></a>XSS与csrf对比</h2><p><strong>xss：攻击者发现XSS漏洞——构造代码——发送给受害人——受害人打开——攻击者获取受害人的cookie——完成攻击</strong><br><strong>csrf：攻击者发现CSRF漏洞——构造代码——发送给受害人——受害人打开——受害人执行代码——完成攻击</strong></p>
-<p>XSS容易发现，因为攻击者需要登陆后台完成攻击，管理员可以看到日志发现攻击者；而CSRF的攻击是管理员自己实现的，攻击者只负责构造代码。<br>CSRF属于业务逻辑漏洞，服务器信任经过身份认证的用户<br>XSS属于技术漏洞，客户信任服务器</p>
-<h2 id="Csrf-跨站请求伪造-攻击思想"><a href="#Csrf-跨站请求伪造-攻击思想" class="headerlink" title="Csrf(跨站请求伪造)攻击思想"></a>Csrf(跨站请求伪造)攻击思想</h2><p>攻击者诱使在一个网站上已经登录的用户在另一个网站上执行未授权的操作（例如，转账、修改个人信息等）。攻击者通过构造一个恶意的请求（如一个嵌入恶意链接的表单），并诱使用户点击，借此伪造用户在目标站点的请求。</p>
-<h2 id="Token"><a href="#Token" class="headerlink" title="Token"></a>Token</h2><p><strong>Token</strong> 是一种用于防止恶意攻击的安全机制。它是一个随机生成的唯一标识符，用于验证请求是否来自合法的用户。通常，<strong>CSRF Token</strong> 是服务器生成并与用户的会话关联的，并且嵌入在表单中或通过 HTTP 头传递，防止其他恶意网站伪造用户请求。</p>
+        <h2 id="xss与csrf对比"><a class="markdownIt-Anchor" href="#xss与csrf对比"></a> XSS与csrf对比</h2>
+<p><strong>xss：攻击者发现XSS漏洞——构造代码——发送给受害人——受害人打开——攻击者获取受害人的cookie——完成攻击</strong><br />
+<strong>csrf：攻击者发现CSRF漏洞——构造代码——发送给受害人——受害人打开——受害人执行代码——完成攻击</strong></p>
+<p>XSS容易发现，因为攻击者需要登陆后台完成攻击，管理员可以看到日志发现攻击者；而CSRF的攻击是管理员自己实现的，攻击者只负责构造代码。<br />
+CSRF属于业务逻辑漏洞，服务器信任经过身份认证的用户<br />
+XSS属于技术漏洞，客户信任服务器</p>
+<h2 id="csrf跨站请求伪造攻击思想"><a class="markdownIt-Anchor" href="#csrf跨站请求伪造攻击思想"></a> Csrf(跨站请求伪造)攻击思想</h2>
+<p>攻击者诱使在一个网站上已经登录的用户在另一个网站上执行未授权的操作（例如，转账、修改个人信息等）。攻击者通过构造一个恶意的请求（如一个嵌入恶意链接的表单），并诱使用户点击，借此伪造用户在目标站点的请求。</p>
+<h2 id="token"><a class="markdownIt-Anchor" href="#token"></a> Token</h2>
+<p><strong>Token</strong> 是一种用于防止恶意攻击的安全机制。它是一个随机生成的唯一标识符，用于验证请求是否来自合法的用户。通常，<strong>CSRF Token</strong> 是服务器生成并与用户的会话关联的，并且嵌入在表单中或通过 HTTP 头传递，防止其他恶意网站伪造用户请求。</p>
 <p><em><strong>作用</strong></em>：<strong>CSRF Token</strong> 的目的是确保每个请求都是由用户自己发起的，而不是由恶意网站伪造的。</p>
-<h4 id="唯一性"><a href="#唯一性" class="headerlink" title="唯一性"></a><strong>唯一性</strong></h4><ul>
+<h4 id="唯一性"><a class="markdownIt-Anchor" href="#唯一性"></a> <strong>唯一性</strong></h4>
+<ul>
 <li>每个用户的 CSRF Token 都是唯一的，且通常会在用户登录后生成。</li>
 <li>Token 是一个随机生成的字符串，具有较高的复杂性，以防止被猜测或重用。</li>
 </ul>
-<h4 id="防止伪造请求："><a href="#防止伪造请求：" class="headerlink" title="防止伪造请求："></a><strong>防止伪造请求</strong>：</h4><ul>
+<h4 id="防止伪造请求"><a class="markdownIt-Anchor" href="#防止伪造请求"></a> <strong>防止伪造请求</strong>：</h4>
+<ul>
 <li>在用户提交请求时，服务器会检查请求中是否包含有效的 CSRF Token。</li>
 <li>Token 必须与用户会话中的 Token 匹配，确保请求是由合法的用户发起的。</li>
 </ul>
-<h4 id="与表单或请求关联："><a href="#与表单或请求关联：" class="headerlink" title="与表单或请求关联："></a><strong>与表单或请求关联</strong>：</h4><ul>
-<li><p><strong>HTML 表单</strong>：在表单提交时，服务器会将 CSRF Token 嵌入表单中，作为隐藏字段一起提交。</p>
+<h4 id="与表单或请求关联"><a class="markdownIt-Anchor" href="#与表单或请求关联"></a> <strong>与表单或请求关联</strong>：</h4>
+<ul>
+<li>
+<p><strong>HTML 表单</strong>：在表单提交时，服务器会将 CSRF Token 嵌入表单中，作为隐藏字段一起提交。</p>
 </li>
-<li><p><strong>HTTP 请求头</strong>：对于 AJAX 请求或 API 调用，CSRF Token 通常通过 HTTP 请求头（例如 <code>X-CSRF-Token</code>）发送。</p>
-  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;/submit&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;csrf_token&quot;</span> <span class="attr">value</span>=<span class="string">&quot;unique_token_value&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Submit&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>
+<p><strong>HTTP 请求头</strong>：对于 AJAX 请求或 API 调用，CSRF Token 通常通过 HTTP 请求头（例如 <code>X-CSRF-Token</code>）发送。</p>
+  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;/submit&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;csrf_token&quot;</span> <span class="attr">value</span>=<span class="string">&quot;unique_token_value&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Submit&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<h2 id="漏洞挖掘"><a href="#漏洞挖掘" class="headerlink" title="漏洞挖掘"></a>漏洞挖掘</h2><p>1、最简单的方法就是抓取一个正常请求的数据包，如果没有<code>Referer</code>字段和<code>token</code>，那么极有可能存在CSRF漏洞。</p>
+<h2 id="漏洞挖掘"><a class="markdownIt-Anchor" href="#漏洞挖掘"></a> 漏洞挖掘</h2>
+<p>1、最简单的方法就是抓取一个正常请求的数据包，如果没有<code>Referer</code>字段和<code>token</code>，那么极有可能存在CSRF漏洞。</p>
 <p>2、如果有Referer字段，但是去掉Referer字段后再重新提交，如果该提交还有效，那么基本上可以确定存在CSRF漏洞。</p>
 <p>3、随着对CSRF漏洞研究的不断深入，不断涌现出一些专门针对CSRF漏洞进行检测的工具，如<code>CSRFTester</code>，<code>CSRF Request Builder</code>等。以CSRFTester工具为例，CSRF漏洞检测工具的测试原理如下:</p>
 <p>使用CSRFTester进行测试时，首先需要抓取我们在浏览器中访问过的所有链接以及所有的表单等信息，然后通过在CSRFTester中修改相应的表单等信息，重新提交，这相当于一次伪造客户端请求。</p>
 <p>如果修改后的测试请求成功被网站服务器接受，则说明存在CSRF漏洞，当然此款工具也可以被用来进行CSRF攻击。</p>
-<h2 id="漏洞防御"><a href="#漏洞防御" class="headerlink" title="漏洞防御"></a>漏洞防御</h2><h3 id="1、验证码"><a href="#1、验证码" class="headerlink" title="1、验证码"></a>1、验证码</h3><p>验证码被认为是对抗CSRF攻击最简洁而有效的防御方法。</p>
+<h2 id="漏洞防御"><a class="markdownIt-Anchor" href="#漏洞防御"></a> 漏洞防御</h2>
+<h3 id="1-验证码"><a class="markdownIt-Anchor" href="#1-验证码"></a> 1、验证码</h3>
+<p>验证码被认为是对抗CSRF攻击最简洁而有效的防御方法。</p>
 <p>CSRF攻击的过程，往往是在用户不知情的情况下构造了网络请求。而验证码，则强制用户必须与应用进行交互，才能完成最终请求。因此在通常情况下，验证码能够很好地遏制CSRF攻击。</p>
 <p>但是验证码并非万能。很多时候，出于用户体验考虑，网站不能给所有的操作都加上验证码。因此，验证码只能作为防御CSRF的一种辅助手段，而不能作为最主要的解决方案。</p>
-<h3 id="2、在请求地址中添加-token-并验证"><a href="#2、在请求地址中添加-token-并验证" class="headerlink" title="2、在请求地址中添加 token 并验证"></a>2、在请求地址中添加 token 并验证</h3><p>可以在 HTTP 请求中以参数的形式加入一个随机产生的 token，并在服务器端建立一个拦截器来验证这token，如果请求中没有 token 或者 token 内容不正确，则认为可能是 CSRF 攻击而拒绝该请求。</p>
-<h3 id="3-验证-HTTP-Referer-字段"><a href="#3-验证-HTTP-Referer-字段" class="headerlink" title="3.验证 HTTP Referer 字段"></a>3.验证 HTTP Referer 字段</h3><p>根据 HTTP 协议，在 HTTP 头中有一个字段叫Referer，它记录了该 HTTP 请求的来源地址。在通常情况下，访问一个安全受限页面的请求来自于同一个网站，比如需要访问 ：</p>
+<h3 id="2-在请求地址中添加-token-并验证"><a class="markdownIt-Anchor" href="#2-在请求地址中添加-token-并验证"></a> 2、在请求地址中添加 token 并验证</h3>
+<p>可以在 HTTP 请求中以参数的形式加入一个随机产生的 token，并在服务器端建立一个拦截器来验证这token，如果请求中没有 token 或者 token 内容不正确，则认为可能是 CSRF 攻击而拒绝该请求。</p>
+<h3 id="3验证-http-referer-字段"><a class="markdownIt-Anchor" href="#3验证-http-referer-字段"></a> 3.验证 HTTP Referer 字段</h3>
+<p>根据 HTTP 协议，在 HTTP 头中有一个字段叫Referer，它记录了该 HTTP 请求的来源地址。在通常情况下，访问一个安全受限页面的请求来自于同一个网站，比如需要访问 ：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://bank.example/withdraw?account=bob&amp;amount=1000000&amp;for=Mallory</span><br></pre></td></tr></table></figure>
-
 <p>用户必须先登陆 bank.example，然后通过点击页面上的按钮来触发转账事件。</p>
 <p>这时，该转帐请求的 Referer 值就会是转账按钮所在的页面的 URL，通常是以 bank.example 域名开头的地址。而如果黑客要对银行网站实施 CSRF 攻击，他只能在他自己的网站构造请求，当用户通过黑客的网站发送请求到银行时，该请求的 Referer 是指向黑客自己的网站。</p>
 <p>因此，要防御 CSRF 攻击，银行网站只需要对于每一个转账请求验证其 Referer 值，如果是以 bank.example 开头的域名，则说明该请求是来自银行网站自己的请求，是合法的。如果 Referer 是其他网站的话，则有可能是黑客的 CSRF 攻击，拒绝该请求。</p>
 <p>局限性：依靠于浏览器的安全性</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43378996/article/details/123910614">大佬文章</a></p>
-<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>将如下代码通过存储型XSS插入到数据库中，这语句会弹出用户的token</p>
+<h2 id="漏洞利用"><a class="markdownIt-Anchor" href="#漏洞利用"></a> 漏洞利用</h2>
+<p>将如下代码通过存储型XSS插入到数据库中，这语句会弹出用户的token</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe src=&quot;../csrf/&quot; onload=alert(frames[0].document.getElementsByName(&#x27;user_token&#x27;)[0].value)&gt;&lt;/iframe&gt;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -420,10 +436,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        37.1k
+        37.9k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        02:24
+        02:26
       </div>
     
     
@@ -455,7 +471,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS%E4%B8%8Ecsrf%E5%AF%B9%E6%AF%94"><span class="toc-number">1.</span> <span class="toc-text">XSS与csrf对比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Csrf-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0-%E6%94%BB%E5%87%BB%E6%80%9D%E6%83%B3"><span class="toc-number">2.</span> <span class="toc-text">Csrf(跨站请求伪造)攻击思想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Token"><span class="toc-number">3.</span> <span class="toc-text">Token</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%94%AF%E4%B8%80%E6%80%A7"><span class="toc-number">3.0.1.</span> <span class="toc-text">唯一性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B2%E6%AD%A2%E4%BC%AA%E9%80%A0%E8%AF%B7%E6%B1%82%EF%BC%9A"><span class="toc-number">3.0.2.</span> <span class="toc-text">防止伪造请求：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8E%E8%A1%A8%E5%8D%95%E6%88%96%E8%AF%B7%E6%B1%82%E5%85%B3%E8%81%94%EF%BC%9A"><span class="toc-number">3.0.3.</span> <span class="toc-text">与表单或请求关联：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98"><span class="toc-number">4.</span> <span class="toc-text">漏洞挖掘</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E9%98%B2%E5%BE%A1"><span class="toc-number">5.</span> <span class="toc-text">漏洞防御</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E9%AA%8C%E8%AF%81%E7%A0%81"><span class="toc-number">5.1.</span> <span class="toc-text">1、验证码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%9C%A8%E8%AF%B7%E6%B1%82%E5%9C%B0%E5%9D%80%E4%B8%AD%E6%B7%BB%E5%8A%A0-token-%E5%B9%B6%E9%AA%8C%E8%AF%81"><span class="toc-number">5.2.</span> <span class="toc-text">2、在请求地址中添加 token 并验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%AA%8C%E8%AF%81-HTTP-Referer-%E5%AD%97%E6%AE%B5"><span class="toc-number">5.3.</span> <span class="toc-text">3.验证 HTTP Referer 字段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-number">6.</span> <span class="toc-text">漏洞利用</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#xss%E4%B8%8Ecsrf%E5%AF%B9%E6%AF%94"><span class="toc-number">1.</span> <span class="toc-text"> XSS与csrf对比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#csrf%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0%E6%94%BB%E5%87%BB%E6%80%9D%E6%83%B3"><span class="toc-number">2.</span> <span class="toc-text"> Csrf(跨站请求伪造)攻击思想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#token"><span class="toc-number">3.</span> <span class="toc-text"> Token</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%94%AF%E4%B8%80%E6%80%A7"><span class="toc-number">3.0.1.</span> <span class="toc-text"> 唯一性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B2%E6%AD%A2%E4%BC%AA%E9%80%A0%E8%AF%B7%E6%B1%82"><span class="toc-number">3.0.2.</span> <span class="toc-text"> 防止伪造请求：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8E%E8%A1%A8%E5%8D%95%E6%88%96%E8%AF%B7%E6%B1%82%E5%85%B3%E8%81%94"><span class="toc-number">3.0.3.</span> <span class="toc-text"> 与表单或请求关联：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98"><span class="toc-number">4.</span> <span class="toc-text"> 漏洞挖掘</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E9%98%B2%E5%BE%A1"><span class="toc-number">5.</span> <span class="toc-text"> 漏洞防御</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%AA%8C%E8%AF%81%E7%A0%81"><span class="toc-number">5.1.</span> <span class="toc-text"> 1、验证码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%9C%A8%E8%AF%B7%E6%B1%82%E5%9C%B0%E5%9D%80%E4%B8%AD%E6%B7%BB%E5%8A%A0-token-%E5%B9%B6%E9%AA%8C%E8%AF%81"><span class="toc-number">5.2.</span> <span class="toc-text"> 2、在请求地址中添加 token 并验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E9%AA%8C%E8%AF%81-http-referer-%E5%AD%97%E6%AE%B5"><span class="toc-number">5.3.</span> <span class="toc-text"> 3.验证 HTTP Referer 字段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-number">6.</span> <span class="toc-text"> 漏洞利用</span></a></li></ol>
       
   </div>
 </div>
@@ -468,7 +484,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">22</div>
+    <div class="sidebar-state-number">23</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -476,7 +492,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">14</div>
+    <div class="sidebar-state-number">15</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -601,7 +617,7 @@
           url: "http://example.com/2025/02/17/Csrf/",
           excerpt: "",
           description: "",
-          stripContent: "XSS与csrf对比xss：攻击者发现XSS漏洞——构造代码——发送给受害人——受害人打开——攻击者获取受害人的cookie——完成攻击csrf：攻击者发现CSRF漏洞——构造代码——发送给受害人——受害人打开——受害人执行代码——完成攻击 XSS容易发现，因为攻击者需要登陆后台完成攻击，管理员可以看到日志发现攻击者；而CSRF的攻击是管理员自己实现的，攻击者只负责构造代码。CSRF属于业务逻辑漏洞，服务器信任经过身份认证的用户XSS属于技术漏洞，客户信任服务器 Csrf(跨站请求伪造)攻击思想",
+          stripContent: " XSS与csrf对比 xss：攻击者发现XSS漏洞——构造代码——发送给受害人——受害人打开——攻击者获取受害人的cookie——完成攻击 csrf：攻击者发现CSRF漏洞——构造代码——发送给受害人——受害人打开——受害人执行代码——完成攻击 XSS容易发现，因为攻击者需要登陆后台完成攻击，管理员可以看到日志发现攻击者；而CSRF的攻击是管理员自己实现的，攻击者只负责构造代码。 CSRF属于业务逻辑漏洞，服务器信任经过身份认证的用户 XSS属于技术漏洞，客户信任服务器  Csrf(跨站请求伪",
           date: "Mon Feb 17 2025 18:44:16 GMT+0800",
           updated: "Sun Feb 23 2025 17:55:42 GMT+0800",
           cover: "/../images/126839103p0master1200.jpg",

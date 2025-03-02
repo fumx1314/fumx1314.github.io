@@ -204,7 +204,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">22</div>
+    <div class="sidebar-state-number">23</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -212,7 +212,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">14</div>
+    <div class="sidebar-state-number">15</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -272,36 +272,33 @@
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2024/12/26/python%E4%B9%8B%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/" aria-label="python之魔术方法"></a>
+      <a class="post-link" href="/2024/12/27/python%E4%B9%8B%E5%AE%B9%E5%99%A8(%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E5%88%97%E8%A1%A8)/" aria-label="python之容器（字符串与列表）"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/126839103p0master1200.jpg" data-sizes="auto" alt="python之魔术方法" class="lazyload">
+        <img data-src="/../images/17369576223624.jpg" data-sizes="auto" alt="python之容器（字符串与列表）" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-26</span>
-        <span><span class="icon-pencil"></span>401 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
+        <span><span class="icon-calendar"></span>2024-12-27</span>
+        <span><span class="icon-pencil"></span>689 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
       </div>
-      <h2 class="post-title">python之魔术方法</h2>
+      <h2 class="post-title">python之容器（字符串与列表）</h2>
       <article class="post-article">
         
-          init()构造方法关键词：
-1__init__
-
-作用：可以直接在创建对象时对类中属性赋值
-示例：
-12345678class a:    name=None#类中定义可不写    age=None    def __init__(self,name,age):        self.name=name        self.age=agex=a(&amp;quot;小米&amp;quot;,18)
-
-str()字符串方法关键字：
-1__str__
-
-此方法是当打印对象或者使用str()转换对象时被调用
-话不多说，上代码：
-12345678class person:    def __init__(se
+           字符串
+ 字符串访问
+首先我们定义一个字符串
+1s=&amp;quot;python&amp;quot;
+访问方式有多种，我们来看最常规的几种
+12345678#访问字符串中的单个字符print(s[i])#访问字符串中的字串print(s[i:j])#从s[i]到s[j-1]print(s[:j])#从s[0]到s[j-1]print(s[i:])#从s[i]到字符串末尾print(s[i:j:z])#从s[i]到s[j-1]以z步长截取#上述方法也叫切片
+ 单个字符编码
+python使用ord()函数返回单个字符的编码，chr()函数把编码转成相应字符
+下面我们来演示一下
+123s=&amp;#x27;A&amp;#x
         
       </article>
     </div>
@@ -311,10 +308,48 @@ str()字符串方法关键字：
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2024/12/25/python%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" aria-label="python之面向对象"></a>
+      <a class="post-link" href="/2024/12/26/python%E4%B9%8B%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/" aria-label="python之魔术方法"></a>
     
     
     <div class="post-cover-right">
+      
+        <img data-src="/../images/126839103p0master1200.jpg" data-sizes="auto" alt="python之魔术方法" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2024-12-26</span>
+        <span><span class="icon-pencil"></span>403 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
+      </div>
+      <h2 class="post-title">python之魔术方法</h2>
+      <article class="post-article">
+        
+           init()构造方法
+关键词：
+1__init__
+作用：可以直接在创建对象时对类中属性赋值
+示例：
+12345678class a:    name=None#类中定义可不写    age=None    def __init__(self,name,age):        self.name=name        self.age=agex=a(&amp;quot;小米&amp;quot;,18)
+ str()字符串方法
+关键字：
+1__str__
+此方法是当打印对象或者使用str()转换对象时被调用
+话不多说，上代码：
+12345678class person:    def __init__(s
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2024/12/25/python%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" aria-label="python之面向对象"></a>
+    
+    
+    <div class="post-cover-left">
       
         <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="python之面向对象" class="lazyload">
       
@@ -328,13 +363,14 @@ str()字符串方法关键字：
       <h2 class="post-title">python之面向对象</h2>
       <article class="post-article">
         
-          类的定义12class classname:    //内容
+           类的定义
+12class classname:    //内容
 
-
-类的对象类对象支持两种操作：实例化和属性的引用
+ 类的对象
+类对象支持两种操作：实例化和属性的引用
 简单来说就是调用类和访问类的属性和方法
 举个例子：
-12345678910class class1:   a=123   b=456    def hanshu(self):#类的方法后面会讲到        return &amp;quot;hello world&amp;quot;#创建一个对象，调用类x=class1()#访问类的属性和方法print(&amp;quot;class1类的属性a,b为：&amp;quot;,x.a,x.b)print(&amp;quot;class1类的方法输出结果为：&amp;quot;,
+12345678910class class1:   a=123   b=456    def hanshu(self):#类的方法后面会讲到        return &amp;quot;hello world&amp;quot;#创建一个对象，调用类x=class1()#访问类的属性和方法print(&amp;quot;class1类的属性a,b为：&amp;quot;,x.a,x.b)print(&amp;quot;class1类的方法输出结果为：&amp;quo
         
       </article>
     </div>
@@ -374,10 +410,10 @@ str()字符串方法关键字：
     
       <div>
         <span class="icon-brush"></span>
-        37.1k
+        37.9k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        02:24
+        02:26
       </div>
     
     
@@ -413,7 +449,7 @@ str()字符串方法关键字：
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">22</div>
+    <div class="sidebar-state-number">23</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -421,7 +457,7 @@ str()字符串方法关键字：
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">14</div>
+    <div class="sidebar-state-number">15</div>
   </div>
 </div>
 <div class="sidebar-social">
