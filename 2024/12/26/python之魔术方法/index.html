@@ -27,12 +27,12 @@
 
   
   
-    <meta name="description" content="init()构造方法关键词： 1__init__  作用：可以直接在创建对象时对类中属性赋值 示例： 12345678class a:    name&#x3D;None#类中定义可不写    age&#x3D;None    def __init__(self,name,age):        self.name&#x3D;name        self.age&#x3D;agex&#x3D;a(&quot;小米&quot;,18)  st">
+    <meta name="description" content="init()构造方法 关键词： 1__init__ 作用：可以直接在创建对象时对类中属性赋值 示例： 12345678class a:    name&#x3D;None#类中定义可不写    age&#x3D;None    def __init__(self,name,age):        self.name&#x3D;name        self.age&#x3D;agex&#x3D;a(&quot;小米&quot;,18)  s">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python之魔术方法">
 <meta property="og:url" content="http://example.com/2024/12/26/python%E4%B9%8B%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="KL">
-<meta property="og:description" content="init()构造方法关键词： 1__init__  作用：可以直接在创建对象时对类中属性赋值 示例： 12345678class a:    name&#x3D;None#类中定义可不写    age&#x3D;None    def __init__(self,name,age):        self.name&#x3D;name        self.age&#x3D;agex&#x3D;a(&quot;小米&quot;,18)  st">
+<meta property="og:description" content="init()构造方法 关键词： 1__init__ 作用：可以直接在创建对象时对类中属性赋值 示例： 12345678class a:    name&#x3D;None#类中定义可不写    age&#x3D;None    def __init__(self,name,age):        self.name&#x3D;name        self.age&#x3D;agex&#x3D;a(&quot;小米&quot;,18)  s">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-12-26T03:22:07.000Z">
 <meta property="article:modified_time" content="2025-02-23T09:56:41.139Z">
@@ -195,7 +195,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#init-%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">init()构造方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#str-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">str()字符串方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#call-%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">call()魔术方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#eq-%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E7%9B%B8%E7%AD%89"><span class="toc-number">4.</span> <span class="toc-text">eq()判断是否相等</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#init%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text"> init()构造方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#str%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text"> str()字符串方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#call%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text"> call()魔术方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#eq%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E7%9B%B8%E7%AD%89"><span class="toc-number">4.</span> <span class="toc-text"> eq()判断是否相等</span></a></li></ol>
       
   </div>
 </div>
@@ -208,7 +208,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">26</div>
+    <div class="sidebar-state-number">38</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -216,7 +216,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">16</div>
+    <div class="sidebar-state-number">18</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -298,38 +298,33 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
       
-        <h2 id="init-构造方法"><a href="#init-构造方法" class="headerlink" title="init()构造方法"></a>init()构造方法</h2><p>关键词：</p>
+        <h2 id="init构造方法"><a class="markdownIt-Anchor" href="#init构造方法"></a> init()构造方法</h2>
+<p>关键词：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__init__</span><br></pre></td></tr></table></figure>
-
 <p>作用：可以直接在创建对象时对类中属性赋值</p>
 <p>示例：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">a</span>:</span><br><span class="line">    name=<span class="literal">None</span><span class="comment">#类中定义可不写</span></span><br><span class="line">    age=<span class="literal">None</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,name,age</span>):</span><br><span class="line">        <span class="variable language_">self</span>.name=name</span><br><span class="line">        <span class="variable language_">self</span>.age=age</span><br><span class="line">x=a(<span class="string">&quot;小米&quot;</span>,<span class="number">18</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="str-字符串方法"><a href="#str-字符串方法" class="headerlink" title="str()字符串方法"></a>str()字符串方法</h2><p>关键字：</p>
+<h2 id="str字符串方法"><a class="markdownIt-Anchor" href="#str字符串方法"></a> str()字符串方法</h2>
+<p>关键字：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__str__</span><br></pre></td></tr></table></figure>
-
 <p>此方法是当打印对象或者使用str()转换对象时被调用</p>
 <p>话不多说，上代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">person</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,name</span>):</span><br><span class="line">        <span class="variable language_">self</span>.name=name</span><br><span class="line">	<span class="keyword">def</span> <span class="title function_">__str__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">f&quot;你的名字叫<span class="subst">&#123;self.name&#125;</span>&quot;</span></span><br><span class="line">person=person(<span class="string">&quot;小米&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(person)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>(person))</span><br></pre></td></tr></table></figure>
-
 <p>输出结果：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">你的名字叫小米</span><br><span class="line">你的名字叫小米</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="call-魔术方法"><a href="#call-魔术方法" class="headerlink" title="call()魔术方法"></a>call()魔术方法</h2><p>在我们创建了一个对象之后，如果我们”不小心”将此对象当作函数来执行会发生什么呢…</p>
+<hr />
+<h2 id="call魔术方法"><a class="markdownIt-Anchor" href="#call魔术方法"></a> call()魔术方法</h2>
+<p>在我们创建了一个对象之后，如果我们&quot;不小心&quot;将此对象当作函数来执行会发生什么呢…</p>
 <p>没错，当对象以函数的方式调用时call()方法会被默认自动调用</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">study</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,name</span>):</span><br><span class="line">        <span class="variable language_">self</span>.name=name</span><br><span class="line">	<span class="keyword">def</span> <span class="title function_">__call__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;哦吼吼，被自动调用了&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;我的名字叫<span class="subst">&#123;self.name&#125;</span>&quot;</span>)</span><br><span class="line">a=study(<span class="string">&quot;奥特曼&quot;</span>)</span><br><span class="line">a()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p>输出结果为：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">哦吼吼，被自动调用了</span><br><span class="line">我的名字叫奥特曼</span><br></pre></td></tr></table></figure>
-
-<h2 id="eq-判断是否相等"><a href="#eq-判断是否相等" class="headerlink" title="eq()判断是否相等"></a>eq()判断是否相等</h2><p>此方法是当判断是否相等时自动调用</p>
+<h2 id="eq判断是否相等"><a class="markdownIt-Anchor" href="#eq判断是否相等"></a> eq()判断是否相等</h2>
+<p>此方法是当判断是否相等时自动调用</p>
 <p>当然，也可以判断字符串或者值是否相等</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">test</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name, age</span>):</span><br><span class="line">        <span class="variable language_">self</span>.name = name</span><br><span class="line">        <span class="variable language_">self</span>.age = age</span><br><span class="line"></span><br><span class="line">	<span class="keyword">def</span> <span class="title function_">__eq__</span>(<span class="params">self, other</span>):</span><br><span class="line">    	<span class="keyword">return</span> <span class="variable language_">self</span>.age == other.age</span><br><span class="line">a=test(<span class="string">&quot;小明&quot;</span>,<span class="number">18</span>)</span><br><span class="line">b=test(<span class="string">&quot;小红&quot;</span>,<span class="number">19</span>)</span><br><span class="line"><span class="built_in">print</span>(a==b)</span><br></pre></td></tr></table></figure>
-
 <p>输出结果为：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">false</span><br></pre></td></tr></table></figure>
-
 <p>魔术方法众多，该篇只谈及了几个常见的魔术方法，后续也会陆续补充</p>
 
       
@@ -414,10 +409,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        52.5k
+        62.9k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        03:31
+        04:11
       </div>
     
     
@@ -449,7 +444,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#init-%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">init()构造方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#str-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">str()字符串方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#call-%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">call()魔术方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#eq-%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E7%9B%B8%E7%AD%89"><span class="toc-number">4.</span> <span class="toc-text">eq()判断是否相等</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#init%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text"> init()构造方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#str%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text"> str()字符串方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#call%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text"> call()魔术方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#eq%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E7%9B%B8%E7%AD%89"><span class="toc-number">4.</span> <span class="toc-text"> eq()判断是否相等</span></a></li></ol>
       
   </div>
 </div>
@@ -462,7 +457,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">26</div>
+    <div class="sidebar-state-number">38</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -470,7 +465,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">16</div>
+    <div class="sidebar-state-number">18</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -595,7 +590,7 @@
           url: "http://example.com/2024/12/26/python%E4%B9%8B%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/",
           excerpt: "",
           description: "",
-          stripContent: "init()构造方法关键词： 1__init__  作用：可以直接在创建对象时对类中属性赋值 示例： 12345678class a:    name=None#类中定义可不写    age=None    def __init__(self,name,age):        self.name=name        self.age=agex=a(&amp;quot;小米&amp;quot;,18)  str()字符串方法关键字： 1__str__  此方法是当打印对象或者使用str()转换对象时被调用 ",
+          stripContent: " init()构造方法 关键词： 1__init__ 作用：可以直接在创建对象时对类中属性赋值 示例： 12345678class a:    name=None#类中定义可不写    age=None    def __init__(self,name,age):        self.name=name        self.age=agex=a(&amp;quot;小米&amp;quot;,18)  str()字符串方法 关键字： 1__str__ 此方法是当打印对象或者使用str()转换对象时被调用",
           date: "Thu Dec 26 2024 11:22:07 GMT+0800",
           updated: "Sun Feb 23 2025 17:56:41 GMT+0800",
           cover: "/../images/126839103p0master1200.jpg",

