@@ -204,7 +204,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">89</div>
+    <div class="sidebar-state-number">85</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -212,7 +212,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">66</div>
+    <div class="sidebar-state-number">62</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -272,114 +272,10 @@
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/04/06/%5BCISCN2019%20%E6%80%BB%E5%86%B3%E8%B5%9B%20Day2%20Web1%5DEasyweb/" aria-label="[CISCN2019 总决赛 Day2 Web1]Easyweb"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[CISCN2019 总决赛 Day2 Web1]Easyweb" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-04-06</span>
-        <span><span class="icon-pencil"></span>972 字</span>
-        <span><span class="icon-clock"></span>4 分钟</span>
-      </div>
-      <h2 class="post-title">[CISCN2019 总决赛 Day2 Web1]Easyweb</h2>
-      <article class="post-article">
-        
-           题目界面：
-一个登录框，随便试了一下，发现没一点用
-信息收集发现有robots.txt文件
-
-发现有压缩文件
-我们访问index.php.bak发现not found
-那我们再到源码里看一下，发现了image.php
-访问image.php.bak
-1234567891011121314151617include &amp;quot;config.php&amp;quot;;$id=isset($_GET[&amp;quot;id&amp;quot;])?$_GET[&amp;quot;id&amp;quot;]:&amp;quot;1&amp;quot;;$path=isset($_GET[&amp;quot;path&amp;quot;])?$_GET[&amp;quot;
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/04/05/%5BGYCTF2020%5DEzsqli/" aria-label="[GYCTF2020]Ezsqli"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        
-        
-          <img data-src="../images/17373827994914.jpg" data-sizes="auto" alt="[GYCTF2020]Ezsqli" class="lazyload">
-        
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-04-05</span>
-        <span><span class="icon-pencil"></span>531 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
-      </div>
-      <h2 class="post-title">[GYCTF2020]Ezsqli</h2>
-      <article class="post-article">
-        
-           题目界面：
-看题目就是一个sql注入
-我们先fuzz测试一下，看过滤了哪些关键字
-
-发现union都被过滤了，排除联合注入
-or也被过滤了，那imformation也会被过滤，那我们只能用innodb_index_stats和innodb_table_stats或sys.schema_table_statistics_with_buffer来获取表名，但这也会演变为了无列名注入，因为这几个库里面只有数据库和表名而没有列名
-而且只能用盲注来爆了
-而if也被过滤了，只能使用异或盲注了
-盲注爆表名这也是利用二分盲注+异或注入
-123456789101112131415161718192021222
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/04/05/phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" aria-label="phar反序列化"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/124691006_p0_master1200.jpg" data-sizes="auto" alt="phar反序列化" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-04-05</span>
-        <span><span class="icon-pencil"></span>758 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
-      </div>
-      <h2 class="post-title">phar反序列化</h2>
-      <article class="post-article">
-        
-          引言PHP反序列化常见的是使用unserilize()进行反序列化，除此之外还有其它的反序列化方法，不需要用到unserilize()。就是用到了本文的主要内容——phar反序列化。很多大佬都进行过总结，但是看了这个知识点的比较全的内容。我看了不下二十篇文章，最后写此文为方便自己以后查看。
-介绍Phar是将php文件打包而成的一种压缩文档，类似于Java中的jar包。它有一个特性就是phar文件会以序列化的形式储存用户自定义的meta-data。以扩展反序列化漏洞的攻击面，配合phar://协议使用。
-Phar文件结构
-a stub是一个文件标志，格式为 ：xxx&amp;lt;?php xxx;__
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
       <a class="post-link" href="/2025/04/05/%5BSWPUCTF%202018%5DSimplePHP/" aria-label="[SWPUCTF 2018]SimplePHP"></a>
     
     
-    <div class="post-cover-right">
+    <div class="post-cover-left">
       
         <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[SWPUCTF 2018]SimplePHP" class="lazyload">
       
@@ -405,36 +301,6 @@ a stub是一个文件标志，格式为 ：xxx&amp;lt;?php xxx;__
 </div>
   
     <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/04/04/%5BCATCTF%5Dcatcat-new/" aria-label="[CATCTF]catcat-new"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        
-        
-          <img data-src="../images/17373827994914.jpg" data-sizes="auto" alt="[CATCTF]catcat-new" class="lazyload">
-        
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-04-04</span>
-        <span><span class="icon-pencil"></span>1.8k 字</span>
-        <span><span class="icon-clock"></span>7 分钟</span>
-      </div>
-      <h2 class="post-title">[CATCTF]catcat-new</h2>
-      <article class="post-article">
-        
-          知识点12345678910111213141516171819Linux系统敏感文件，flask_session_cookie_manager伪造session并执行，session存储在cookie中/etc/passwd该文件储存了该Linux系统中所有用户的一些基本信息，只有root权限才可以修改。其具体格式为      用户名:口令:用户标识号:组标识号:注释性描述:主目录:登录Shell（以冒号作为分隔符）/proc/selfproc是一个伪文件系统，它提供了内核数据结构的接口。内核数据是在程序运行时存储在内部半导体存储器中数据。通过/proc/PID可以访问对应PID的进程内核数
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
       <a class="post-link" href="/2025/04/04/%5BHFCTF2020%5DEasyLogin/" aria-label="[HFCTF2020]EasyLogin"></a>
@@ -444,7 +310,7 @@ a stub是一个文件标志，格式为 ：xxx&amp;lt;?php xxx;__
       
         
         
-          <img data-src="../images/124691006_p0_master1200.jpg" data-sizes="auto" alt="[HFCTF2020]EasyLogin" class="lazyload">
+          <img data-src="../images/17373827994914.jpg" data-sizes="auto" alt="[HFCTF2020]EasyLogin" class="lazyload">
         
       
     </div>
@@ -481,7 +347,7 @@ a stub是一个文件标志，格式为 ：xxx&amp;lt;?php xxx;__
       
         
         
-          <img data-src="../images/17373827994914.jpg" data-sizes="auto" alt="php:filter的奇淫巧计" class="lazyload">
+          <img data-src="../images/17369576223624.jpg" data-sizes="auto" alt="php:filter的奇淫巧计" class="lazyload">
         
       
     </div>
@@ -560,7 +426,7 @@ write 参数指定 一个或多个过滤器 用于 写 操作，多个过滤器�
       
         
         
-          <img data-src="../images/17373827994914.jpg" data-sizes="auto" alt="[HITCON 2017]SSRFme" class="lazyload">
+          <img data-src="../images/1737907114de8a.jpg" data-sizes="auto" alt="[HITCON 2017]SSRFme" class="lazyload">
         
       
     </div>
@@ -615,6 +481,134 @@ write 参数指定 一个或多个过滤器 用于 写 操作，多个过滤器�
   </div>
 </div>
   
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/04/01/%5BRCTF2015%5DEasySQL/" aria-label="[RCTF2015]EasySQL"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[RCTF2015]EasySQL" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-04-01</span>
+        <span><span class="icon-pencil"></span>535 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
+      </div>
+      <h2 class="post-title">[RCTF2015]EasySQL</h2>
+      <article class="post-article">
+        
+           用户首页发现一个登录栏，注册栏，我们注册并登录发现有个修改密码的地方
+
+总共就只有这三处可以进行注入
+我们注册admin的账号发现存在用户，那我们尝试使用二次注入来登录admin的账号
+12345678910111213注册admin&amp;quot;密码为1登录admin&amp;quot;密码为1修改密码1-&amp;gt;2重返登录界面登录admin密码为2登录成功
+
+我们成功登录admin的账号，但未发现flag，但起码证明了注册页面存在二次注入
+那我们猜测后端注册页面的sql语句为
+1select * from user where username=&amp;quot;xxx&amp;quot; and passwo
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/31/JWT/" aria-label="JWT"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="JWT" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-31</span>
+        <span><span class="icon-pencil"></span>266 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
+      </div>
+      <h2 class="post-title">JWT</h2>
+      <article class="post-article">
+        
+          JSON Web Token是什么
+JSON Web Token (JWT)是一个开放标准(RFC 7519)，它定义了一种紧凑的、自包含的方式，用于作为JSON对象在各方之间安全地传输信息。该信息可以被验证和信任，因为它是数字签名的。
+
+JWT由三部分组成，类似于xxx.yyy.zzz，前两部分是base64编码的内容，第三部分是加密的签名部分
+第一部分被称为header,会说明字符串的类型以及加密方式，当然还会包含其他一些字段，在介绍JWT安全问题时会涉及到部分。
+第二部分被称为payload,包含用户的身份id,是否是管理权限等字段，这部分中的相关字段可以根据实际情况自行定义。
+第三部分
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/31/%5BCISCN2019%20%E5%8D%8E%E5%8C%97%E8%B5%9B%E5%8C%BA%20Day1%20Web2%5Dikun/" aria-label="[CISCN2019 华北赛区 Day1 Web2]ikun"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[CISCN2019 华北赛区 Day1 Web2]ikun" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-31</span>
+        <span><span class="icon-pencil"></span>408 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
+      </div>
+      <h2 class="post-title">[CISCN2019 华北赛区 Day1 Web2]ikun</h2>
+      <article class="post-article">
+        
+          知识点：12pickle反序列化jwt构造
+
+ ikun的题
+前面的步骤略述一下吧
+需买vp6
+我们用脚本把vp6的购买页面爆出来
+12345678import requestsurl=&amp;quot;http://7de96e39-e3e1-4117-ad12-5b29895ec975.node5.buuoj.cn/shop?page=&amp;quot;for i in range (0,2000):    print(i)    r = requests.get(url + str(i))    if &amp;#x27;lv6.png&amp;#x27; in r.text:        print(i)   
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/31/%5BZer0pts2020%5DCan%20you%20guess%20it/" aria-label="[Zer0pts2020]Can you guess it"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[Zer0pts2020]Can you guess it" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-31</span>
+        <span><span class="icon-pencil"></span>555 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
+      </div>
+      <h2 class="post-title">[Zer0pts2020]Can you guess it</h2>
+      <article class="post-article">
+        
+          知识点：1234567891011$_SERVER[&amp;#x27;PHP_SELF&amp;#x27;] 包含了当前执行脚本的文件路径/index.php/index.php/aaa.php这两种访问的都是index.php，可能是因为aaa.php不存在basename()可以理解为对传入的参数路径截取最后一段作为返回值，但是该函数发现最后一段为不可见字符时会退取上一层的目录$var1=&amp;quot;/config.php/test&amp;quot;basename($var1)	=&amp;gt; test$var2=&amp;quot;/config.php/%ff&amp;quot;basename($var2)	=&amp;gt;	
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
 
 
   <nav id="page-nav" data-aos="fade-up">
@@ -648,10 +642,10 @@ write 参数指定 一个或多个过滤器 用于 写 操作，多个过滤器�
     
       <div>
         <span class="icon-brush"></span>
-        120.8k
+        115.8k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        08:20
+        07:58
       </div>
     
     
@@ -687,7 +681,7 @@ write 参数指定 一个或多个过滤器 用于 写 操作，多个过滤器�
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">89</div>
+    <div class="sidebar-state-number">85</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -695,7 +689,7 @@ write 参数指定 一个或多个过滤器 用于 写 操作，多个过滤器�
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">66</div>
+    <div class="sidebar-state-number">62</div>
   </div>
 </div>
 <div class="sidebar-social">

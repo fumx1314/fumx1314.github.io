@@ -204,7 +204,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">89</div>
+    <div class="sidebar-state-number">85</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -212,7 +212,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">66</div>
+    <div class="sidebar-state-number">62</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -437,47 +437,10 @@ Signin
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/04/07/XCTF-very-easy-sql/" aria-label="[XCTF]very_easy_sql"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[XCTF]very_easy_sql" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-04-07</span>
-        <span><span class="icon-pencil"></span>1.2k 字</span>
-        <span><span class="icon-clock"></span>5 分钟</span>
-      </div>
-      <h2 class="post-title">[XCTF]very_easy_sql</h2>
-      <article class="post-article">
-        
-            其实我对这个题也是一知半解，可以去看这位佬的题解，讲的很好
-攻防世界web新手 - very_easy_sql（非常详细的wp）_easy sql 攻防世界-CSDN博客
-
-题目界面
-信息收集you are not an inner user, so we can not let you have identify~.意思是需要以本地用户访问。这里又没有rce、越权、文件包含等。那么很有可能有ssrf。
-简单的尝试了一下sql注入没有任何回显
-在源代码里找到了个use.php
-
-我们尝试输入?url=127.0.0.1发现index.php的页面被回显出来了
-说明存在ssrf漏洞
-解题go
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
       <a class="post-link" href="/2025/04/07/%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202018%5DComment/" aria-label="[网鼎杯 2018]Comment"></a>
     
     
-    <div class="post-cover-right">
+    <div class="post-cover-left">
       
         <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[网鼎杯 2018]Comment" class="lazyload">
       
@@ -517,12 +480,12 @@ xss是因为如果发帖时进行了xss注入，那…
 </div>
   
     <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
+  <div class="post-wrap-right" data-aos="fade-up">
     
       <a class="post-link" href="/2025/04/07/%5BNCTF2019%5DSQLi/" aria-label="[NCTF2019]SQLi"></a>
     
     
-    <div class="post-cover-left">
+    <div class="post-cover-right">
       
         <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[NCTF2019]SQLi" class="lazyload">
       
@@ -558,12 +521,12 @@ sql语句都给我们显示出来了
 </div>
   
     <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
+  <div class="post-wrap-left" data-aos="fade-up">
     
       <a class="post-link" href="/2025/04/06/%5BNPUCTF2020%5Dezinclude/" aria-label="[NPUCTF2020]ezinclude"></a>
     
     
-    <div class="post-cover-right">
+    <div class="post-cover-left">
       
         <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[NPUCTF2020]ezinclude" class="lazyload">
       
@@ -597,41 +560,73 @@ sql语句都给我们显示出来了
 </div>
   
     <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
+  <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/04/06/XCTF-ics-05/" aria-label="XCTF-ics-05"></a>
+      <a class="post-link" href="/2025/04/06/%5BCISCN2019%20%E6%80%BB%E5%86%B3%E8%B5%9B%20Day2%20Web1%5DEasyweb/" aria-label="[CISCN2019 总决赛 Day2 Web1]Easyweb"></a>
     
     
-    <div class="post-cover-left">
+    <div class="post-cover-right">
       
-        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="XCTF-ics-05" class="lazyload">
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[CISCN2019 总决赛 Day2 Web1]Easyweb" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
         <span><span class="icon-calendar"></span>2025-04-06</span>
-        <span><span class="icon-pencil"></span>1.2k 字</span>
-        <span><span class="icon-clock"></span>6 分钟</span>
+        <span><span class="icon-pencil"></span>972 字</span>
+        <span><span class="icon-clock"></span>4 分钟</span>
       </div>
-      <h2 class="post-title">XCTF-ics-05</h2>
+      <h2 class="post-title">[CISCN2019 总决赛 Day2 Web1]Easyweb</h2>
       <article class="post-article">
         
-           
-题目界面如上
-找不到可以利用的地方
-我们用dirsearch扫一下
-我们发现有个index.php&amp;#x2F;login&amp;#x2F;
-我们进去之后如下
+           题目界面：
+一个登录框，随便试了一下，发现没一点用
+信息收集发现有robots.txt文件
 
-发现有个?page传参
-但当我们传index.php时会回显出ok
-说明这里能读取文件，但有的会被过滤
-我们试一下用php伪协议读取index.php
-1php://filter/read=convert.base64-encode/resource=index.php
+发现有压缩文件
+我们访问index.php.bak发现not found
+那我们再到源码里看一下，发现了image.php
+访问image.php.bak
+1234567891011121314151617include &amp;quot;config.php&amp;quot;;$id=isset($_GET[&amp;quot;id&amp;quot;])?$_GET[&amp;quot;id&amp;quot;]:&amp;quot;1&amp;quot;;$path=isset($_GET[&amp;quot;path&amp;quot;])?$_GET[&amp;quot;
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/04/05/%5BGYCTF2020%5DEzsqli/" aria-label="[GYCTF2020]Ezsqli"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        
+        
+          <img data-src="../images/17373827994914.jpg" data-sizes="auto" alt="[GYCTF2020]Ezsqli" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-04-05</span>
+        <span><span class="icon-pencil"></span>531 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
+      </div>
+      <h2 class="post-title">[GYCTF2020]Ezsqli</h2>
+      <article class="post-article">
+        
+           题目界面：
+看题目就是一个sql注入
+我们先fuzz测试一下，看过滤了哪些关键字
 
-有回显
-解码
-12345678910111213141516171819202122232425262728293031323334353637383940414243
+发现union都被过滤了，排除联合注入
+or也被过滤了，那imformation也会被过滤，那我们只能用innodb_index_stats和innodb_table_stats或sys.schema_table_statistics_with_buffer来获取表名，但这也会演变为了无列名注入，因为这几个库里面只有数据库和表名而没有列名
+而且只能用盲注来爆了
+而if也被过滤了，只能使用异或盲注了
+盲注爆表名这也是利用二分盲注+异或注入
+123456789101112131415161718192021222
         
       </article>
     </div>
@@ -641,36 +636,27 @@ sql语句都给我们显示出来了
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/04/06/%5Bcsaw%5Dmfw/" aria-label="[csaw]mfw"></a>
+      <a class="post-link" href="/2025/04/05/phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" aria-label="phar反序列化"></a>
     
     
     <div class="post-cover-right">
       
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[csaw]mfw" class="lazyload">
+        <img data-src="/../images/124691006_p0_master1200.jpg" data-sizes="auto" alt="phar反序列化" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-04-06</span>
-        <span><span class="icon-pencil"></span>806 字</span>
-        <span><span class="icon-clock"></span>4 分钟</span>
+        <span><span class="icon-calendar"></span>2025-04-05</span>
+        <span><span class="icon-pencil"></span>758 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
       </div>
-      <h2 class="post-title">[csaw]mfw</h2>
+      <h2 class="post-title">phar反序列化</h2>
       <article class="post-article">
         
-           
-题目界面什么都没有
-信息收集我们用dirsearch扫一下目录
-发现有.git文件
-
-解题这里面有index.php文件
-我们用githacker工具把.git文件扒下来审计
-1githacker --url http://61.147.171.105:64503/.git --output-folder shctf
-
-
-这里面的flag.php什么都没有
-最有用的就是index.php文件了
-123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354
+          引言PHP反序列化常见的是使用unserilize()进行反序列化，除此之外还有其它的反序列化方法，不需要用到unserilize()。就是用到了本文的主要内容——phar反序列化。很多大佬都进行过总结，但是看了这个知识点的比较全的内容。我看了不下二十篇文章，最后写此文为方便自己以后查看。
+介绍Phar是将php文件打包而成的一种压缩文档，类似于Java中的jar包。它有一个特性就是phar文件会以序列化的形式储存用户自定义的meta-data。以扩展反序列化漏洞的攻击面，配合phar://协议使用。
+Phar文件结构
+a stub是一个文件标志，格式为 ：xxx&amp;lt;?php xxx;__
         
       </article>
     </div>
@@ -710,10 +696,10 @@ sql语句都给我们显示出来了
     
       <div>
         <span class="icon-brush"></span>
-        120.8k
+        115.8k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        08:20
+        07:58
       </div>
     
     
@@ -749,7 +735,7 @@ sql语句都给我们显示出来了
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">89</div>
+    <div class="sidebar-state-number">85</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -757,7 +743,7 @@ sql语句都给我们显示出来了
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">66</div>
+    <div class="sidebar-state-number">62</div>
   </div>
 </div>
 <div class="sidebar-social">

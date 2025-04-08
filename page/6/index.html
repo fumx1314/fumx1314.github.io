@@ -204,7 +204,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">89</div>
+    <div class="sidebar-state-number">85</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -212,7 +212,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">66</div>
+    <div class="sidebar-state-number">62</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -268,173 +268,6 @@
 
           <section id="main">
   
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/16/%5BSUCTF%202019%5DCheckIn/" aria-label="[SUCTF 2019]CheckIn"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[SUCTF 2019]CheckIn" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-16</span>
-        <span><span class="icon-pencil"></span>340 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
-      </div>
-      <h2 class="post-title">[SUCTF 2019]CheckIn</h2>
-      <article class="post-article">
-        
-           
-我们先上传一个写有一句话木马的php文件试一下
-回显说文件后缀不能有ph
-所以我们php3,php5,phhtml都不能用了
-那我们再上传一个后缀名改为jpg的一句话木马文件
-
-发现不能有&amp;lt;?符号
-那我们使用js
-1&amp;lt;script language=&amp;#x27;php&amp;#x27;&amp;gt; @eval($_POST[&amp;#x27;pass&amp;#x27;]);&amp;lt;/script&amp;gt;
-
-再次提交
-
-发现它后端检查了文件的标识头
-那我们就可以修改一下文件的标识头
-1gif文件：直接在文件内容开头写入GIF89a就行，一般都用这个，因为好记
-
-再次上传，上传成功
-现在就要考虑如何将上
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/15/%5B%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98%202019%5DHardSQL/" aria-label="[极客大挑战 2019]HardSQL"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[极客大挑战 2019]HardSQL" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-15</span>
-        <span><span class="icon-pencil"></span>459 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
-      </div>
-      <h2 class="post-title">[极客大挑战 2019]HardSQL</h2>
-      <article class="post-article">
-        
-           
-判断过滤法一(Fuzz测试)法二(自己试)：过滤了空格
-试了很多，空格只能用反引号和括号来绕过
-过滤了**&amp;#x3D;**
-可以用like来绕过
-过滤了substring与mid
-可以用right与left来绕过
-知识点：
-RIGHT 是一个字符串函数，用于从字符串的右侧提取指定数量的字符
-1RIGHT(string, length)
-
-
-string：要提取字符的字符串。
-length：要提取的字符数。如果 length 大于字符串的长度，则返回整个字符串。
-
-LEFT 是一个字符串函数，用于从字符串的左侧提取指定数量的字符。它的语法如下：
-1LEFT(string, length)
-
-
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/14/%5BMRCTF2020%5D%E4%BD%A0%E4%BC%A0%E4%BD%A0%F0%9F%90%8E%E5%91%A2/" aria-label="[MRCTF2020]你传你🐎呢"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[MRCTF2020]你传你🐎呢" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-14</span>
-        <span><span class="icon-pencil"></span>308 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
-      </div>
-      <h2 class="post-title">[MRCTF2020]你传你🐎呢</h2>
-      <article class="post-article">
-        
-          
-判断检验方式我们发现前端是没有检验的
-所以是后端检验文件
-我们先试着上传一个php文件，里面有一句话木马–&amp;gt;上传失败
-上传php文件，抓包修改文件后缀名为png–&amp;gt;上传失败
-上传php文件，抓包修改文件后缀名和Content-Type:png 和 image&amp;#x2F;png –&amp;gt;上传成功
-所以我们猜测是对文件后缀名和Content-Type进行了校验
-如何成功解析php文件但当我们上传了文件之后发现它变成了一个png文件，无法正常解析为php文件
-所以我们需要一个外物来助它变为php文件
-这时候就想到了.user.ini文件和.htaccess文件
-这里上传.user.i
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/13/%5BBJDCTF2020%5DEasy%20MD5/" aria-label="[BJDCTF2020]Easy MD5"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[BJDCTF2020]Easy MD5" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-13</span>
-        <span><span class="icon-pencil"></span>210 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
-      </div>
-      <h2 class="post-title">[BJDCTF2020]Easy MD5</h2>
-      <article class="post-article">
-        
-            没找到有用信息
-抓个包看看
-
-响应包里看到一个查询语句
-有个md5语法
-第一关(md5的sql注入)
-所以我们需要输入一个字符串使得它md5加密后返回’or’XXXXXXXXX(这里的XXXXX是一些乱码和不可见字符)
-这里的SQL语句会变成
-1select * from `admin` where password=&amp;#x27;&amp;#x27;or&amp;#x27;XXXXXXXXX&amp;#x27;  
-
-这里用：ffifdyop,这个MD5加密后会返回’or’6XXXXXXXXX
-第二关(md5弱比较)查看源码
-
-这里随便上传两个md5编码后是0e…的就行了
-12345678910PM1kVTMBE
-        
-      </article>
-    </div>
-  </div>
-</div>
   
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
@@ -527,7 +360,7 @@ php字符串解析漏洞
       
         
         
-          <img data-src="../images/124691006_p0_master1200.jpg" data-sizes="auto" alt="[GXYCTF2019]Ping Ping Ping" class="lazyload">
+          <img data-src="../images/17373827994914.jpg" data-sizes="auto" alt="[GXYCTF2019]Ping Ping Ping" class="lazyload">
         
       
     </div>
@@ -573,7 +406,7 @@ ls执行成功，证明;命令执行能行
       
         
         
-          <img data-src="../images/1737907114de8a.jpg" data-sizes="auto" alt="[HCTF 2018]WarmUp" class="lazyload">
+          <img data-src="../images/126839103p0master1200.jpg" data-sizes="auto" alt="[HCTF 2018]WarmUp" class="lazyload">
         
       
     </div>
@@ -667,6 +500,134 @@ web174(过滤数字、flag)123456//拼接sql语句查找指定ID用户$sql = &am
   </div>
 </div>
   
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/05/BaseCTF2024/" aria-label="BaseCTF2024"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="BaseCTF2024" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-05</span>
+        <span><span class="icon-pencil"></span>6.5k 字</span>
+        <span><span class="icon-clock"></span>32 分钟</span>
+      </div>
+      <h2 class="post-title">BaseCTF2024</h2>
+      <article class="post-article">
+        
+          A Dark Room查看源代码
+upload上传一个php文件
+里面写有一句话木马
+蚁剑连接
+ez
+HTTP是什么呀按要求改请求头就行
+喵喵喵命令执行读取flag.php
+?DT&amp;#x3D;system(cat &amp;#x2F;flag)
+MD5绕过欸MD5可以全部用数组绕过
+a[]&amp;#x3D;1&amp;amp;b[]&amp;#x3D;2…
+一起吃豆豆查看源代码
+
+在index.php里面找游戏结束的代码，发现一串base64编码，解码
+flag到手
+flag直接读取不就行了？考察php原生类
+1234567891011121314&amp;lt;?phphighlight_file(&amp;#x27;index.php
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/04/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF/" aria-label="命令执行绕过姿势"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="命令执行绕过姿势" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-04</span>
+        <span><span class="icon-pencil"></span>3.9k 字</span>
+        <span><span class="icon-clock"></span>17 分钟</span>
+      </div>
+      <h2 class="post-title">命令执行绕过姿势</h2>
+      <article class="post-article">
+        
+          小知识12345include不用括号，分号可以用?&amp;gt;代替。 //c=include$_GET[1]?&amp;gt;&amp;amp;1=data://text/plain,&amp;lt;?php system(&amp;quot;cat flag.php&amp;quot;);?&amp;gt;若想截断后面语句：%0a、%26、||&amp;lt;、&amp;lt;&amp;gt;、$&amp;#123;IFS&amp;#125;可以绕过空格过滤
+
+无过滤：12345678910111213141516171819通配符payload1:c=system(&amp;quot;nl fla?????&amp;quot;);payload2:c=system(&amp;quot;nl fla*&amp;
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/02/28/php%E5%8E%9F%E7%94%9F%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E7%B1%BB/" aria-label="php原生文件操作类"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="php原生文件操作类" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-02-28</span>
+        <span><span class="icon-pencil"></span>830 字</span>
+        <span><span class="icon-clock"></span>3 分钟</span>
+      </div>
+      <h2 class="post-title">php原生文件操作类</h2>
+      <article class="post-article">
+        
+           我在做一个ctf新手题的时候遇到了此概念
+这类概念在反序列化中用到相对多一点
+例题先看这题源码
+1234567891011121314&amp;lt;?phphighlight_file(&amp;#x27;index.php&amp;#x27;);# 我把flag藏在一个secret文件夹里面了，所以要学会遍历啊~error_reporting(0);$J1ng = $_POST[&amp;#x27;J&amp;#x27;];$Hong = $_POST[&amp;#x27;H&amp;#x27;];$Keng = $_GET[&amp;#x27;K&amp;#x27;];$Wang = $_GET[&amp;#x27;W&amp;#x27;];$dir = new $Ken
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/02/24/php%E5%B8%B8%E7%94%A8%E7%89%B9%E6%80%A7/" aria-label="php常用特性"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="php常用特性" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-02-24</span>
+        <span><span class="icon-pencil"></span>8.4k 字</span>
+        <span><span class="icon-clock"></span>39 分钟</span>
+      </div>
+      <h2 class="post-title">php常用特性</h2>
+      <article class="post-article">
+        
+          常见php函数12345678910substr(string,start,length)  //截取字符串strrev(string $string) //反转字符串FilesystemIterator   //获取目录文件FilesystemIteratortrim()         //用于去除字符串两端的空白字符或其他指定字符。getcwd()函数    //取得当前工作目录getcwd()函数strpos() - 查找字符串在另一字符串中第一次出现的位置（区分大小写）stripos() -查找字符串在另一字符串中第一次出现的位置（不区分大小写）strrpos() - 查找字符串在另
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
 
 
   <nav id="page-nav" data-aos="fade-up">
@@ -700,10 +661,10 @@ web174(过滤数字、flag)123456//拼接sql语句查找指定ID用户$sql = &am
     
       <div>
         <span class="icon-brush"></span>
-        120.8k
+        115.8k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        08:20
+        07:58
       </div>
     
     
@@ -739,7 +700,7 @@ web174(过滤数字、flag)123456//拼接sql语句查找指定ID用户$sql = &am
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">89</div>
+    <div class="sidebar-state-number">85</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -747,7 +708,7 @@ web174(过滤数字、flag)123456//拼接sql语句查找指定ID用户$sql = &am
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">66</div>
+    <div class="sidebar-state-number">62</div>
   </div>
 </div>
 <div class="sidebar-social">

@@ -204,7 +204,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">89</div>
+    <div class="sidebar-state-number">85</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -212,7 +212,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">66</div>
+    <div class="sidebar-state-number">62</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -272,140 +272,6 @@
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/28/%5B%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98%202019%5DFinalSQL/" aria-label="[极客大挑战 2019]FinalSQL"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[极客大挑战 2019]FinalSQL" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-28</span>
-        <span><span class="icon-pencil"></span>314 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
-      </div>
-      <h2 class="post-title">[极客大挑战 2019]FinalSQL</h2>
-      <article class="post-article">
-        
-           
-这个题一看就是挺nb的sql注入的(final)
-果然，试了一圈，&amp;#39;,select,union,or,and,handler等等等等好多都被过滤了
-毫无头绪
-发现那个神秘号码能点
-
-欸嘿，又有一个id，那估计这里才是注入点吧
-看题目提示应该是想要我们试一下盲注的
-这里我们用二分盲注
-但sql语句我们用异或来构造
-脚本：
-12345678910111213141516171819202122232425262728293031323334import requestsimport timeurl = &amp;quot;http://f25c8ff6-0659-4275-991a-47669
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/28/%5BCISCN2019%20%E5%8D%8E%E4%B8%9C%E5%8D%97%E8%B5%9B%E5%8C%BA%5DWeb11/" aria-label="[CISCN2019 华东南赛区]Web11"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[CISCN2019 华东南赛区]Web11" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-28</span>
-        <span><span class="icon-pencil"></span>995 字</span>
-        <span><span class="icon-clock"></span>4 分钟</span>
-      </div>
-      <h2 class="post-title">[CISCN2019 华东南赛区]Web11</h2>
-      <article class="post-article">
-        
-          smarty ssti知识点：12345678在开始介绍 Smarty 之前先了解一下模板引擎，模板引擎是为了让前端界面(html)与程序代码(php)分离而产生的一种解决方案，简单来说就是 html 文件里再也不用写 php 代码了。Smarty 的原理是变量替换原则，我们只需要在 html 文件里写好 Smarty 的标签即可，例如 &amp;#123;name&amp;#125;，然后调用 Smarty 的方法传递变量参数即可&amp;#123;literal&amp;#125; 标签：&amp;#123;literal&amp;#125;可以让一个模板区域的字符原样输出。这经常用于保护页面上的Javascript或css样式表，避免
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/28/%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202020%20%E6%9C%B1%E9%9B%80%E7%BB%84%5DNmap/" aria-label="[网鼎杯 2020 朱雀组]Nmap"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[网鼎杯 2020 朱雀组]Nmap" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-28</span>
-        <span><span class="icon-pencil"></span>1.2k 字</span>
-        <span><span class="icon-clock"></span>4 分钟</span>
-      </div>
-      <h2 class="post-title">[网鼎杯 2020 朱雀组]Nmap</h2>
-      <article class="post-article">
-        
-            题目界面
-这是个namp工具扫描界面
-我们来了解一下namp工具
-namp常见参数123456-iL 读取文件内容，以文件内容作为搜索目标-o 输出到文件-oN 标准保存-oX XML保存-oG Grep保存-oA 保存到所有格式
-
-常见指令123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051nmap -v 127.0.0.1给出了远程机器更详细的信息，显示冗余信息(扫描细节)nmap -iL nmaptest.txt运行带“iL 选项的nmap命令来扫描文
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/28/%5B%E5%BC%BA%E7%BD%91%E6%9D%AF%202019%5D%E9%AB%98%E6%98%8E%E7%9A%84%E9%BB%91%E5%AE%A2/" aria-label="[强网杯 2019]高明的黑客"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/126839103p0master1200.jpg" data-sizes="auto" alt="[强网杯 2019]高明的黑客" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-28</span>
-        <span><span class="icon-pencil"></span>577 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
-      </div>
-      <h2 class="post-title">[强网杯 2019]高明的黑客</h2>
-      <article class="post-article">
-        
-          
-题目提示我们访问www.tar.gz
-下了好久，终于下好了，有接近40mb…
-里面有几千个php文件
-而且每个里面都含有shell
-也不可能手动去试
-只能用脚本来一个个试，来找出能利用的shell
-把src文件夹解压进phpstudy的www目录里
-打开phpstudy，记得php的版本需要大于7
-然后运行下面这个脚本
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859import osimport requestsimpor
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
       <a class="post-link" href="/2025/03/27/%5B%E5%AE%89%E6%B4%B5%E6%9D%AF%202019%5Deasy_serialize_php/" aria-label="[安洵杯 2019]easy_serialize_php"></a>
     
     
@@ -413,7 +279,7 @@ namp常见参数123456-iL 读取文件内容，以文件内容作为搜索目标
       
         
         
-          <img data-src="../images/17373827994914.jpg" data-sizes="auto" alt="[安洵杯 2019]easy_serialize_php" class="lazyload">
+          <img data-src="../images/1737907114de8a.jpg" data-sizes="auto" alt="[安洵杯 2019]easy_serialize_php" class="lazyload">
         
       
     </div>
@@ -585,7 +451,7 @@ img那个像base64加密后
       
         
         
-          <img data-src="../images/1737907114de8a.jpg" data-sizes="auto" alt="[GWCTF 2019]我有一个数据库" class="lazyload">
+          <img data-src="../images/124691006_p0_master1200.jpg" data-sizes="auto" alt="[GWCTF 2019]我有一个数据库" class="lazyload">
         
       
     </div>
@@ -618,6 +484,147 @@ img那个像base64加密后
 题解说看phpmyadmin版本
 
 查询到4.8.1版本存在任意文件读取漏洞：[phpmyadmin 4.8.1 
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/26/%5BGXYCTF2019%5D%E7%A6%81%E6%AD%A2%E5%A5%97%E5%A8%83/" aria-label="[GXYCTF2019]禁止套娃"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[GXYCTF2019]禁止套娃" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-26</span>
+        <span><span class="icon-pencil"></span>681 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
+      </div>
+      <h2 class="post-title">[GXYCTF2019]禁止套娃</h2>
+      <article class="post-article">
+        
+            考察知识点：
+12git泄露无参
+
+
+ 进入题目
+搜查源码，抓包，或者用dirsearch搜都没有发现任何东西
+我们用GitHack查看一下是不是源码泄露
+1python GitHack.py http://4bb4b91d-be9c-4a85-943f-3e68a9e33e62.node5.buuoj.cn:81/.git
+
+发现了一个index.php
+打开一看
+代码审计…
+
+1234567891011121314151617181920212223242526272829&amp;lt;?phpinclude &amp;quot;flag.php&amp;quot;; echo &amp;quot;flag在哪里呢
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/25/%5BBUUCTF%202018%5DOnline%20Tool/" aria-label="[BUUCTF 2018]Online Tool"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        
+        
+          <img data-src="../images/17369576223624.jpg" data-sizes="auto" alt="[BUUCTF 2018]Online Tool" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-25</span>
+        <span><span class="icon-pencil"></span>597 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
+      </div>
+      <h2 class="post-title">[BUUCTF 2018]Online Tool</h2>
+      <article class="post-article">
+        
+           又是代码审计
+123456789101112131415161718&amp;lt;?phpif (isset($_SERVER[&amp;#x27;HTTP_X_FORWARDED_FOR&amp;#x27;])) &amp;#123;    $_SERVER[&amp;#x27;REMOTE_ADDR&amp;#x27;] = $_SERVER[&amp;#x27;HTTP_X_FORWARDED_FOR&amp;#x27;];&amp;#125;if(!isset($_GET[&amp;#x27;host&amp;#x27;])) &amp;#123;    highlight_file(__FILE__);&amp;#125; else &amp;#123;    $host = $_GET[
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/25/%5BBJDCTF2020%5DZJCTF%EF%BC%8C%E4%B8%8D%E8%BF%87%E5%A6%82%E6%AD%A4/" aria-label="[BJDCTF2020]ZJCTF，不过如此"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[BJDCTF2020]ZJCTF，不过如此" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-25</span>
+        <span><span class="icon-pencil"></span>797 字</span>
+        <span><span class="icon-clock"></span>3 分钟</span>
+      </div>
+      <h2 class="post-title">[BJDCTF2020]ZJCTF，不过如此</h2>
+      <article class="post-article">
+        
+           题目源码：
+1234567891011121314151617&amp;lt;?phperror_reporting(0);$text = $_GET[&amp;quot;text&amp;quot;];$file = $_GET[&amp;quot;file&amp;quot;];if(isset($text)&amp;amp;&amp;amp;(file_get_contents($text,&amp;#x27;r&amp;#x27;)===&amp;quot;I have a dream&amp;quot;))&amp;#123;    echo &amp;quot;&amp;lt;br&amp;gt;&amp;lt;h1&amp;gt;&amp;quot;.file_get_contents($text,&amp;#x27;r&amp;#x
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/25/%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202020%20%E6%9C%B1%E9%9B%80%E7%BB%84%5Dphpweb/" aria-label="[网鼎杯 2020 朱雀组]phpweb"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[网鼎杯 2020 朱雀组]phpweb" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-25</span>
+        <span><span class="icon-pencil"></span>574 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
+      </div>
+      <h2 class="post-title">[网鼎杯 2020 朱雀组]phpweb</h2>
+      <article class="post-article">
+        
+           进入题目页面后
+没发现任何东西
+但我们查看源码，发现有两个隐藏的输入框，都是用post传参的
+一个是p一个是func
+我们打开hackbar
+
+发现这两个已经传参了
+我们根据func的名字，推测func是函数，p为func的参数
+我们来实验一下
+
+果然被回显了
+那我们就可以用它尝试着去读取文件或命令执行了
+system等命令执行函数都被过滤了
+试了一下，好像只有highlight_file和file_get_contents能用
+我们用file_get_contents查看index.php的源码
+12345678910111213141516171819202122232425262728
         
       </article>
     </div>
@@ -657,10 +664,10 @@ img那个像base64加密后
     
       <div>
         <span class="icon-brush"></span>
-        120.8k
+        115.8k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        08:20
+        07:58
       </div>
     
     
@@ -696,7 +703,7 @@ img那个像base64加密后
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">89</div>
+    <div class="sidebar-state-number">85</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -704,7 +711,7 @@ img那个像base64加密后
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">66</div>
+    <div class="sidebar-state-number">62</div>
   </div>
 </div>
 <div class="sidebar-social">
