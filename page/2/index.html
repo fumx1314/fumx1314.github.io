@@ -204,15 +204,15 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">89</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
-    <div class="sidebar-state-number">3</div>
+    <div class="sidebar-state-number">4</div>
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">35</div>
+    <div class="sidebar-state-number">66</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -272,25 +272,32 @@
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/27/%5BBJDCTF2020%5DCookie%20is%20so%20stable/" aria-label="[BJDCTF2020]Cookie is so stable"></a>
+      <a class="post-link" href="/2025/04/06/%5BCISCN2019%20%E6%80%BB%E5%86%B3%E8%B5%9B%20Day2%20Web1%5DEasyweb/" aria-label="[CISCN2019 总决赛 Day2 Web1]Easyweb"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[BJDCTF2020]Cookie is so stable" class="lazyload">
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[CISCN2019 总决赛 Day2 Web1]Easyweb" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-27</span>
-        <span><span class="icon-pencil"></span>343 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
+        <span><span class="icon-calendar"></span>2025-04-06</span>
+        <span><span class="icon-pencil"></span>972 字</span>
+        <span><span class="icon-clock"></span>4 分钟</span>
       </div>
-      <h2 class="post-title">[BJDCTF2020]Cookie is so stable</h2>
+      <h2 class="post-title">[CISCN2019 总决赛 Day2 Web1]Easyweb</h2>
       <article class="post-article">
         
-           知识点：
-12345678910111213141516171819twig模板注入判断：输入&amp;#123;&amp;#123;7*&amp;#x27;7&amp;#x27;&amp;#125;&amp;#125;返回49则是twig返回7777777则是jinja2twig模板注入payload:&amp;#123;&amp;#123;_self.env.registerUndefinedFilterCallback(&amp;quot;exec&amp;quot;)&amp;#125;&amp;#125;&amp;#123;&amp;#123;_self.env.getFilter(&amp;quot;cat /flag&amp;quot;)&amp;#125;&amp;#125;&amp;#123;&amp;#123;&amp;#x27;/et
+           题目界面：
+一个登录框，随便试了一下，发现没一点用
+信息收集发现有robots.txt文件
+
+发现有压缩文件
+我们访问index.php.bak发现not found
+那我们再到源码里看一下，发现了image.php
+访问image.php.bak
+1234567891011121314151617include &amp;quot;config.php&amp;quot;;$id=isset($_GET[&amp;quot;id&amp;quot;])?$_GET[&amp;quot;id&amp;quot;]:&amp;quot;1&amp;quot;;$path=isset($_GET[&amp;quot;path&amp;quot;])?$_GET[&amp;quot;
         
       </article>
     </div>
@@ -300,35 +307,36 @@
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/27/%5BWUSTCTF2020%5D%E6%9C%B4%E5%AE%9E%E6%97%A0%E5%8D%8E/" aria-label="[WUSTCTF2020]朴实无华"></a>
+      <a class="post-link" href="/2025/04/05/%5BGYCTF2020%5DEzsqli/" aria-label="[GYCTF2020]Ezsqli"></a>
     
     
     <div class="post-cover-right">
       
-        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[WUSTCTF2020]朴实无华" class="lazyload">
+        
+        
+          <img data-src="../images/17373827994914.jpg" data-sizes="auto" alt="[GYCTF2020]Ezsqli" class="lazyload">
+        
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-27</span>
-        <span><span class="icon-pencil"></span>660 字</span>
+        <span><span class="icon-calendar"></span>2025-04-05</span>
+        <span><span class="icon-pencil"></span>531 字</span>
         <span><span class="icon-clock"></span>2 分钟</span>
       </div>
-      <h2 class="post-title">[WUSTCTF2020]朴实无华</h2>
+      <h2 class="post-title">[GYCTF2020]Ezsqli</h2>
       <article class="post-article">
         
-           知识点:
-12345intval()输入100e2之类的数据，会解释称100，但后面在执行+1时，100e2是解释称10000的，因此使用100e2绕过0e215962017的md5值弱等于0e215962017$IFS$1代替空格
-一进去什么都没发现
-用dirsearch扫一下
-发现robots.txt
-访问之后发现/fAke_f1agggg.php
-访问发现什么都没有
-不信邪
-抓个包看看
-在响应头看到了fl4g.php
-访问
-1234567891011121314151617181920212223242526272829303132333435363738394041&amp;lt;?phph
+           题目界面：
+看题目就是一个sql注入
+我们先fuzz测试一下，看过滤了哪些关键字
+
+发现union都被过滤了，排除联合注入
+or也被过滤了，那imformation也会被过滤，那我们只能用innodb_index_stats和innodb_table_stats或sys.schema_table_statistics_with_buffer来获取表名，但这也会演变为了无列名注入，因为这几个库里面只有数据库和表名而没有列名
+而且只能用盲注来爆了
+而if也被过滤了，只能使用异或盲注了
+盲注爆表名这也是利用二分盲注+异或注入
+123456789101112131415161718192021222
         
       </article>
     </div>
@@ -338,33 +346,27 @@
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/26/%5BBJDCTF2020%5DMark%20loves%20cat/" aria-label="[BJDCTF2020]Mark loves cat"></a>
+      <a class="post-link" href="/2025/04/05/phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" aria-label="phar反序列化"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[BJDCTF2020]Mark loves cat" class="lazyload">
+        <img data-src="/../images/124691006_p0_master1200.jpg" data-sizes="auto" alt="phar反序列化" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-26</span>
-        <span><span class="icon-pencil"></span>290 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
+        <span><span class="icon-calendar"></span>2025-04-05</span>
+        <span><span class="icon-pencil"></span>758 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
       </div>
-      <h2 class="post-title">[BJDCTF2020]Mark loves cat</h2>
+      <h2 class="post-title">phar反序列化</h2>
       <article class="post-article">
         
-          进来之后毫无头绪
-
-我们用dirsearch扫一下
-发现有.git文件
-那我们再用Githack扫一下
-
-扫出了index.php源码
-哈哈哈哈
-
-1234567891011121314151617181920212223242526272829303132&amp;lt;?phpinclude &amp;#x27;flag.php&amp;#x27;;$yds = &amp;quot;dog&amp;quot;;$is = &amp;quot;cat&amp;quot;;$handsome = &amp;#x27;yds&amp;#x27;;foreach($_POST as $x =&amp;gt; $y)&amp;#123;　　　　    $$x = $y  ;  //传a
+          引言PHP反序列化常见的是使用unserilize()进行反序列化，除此之外还有其它的反序列化方法，不需要用到unserilize()。就是用到了本文的主要内容——phar反序列化。很多大佬都进行过总结，但是看了这个知识点的比较全的内容。我看了不下二十篇文章，最后写此文为方便自己以后查看。
+介绍Phar是将php文件打包而成的一种压缩文档，类似于Java中的jar包。它有一个特性就是phar文件会以序列化的形式储存用户自定义的meta-data。以扩展反序列化漏洞的攻击面，配合phar://协议使用。
+Phar文件结构
+a stub是一个文件标志，格式为 ：xxx&amp;lt;?php xxx;__
         
       </article>
     </div>
@@ -374,46 +376,28 @@
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/26/%5BGWCTF%202019%5D%E6%88%91%E6%9C%89%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93/" aria-label="[GWCTF 2019]我有一个数据库"></a>
+      <a class="post-link" href="/2025/04/05/%5BSWPUCTF%202018%5DSimplePHP/" aria-label="[SWPUCTF 2018]SimplePHP"></a>
     
     
     <div class="post-cover-right">
       
-        
-        
-          <img data-src="../images/17373827994914.jpg" data-sizes="auto" alt="[GWCTF 2019]我有一个数据库" class="lazyload">
-        
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[SWPUCTF 2018]SimplePHP" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-26</span>
-        <span><span class="icon-pencil"></span>209 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
+        <span><span class="icon-calendar"></span>2025-04-05</span>
+        <span><span class="icon-pencil"></span>1.8k 字</span>
+        <span><span class="icon-clock"></span>9 分钟</span>
       </div>
-      <h2 class="post-title">[GWCTF 2019]我有一个数据库</h2>
+      <h2 class="post-title">[SWPUCTF 2018]SimplePHP</h2>
       <article class="post-article">
         
-          考点：
-1.目录扫描
-2.[phpmyadmin 4.8.1 远程文件包含漏洞（CVE-2018-12613）](https://www.abelche.com/2019/11/16/CVE/phpmyadmin 4.8.1 远程文件包含漏洞（CVE-2018-12613）/)
-题目：
+          知识点：1234phar://伪协议这个就是php解压缩包的一个函数，不管后缀是什么，都会当做压缩包来解压，用法：?file=phar://压缩包/内部文件 phar://xxx.png/shell.php 注意 PHP&amp;gt;=5.3.0压缩包需要是zip协议压缩，rar不行，将木马文件压缩后，改为其他任意格式的文件都可以正常使用。步骤：写一个一句话木马shell。php，然后用zip协议解压缩为shell.zip。然后将后缀改为png等其他格式无unserialize()的反序列化-&amp;gt;phar
 
-这题实在没思路
-根据题解说
-现用扫描目录工具扫一下
+先放张图来唤醒回忆
 
-发现有三个文件
-打开robots.txt
-
-打开phpinfo.php
-
-也没什么用
-继续访问phpmyadmin/
-
-题解说看phpmyadmin版本
-
-查询到4.8.1版本存在任意文件读取漏洞：[phpmyadmin 4.8.1 远程文件包含漏洞（CV
+信息收集上传文件界面：可以提交文件，但又过滤，文件名称upload
         
       </article>
     </div>
@@ -423,35 +407,27 @@
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/26/%5BGXYCTF2019%5D%E7%A6%81%E6%AD%A2%E5%A5%97%E5%A8%83/" aria-label="[GXYCTF2019]禁止套娃"></a>
+      <a class="post-link" href="/2025/04/04/%5BCATCTF%5Dcatcat-new/" aria-label="[CATCTF]catcat-new"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[GXYCTF2019]禁止套娃" class="lazyload">
+        
+        
+          <img data-src="../images/17373827994914.jpg" data-sizes="auto" alt="[CATCTF]catcat-new" class="lazyload">
+        
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-26</span>
-        <span><span class="icon-pencil"></span>681 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
+        <span><span class="icon-calendar"></span>2025-04-04</span>
+        <span><span class="icon-pencil"></span>1.8k 字</span>
+        <span><span class="icon-clock"></span>7 分钟</span>
       </div>
-      <h2 class="post-title">[GXYCTF2019]禁止套娃</h2>
+      <h2 class="post-title">[CATCTF]catcat-new</h2>
       <article class="post-article">
         
-          考察知识点：
-12git泄露无can
-
-进入题目
-搜查源码，抓包，或者用dirsearch搜都没有发现任何东西
-我们用GitHack查看一下是不是源码泄露
-1python GitHack.py http://4bb4b91d-be9c-4a85-943f-3e68a9e33e62.node5.buuoj.cn:81/.git
-发现了一个index.php
-打开一看
-代码审计…
-
-1234567891011121314151617181920212223242526272829&amp;lt;?phpinclude &amp;quot;flag.php&amp;quot;; echo &amp;quot;flag在哪里呢?&amp;l
+          知识点12345678910111213141516171819Linux系统敏感文件，flask_session_cookie_manager伪造session并执行，session存储在cookie中/etc/passwd该文件储存了该Linux系统中所有用户的一些基本信息，只有root权限才可以修改。其具体格式为      用户名:口令:用户标识号:组标识号:注释性描述:主目录:登录Shell（以冒号作为分隔符）/proc/selfproc是一个伪文件系统，它提供了内核数据结构的接口。内核数据是在程序运行时存储在内部半导体存储器中数据。通过/proc/PID可以访问对应PID的进程内核数
         
       </article>
     </div>
@@ -461,28 +437,34 @@
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/25/%5BBUUCTF%202018%5DOnline%20Tool/" aria-label="[BUUCTF 2018]Online Tool"></a>
+      <a class="post-link" href="/2025/04/04/%5BHFCTF2020%5DEasyLogin/" aria-label="[HFCTF2020]EasyLogin"></a>
     
     
     <div class="post-cover-right">
       
         
         
-          <img data-src="../images/1737907114de8a.jpg" data-sizes="auto" alt="[BUUCTF 2018]Online Tool" class="lazyload">
+          <img data-src="../images/124691006_p0_master1200.jpg" data-sizes="auto" alt="[HFCTF2020]EasyLogin" class="lazyload">
         
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-25</span>
-        <span><span class="icon-pencil"></span>599 字</span>
+        <span><span class="icon-calendar"></span>2025-04-04</span>
+        <span><span class="icon-pencil"></span>570 字</span>
         <span><span class="icon-clock"></span>2 分钟</span>
       </div>
-      <h2 class="post-title">[BUUCTF 2018]Online Tool</h2>
+      <h2 class="post-title">[HFCTF2020]EasyLogin</h2>
       <article class="post-article">
         
-          又是代码审计
-123456789101112131415161718&amp;lt;?phpif (isset($_SERVER[&amp;#x27;HTTP_X_FORWARDED_FOR&amp;#x27;])) &amp;#123;    $_SERVER[&amp;#x27;REMOTE_ADDR&amp;#x27;] = $_SERVER[&amp;#x27;HTTP_X_FORWARDED_FOR&amp;#x27;];&amp;#125;if(!isset($_GET[&amp;#x27;host&amp;#x27;])) &amp;#123;    highlight_file(__FILE__);&amp;#125; else &amp;#123;    $host = $_GET[&amp;
+           
+这题我们发现有一个登录和注册页面，我们随便注册一个用户名然后登录
+
+题目分析会发现有一个getflag，但我们点击之后会弹出权限不足
+那应该是要登录admin账户才能拿到了
+我们在信息搜集一下看能不能发现什么东西
+在源代码里发现一个app.js文件
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647function login() &amp;#123;    const username = $(&amp;quot;#username&amp;quot;).val();    const pas
         
       </article>
     </div>
@@ -492,25 +474,107 @@
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/25/%5BBJDCTF2020%5DZJCTF%EF%BC%8C%E4%B8%8D%E8%BF%87%E5%A6%82%E6%AD%A4/" aria-label="[BJDCTF2020]ZJCTF，不过如此"></a>
+      <a class="post-link" href="/2025/04/02/php%E4%BC%AA%E5%8D%8F%E8%AE%AE%E8%BF%87%E6%BB%A4%E5%99%A8/" aria-label="php:filter的奇淫巧计"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[BJDCTF2020]ZJCTF，不过如此" class="lazyload">
+        
+        
+          <img data-src="../images/17373827994914.jpg" data-sizes="auto" alt="php:filter的奇淫巧计" class="lazyload">
+        
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-25</span>
-        <span><span class="icon-pencil"></span>797 字</span>
+        <span><span class="icon-calendar"></span>2025-04-02</span>
+        <span><span class="icon-pencil"></span>932 字</span>
+        <span><span class="icon-clock"></span>4 分钟</span>
+      </div>
+      <h2 class="post-title">php:filter的奇淫巧计</h2>
+      <article class="post-article">
+        
+          简介php:&amp;#x2F;&amp;#x2F;fileter的基本格式：
+php://filter/read=?/resource=?
+
+
+
+项目
+描述
+
+
+
+resource
+在 php:&amp;#x2F;&amp;#x2F;filter 中，resource 参数是必须的。resource 用于指定 需要进行筛选过滤的数据流。
+
+
+read
+read 参数指定 一个或多个过滤器 用于 读 操作，多个过滤器之间以管道符进行分隔。
+
+
+write
+write 参数指定 一个或多个过滤器 用于 写 操作，多个过滤器之间以管道符进行分隔。
+
+
+任何没有以 read= 或 write= 作前缀的筛选器列表会 视情况应用于读
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/04/02/%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202020%20%E7%99%BD%E8%99%8E%E7%BB%84%5DPicDown/" aria-label="[网鼎杯 2020 白虎组]PicDown"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[网鼎杯 2020 白虎组]PicDown" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-04-02</span>
+        <span><span class="icon-pencil"></span>1.3k 字</span>
+        <span><span class="icon-clock"></span>5 分钟</span>
+      </div>
+      <h2 class="post-title">[网鼎杯 2020 白虎组]PicDown</h2>
+      <article class="post-article">
+        
+          知识点：123456789101112131415161718192021222324python2的urllib的urlopen，和urllib2中的urlopen明显区别就是urllib.urlopen支持将路径作为参数去打开对应的本地路径，所以可以直接填入路径读取文件• proc目录proc文件系统是一个伪文件系统，它只存在内存当中，而不占用外存空间。它以文件系统的方式为访问系统内核数据的操作提供接口。还有的是一些以数字命名的目录，他们是进程目录。系统中当前运行的每一个进程都有对应的一个目录在/proc下，以进程的PID号为目录名，他们是读取进程信息的接口。而self目录则是读取进程本身
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/04/01/%5BHITCON%202017%5DSSRFme/" aria-label="[HITCON 2017]SSRFme"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        
+        
+          <img data-src="../images/17373827994914.jpg" data-sizes="auto" alt="[HITCON 2017]SSRFme" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-04-01</span>
+        <span><span class="icon-pencil"></span>809 字</span>
         <span><span class="icon-clock"></span>3 分钟</span>
       </div>
-      <h2 class="post-title">[BJDCTF2020]ZJCTF，不过如此</h2>
+      <h2 class="post-title">[HITCON 2017]SSRFme</h2>
       <article class="post-article">
         
-          题目源码：
-1234567891011121314151617&amp;lt;?phperror_reporting(0);$text = $_GET[&amp;quot;text&amp;quot;];$file = $_GET[&amp;quot;file&amp;quot;];if(isset($text)&amp;amp;&amp;amp;(file_get_contents($text,&amp;#x27;r&amp;#x27;)===&amp;quot;I have a dream&amp;quot;))&amp;#123;    echo &amp;quot;&amp;lt;br&amp;gt;&amp;lt;h1&amp;gt;&amp;quot;.file_get_contents($text,&amp;#x27;r&amp;#x2
+           题目源码：
+12345678910111213141516171819&amp;lt;?php    if (isset($_SERVER[&amp;#x27;HTTP_X_FORWARDED_FOR&amp;#x27;])) &amp;#123;        $http_x_headers = explode(&amp;#x27;,&amp;#x27;, $_SERVER[&amp;#x27;HTTP_X_FORWARDED_FOR&amp;#x27;]);        $_SERVER[&amp;#x27;REMOTE_ADDR&amp;#x27;] = $http_x_headers[0];    &amp;#125;    echo $_SERVER[&amp;quot;R
         
       </article>
     </div>
@@ -520,109 +584,31 @@
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/25/%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202020%20%E6%9C%B1%E9%9B%80%E7%BB%84%5Dphpweb/" aria-label="[网鼎杯 2020 朱雀组]phpweb"></a>
+      <a class="post-link" href="/2025/04/01/%5BNCTF2019%5DTrue%20XML%20cookbook/" aria-label="[NCTF2019]True XML cookbook"></a>
     
     
     <div class="post-cover-right">
       
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[网鼎杯 2020 朱雀组]phpweb" class="lazyload">
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[NCTF2019]True XML cookbook" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-25</span>
-        <span><span class="icon-pencil"></span>573 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
+        <span><span class="icon-calendar"></span>2025-04-01</span>
+        <span><span class="icon-pencil"></span>1.1k 字</span>
+        <span><span class="icon-clock"></span>5 分钟</span>
       </div>
-      <h2 class="post-title">[网鼎杯 2020 朱雀组]phpweb</h2>
+      <h2 class="post-title">[NCTF2019]True XML cookbook</h2>
       <article class="post-article">
         
-          进入题目页面后
-没发现任何东西
-但我们查看源码，发现有两个隐藏的输入框，都是用post传参的
-一个是p一个是func
-我们打开hackbar
+          知识点：1234XXE漏洞发生在应用程序解析XML输入时，没有禁止外部实体的加载，导致可加载恶意外部文件和代码，造成任意文件读取、命令执行、内网端口扫描、攻击内网网站、发起Dos攻击等危害。XML解释器支持多种协议，其中PHP就支持http和gopher，所以可能flag存在于内网主机上，我们需要通过XXE对内网进行探测**内网信息可以查看**/etc/hosts(主机名与 IP 映射)、/proc/net/arp(内网活跃设备)、proc/net/fib_trie(内网子网结构和路由策略)**等等
 
-发现这两个已经传参了
-我们根据func的名字，推测func是函数，p为func的参数
-我们来实验一下
+ 这题的界面和ctfshow上xxe最后一题很像
 
-果然被回显了
-那我们就可以用它尝试着去读取文件或命令执行了
-system等命令执行函数都被过滤了
-试了一下，好像只有highlight_file和file_get_contents能用
-我们用file_get_contents查看index.php的源码
-123456789101112131415161718192021222324252627282
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/24/%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202018%5DFakebook/" aria-label="[网鼎杯 2018]Fakebook"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[网鼎杯 2018]Fakebook" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-24</span>
-        <span><span class="icon-pencil"></span>518 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
-      </div>
-      <h2 class="post-title">[网鼎杯 2018]Fakebook</h2>
-      <article class="post-article">
-        
-          
-这个题我看到有登录和注册还以为是sql注入，但发现根本注不了
-那就先登录进去看看吧
+题目界面
+我们抓包查看
 
-进来之后发现no可以注入
-1230 union/**/select 1,(查询语句),3,4#//union select连在一起会被过滤，用/**/分开//查询结果只能在2处回显
-但经过我一顿查询
-发现毛都没有
-注意看，这里的data字段存放的是序列化字符串(后面要考)
-
-根据题解思路，说看robots.txt
-我们访问一下
-
-发现一个备份文件，我们下载下来访问
-发现一堆代码
-12345678910111213141516171819202122232425262728293031323334353637
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/23/CTFSHOW-php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" aria-label="CTFSHOW-php反序列化"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="CTFSHOW-php反序列化" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-23</span>
-        <span><span class="icon-pencil"></span>2.6k 字</span>
-        <span><span class="icon-clock"></span>14 分钟</span>
-      </div>
-      <h2 class="post-title">CTFSHOW-php反序列化</h2>
-      <article class="post-article">
-        
-           web254(代码审计)
-123456789101112131415161718192021222324252627282930313233343536373839include(&amp;#x27;flag.php&amp;#x27;);class ctfShowUser&amp;#123;    public $username=&amp;#x27;xxxxxx&amp;#x27;;    public $password=&amp;#x27;xxxxxx&amp;#x27;;    public $isVip=false;    public function checkVip()&amp;#123;        return $this-&amp;gt
+我们看到请求包
         
       </article>
     </div>
@@ -633,7 +619,7 @@ system等命令执行函数都被过滤了
 
   <nav id="page-nav" data-aos="fade-up">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
   </nav>
 
 
@@ -662,10 +648,10 @@ system等命令执行函数都被过滤了
     
       <div>
         <span class="icon-brush"></span>
-        91.7k
+        120.8k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        06:19
+        08:20
       </div>
     
     
@@ -701,15 +687,15 @@ system等命令执行函数都被过滤了
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">89</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
-    <div class="sidebar-state-number">3</div>
+    <div class="sidebar-state-number">4</div>
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">35</div>
+    <div class="sidebar-state-number">66</div>
   </div>
 </div>
 <div class="sidebar-social">

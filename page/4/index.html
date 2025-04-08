@@ -204,15 +204,15 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">89</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
-    <div class="sidebar-state-number">3</div>
+    <div class="sidebar-state-number">4</div>
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">35</div>
+    <div class="sidebar-state-number">66</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -272,43 +272,35 @@
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/11/%5BGXYCTF2019%5DPing%20Ping%20Ping/" aria-label="[GXYCTF2019]Ping Ping Ping"></a>
+      <a class="post-link" href="/2025/03/28/%5B%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98%202019%5DFinalSQL/" aria-label="[极客大挑战 2019]FinalSQL"></a>
     
     
     <div class="post-cover-left">
       
-        
-        
-          <img data-src="../images/17373827994914.jpg" data-sizes="auto" alt="[GXYCTF2019]Ping Ping Ping" class="lazyload">
-        
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[极客大挑战 2019]FinalSQL" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-11</span>
-        <span><span class="icon-pencil"></span>351 字</span>
+        <span><span class="icon-calendar"></span>2025-03-28</span>
+        <span><span class="icon-pencil"></span>314 字</span>
         <span><span class="icon-clock"></span>1 分钟</span>
       </div>
-      <h2 class="post-title">[GXYCTF2019]Ping Ping Ping</h2>
+      <h2 class="post-title">[极客大挑战 2019]FinalSQL</h2>
       <article class="post-article">
         
-          知识点：
-123ping命令执行堆叠命令执行（分号分隔语句）空格的过滤
+           
+这个题一看就是挺nb的sql注入的(final)
+果然，试了一圈，&amp;#39;,select,union,or,and,handler等等等等好多都被过滤了
+毫无头绪
+发现那个神秘号码能点
 
-刚进去页面是这样的
-题目名字既然叫ping ping ping
-还有个ip=
-那肯定是考察命令执行
-看?ip=那应该是get传参ip=
-当我们输入?ip=127.0.0.1后出来了网络应答信息，其实没必要输入127，直接输入1也有回显
-但我们输入?ip=127.0.0.1 | ls时发现回显错误
-猜测应该是过滤了一些东西
-我们输入?ip=127.0.0.1;ls;
-
-ls执行成功，证明;命令执行能行
-但我们输入?ip=1;cat flag.php;时发现回显错误
-经过测试发现是过滤了空格和flag
-123注意：这里我们绕
+欸嘿，又有一个id，那估计这里才是注入点吧
+看题目提示应该是想要我们试一下盲注的
+这里我们用二分盲注
+但sql语句我们用异或来构造
+脚本：
+12345678910111213141516171819202122232425262728293031323334import requestsimport timeurl = &amp;quot;http://f25c8ff6-0659-4275-991a-47669
         
       </article>
     </div>
@@ -318,30 +310,24 @@ ls执行成功，证明;命令执行能行
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/11/%5BHCTF%202018%5DWarmUp/" aria-label="[HCTF 2018]WarmUp"></a>
+      <a class="post-link" href="/2025/03/28/%5BCISCN2019%20%E5%8D%8E%E4%B8%9C%E5%8D%97%E8%B5%9B%E5%8C%BA%5DWeb11/" aria-label="[CISCN2019 华东南赛区]Web11"></a>
     
     
     <div class="post-cover-right">
       
-        
-        
-          <img data-src="../images/17373827994914.jpg" data-sizes="auto" alt="[HCTF 2018]WarmUp" class="lazyload">
-        
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[CISCN2019 华东南赛区]Web11" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-11</span>
-        <span><span class="icon-pencil"></span>508 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
+        <span><span class="icon-calendar"></span>2025-03-28</span>
+        <span><span class="icon-pencil"></span>995 字</span>
+        <span><span class="icon-clock"></span>4 分钟</span>
       </div>
-      <h2 class="post-title">[HCTF 2018]WarmUp</h2>
+      <h2 class="post-title">[CISCN2019 华东南赛区]Web11</h2>
       <article class="post-article">
         
-          知识点：
-12审查代码的能力include的特性
-题目源码：
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849&amp;lt;?php    highlight_file(__FILE__);    class emmm    &amp;#123;        public static function checkFile(&amp;amp;$page)        &amp;#123;            $whitelist = [&amp;quot;source&amp;quot;=&amp;gt;&amp;quo
+          smarty ssti知识点：12345678在开始介绍 Smarty 之前先了解一下模板引擎，模板引擎是为了让前端界面(html)与程序代码(php)分离而产生的一种解决方案，简单来说就是 html 文件里再也不用写 php 代码了。Smarty 的原理是变量替换原则，我们只需要在 html 文件里写好 Smarty 的标签即可，例如 &amp;#123;name&amp;#125;，然后调用 Smarty 的方法传递变量参数即可&amp;#123;literal&amp;#125; 标签：&amp;#123;literal&amp;#125;可以让一个模板区域的字符原样输出。这经常用于保护页面上的Javascript或css样式表，避免
         
       </article>
     </div>
@@ -351,282 +337,287 @@ ls执行成功，证明;命令执行能行
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/11/%5BSUCTF%202019%5DEasySQL/" aria-label="[SUCTF 2019]EasySQL"></a>
+      <a class="post-link" href="/2025/03/28/%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202020%20%E6%9C%B1%E9%9B%80%E7%BB%84%5DNmap/" aria-label="[网鼎杯 2020 朱雀组]Nmap"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[SUCTF 2019]EasySQL" class="lazyload">
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[网鼎杯 2020 朱雀组]Nmap" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-11</span>
-        <span><span class="icon-pencil"></span>488 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
-      </div>
-      <h2 class="post-title">[SUCTF 2019]EasySQL</h2>
-      <article class="post-article">
-        
-          考察知识点：
-123456789sql之堆叠注入后端代码猜测1 || ** 类语句理解select 1 from 类语句理解set sql_mode = pipes_as_concat 命令理解（为什么没有过滤set、concat的原因）
-
-这题本来我是按照正常的sql注入逻辑在写，然后尝试各种闭合，发现都不行
-那肯定不能按联合注入的思路来了
-而且这个题也没有报错回显，排除报错注入
-我们可以用堆叠注入来尝试
-输入1;show databases;//查数据库
-回显：Array ( [0] =&amp;gt; 1 ) Array ( [0] =&amp;gt; ctf ) Array ( [0] =&amp;gt; c
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/09/CTFSHOW-sql/" aria-label="CTFSHOW-sql"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="CTFSHOW-sql" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-09</span>
-        <span><span class="icon-pencil"></span>2k 字</span>
-        <span><span class="icon-clock"></span>10 分钟</span>
-      </div>
-      <h2 class="post-title">CTFSHOW-sql</h2>
-      <article class="post-article">
-        
-           无过滤(输入无过滤，返回有过滤)
- web171
-万能密码
-联合注入
- web172
-无过滤联合注入
-0&#39; union select 1,(select password from ctfshow_user2 where username=&#39;flag&#39;) %23
- web173
-用hex()绕过正则
-11&amp;#x27; union select id,hex(username),hex(password) from ctfshow_user3--+
- web174(过滤数字、flag)
-123456//拼接sql语句查找指定ID用户$sql = &amp;quot;select id,username
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/05/BaseCTF2024/" aria-label="BaseCTF2024"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="BaseCTF2024" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-05</span>
-        <span><span class="icon-pencil"></span>6.5k 字</span>
-        <span><span class="icon-clock"></span>32 分钟</span>
-      </div>
-      <h2 class="post-title">BaseCTF2024</h2>
-      <article class="post-article">
-        
-           A Dark Room
-查看源代码
- upload
-上传一个php文件
-里面写有一句话木马
-蚁剑连接
-ez
- HTTP是什么呀
-按要求改请求头就行
- 喵喵喵
-命令执行读取flag.php
-?DT=system(cat /flag)
- MD5绕过欸
-MD5可以全部用数组绕过
-a[]=1&amp;amp;b[]=2…
- 一起吃豆豆
-查看源代码
-
-在index.php里面找游戏结束的代码，发现一串base64编码，解码
-flag到手
- flag直接读取不就行了？
-考察php原生类
-1234567891011121314&amp;lt;?phphighlight_file(&amp;#x27;index.php&amp;#x27;
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/04/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF/" aria-label="命令执行绕过姿势"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="命令执行绕过姿势" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-04</span>
-        <span><span class="icon-pencil"></span>3.9k 字</span>
-        <span><span class="icon-clock"></span>17 分钟</span>
-      </div>
-      <h2 class="post-title">命令执行绕过姿势</h2>
-      <article class="post-article">
-        
-           小知识
-12345include不用括号，分号可以用?&amp;gt;代替。 //c=include$_GET[1]?&amp;gt;&amp;amp;1=data://text/plain,&amp;lt;?php system(&amp;quot;cat flag.php&amp;quot;);?&amp;gt;若想截断后面语句：%0a、%26、||&amp;lt;、&amp;lt;&amp;gt;、$&amp;#123;IFS&amp;#125;可以绕过空格过滤
- 无过滤：
-12345678910111213141516171819通配符payload1:c=system(&amp;quot;nl fla?????&amp;quot;);payload2:c=system(&amp;quot;nl fl
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/02/28/php%E5%8E%9F%E7%94%9F%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E7%B1%BB/" aria-label="php原生文件操作类"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="php原生文件操作类" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-02-28</span>
-        <span><span class="icon-pencil"></span>823 字</span>
-        <span><span class="icon-clock"></span>3 分钟</span>
-      </div>
-      <h2 class="post-title">php原生文件操作类</h2>
-      <article class="post-article">
-        
-          我在做一个ctf新手题的时候遇到了此概念
-这类概念在反序列化中用到相对多一点
- 例题
-先看这题源码
-1234567891011121314&amp;lt;?phphighlight_file(&amp;#x27;index.php&amp;#x27;);# 我把flag藏在一个secret文件夹里面了，所以要学会遍历啊~error_reporting(0);$J1ng = $_POST[&amp;#x27;J&amp;#x27;];$Hong = $_POST[&amp;#x27;H&amp;#x27;];$Keng = $_GET[&amp;#x27;K&amp;#x27;];$Wang = $_GET[&amp;#x27;W&amp;#x27;];$dir = new $Ke
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/02/24/php%E5%B8%B8%E7%94%A8%E7%89%B9%E6%80%A7/" aria-label="php常用特性"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="php常用特性" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-02-24</span>
-        <span><span class="icon-pencil"></span>8.3k 字</span>
-        <span><span class="icon-clock"></span>38 分钟</span>
-      </div>
-      <h2 class="post-title">php常用特性</h2>
-      <article class="post-article">
-        
-           常见php函数
-12345678910substr(string,start,length)  //截取字符串strrev(string $string) //反转字符串FilesystemIterator   //获取目录文件FilesystemIteratortrim()         //用于去除字符串两端的空白字符或其他指定字符。getcwd()函数    //取得当前工作目录getcwd()函数strpos() - 查找字符串在另一字符串中第一次出现的位置（区分大小写）stripos() -查找字符串在另一字符串中第一次出现的位置（不区分大小写）strrpos() - 查找字符串
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/02/23/%E7%88%86%E7%A0%B4/" aria-label="爆破"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/126839103p0master1200.jpg" data-sizes="auto" alt="爆破" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-02-23</span>
-        <span><span class="icon-pencil"></span>531 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
-      </div>
-      <h2 class="post-title">爆破</h2>
-      <article class="post-article">
-        
-           php伪随机数
- 原理
-https://blog.csdn.net/qq_35493457/article/details/124080444
-123mt_srand() //播种 Mersenne Twister 随机数生成器。 mt_rand()   //生成随机数简单来说mt_srand()通过分发seed种子，然后种子有了后，靠mt_rand()生成随机数
-漏洞之处：
-mt_rand()如何生成的随机整数，它与设置的seed值和调用该函数的次数有关，假设使用mt_srand(12345)进行了一次播种，那么第一次调用mt_rand生成的数值为a，第二次为b，第三次为c。所以当有人拿到
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/02/22/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/" aria-label="信息搜集"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="信息搜集" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-02-22</span>
+        <span><span class="icon-calendar"></span>2025-03-28</span>
         <span><span class="icon-pencil"></span>1.2k 字</span>
         <span><span class="icon-clock"></span>4 分钟</span>
       </div>
-      <h2 class="post-title">信息搜集</h2>
+      <h2 class="post-title">[网鼎杯 2020 朱雀组]Nmap</h2>
       <article class="post-article">
         
-           WEB-1-2-查看源码
-f12
-ctrl+u
-url前加vier-source:
-crtl+shift+i
-另辟蹊径：
-一直刷新网页同时一直按f12，以条件竞争打开源码
-在还没创建好环境之前打开源代码
-浏览器关闭js
-Ctrl+s 保存页面至电脑任意位置后用文本打开即可
- WEB-4-5-6-7-8-信息源码泄露
-一般都是根据环境的不同，一些备份文件未删除导致的代码信息泄露
-最简单的方法就是用dirsearch工具扫一下
-【web审计-源码泄露】获取源码方法，利用工具_dsstoreexp-CSDN博客]:
- WEB-9-vim缓存泄露
-在linux中用vi或vim编辑文件时会创建临时文件
+            题目界面
+这是个namp工具扫描界面
+我们来了解一下namp工具
+namp常见参数123456-iL 读取文件内容，以文件内容作为搜索目标-o 输出到文件-oN 标准保存-oX XML保存-oG Grep保存-oA 保存到所有格式
+
+常见指令123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051nmap -v 127.0.0.1给出了远程机器更详细的信息，显示冗余信息(扫描细节)nmap -iL nmaptest.txt运行带“iL 选项的nmap命令来扫描文
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/28/%5B%E5%BC%BA%E7%BD%91%E6%9D%AF%202019%5D%E9%AB%98%E6%98%8E%E7%9A%84%E9%BB%91%E5%AE%A2/" aria-label="[强网杯 2019]高明的黑客"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/126839103p0master1200.jpg" data-sizes="auto" alt="[强网杯 2019]高明的黑客" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-28</span>
+        <span><span class="icon-pencil"></span>577 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
+      </div>
+      <h2 class="post-title">[强网杯 2019]高明的黑客</h2>
+      <article class="post-article">
+        
+          
+题目提示我们访问www.tar.gz
+下了好久，终于下好了，有接近40mb…
+里面有几千个php文件
+而且每个里面都含有shell
+也不可能手动去试
+只能用脚本来一个个试，来找出能利用的shell
+把src文件夹解压进phpstudy的www目录里
+打开phpstudy，记得php的版本需要大于7
+然后运行下面这个脚本
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859import osimport requestsimpor
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/27/%5B%E5%AE%89%E6%B4%B5%E6%9D%AF%202019%5Deasy_serialize_php/" aria-label="[安洵杯 2019]easy_serialize_php"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        
+        
+          <img data-src="../images/17373827994914.jpg" data-sizes="auto" alt="[安洵杯 2019]easy_serialize_php" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-27</span>
+        <span><span class="icon-pencil"></span>904 字</span>
+        <span><span class="icon-clock"></span>4 分钟</span>
+      </div>
+      <h2 class="post-title">[安洵杯 2019]easy_serialize_php</h2>
+      <article class="post-article">
+        
+           题目源码：
+1234567891011121314151617181920212223242526272829303132333435363738394041424344 &amp;lt;?php$function = @$_GET[&amp;#x27;f&amp;#x27;];function filter($img)&amp;#123;    $filter_arr = array(&amp;#x27;php&amp;#x27;,&amp;#x27;flag&amp;#x27;,&amp;#x27;php5&amp;#x27;,&amp;#x27;php4&amp;#x27;,&amp;#x27;fl1g&amp;#x27;);    $filter = &amp;#x27;/&amp;#x27;.implode
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/27/%5B%E5%AE%89%E6%B4%B5%E6%9D%AF%202019%5Deasy_web/" aria-label="[安洵杯 2019]easy_web"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[安洵杯 2019]easy_web" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-27</span>
+        <span><span class="icon-pencil"></span>596 字</span>
+        <span><span class="icon-clock"></span>3 分钟</span>
+      </div>
+      <h2 class="post-title">[安洵杯 2019]easy_web</h2>
+      <article class="post-article">
+        
+           
+一进来发现什么都没有
+只有一个img传参和cmd
+img那个像base64加密后
+我们拿去解码
+1234567TXpVek5UTTFNbVUzTURabE5qYz0=-&amp;gt;MzUzNTM1MmU3MDZlNjc=    //这个也像base64，再次解码-&amp;gt;3535352e706e67    //这一串像16进制编码-&amp;gt;555.png
+
+那这里的意思就是
+可以通过img来读取经过一次16进制编码，两次base64编码的文件或图片
+我们把flag.php变形一下
+123flag.php-&amp;gt;TmpZMll6WXhOamN5WlRjd05qZzNNQT09
+
+
+方向应该对了
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/27/%5BBJDCTF2020%5DCookie%20is%20so%20stable/" aria-label="[BJDCTF2020]Cookie is so stable"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[BJDCTF2020]Cookie is so stable" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-27</span>
+        <span><span class="icon-pencil"></span>343 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
+      </div>
+      <h2 class="post-title">[BJDCTF2020]Cookie is so stable</h2>
+      <article class="post-article">
+        
+          知识点：12345678910111213141516171819twig模板注入判断：输入&amp;#123;&amp;#123;7*&amp;#x27;7&amp;#x27;&amp;#125;&amp;#125;返回49则是twig返回7777777则是jinja2twig模板注入payload:&amp;#123;&amp;#123;_self.env.registerUndefinedFilterCallback(&amp;quot;exec&amp;quot;)&amp;#125;&amp;#125;&amp;#123;&amp;#123;_self.env.getFilter(&amp;quot;cat /flag&amp;quot;)&amp;#125;&amp;#125;&amp;#123;&amp;#123;&amp;#x27;/etc/
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/27/%5BWUSTCTF2020%5D%E6%9C%B4%E5%AE%9E%E6%97%A0%E5%8D%8E/" aria-label="[WUSTCTF2020]朴实无华"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[WUSTCTF2020]朴实无华" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-27</span>
+        <span><span class="icon-pencil"></span>661 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
+      </div>
+      <h2 class="post-title">[WUSTCTF2020]朴实无华</h2>
+      <article class="post-article">
+        
+          知识点:12345intval()输入100e2之类的数据，会解释称100，但后面在执行+1时，100e2是解释称10000的，因此使用100e2绕过0e215962017的md5值弱等于0e215962017$IFS$1代替空格
+
+ 一进去什么都没发现
+用dirsearch扫一下
+发现robots.txt
+访问之后发现&amp;#x2F;fAke_f1agggg.php
+访问发现什么都没有
+不信邪
+抓个包看看
+在响应头看到了fl4g.php
+访问
+1234567891011121314151617181920212223242526272829303132333435363738394041&amp;lt;
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/26/%5BBJDCTF2020%5DMark%20loves%20cat/" aria-label="[BJDCTF2020]Mark loves cat"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[BJDCTF2020]Mark loves cat" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-26</span>
+        <span><span class="icon-pencil"></span>290 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
+      </div>
+      <h2 class="post-title">[BJDCTF2020]Mark loves cat</h2>
+      <article class="post-article">
+        
+           进来之后毫无头绪
+
+我们用dirsearch扫一下
+发现有.git文件
+那我们再用Githack扫一下
+
+扫出了index.php源码
+哈哈哈哈
+
+1234567891011121314151617181920212223242526272829303132&amp;lt;?phpinclude &amp;#x27;flag.php&amp;#x27;;$yds = &amp;quot;dog&amp;quot;;$is = &amp;quot;cat&amp;quot;;$handsome = &amp;#x27;yds&amp;#x27;;foreach($_POST as $x =&amp;gt; $y)&amp;#123;　　　　    $$x = $y  ;  //传
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/03/26/%5BGWCTF%202019%5D%E6%88%91%E6%9C%89%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93/" aria-label="[GWCTF 2019]我有一个数据库"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        
+        
+          <img data-src="../images/1737907114de8a.jpg" data-sizes="auto" alt="[GWCTF 2019]我有一个数据库" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-03-26</span>
+        <span><span class="icon-pencil"></span>212 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
+      </div>
+      <h2 class="post-title">[GWCTF 2019]我有一个数据库</h2>
+      <article class="post-article">
+        
+           考点：
+1.目录扫描
+2.[phpmyadmin 4.8.1 远程文件包含漏洞（CVE-2018-12613）](https://www.abelche.com/2019/11/16/CVE/phpmyadmin 4.8.1 远程文件包含漏洞（CVE-2018-12613）&amp;#x2F;)
+题目：
+
+这题实在没思路
+根据题解说
+现用扫描目录工具扫一下
+
+发现有三个文件
+打开robots.txt
+
+打开phpinfo.php
+
+也没什么用
+继续访问phpmyadmin&amp;#x2F;
+
+题解说看phpmyadmin版本
+
+查询到4.8.1版本存在任意文件读取漏洞：[phpmyadmin 4.8.1 
         
       </article>
     </div>
@@ -637,7 +628,7 @@ Ctrl+s 保存页面至电脑任意位置后用文本打开即可
 
   <nav id="page-nav" data-aos="fade-up">
     
-    <a class="extend prev" rel="prev" href="/page/3/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/5/">下一页 &raquo;</a>
   </nav>
 
 
@@ -666,10 +657,10 @@ Ctrl+s 保存页面至电脑任意位置后用文本打开即可
     
       <div>
         <span class="icon-brush"></span>
-        91.7k
+        120.8k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        06:19
+        08:20
       </div>
     
     
@@ -705,15 +696,15 @@ Ctrl+s 保存页面至电脑任意位置后用文本打开即可
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">89</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
-    <div class="sidebar-state-number">3</div>
+    <div class="sidebar-state-number">4</div>
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">35</div>
+    <div class="sidebar-state-number">66</div>
   </div>
 </div>
 <div class="sidebar-social">

