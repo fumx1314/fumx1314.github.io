@@ -1,0 +1,770 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-CN"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_bq08450reo';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};window.REIMU_CONFIG.code_block = {"expand":true};</script>
+  
+  <title>
+    [网鼎杯 2020 半决赛]faka |
+    
+    KL
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_bq08450reo.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="40多m的压缩包源码… 用seay扫一下  看到管理员后台系统处可能有任意文件读取漏洞  未授权添加账号和提升权限漏洞 我们需要登录后台，这里有两种做法 法一： 源码给了sql代码 我们在本地导入，就可以查看admin用户的password  是一个md5加密，暴力破解得到admincccbbb123 **法二：**越权漏洞 &#x2F;admin&#x2F;Index&#x2F;info处存在未授权访问  这里是添加用户数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[网鼎杯 2020 半决赛]faka">
+<meta property="og:url" content="http://example.com/2025/05/30/[%E7%BD%91%E9%BC%8E%E6%9D%AF%202020%20%E5%8D%8A%E5%86%B3%E8%B5%9B]faka/index.html">
+<meta property="og:site_name" content="KL">
+<meta property="og:description" content="40多m的压缩包源码… 用seay扫一下  看到管理员后台系统处可能有任意文件读取漏洞  未授权添加账号和提升权限漏洞 我们需要登录后台，这里有两种做法 法一： 源码给了sql代码 我们在本地导入，就可以查看admin用户的password  是一个md5加密，暴力破解得到admincccbbb123 **法二：**越权漏洞 &#x2F;admin&#x2F;Index&#x2F;info处存在未授权访问  这里是添加用户数据">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2025/05/30/images/20250530144230558.png">
+<meta property="og:image" content="http://example.com/2025/05/30/images/20250530144617863.png">
+<meta property="og:image" content="http://example.com/2025/05/30/images/20250530145125652.png">
+<meta property="og:image" content="http://example.com/2025/05/30/images/20250530145245732.png">
+<meta property="og:image" content="http://example.com/2025/05/30/images/20250530145342451.png">
+<meta property="og:image" content="http://example.com/2025/05/30/images/20250530143302009.png">
+<meta property="og:image" content="http://example.com/2025/05/30/images/20250530145514920.png">
+<meta property="og:image" content="http://example.com/2025/05/30/images/0250530150219680.png">
+<meta property="og:image" content="http://example.com/2025/05/30/images/20250530150427441.png">
+<meta property="og:image" content="http://example.com/2025/05/30/images/0250530153924636.png">
+<meta property="og:image" content="http://example.com/2025/05/30/images/20250530154429590.png">
+<meta property="og:image" content="http://example.com/2025/05/30/images/20250530154512842.png">
+<meta property="article:published_time" content="2025-05-30T06:22:06.000Z">
+<meta property="article:modified_time" content="2025-05-30T07:47:46.618Z">
+<meta property="article:author" content="FuB0Y">
+<meta property="article:tag" content="代码审计">
+<meta property="article:tag" content="thinkphp">
+<meta property="article:tag" content="CMS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2025/05/30/images/20250530144230558.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="KL" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+    
+      
+        
+<link rel="stylesheet" href="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.css">
+
+      
+    
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <picture>
+      
+    </picture>
+    
+      <img fetchpriority="high" src="/images/banner.webp" alt="[网鼎杯 2020 半决赛]faka">
+    
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">[网鼎杯 2020 半决赛]faka</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content"  class="sidebar-right" >
+          <aside id="sidebar">
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AA%E6%8E%88%E6%9D%83%E6%B7%BB%E5%8A%A0%E8%B4%A6%E5%8F%B7%E5%92%8C%E6%8F%90%E5%8D%87%E6%9D%83%E9%99%90%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.</span> <span class="toc-text"> 未授权添加账号和提升权限漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%BC%8F%E6%B4%9E"><span class="toc-number">2.</span> <span class="toc-text"> 任意文件下载漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E"><span class="toc-number">3.</span> <span class="toc-text"> 文件上传漏洞</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">186</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">4</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">179</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+  
+  </div>
+</aside>
+
+          <section id="main"><article id="post-[网鼎杯 2020 半决赛]faka" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2025/05/30/%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202020%20%E5%8D%8A%E5%86%B3%E8%B5%9B%5Dfaka/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-05-30T06:22:06.000Z" itemprop="datePublished">2025-05-30</time>
+    <time style="display: none;" id="post-update-time">2025-05-30</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/" data-aos="zoom-in">刷题</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <p>40多m的压缩包源码…</p>
+<p>用seay扫一下</p>
+<p><img src="../images/20250530144230558.png" alt="image-20250530144230558" /></p>
+<p>看到管理员后台系统处可能有任意文件读取漏洞</p>
+<h2 id="未授权添加账号和提升权限漏洞"><a class="markdownIt-Anchor" href="#未授权添加账号和提升权限漏洞"></a> 未授权添加账号和提升权限漏洞</h2>
+<p>我们需要登录后台，这里有两种做法</p>
+<p><strong>法一：</strong></p>
+<p>源码给了sql代码</p>
+<p>我们在本地导入，就可以查看admin用户的password</p>
+<p><img src="../images/20250530144617863.png" alt="image-20250530144617863" /></p>
+<p>是一个md5加密，暴力破解得到<code>admincccbbb123</code></p>
+<p>**法二：**越权漏洞</p>
+<p>/admin/Index/info处存在未授权访问</p>
+<p><img src="../images/20250530145125652.png" alt="image-20250530145125652" /></p>
+<p>这里是添加用户数据的地方</p>
+<p>如果我们正常添加，得到的其实还是普通用户，我们需要看后台鉴权代码</p>
+<p><img src="../images/20250530145245732.png" alt="image-20250530145245732" /></p>
+<p>正常添加是没有authorize这个参数的</p>
+<p>看看给的sql文件，admin的authorize是3</p>
+<p><img src="../images/20250530145342451.png" alt="image-20250530145342451" /></p>
+<p>我们也在添加用户的时候把authorize设为3即可</p>
+<p><img src="../images/20250530143302009.png" alt="image-20250530143302009" /></p>
+<p>这样我们的超管就添加好了</p>
+<p>然后在/admin/login.html登录后台</p>
+<p><img src="../images/20250530145514920.png" alt="image-20250530145514920" /></p>
+<h2 id="任意文件下载漏洞"><a class="markdownIt-Anchor" href="#任意文件下载漏洞"></a> 任意文件下载漏洞</h2>
+<p>在<code>/application/manage/controller/Backup.php</code>有任意文件读取并下载</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">function downloadBak() &#123;</span><br><span class="line">    $file_name = $_GET[&#x27;file&#x27;];</span><br><span class="line">    $file_dir = $this-&gt;config[&#x27;path&#x27;];</span><br><span class="line">    if (!file_exists($file_dir . &quot;/&quot; . $file_name)) &#123; //检查文件是否存在</span><br><span class="line">        return false;</span><br><span class="line">        exit;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        $file = fopen($file_dir . &quot;/&quot; . $file_name, &quot;r&quot;); // 打开文件</span><br><span class="line">        // 设置下载头</span><br><span class="line">        header(&#x27;Content-Encoding: none&#x27;);</span><br><span class="line">        header(&quot;Content-type: application/octet-stream&quot;);</span><br><span class="line">        header(&quot;Accept-Ranges: bytes&quot;);</span><br><span class="line">        header(&quot;Accept-Length: &quot; . filesize($file_dir . &quot;/&quot; . $file_name));</span><br><span class="line">        header(&#x27;Content-Transfer-Encoding: binary&#x27;);</span><br><span class="line">        header(&quot;Content-Disposition: attachment; filename=&quot; . $file_name);  //以真实文件名提供给浏览器下载</span><br><span class="line">        header(&#x27;Pragma: no-cache&#x27;);</span><br><span class="line">        header(&#x27;Expires: 0&#x27;);</span><br><span class="line">        //输出文件内容</span><br><span class="line">        echo fread($file, filesize($file_dir . &quot;/&quot; . $file_name));</span><br><span class="line">        fclose($file);</span><br><span class="line">        exit;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里没有任何过滤，传个file参数进行目录穿越即可</p>
+<p>我们访问<code>/manage/backup/downloadBak?file=../../../../../../etc/passwd</code></p>
+<p><img src="../images/0250530150219680.png" alt="image-20250530150219680" /></p>
+<p>然后文件就被下载下来了</p>
+<p>但我们不知道flag在哪</p>
+<p>(穿越者:其实在/flag.txt)</p>
+<p>所以这个漏洞就利用不了了</p>
+<h2 id="文件上传漏洞"><a class="markdownIt-Anchor" href="#文件上传漏洞"></a> 文件上传漏洞</h2>
+<p>在后台找到了文件上传的地方</p>
+<p><img src="../images/20250530150427441.png" alt="image-20250530150427441" /></p>
+<p>跟进此页面的源码</p>
+<p>代码位于<code>application/admin/controller/Plugs.php</code>的upload方法：（加注释）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 通用文件上传方法</span><br><span class="line"> * @return \think\response\Json 返回JSON格式的上传结果</span><br><span class="line"> */</span><br><span class="line">public function upload()</span><br><span class="line">&#123;</span><br><span class="line">    // 获取上传的文件对象</span><br><span class="line">    $file = $this-&gt;request-&gt;file(&#x27;file&#x27;);</span><br><span class="line">    </span><br><span class="line">    // 获取文件扩展名并转为小写</span><br><span class="line">    $ext = strtolower(pathinfo($file-&gt;getInfo(&#x27;name&#x27;), PATHINFO_EXTENSION));</span><br><span class="line">    </span><br><span class="line">    // 将客户端传来的MD5值按16位长度分割为数组</span><br><span class="line">    $md5 = str_split($this-&gt;request-&gt;post(&#x27;md5&#x27;), 16);</span><br><span class="line">    </span><br><span class="line">    // 组合生成存储文件名：MD5分割部分用/连接 + 扩展名</span><br><span class="line">    $filename = join(&#x27;/&#x27;, $md5) . &quot;.&#123;$ext&#125;&quot;;</span><br><span class="line">    </span><br><span class="line">    // 检查文件类型是否被允许：</span><br><span class="line">    // 1. 禁止上传PHP文件</span><br><span class="line">    // 2. 检查扩展名是否在系统配置允许的列表中</span><br><span class="line">    if (strtolower($ext) == &#x27;php&#x27; || !in_array($ext, explode(&#x27;,&#x27;, strtolower(sysconf(&#x27;storage_local_exts&#x27;))))) &#123;</span><br><span class="line">        return json([&#x27;code&#x27; =&gt; &#x27;ERROR&#x27;, &#x27;msg&#x27; =&gt; &#x27;文件上传类型受限&#x27;]);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 文件上传Token验证：</span><br><span class="line">    // 对比客户端传来的token与服务端生成的token（文件名+session_id的MD5值）</span><br><span class="line">    if ($this-&gt;request-&gt;post(&#x27;token&#x27;) !== md5($filename . session_id())) &#123;</span><br><span class="line">        return json([&#x27;code&#x27; =&gt; &#x27;ERROR&#x27;, &#x27;msg&#x27; =&gt; &#x27;文件上传验证失败&#x27;]);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 文件上传处理：</span><br><span class="line">    // 将文件移动到指定目录（static/upload/第一段MD5值/），使用第二段MD5值作为文件名</span><br><span class="line">    // 第三个参数true表示覆盖已存在文件</span><br><span class="line">    if (($info = $file-&gt;move(&#x27;static&#x27; . DS . &#x27;upload&#x27; . DS . $md5[0], $md5[1], true))) &#123;</span><br><span class="line">        // 如果移动成功，获取文件访问URL</span><br><span class="line">        if (($site_url = FileService::getFileUrl($filename, &#x27;local&#x27;))) &#123;</span><br><span class="line">            // 返回上传成功信息及文件URL</span><br><span class="line">            return json([&#x27;data&#x27; =&gt; [&#x27;site_url&#x27; =&gt; $site_url], &#x27;code&#x27; =&gt; &#x27;SUCCESS&#x27;, &#x27;msg&#x27; =&gt; &#x27;文件上传成功&#x27;]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 如果上述过程有任何失败，返回错误信息</span><br><span class="line">    return json([&#x27;code&#x27; =&gt; &#x27;ERROR&#x27;, &#x27;msg&#x27; =&gt; &#x27;文件上传失败&#x27;]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>先看文件上传类型限制：不能是php，或者不是<code>storage_local_exts</code>里面的</p>
+<p>但这个是可以通过管理面板改配置来控制的。</p>
+<p>然后看上传token验证：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 文件上传Token验证</span><br><span class="line">if ($this-&gt;request-&gt;post(&#x27;token&#x27;) !== md5($filename . session_id())) &#123;</span><br><span class="line">    return json([&#x27;code&#x27; =&gt; &#x27;ERROR&#x27;, &#x27;msg&#x27; =&gt; &#x27;文件上传验证失败&#x27;]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>客户端token值需与文件名拼接session_id的md5值相同</p>
+<p>但默认sessoin_id为空，所以即只需等于<code>md5($filename)</code></p>
+<p>再看文件上传处理函数:move</p>
+<p><code>$file-&gt;move('static' . DS . 'upload' . DS . $md5[0], $md5[1], true)</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 移动文件</span><br><span class="line"> * @access public</span><br><span class="line"> * @param  string      $path     保存路径</span><br><span class="line"> * @param  string|bool $savename 保存的文件名 默认自动生成</span><br><span class="line"> * @param  boolean     $replace  同名文件是否覆盖</span><br><span class="line"> * @return false|File</span><br><span class="line"> */</span><br><span class="line">public function move($path, $savename = true, $replace = true)</span><br><span class="line">&#123;</span><br><span class="line">    // 文件上传失败，捕获错误代码</span><br><span class="line">    if (!empty($this-&gt;info[&#x27;error&#x27;])) &#123;</span><br><span class="line">        $this-&gt;error($this-&gt;info[&#x27;error&#x27;]);</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 检测合法性</span><br><span class="line">    if (!$this-&gt;isValid()) &#123;</span><br><span class="line">        $this-&gt;error = &#x27;upload illegal files&#x27;;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 验证上传</span><br><span class="line">    if (!$this-&gt;check()) &#123;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    $path = rtrim($path, DS) . DS;</span><br><span class="line">    // 文件保存命名规则</span><br><span class="line">    $saveName = $this-&gt;buildSaveName($savename);   //$this-&gt;buildSaveName获取文件名</span><br><span class="line">    $filename = $path . $saveName;</span><br><span class="line"></span><br><span class="line">    // 检测目录</span><br><span class="line">    if (false === $this-&gt;checkPath(dirname($filename))) &#123;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 不覆盖同名文件</span><br><span class="line">    if (!$replace &amp;&amp; is_file($filename)) &#123;</span><br><span class="line">        $this-&gt;error = [&#x27;has the same filename: &#123;:filename&#125;&#x27;, [&#x27;filename&#x27; =&gt; $filename]];</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /* 移动文件 */</span><br><span class="line">    if ($this-&gt;isTest) &#123;</span><br><span class="line">        rename($this-&gt;filename, $filename);</span><br><span class="line">    &#125; elseif (!move_uploaded_file($this-&gt;filename, $filename)) &#123;</span><br><span class="line">        $this-&gt;error = &#x27;upload write error&#x27;;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 返回 File 对象实例</span><br><span class="line">    $file = new self($filename);</span><br><span class="line">    $file-&gt;setSaveName($saveName)-&gt;setUploadInfo($this-&gt;info);</span><br><span class="line"></span><br><span class="line">    return $file;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>$this-&gt;buildSaveName获取文件名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">protected function buildSaveName($savename)</span><br><span class="line">&#123;</span><br><span class="line">    // 自动生成文件名</span><br><span class="line">    ...</span><br><span class="line">    if (!strpos($savename, &#x27;.&#x27;)) &#123;</span><br><span class="line">        $savename .= &#x27;.&#x27; . pathinfo($this-&gt;getInfo(&#x27;name&#x27;), PATHINFO_EXTENSION);</span><br><span class="line">    &#125;</span><br><span class="line">    return $savename;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个if表示如果name中有点则直接返回，参数<code>$savename</code>是<code>md5[1]</code>，也就是说如果<code>md5[1]=xxx.php</code>，那么文件名就为<code>xxx.php</code><br />
+所以，<code>$md5</code>可控，$filename可控，token也可控</p>
+<p>也就是又转到了<code>static/upload/$md5[0]/$md5[1]</code></p>
+<p>因此可以考虑把php后缀写到<code>$md5[1]</code>里面，想办法构造一下</p>
+<p>$md5[1]其实就是客户端发送的32位md5值经过16位切割得到的第二部分</p>
+<p>解题：</p>
+<p>上传带一句话木马的php文件，记得带文件头<strong>GIF89a</strong>(绕过check检测)</p>
+<p>抓包，将post参数md5后四位改为<code>.php</code>，放包</p>
+<p><img src="../images/0250530153924636.png" alt="image-20250530153924636" /></p>
+<p>然后下一个包，将key的md5值后面四位也改为.php，放包</p>
+<p><img src="../images/20250530154429590.png" alt="image-20250530154429590" /></p>
+<p>显示上传失败，但实际已经上传成功了</p>
+<p><img src="../images/20250530154512842.png" alt="image-20250530154512842" /></p>
+<p>得到flag</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/CMS/" rel="tag">CMS</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/thinkphp/" rel="tag">thinkphp</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" rel="tag">代码审计</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          
+          
+            <img data-src="/images/17369576223624.jpg" data-sizes="auto" alt="[BSidesCF 2019]Mixer" class="lazyload">
+          
+        
+        <a href="/2025/05/30/%5BBSidesCF%202019%5DMixer/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            [BSidesCF 2019]Mixer
+          
+        </h3>
+      </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/images/bg1.jpg" data-sizes="auto" alt="[NPUCTF2020]web🐕" class="lazyload">
+        
+      
+      <a href="/2025/05/29/%5BNPUCTF2020%5Dweb%F0%9F%90%95/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          [NPUCTF2020]web🐕
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+</section>
+        </div>
+        
+        
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2025
+      <span class="footer-info-sep rotate"></span>
+      FuB0Y
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        284k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        20:48
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AA%E6%8E%88%E6%9D%83%E6%B7%BB%E5%8A%A0%E8%B4%A6%E5%8F%B7%E5%92%8C%E6%8F%90%E5%8D%87%E6%9D%83%E9%99%90%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.</span> <span class="toc-text"> 未授权添加账号和提升权限漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%BC%8F%E6%B4%9E"><span class="toc-number">2.</span> <span class="toc-text"> 任意文件下载漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E"><span class="toc-number">3.</span> <span class="toc-text"> 文件上传漏洞</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">186</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">4</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">179</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.6/dist/index.umd.js" integrity="sha384-vkGvf25gm1C1PbcoD5dNfc137HzNL&#x2F;hr1RKA5HniJOaawtvUmH5lTVFgFAruE9Ge" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "FuB0Y",
+          title: "[网鼎杯 2020 半决赛]faka",
+          url: "http://example.com/2025/05/30/[%E7%BD%91%E9%BC%8E%E6%9D%AF%202020%20%E5%8D%8A%E5%86%B3%E8%B5%9B]faka/",
+          excerpt: "",
+          description: "",
+          stripContent: "40多m的压缩包源码… 用seay扫一下  看到管理员后台系统处可能有任意文件读取漏洞  未授权添加账号和提升权限漏洞 我们需要登录后台，这里有两种做法 法一： 源码给了sql代码 我们在本地导入，就可以查看admin用户的password  是一个md5加密，暴力破解得到admincccbbb123 **法二：**越权漏洞 /admin/Index/info处存在未授权访问  这里是添加用户数据的地方 如果我们正常添加，得到的其实还是普通用户，我们需要看后台鉴权代码  正常添加是没有autho",
+          date: "Fri May 30 2025 14:22:06 GMT+0800",
+          updated: "Fri May 30 2025 15:47:46 GMT+0800",
+          cover: "/images/banner.webp",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+
+
+
+
+
+
+
+
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.3.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+  
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm&#x2F;Yr2r3Dy4lfFg" crossorigin="anonymous" defer data-pjax></script>
+
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb&#x2F;GhzOouOXtZMP&#x2F;7XUzwPTstBeZFe&#x2F;+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" defer onload="renderMathInElement(document.body, {delimiters: [{left: &#39;$$&#39;, right: &#39;$$&#39;, display: true},{left: &#39;$&#39;, right: &#39;$&#39;, display: false}]});" data-pjax></script>
+
+  
+
+
+
+
+
+  </body>
+  </html>
+

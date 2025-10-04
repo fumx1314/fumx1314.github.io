@@ -34,7 +34,7 @@
 <meta property="og:description" content="世所谓英雄者，不以挫抑而灰心，不以失败而退怯">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/banner.webp">
-<meta property="article:author" content="fuboy">
+<meta property="article:author" content="FuB0Y">
 <meta property="article:tag" content="博客">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/images/banner.webp">
@@ -49,6 +49,12 @@
 <link rel="stylesheet" href="/css/style.css">
 
   <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+    
+      
+        <link rel="preload" href="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+      
+    
   
   
   
@@ -197,14 +203,14 @@
     <div class="sidebar-wrap" data-aos="fade-up">
       
         <div class="sidebar-author">
-  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
-  <div class="sidebar-author-name">fuboy</div>
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
   <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">85</div>
+    <div class="sidebar-state-number">186</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -212,7 +218,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">179</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -272,25 +278,48 @@
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/31/%5BSUCTF%202019%5DPythonginx/" aria-label="[SUCTF 2019]Pythonginx"></a>
+      <a class="post-link" href="/2025/06/07/%E7%BD%91%E9%BC%8E%E6%9D%AF2024%E9%9D%92%E9%BE%99%E7%BB%84web01%E5%A4%8D%E7%8E%B0/" aria-label="网鼎杯2024青龙组web01复现"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[SUCTF 2019]Pythonginx" class="lazyload">
+        
+        
+          <img data-src="/images/124691006_p0_master1200.jpg" data-sizes="auto" alt="网鼎杯2024青龙组web01复现" class="lazyload">
+        
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-31</span>
-        <span><span class="icon-pencil"></span>861 字</span>
-        <span><span class="icon-clock"></span>3 分钟</span>
+        <span><span class="icon-calendar"></span>2025-06-07</span>
+        <span><span class="icon-pencil"></span>2.8k 字</span>
+        <span><span class="icon-clock"></span>15 分钟</span>
       </div>
-      <h2 class="post-title">[SUCTF 2019]Pythonginx</h2>
+      <h2 class="post-title">网鼎杯2024青龙组web01复现</h2>
       <article class="post-article">
         
-           题目源码：
-12345678910111213141516171819202122232425262728293031323334@app.route(&amp;#x27;/getUrl&amp;#x27;, methods=[&amp;#x27;GET&amp;#x27;, &amp;#x27;POST&amp;#x27;])def getUrl():    # 从请求中获取url参数    url = request.args.get(&amp;quot;url&amp;quot;)    host = parse.urlparse(url).hostname    # 第一处检查主机名是否为 &amp;#x27;suctf.cc&amp;#x27;    if h
+            这题看着挺有趣的，毕竟我没见过多少web题和crypto一起考的
+当然我没报名肯定做不了，结合着题解来做
+题目分析题目描述：
+
+进去是一个登录框
+
+没做验证任意可登录，但是admin无法登陆进去
+登录进去之后：
+
+除了登出按键，这四个按键对应四个路由：
+1234/profile/game/upload/view_uploads
+
+profile:
+
+game:
+
+upload:
+
+view_upload:
+jwt和session分析Cookie中设置了 token(jwt) 和 session(flask session) 
+说明一些页面的鉴权代码不同
+发现 view_uploads这里的
         
       </article>
     </div>
@@ -300,97 +329,30 @@
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/30/%5BFBCTF2019%5DRCEService/" aria-label="[FBCTF2019]RCEService"></a>
+      <a class="post-link" href="/2025/06/07/%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202020%20%E6%80%BB%E5%86%B3%E8%B5%9B%5DGame%20Exp/" aria-label="[网鼎杯 2020 总决赛]Game Exp"></a>
     
     
     <div class="post-cover-right">
       
         
         
-          <img data-src="../images/17373827994914.jpg" data-sizes="auto" alt="[FBCTF2019]RCEService" class="lazyload">
+          <img data-src="/images/124691006_p0_master1200.jpg" data-sizes="auto" alt="[网鼎杯 2020 总决赛]Game Exp" class="lazyload">
         
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-30</span>
-        <span><span class="icon-pencil"></span>1.6k 字</span>
-        <span><span class="icon-clock"></span>6 分钟</span>
-      </div>
-      <h2 class="post-title">[FBCTF2019]RCEService</h2>
-      <article class="post-article">
-        
-            
-题目界面如上
-它说需要我们传入一个json格式的命令
-我们传入
-&amp;#123;&amp;quot;cmd&amp;quot;:&amp;quot;ls&amp;quot;&amp;#125;
-回显出来了index.php
-但当我们传入
-&amp;#123;&amp;quot;cmd&amp;quot;:&amp;quot;ls /&amp;quot;&amp;#125;
-发现&amp;#x2F;被过滤了
-经过多次尝试，发现好多符号都被过滤了
-没办法了，看题解
-题解说这题是有源码的…我没找到…题目的问题
-题目源码：
-123456789101112131415161718192021&amp;lt;?phpputenv(&amp;#x27;PATH=/home/rceservice/jail&amp;#x27;
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/30/%5BGYCTF2020%5DFlaskApp/" aria-label="[GYCTF2020]FlaskApp"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        
-        
-          <img data-src="../images/126839103p0master1200.jpg" data-sizes="auto" alt="[GYCTF2020]FlaskApp" class="lazyload">
-        
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-30</span>
-        <span><span class="icon-pencil"></span>1.4k 字</span>
-        <span><span class="icon-clock"></span>7 分钟</span>
-      </div>
-      <h2 class="post-title">[GYCTF2020]FlaskApp</h2>
-      <article class="post-article">
-        
-          知识点：pin码生成123456789101112131415161718pin码生成要六要素1.username 在可以任意文件读的条件下读 /etc/passwd进行猜测2.modname 默认flask.app3.appname 默认Flask4.moddir flask库下app.py的绝对路径,可以通过报错拿到,如传参的时候给个不存在的变量5.uuidnode mac地址的十进制unbuntu读取 /sys/class/net/eth0/addresscentos读取  /sys/class/net/ens33/address6.machine_id 机器码linux的id一般存放在
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/30/%5BBJDCTF2020%5DEasySearch/" aria-label="[BJDCTF2020]EasySearch"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[BJDCTF2020]EasySearch" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-30</span>
-        <span><span class="icon-pencil"></span>558 字</span>
+        <span><span class="icon-calendar"></span>2025-06-07</span>
+        <span><span class="icon-pencil"></span>496 字</span>
         <span><span class="icon-clock"></span>2 分钟</span>
       </div>
-      <h2 class="post-title">[BJDCTF2020]EasySearch</h2>
+      <h2 class="post-title">[网鼎杯 2020 总决赛]Game Exp</h2>
       <article class="post-article">
         
-          知识点1234567ssi注入：SSI 注入全称Server-Side Includes Injection（服务端包含注入），ssi可以赋予html静态页面的动态效果，通过ssi执行命令，返回对应的结果当在网站目录中发现了.stm .shtm .shtml或在界面中发现了&amp;lt;div&amp;gt;&amp;#123;$what&amp;#125;&amp;lt;/div&amp;gt;&amp;lt;p&amp;gt;Welcome, &amp;#123;&amp;#123;username&amp;#125;&amp;#125;&amp;lt;/p&amp;gt;&amp;lt;div&amp;gt;&amp;#123;%$a%&amp;#125;&amp;lt;/div&amp;gt;就容易产生ssi注入，此处问题的其注入格式为：&amp;
+           给源码了
+代码很多，但利用点其实就在register.php中，这里直接就有一个eval
+
+123456789101112131415161718192021222324252627282930313233&amp;lt;?phpclass AnyClass&amp;#123;    var $output = &amp;#x27;system(&amp;quot;ls&amp;quot;)&amp;#x27;;    function __destruct()    &amp;#123;        eval($this -&amp;gt; output);    &amp;#125;&amp;#125;if (isset($_POST[&amp;#x27;username
         
       </article>
     </div>
@@ -400,28 +362,32 @@
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/29/%5BDe1CTF%202019%5DSSRF%20Me/" aria-label="[De1CTF 2019]SSRF Me"></a>
+      <a class="post-link" href="/2025/06/06/%5BHFCTF%202021%20Final%5Dhatenum/" aria-label="[HFCTF 2021 Final]hatenum"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[De1CTF 2019]SSRF Me" class="lazyload">
+        
+        
+          <img data-src="/images/bg1.jpg" data-sizes="auto" alt="[HFCTF 2021 Final]hatenum" class="lazyload">
+        
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-29</span>
-        <span><span class="icon-pencil"></span>1.2k 字</span>
-        <span><span class="icon-clock"></span>5 分钟</span>
+        <span><span class="icon-calendar"></span>2025-06-06</span>
+        <span><span class="icon-pencil"></span>2.3k 字</span>
+        <span><span class="icon-clock"></span>11 分钟</span>
       </div>
-      <h2 class="post-title">[De1CTF 2019]SSRF Me</h2>
+      <h2 class="post-title">[HFCTF 2021 Final]hatenum</h2>
       <article class="post-article">
         
-            知识点：
-1flask框架
+           题目界面：
 
-题目源码：
-123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113from flask import Flask, request  # 导入Flask和re
+有注册有登录
+还有源码附件：
+home.php:
+123456789101112&amp;lt;?phprequire_once(&amp;#x27;config.php&amp;#x27;);if(!$_SESSION[&amp;#x27;username&amp;#x27;])&amp;#123;	header(&amp;#x27;location:index.php&amp;#x27;);&amp;#125;if($_SESSION[&amp;#x27;username&amp;#x27;]==&amp;#x27;admin&amp;#x27;)&amp;#123;	echo file_get_contents(&amp;#x27;/flag&amp;#x27;);&amp;#125;else&amp;#123;
         
       </article>
     </div>
@@ -431,95 +397,28 @@
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/28/%5BCISCN%202019%20%E5%88%9D%E8%B5%9B%5DLove%20Math/" aria-label="[CISCN 2019 初赛]Love Math"></a>
+      <a class="post-link" href="/2025/06/06/%5BNewStarCTF%20%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93%5DSo%20Baby%20RCE/" aria-label="[NewStarCTF 公开赛赛道]So Baby RCE"></a>
     
     
     <div class="post-cover-right">
       
         
         
-          <img data-src="../images/17373827994914.jpg" data-sizes="auto" alt="[CISCN 2019 初赛]Love Math" class="lazyload">
+          <img data-src="/images/1737907114de8a.jpg" data-sizes="auto" alt="[NewStarCTF 公开赛赛道]So Baby RCE" class="lazyload">
         
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-28</span>
-        <span><span class="icon-pencil"></span>1.1k 字</span>
-        <span><span class="icon-clock"></span>5 分钟</span>
-      </div>
-      <h2 class="post-title">[CISCN 2019 初赛]Love Math</h2>
-      <article class="post-article">
-        
-          知识点：123php中可以把函数名通过字符串的方式传递给一个变量，然后通过此变量动态调用函数比如下面的代码会执行 system(‘cat/flag’);例：?c=($_GET[a])($_GET[b])&amp;amp;a=system&amp;amp;b=cat /flag
-
- 题目源码：
-123456789101112131415161718192021222324252627&amp;lt;?php//听说你很喜欢数学，不知道你是否爱它胜过爱flagif(!isset($_GET[&amp;#x27;c&amp;#x27;]))&amp;#123;    show_source(__FILE__);&amp;#125;else&amp;#123;  
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/28/%5B%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98%202019%5DFinalSQL/" aria-label="[极客大挑战 2019]FinalSQL"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[极客大挑战 2019]FinalSQL" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-28</span>
-        <span><span class="icon-pencil"></span>314 字</span>
+        <span><span class="icon-calendar"></span>2025-06-06</span>
+        <span><span class="icon-pencil"></span>147 字</span>
         <span><span class="icon-clock"></span>1 分钟</span>
       </div>
-      <h2 class="post-title">[极客大挑战 2019]FinalSQL</h2>
+      <h2 class="post-title">[NewStarCTF 公开赛赛道]So Baby RCE</h2>
       <article class="post-article">
         
-           
-这个题一看就是挺nb的sql注入的(final)
-果然，试了一圈，&amp;#39;,select,union,or,and,handler等等等等好多都被过滤了
-毫无头绪
-发现那个神秘号码能点
-
-欸嘿，又有一个id，那估计这里才是注入点吧
-看题目提示应该是想要我们试一下盲注的
-这里我们用二分盲注
-但sql语句我们用异或来构造
-脚本：
-12345678910111213141516171819202122232425262728293031323334import requestsimport timeurl = &amp;quot;http://f25c8ff6-0659-4275-991a-47669
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/28/%5BCISCN2019%20%E5%8D%8E%E4%B8%9C%E5%8D%97%E8%B5%9B%E5%8C%BA%5DWeb11/" aria-label="[CISCN2019 华东南赛区]Web11"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[CISCN2019 华东南赛区]Web11" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-28</span>
-        <span><span class="icon-pencil"></span>995 字</span>
-        <span><span class="icon-clock"></span>4 分钟</span>
-      </div>
-      <h2 class="post-title">[CISCN2019 华东南赛区]Web11</h2>
-      <article class="post-article">
-        
-          smarty ssti知识点：12345678在开始介绍 Smarty 之前先了解一下模板引擎，模板引擎是为了让前端界面(html)与程序代码(php)分离而产生的一种解决方案，简单来说就是 html 文件里再也不用写 php 代码了。Smarty 的原理是变量替换原则，我们只需要在 html 文件里写好 Smarty 的标签即可，例如 &amp;#123;name&amp;#125;，然后调用 Smarty 的方法传递变量参数即可&amp;#123;literal&amp;#125; 标签：&amp;#123;literal&amp;#125;可以让一个模板区域的字符原样输出。这经常用于保护页面上的Javascript或css样式表，避免
+           我是fw，newstar也不会
+1234567891011&amp;lt;?phperror_reporting(0);if(isset($_GET[&amp;quot;cmd&amp;quot;]))&amp;#123;    if(preg_match(&amp;#x27;/et|echo|cat|tac|base|sh|more|less|tail|vi|head|nl|env|fl|\||;|\^|\&amp;#x27;|\]|&amp;quot;|&amp;lt;|&amp;gt;|`|\/| |\\\\|\*/i&amp;#x27;,$_GET[&amp;quot;cmd&amp;quot;]))&amp;#123;       echo &amp;quot;Don&amp;#x27;t Hack
         
       </article>
     </div>
@@ -529,29 +428,28 @@
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/28/%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202020%20%E6%9C%B1%E9%9B%80%E7%BB%84%5DNmap/" aria-label="[网鼎杯 2020 朱雀组]Nmap"></a>
+      <a class="post-link" href="/2025/06/06/%5BMTCTF%202022%5Deasypickle/" aria-label="[MTCTF 2022]easypickle"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[网鼎杯 2020 朱雀组]Nmap" class="lazyload">
+        
+        
+          <img data-src="/images/175514388679175514388612.jpg" data-sizes="auto" alt="[MTCTF 2022]easypickle" class="lazyload">
+        
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-28</span>
-        <span><span class="icon-pencil"></span>1.2k 字</span>
-        <span><span class="icon-clock"></span>4 分钟</span>
+        <span><span class="icon-calendar"></span>2025-06-06</span>
+        <span><span class="icon-pencil"></span>1.4k 字</span>
+        <span><span class="icon-clock"></span>6 分钟</span>
       </div>
-      <h2 class="post-title">[网鼎杯 2020 朱雀组]Nmap</h2>
+      <h2 class="post-title">[MTCTF 2022]easypickle</h2>
       <article class="post-article">
         
-            题目界面
-这是个namp工具扫描界面
-我们来了解一下namp工具
-namp常见参数123456-iL 读取文件内容，以文件内容作为搜索目标-o 输出到文件-oN 标准保存-oX XML保存-oG Grep保存-oA 保存到所有格式
-
-常见指令123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051nmap -v 127.0.0.1给出了远程机器更详细的信息，显示冗余信息(扫描细节)nmap -iL nmaptest.txt运行带“iL 选项的nmap命令来扫描文
+          代码审计给了我们源码：
+12345678910111213141516171819202122232425262728293031323334import base64import picklefrom flask import Flask, sessionimport osimport randomapp = Flask(__name__)app.config[&amp;#x27;SECRET_KEY&amp;#x27;] = os.urandom(2).hex()@app.route(&amp;#x27;/&amp;#x27;)def hello_world():    if not session.get(&amp;#x27;
         
       </article>
     </div>
@@ -561,34 +459,184 @@ namp常见参数123456-iL 读取文件内容，以文件内容作为搜索目标
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/28/%5B%E5%BC%BA%E7%BD%91%E6%9D%AF%202019%5D%E9%AB%98%E6%98%8E%E7%9A%84%E9%BB%91%E5%AE%A2/" aria-label="[强网杯 2019]高明的黑客"></a>
+      <a class="post-link" href="/2025/06/04/%E6%9A%91%E6%9C%9F6%E6%9C%88web%E9%9A%BE%E7%82%B9%E5%89%96%E6%9E%90/" aria-label="暑期6月web难点剖析"></a>
     
     
     <div class="post-cover-right">
       
-        <img data-src="/../images/126839103p0master1200.jpg" data-sizes="auto" alt="[强网杯 2019]高明的黑客" class="lazyload">
+        
+        
+          <img data-src="/images/bg1.jpg" data-sizes="auto" alt="暑期6月web难点剖析" class="lazyload">
+        
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-28</span>
-        <span><span class="icon-pencil"></span>577 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
+        <span><span class="icon-calendar"></span>2025-06-04</span>
+        <span><span class="icon-pencil"></span>0 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
       </div>
-      <h2 class="post-title">[强网杯 2019]高明的黑客</h2>
+      <h2 class="post-title">暑期6月web难点剖析</h2>
       <article class="post-article">
         
           
-题目提示我们访问www.tar.gz
-下了好久，终于下好了，有接近40mb…
-里面有几千个php文件
-而且每个里面都含有shell
-也不可能手动去试
-只能用脚本来一个个试，来找出能利用的shell
-把src文件夹解压进phpstudy的www目录里
-打开phpstudy，记得php的版本需要大于7
-然后运行下面这个脚本
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859import osimport requestsimpor
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/06/04/%5BFireshellCTF2020%5DScreenShoot/" aria-label="[FireshellCTF2020]ScreenShoot"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        
+        
+          <img data-src="/images/17369576223624.jpg" data-sizes="auto" alt="[FireshellCTF2020]ScreenShoot" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-06-04</span>
+        <span><span class="icon-pencil"></span>238 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
+      </div>
+      <h2 class="post-title">[FireshellCTF2020]ScreenShoot</h2>
+      <article class="post-article">
+        
+          
+当我们输入某个url时
+会对那个url网站进行截图
+例:http://www.baidu.com
+
+这里需要去https://beeceptor.com/上生成一个临时的域名
+
+让靶机去访问这个临时域名，然后我们可以查看请求头。注意请求的时候用http协议，然后才能看到请求的流量
+
+发现请求头里的UA似乎不太一样，是PhantomJS,新东西
+
+它在漏洞库里也有收录
+任意文件读取
+
+
+也就是说可以使用file:// URI 的 XMLHttpRequest读取文件
+编写一个index.html放在自己的vps上
+123456789101112131415161718&amp;lt;!DOCTYPE 
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/06/04/%5BZer0pts2020%5DphpNantokaAdmin/" aria-label="[Zer0pts2020]phpNantokaAdmin"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        
+        
+          <img data-src="/images/17373827994914.jpg" data-sizes="auto" alt="[Zer0pts2020]phpNantokaAdmin" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-06-04</span>
+        <span><span class="icon-pencil"></span>792 字</span>
+        <span><span class="icon-clock"></span>4 分钟</span>
+      </div>
+      <h2 class="post-title">[Zer0pts2020]phpNantokaAdmin</h2>
+      <article class="post-article">
+        
+          
+主要知识点：
+sqlite的**create table … as select …**语句
+一进去就是数据库建表，建字段
+
+有源码附件：
+1234&amp;lt;?php $pdo-&amp;gt;query(&amp;#x27;CREATE TABLE `&amp;#x27; . FLAG_TABLE . &amp;#x27;` (`&amp;#x27; . FLAG_COLUMN . &amp;#x27;` TEXT);&amp;#x27;); $pdo-&amp;gt;query(&amp;#x27;INSERT INTO `&amp;#x27; . FLAG_TABLE . &amp;#x27;` VALUES (&amp;quot;&amp;#x27; . FLAG . &amp;#x27;&amp;qu
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/06/03/%5BDe1CTF%202019%5DGiftbox/" aria-label="[De1CTF 2019]Giftbox"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        
+        
+          <img data-src="/images/1737907114de8a.jpg" data-sizes="auto" alt="[De1CTF 2019]Giftbox" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-06-03</span>
+        <span><span class="icon-pencil"></span>1.1k 字</span>
+        <span><span class="icon-clock"></span>5 分钟</span>
+      </div>
+      <h2 class="post-title">[De1CTF 2019]Giftbox</h2>
+      <article class="post-article">
+        
+          一个高级的终端模拟器
+
+cat 看一下文件内容发现有登录
+
+让我想不到的是这里竟然有sql注入
+
+抓包看一下
+
+还有个totp，这是啥玩意，而且好像还是不定的
+搜了一下
+12TOTP算法(Time-based One-time Password algorithm)是一种从共享密钥和当前时间计算一次性密码的算法。它已被采纳为Internet工程任务组标准RFC 6238，是Initiative for Open Authentication(OATH)的基石，并被用于许多双因素身份验证系统。TOTP是基于散列的消息认证码（HMAC）的示例。它使用加密哈希函数将密钥与当前时间戳组合在一起以生成一
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/06/03/%5BMRCTF2020%5DEzpop_Revenge/" aria-label="[MRCTF2020]Ezpop_Revenge"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        
+        
+          <img data-src="/images/124691006_p0_master1200.jpg" data-sizes="auto" alt="[MRCTF2020]Ezpop_Revenge" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-06-03</span>
+        <span><span class="icon-pencil"></span>1k 字</span>
+        <span><span class="icon-clock"></span>5 分钟</span>
+      </div>
+      <h2 class="post-title">[MRCTF2020]Ezpop_Revenge</h2>
+      <article class="post-article">
+        
+          打开是typecho博客
+/www.zip存在源码泄露
+ 代码审计
+flag.php:
+123456&amp;lt;?phpif(!isset($_SESSION)) session_start();if($_SERVER[&amp;#x27;REMOTE_ADDR&amp;#x27;]===&amp;quot;127.0.0.1&amp;quot;)&amp;#123;   $_SESSION[&amp;#x27;flag&amp;#x27;]= &amp;quot;MRCTF&amp;#123;******&amp;#125;&amp;quot;;&amp;#125;else echo &amp;quot;我扌your problem?\nonly localhost can get flag!&amp;q
         
       </article>
     </div>
@@ -599,7 +647,7 @@ namp常见参数123456-iL 读取文件内容，以文件内容作为搜索目标
 
   <nav id="page-nav" data-aos="fade-up">
     
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/4/">下一页 &raquo;</a>
   </nav>
 
 
@@ -617,7 +665,7 @@ namp常见参数123456-iL 读取文件内容，以文件内容作为搜索目标
       <span class="icon-copyright"></span>
       2020-2025
       <span class="footer-info-sep rotate"></span>
-      fuboy
+      FuB0Y
     </div>
     
       <div>
@@ -628,10 +676,10 @@ namp常见参数123456-iL 读取文件内容，以文件内容作为搜索目标
     
       <div>
         <span class="icon-brush"></span>
-        115.8k
+        284k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        07:58
+        20:48
       </div>
     
     
@@ -660,14 +708,14 @@ namp常见参数123456-iL 读取文件内容，以文件内容作为搜索目标
   <div class="sidebar-wrap">
     
       <div class="sidebar-author">
-  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
-  <div class="sidebar-author-name">fuboy</div>
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
   <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">85</div>
+    <div class="sidebar-state-number">186</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -675,7 +723,7 @@ namp常见参数123456-iL 读取文件内容，以文件内容作为搜索目标
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">179</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -827,6 +875,15 @@ namp常见参数123456-iL 读取文件内容，以文件内容作为搜索目标
 </script>
 
 
+
+  
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm&#x2F;Yr2r3Dy4lfFg" crossorigin="anonymous" defer data-pjax></script>
+
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb&#x2F;GhzOouOXtZMP&#x2F;7XUzwPTstBeZFe&#x2F;+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" defer onload="renderMathInElement(document.body, {delimiters: [{left: &#39;$$&#39;, right: &#39;$$&#39;, display: true},{left: &#39;$&#39;, right: &#39;$&#39;, display: false}]});" data-pjax></script>
+
+  
 
 
 

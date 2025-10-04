@@ -34,7 +34,7 @@
 <meta property="og:description" content="世所谓英雄者，不以挫抑而灰心，不以失败而退怯">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/banner.webp">
-<meta property="article:author" content="fuboy">
+<meta property="article:author" content="FuB0Y">
 <meta property="article:tag" content="博客">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/images/banner.webp">
@@ -49,6 +49,12 @@
 <link rel="stylesheet" href="/css/style.css">
 
   <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+    
+      
+        <link rel="preload" href="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+      
+    
   
   
   
@@ -197,14 +203,14 @@
     <div class="sidebar-wrap" data-aos="fade-up">
       
         <div class="sidebar-author">
-  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
-  <div class="sidebar-author-name">fuboy</div>
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
   <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">85</div>
+    <div class="sidebar-state-number">186</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -212,7 +218,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">179</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -272,75 +278,150 @@
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/02/01/%E5%91%BD%E4%BB%A4%E5%9F%BA%E7%A1%80/" aria-label="Linux基础操作"></a>
+      <a class="post-link" href="/2025/05/05/%5BSWPU2019%5DWeb3/" aria-label="[SWPU2019]Web3"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/126839103p0master1200.jpg" data-sizes="auto" alt="[SWPU2019]Web3" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-05-05</span>
+        <span><span class="icon-pencil"></span>1.4k 字</span>
+        <span><span class="icon-clock"></span>6 分钟</span>
+      </div>
+      <h2 class="post-title">[SWPU2019]Web3</h2>
+      <article class="post-article">
+        
+            题目界面：
+
+但登录进去之后除了有个文件上传按钮就没了
+但当我们点击文件上传时就会显示权限不够
+因此我们猜测需要提权
+抓包&amp;#x2F;upload
+
+只看到sessin可以利用
+猜测是session伪造
+flask-session伪造这个伪造的难点就是找密钥
+我找了半天没发现
+然后看题解说随便访问一个不存在页面
+密钥在响应标头中
+。。。
+找到密钥
+
+然后就是工具伪造了
+先解码session
+
+因为admin是可以随便登录的，所以猜测权限不在username这，应该是id，我们将id设为1
+
+再次访问upload
+
+成功访问
+代码审计响应头源码：
+1234567891011121314151
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/05/05/bestphp's%20revenge(%E5%A5%BD%E9%A2%98)/" aria-label="bestphp&#39;s revenge(好题)"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="bestphp&#39;s revenge(好题)" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-05-05</span>
+        <span><span class="icon-pencil"></span>2k 字</span>
+        <span><span class="icon-clock"></span>9 分钟</span>
+      </div>
+      <h2 class="post-title">bestphp&#39;s revenge(好题)</h2>
+      <article class="post-article">
+        
+           题目：
+123456789101112131415161718192021222324&amp;lt;?phphighlight_file(__FILE__);$b = &amp;#x27;implode&amp;#x27;;call_user_func($_GET[&amp;#x27;f&amp;#x27;], $_POST);  //参数二的位置固定为 $_POST 数组，我们很容易便想到利用 extract 函数进行变量覆盖，以便配合后续利用session_start();if (isset($_GET[&amp;#x27;name&amp;#x27;])) &amp;#123;    $_SESSION[&amp;#x27;name&amp;#x27;] = $
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/05/05/%5BFBCTF2019%5DProducts%20Manager/" aria-label="[FBCTF2019]Products Manager"></a>
     
     
     <div class="post-cover-left">
       
         
         
-          <img data-src="../images/17369576223624.jpg" data-sizes="auto" alt="Linux基础操作" class="lazyload">
+          <img data-src="/images/bizhi1.png" data-sizes="auto" alt="[FBCTF2019]Products Manager" class="lazyload">
         
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-02-01</span>
-        <span><span class="icon-pencil"></span>5.3k 字</span>
-        <span><span class="icon-clock"></span>20 分钟</span>
+        <span><span class="icon-calendar"></span>2025-05-05</span>
+        <span><span class="icon-pencil"></span>878 字</span>
+        <span><span class="icon-clock"></span>3 分钟</span>
       </div>
-      <h2 class="post-title">Linux基础操作</h2>
+      <h2 class="post-title">[FBCTF2019]Products Manager</h2>
+      <article class="post-article">
+        
+          题目界面：
+
+添加产品：
+
+查看产品：
+
+ 知识点
+ 数据库字符串比较
+在数据库对字符串进行比较时，若两字符串长度不一样，则会在较短的字符串末尾填充空格，使两个字符串长度一致。
+如下两条查询语句：
+123select * from users where username=&amp;#x27;Dumb&amp;#x27;select * from users where username=&amp;#x27;Dumb &amp;#x27;
+它们的查询结果是一致的，即第二条查询语句中Dumb后面的空格并没有对查询有任何影响。因为在MySQL把查询语句里的username和数据库里的username值进行比较时，它们就是一个字符
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/05/04/%5BPwnThyBytes%202019%5DBaby_SQL/" aria-label="[PwnThyBytes 2019]Baby_SQL"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[PwnThyBytes 2019]Baby_SQL" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-05-04</span>
+        <span><span class="icon-pencil"></span>1.5k 字</span>
+        <span><span class="icon-clock"></span>8 分钟</span>
+      </div>
+      <h2 class="post-title">[PwnThyBytes 2019]Baby_SQL</h2>
       <article class="post-article">
         
           
-linux主要特征 ：一切皆文件（目录、硬盘等都是文件）；硬件都在&amp;#x2F;dev 目录，如硬盘、U盘为&amp;#x2F;dev&amp;#x2F;sd[a-d]； &amp;#x2F;dev&amp;#x2F;sr0（&amp;#x2F;dev&amp;#x2F;cdrom）是光驱的设备名（df命令查看），为设备文件，代表的是光驱本身，得把这个设备挂载到目录下（一般为&amp;#x2F;mnt）(文件系统的临时挂载点)，才能对设备上的文件进行读写等操作；
-不懂的命令 ：man 命令（查用法、全称），只记得关键词，可用man -k 关键词；
-
-系统操作：1234567891011示例：root@app00:~# root    //用户名，r
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/01/25/ISCC2016%20Easy%20Gallery/" aria-label="ISCC2016 Easy Gallery"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="ISCC2016 Easy Gallery" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-01-25</span>
-        <span><span class="icon-pencil"></span>246 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
-      </div>
-      <h2 class="post-title">ISCC2016 Easy Gallery</h2>
-      <article class="post-article">
-        
-           题目链接：Navbar Template for Bootstrap
-进入题目，先上传一个webshell试试
-&amp;lt;?php @eval($_POST[&amp;#39;mima&amp;#39;])?&amp;gt;
-
-但无论怎么尝试都会回显只能上传jpg和gif图片
-我们猜测只能上传图片马
-先制作一个gif图片马,上传
-
-上传成功了，告诉了我们图片id
-那接下来呢？
-
-view了也只是给我们看看奶龙动图，我们去网页源码找答案
-
-当我们在view页面点击submit时，给我们显示了一行路径，不用想，这就是我们上传之后文件所处路径
-这直接考到了我们文件包含的知识
-
-而数据又是以GET传参的，直接输入
-http:
+根据题目意思是个sql注入
+但我们进行注册没反应，随便登录也只回显try again
+在源码中找到source.zip，源码泄露
+index.php(部分)
+1234567891011121314151617181920&amp;lt;?phpsession_start();foreach ($_SESSION as $key =&amp;gt; $value): $_SESSION[$key] = filter($value); endforeach;foreach ($_GET as $key =&amp;gt; $value): $_GET[$key] = filter($value); endforeach
         
       </article>
     </div>
@@ -350,263 +431,27 @@ http:
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/01/23/buuctf-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-Upload/" aria-label="buuctf[极客大挑战]Upload"></a>
+      <a class="post-link" href="/2025/05/03/%E8%B0%B7%E6%AD%8C%E8%AF%AD%E6%B3%95/" aria-label="谷歌语法"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="buuctf[极客大挑战]Upload" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-01-23</span>
-        <span><span class="icon-pencil"></span>450 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
-      </div>
-      <h2 class="post-title">buuctf[极客大挑战]Upload</h2>
-      <article class="post-article">
-        
-           这是一个文件上传漏洞
-
-一开始我是选择了&amp;lt;?php@eval(_POST[&amp;#39;mima&amp;#39;])?&amp;gt;的yijuhua.php文件进行上传，告诉我Not image(上传错误)
-将后缀改为jpg，改Content-Type: image/jpg，回显说存在&amp;lt;?
-我们将yijuhua.php内容改为没有&amp;lt;?的一句话木马&amp;lt;script language=&amp;quot;php&amp;quot;&amp;gt; @eval($_POST[&amp;#39;mima&amp;#39;]); &amp;lt;/script&amp;gt;，再次上传，还是上传失败
-我们将文件名修改为yijuhua.phtml，绕过
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/01/20/upload/" aria-label="upload"></a>
-    
-    
-    <div class="post-cover-right">
-      
         
         
-          <img data-src="../images/1737907114de8a.jpg" data-sizes="auto" alt="upload" class="lazyload">
+          <img data-src="/images/17373827994914.jpg" data-sizes="auto" alt="谷歌语法" class="lazyload">
         
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-01-20</span>
-        <span><span class="icon-pencil"></span>4.3k 字</span>
-        <span><span class="icon-clock"></span>16 分钟</span>
-      </div>
-      <h2 class="post-title">upload</h2>
-      <article class="post-article">
-        
-          在看题解的途中看到很详细的题解：pass-18:
-[点此跳转]:Upload-Lab第18关：巧用条件竞争，轻松绕过上传限制！ | CN-SEC 中文网
-此大佬的其他题解也很好
-
-Pass-01-前端JS绕过这是一个典型的前端绕过，因为它是通过js的弹窗显示的
-如图我们上传不了.php文件(一句话木马)
-
-法一：
-我们在上传php文件时bp抓包抓不到任何东西
-我们只需将构造的php文件（一句话木马)的后缀名改为.jpg|.png|.gif即可
-这样就能抓到包
-
-然后我们在抓到的数据包中将.png再改回.php再进行发送
-
-
-我们能看到文件已经上传成功，打开之后也是显示php的后缀，这说明我们的
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/01/08/SQL%E6%B3%A8%E5%85%A5/" aria-label="SQL注入"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="SQL注入" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-01-08</span>
-        <span><span class="icon-pencil"></span>6.9k 字</span>
-        <span><span class="icon-clock"></span>28 分钟</span>
-      </div>
-      <h2 class="post-title">SQL注入</h2>
-      <article class="post-article">
-        
-          SQL注入注入原理SQL注入是一种将SQL代码插入或添加到应用（用户）的输入参数中的攻击，之后再将这些参数传递给后台的sql服务器加以解析和执行。
-注入方法Sql注入的方式主要是直接将代码插入参数中，这些参数会被置入sql命令中加以执行。间接的攻击方式是将恶意代码插入字符串中，之后将这些字符串保存到数据库的数据表中或将其当成元数据。当将存储的字符串置入动态sql命令中时，恶意代码就将被执行。
-如何判断注入点？老办法：and 1&amp;#x3D;1 页面正常and 1&amp;#x3D;2 页面错误可能存在注入点
-新办法：select * from users where id&amp;#x3D;1daadda LI
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2024/12/28/mysql/" aria-label="mysql"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/124691006_p0_master1200.jpg" data-sizes="auto" alt="mysql" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-28</span>
-        <span><span class="icon-pencil"></span>6.2k 字</span>
-        <span><span class="icon-clock"></span>25 分钟</span>
-      </div>
-      <h2 class="post-title">mysql</h2>
-      <article class="post-article">
-        
-          [TOC]
-数据库（DB）：数据存储的仓库。 数据库管理系统
-（DBMS）：操纵和管理数据库的大型软件。
- SQL：操作关系型数据库的编程语言，是一套标准。
-打开Mysql: mysql -u root -p
-SQL简述SQL的概述Structure Query Language(结构化查询语言)简称SQL
-数据库管理系统可以通过SQL管理数据库；定义和操作数据，维护数据的完整性和安全性。
-mysql是一种关系型数据库，是建立在关系模型基础上，由多张相互连接的二维表（表格）组成的数据库
-对大小写不敏感
-mysql特点：
-
-使用表存储数据，格式统一，便于维护。     
-
-使用SQL语言操作，标
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2024/12/28/python%E4%B9%8B%E5%BC%82%E5%B8%B8/" aria-label="python之异常"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="python之异常" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-28</span>
-        <span><span class="icon-pencil"></span>431 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
-      </div>
-      <h2 class="post-title">python之异常</h2>
-      <article class="post-article">
-        
-          捕获常规异常语法：
-1234try：	可能发生错误的代码except:    如果发生错误执行的代码
-
-捕获指定异常语法:
-1234try:    可能发生异常的代码except 异常类型名 as 变量:    当捕获到该异常类型时，执行的代码
-
-捕获多个异常语法：
-1234try:    可能发生异常的代码except (异常类型1,类型2,...) as 变量:    如果捕获到该异常类型时,执行的代码
-
-捕获所有异常1234try:    可能发生异常的代码except Exception as 变量:    当捕获到该异常类型时，执行的代码
-
-例如
-12345678910111213#
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2024/12/28/python%E4%B9%8B%E6%96%87%E4%BB%B6/" aria-label="python之文件"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/17369576223624.jpg" data-sizes="auto" alt="python之文件" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-28</span>
-        <span><span class="icon-pencil"></span>517 字</span>
+        <span><span class="icon-calendar"></span>2025-05-03</span>
+        <span><span class="icon-pencil"></span>679 字</span>
         <span><span class="icon-clock"></span>2 分钟</span>
       </div>
-      <h2 class="post-title">python之文件</h2>
+      <h2 class="post-title">谷歌语法</h2>
       <article class="post-article">
         
-          open()函数语法：open(name,mode,encoding)
-name：是要打开的目标文件名的字符串（可以包含文件所在的具体路径）
-mode:设置打开文件的模式（访问模式):只读、写入、追加等。
-encoding：编码格式（推荐使用utf-8）
-file&amp;#x3D;open(‘python.txt’,’r’,encoding&amp;#x3D;’’ UTF-8”)
-(encoding 的顺序不是第三位，所以不能用位置参数，用关键字参数直接指定)
-mode:
-
-读文件(read)文件对象.read(number)如果number没有，那将会读取文件中的全部数据
-注意：按理来说一个汉字三个字节，
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2024/12/28/python%E4%B9%8B%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" aria-label="python之基础语法"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="python之基础语法" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-28</span>
-        <span><span class="icon-pencil"></span>584 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
-      </div>
-      <h2 class="post-title">python之基础语法</h2>
-      <article class="post-article">
-        
-          python语法的特点
-每行代码后无需分号
-
-注意冒号
-
-注意缩进
-
-变量无需用数据类型关键词定义
-
-
-基本语法输入输出12a=input()#输入print(&amp;#x27;hi&amp;#x27;,a)#输出
-
-输出时如果print不在同一行，他们输出的结果也不在同一行
-例如：
-123456print(x)print(y)#想要不换行输出，可以在后面加end关键字print(x,end=&amp;quot; &amp;quot;)print(y,end=&amp;quot; &amp;quot;)#end等于什么，就表示输出语句后面跟的是什么
-
-如果想在输出语句中穿插变量：
-12a=&amp;quot;小明&amp;quot;print(f&amp;quo
+          Google语法1234567891011121314151617181920212223242526基础搜索语法关键词搜索：直接输入关键词或短语。双引号精确搜索：使用双引号（&amp;quot;&amp;quot;）进行精确短语搜索。减号排除关键词：使用减号（-）来排除某些词汇。高级搜索语法site:：限定在特定网站或域内搜索，如site:wikipedia.org。intitle:：搜索标题中包含特定词汇的网页，如intitle:气候变化。allintitle:：确保所有列出的词汇都在网页标题中，如allintitle:气候变化 太平洋。inurl:：搜索URL中包含特定词汇的网页，如inurl:blog
         
       </article>
     </div>
@@ -616,26 +461,175 @@ mode:
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2024/12/28/python%E4%B9%8B%E5%B0%81%E8%A3%85%E3%80%81%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/" aria-label="python之封装、继承与多态"></a>
+      <a class="post-link" href="/2025/05/03/%5B%E7%BE%8A%E5%9F%8E%E6%9D%AF%202020%5DEasyphp2/" aria-label="[羊城杯 2020]Easyphp2"></a>
     
     
     <div class="post-cover-right">
       
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="python之封装、继承与多态" class="lazyload">
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[羊城杯 2020]Easyphp2" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-28</span>
-        <span><span class="icon-pencil"></span>468 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
+        <span><span class="icon-calendar"></span>2025-05-03</span>
+        <span><span class="icon-pencil"></span>629 字</span>
+        <span><span class="icon-clock"></span>3 分钟</span>
       </div>
-      <h2 class="post-title">python之封装、继承与多态</h2>
+      <h2 class="post-title">[羊城杯 2020]Easyphp2</h2>
       <article class="post-article">
         
-          封装就是private(私有的)
-关键词:____(双下划线)
-1234567891011121314class phone:    __v=2    def __keep(self):        print(&amp;quot;让cpu以单核模式运行&amp;quot;)    def keep(self):        if(self.__v&amp;gt;=1):            print(&amp;quot;good&amp;quot;)        else :            print(&amp;quot;bad&amp;quot;)ph=phone()# 私有成员无法被类对象直接使用，但是可以被其他的成员使用#
+          题目界面：
+
+一眼看中url的file，一般都存在任意文件读取漏洞
+我们尝试读/etc/passwd
+
+读出来了，再试一下/flag，发现没成功
+那我们尝试读取源码
+发现被过滤了
+经过尝试是过滤了base64加密算法
+我们用双层url编码绕过
+1234567&amp;lt;?php$string = &amp;#x27;convert.base64-encode&amp;#x27;;$exp = &amp;#x27;&amp;#x27;;for($i=0;$i&amp;lt;strlen($string);$i++)&amp;#123;    $exp .= &amp;quot;%25&amp;quot;.dechex(ord($string[$i]));&amp;#12
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/05/03/%5BRoarCTF%202019%5DSimple%20Upload/" aria-label="[RoarCTF 2019]Simple Upload"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[RoarCTF 2019]Simple Upload" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-05-03</span>
+        <span><span class="icon-pencil"></span>962 字</span>
+        <span><span class="icon-clock"></span>4 分钟</span>
+      </div>
+      <h2 class="post-title">[RoarCTF 2019]Simple Upload</h2>
+      <article class="post-article">
+        
+          题目源码：
+12345678910111213141516171819202122232425262728293031323334&amp;lt;?phpnamespace Home\Controller;use Think\Controller;class IndexController extends Controller&amp;#123;    public function index()    &amp;#123;        show_source(__FILE__);    &amp;#125;    public function upload()    &amp;#123;        $uploadFile
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/05/02/%5BwatevrCTF%202019%5DPickle%20Store/" aria-label="[watevrCTF 2019]Pickle Store"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[watevrCTF 2019]Pickle Store" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-05-02</span>
+        <span><span class="icon-pencil"></span>237 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
+      </div>
+      <h2 class="post-title">[watevrCTF 2019]Pickle Store</h2>
+      <article class="post-article">
+        
+          
+题目界面如上
+我们点击buy抓个包看看
+
+发现这个session有点像base64编码，解码看看
+
+解码成功，但是是乱码，根据题目我们判断是pickle编码
+写个脚本解码
+12345import pickleimport base64 a = pickle.loads(base64.b64decode(b&amp;#x27;gAN9cQAoWAUAAABtb25leXEBTfQBWAcAAABoaXN0b3J5cQJdcQNYEAAAAGFudGlfdGFtcGVyX2htYWNxBFggAAAAMmE0MDIxOTA4NmI0YTk1MDNkYWNkNjc1OTRlODg1NjhxBXUu&amp;#x2
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/05/02/%5B%E5%BC%BA%E7%BD%91%E6%9D%AF%202019%5DUpload/" aria-label="[强网杯 2019]Upload"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/126839103p0master1200.jpg" data-sizes="auto" alt="[强网杯 2019]Upload" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-05-02</span>
+        <span><span class="icon-pencil"></span>1.3k 字</span>
+        <span><span class="icon-clock"></span>5 分钟</span>
+      </div>
+      <h2 class="post-title">[强网杯 2019]Upload</h2>
+      <article class="post-article">
+        
+          123考点：网站备份文件泄露反序列化（多文件pop链构造）配合文件上传
+题目界面：
+
+随便注册登录
+
+发现文件上传
+抓包，发现cookie有蹊跷。
+
+12345YTo1OntzOjI6IklEIjtpOjQ7czo4OiJ1c2VybmFtZSI7czo1OiJ0ZXN0MSI7czo1OiJlbWFpbCI7czoxMjoidGVzdDFAcXEuY29tIjtzOjg6InBhc3N3b3JkIjtzOjMyOiI1YTEwNWU4YjlkNDBlMTMyOTc4MGQ2MmVhMjI2NWQ4YSI7czozOiJpbWciO3M6Nzk6Ii4uL3VwbG9hZC9iYmYzOTdk
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/05/01/%5BNPUCTF2020%5Dezlogin/" aria-label="[NPUCTF2020]ezlogin"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[NPUCTF2020]ezlogin" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-05-01</span>
+        <span><span class="icon-pencil"></span>943 字</span>
+        <span><span class="icon-clock"></span>4 分钟</span>
+      </div>
+      <h2 class="post-title">[NPUCTF2020]ezlogin</h2>
+      <article class="post-article">
+        
+          
+首页是一个登录框，但尝试了一下发现这好像不是sql注入，而且过一下就会登录超时
+我们抓包看一下
+
+可以，没有思路，看wp
+wp说这是一个xpath注入，新东西
+而且这个还是无回显的，Xpath盲注
+知识点直接看笔记
+直接开始解题
+输入
+1&amp;#x27;or count(/)=1  or &amp;#x27;&amp;#x27;=&amp;#x27;     //count函数是查询节点个数
+
+1&amp;#x27;or count(/)=2  or &amp;#x27;&amp;#x27;=&amp;#x27;
+
+回显不同，存在盲注
+盲注脚本思路：
+123&amp;lt;username&amp;gt;&amp;#x27;or substring(name(/*[1]),
         
       </article>
     </div>
@@ -646,7 +640,7 @@ mode:
 
   <nav id="page-nav" data-aos="fade-up">
     
-    <a class="extend prev" rel="prev" href="/page/7/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/9/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/7/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/9/">下一页 &raquo;</a>
   </nav>
 
 
@@ -664,7 +658,7 @@ mode:
       <span class="icon-copyright"></span>
       2020-2025
       <span class="footer-info-sep rotate"></span>
-      fuboy
+      FuB0Y
     </div>
     
       <div>
@@ -675,10 +669,10 @@ mode:
     
       <div>
         <span class="icon-brush"></span>
-        115.8k
+        284k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        07:58
+        20:48
       </div>
     
     
@@ -707,14 +701,14 @@ mode:
   <div class="sidebar-wrap">
     
       <div class="sidebar-author">
-  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
-  <div class="sidebar-author-name">fuboy</div>
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
   <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">85</div>
+    <div class="sidebar-state-number">186</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -722,7 +716,7 @@ mode:
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">179</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -874,6 +868,15 @@ mode:
 </script>
 
 
+
+  
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm&#x2F;Yr2r3Dy4lfFg" crossorigin="anonymous" defer data-pjax></script>
+
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb&#x2F;GhzOouOXtZMP&#x2F;7XUzwPTstBeZFe&#x2F;+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" defer onload="renderMathInElement(document.body, {delimiters: [{left: &#39;$$&#39;, right: &#39;$$&#39;, display: true},{left: &#39;$&#39;, right: &#39;$&#39;, display: false}]});" data-pjax></script>
+
+  
 
 
 

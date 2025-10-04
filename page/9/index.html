@@ -34,7 +34,7 @@
 <meta property="og:description" content="世所谓英雄者，不以挫抑而灰心，不以失败而退怯">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/banner.webp">
-<meta property="article:author" content="fuboy">
+<meta property="article:author" content="FuB0Y">
 <meta property="article:tag" content="博客">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/images/banner.webp">
@@ -49,6 +49,12 @@
 <link rel="stylesheet" href="/css/style.css">
 
   <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+    
+      
+        <link rel="preload" href="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+      
+    
   
   
   
@@ -197,14 +203,14 @@
     <div class="sidebar-wrap" data-aos="fade-up">
       
         <div class="sidebar-author">
-  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
-  <div class="sidebar-author-name">fuboy</div>
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
   <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">85</div>
+    <div class="sidebar-state-number">186</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -212,7 +218,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">179</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -272,41 +278,30 @@
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2024/12/28/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" aria-label="正则表达式"></a>
+      <a class="post-link" href="/2025/05/01/Xpath%E7%AC%94%E8%AE%B0/" aria-label="Xpath笔记"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="正则表达式" class="lazyload">
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="Xpath笔记" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-28</span>
-        <span><span class="icon-pencil"></span>1.7k 字</span>
-        <span><span class="icon-clock"></span>7 分钟</span>
+        <span><span class="icon-calendar"></span>2025-05-01</span>
+        <span><span class="icon-pencil"></span>2.6k 字</span>
+        <span><span class="icon-clock"></span>12 分钟</span>
       </div>
-      <h2 class="post-title">正则表达式</h2>
+      <h2 class="post-title">Xpath笔记</h2>
       <article class="post-article">
         
-          正则表达式(regular expression)描述了一种字符串匹配的模式（pattern），可以用来检查一个串是否含有某种子串、将匹配的子串替换或者从某个串中取出符合某个条件的子串等。
-行定位符行定位符用于规定匹配模式只能出现在行的开头或者结尾，“^”表示行的开始，”$”表示行的结尾
-例如：^tm  和 tm$
-元字符除了”^”和”$”，还有很多常用的元字符，例如\bmr\w*\b,两个\b表示匹配单词，*表示匹配0次或多次，\w表示匹配字母、数字、下划线或汉字，该正则表达式就表示匹配以字母”mr”开头的单词
+          Xpath基础语法xpath注入详解 - 渗透测试中心 - 博客园
+查询基本语法作为引入
+1//users/user[loginID/text()=’abc’ and password/text()=’test123’] 
 
-
-
-元字符
-说明
-
-
-
-.
-匹配除换行符以外的任意字符
-
-
-\w
-匹配字母、数
+这是一个XPath查询语句，获取loginID为abc的所有user数据，用户需要提交正确的loginID和password才能返回结果。如果黑客在 loginID 字段中输入：’ or 1&amp;#x3D;1 并在 password 中输入：’ or 1&amp;#x3D;1  就能绕过校验,成功获取所有user数据
+–&amp;gt;
+1//users/user[LoginID/text(
         
       </article>
     </div>
@@ -316,29 +311,35 @@
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2024/12/27/python%E4%B9%8B%E5%AE%B9%E5%99%A8(%E5%85%83%E7%BB%84%E3%80%81%E9%9B%86%E5%90%88%E5%92%8C%E5%AD%97%E5%85%B8)/" aria-label="python之容器(元组、集合和字典)"></a>
+      <a class="post-link" href="/2025/05/01/%5BGoogleCTF2019%20Quals%5DBnv/" aria-label="[GoogleCTF2019 Quals]Bnv"></a>
     
     
     <div class="post-cover-right">
       
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="python之容器(元组、集合和字典)" class="lazyload">
+        
+        
+          <img data-src="/images/1737907114de8a.jpg" data-sizes="auto" alt="[GoogleCTF2019 Quals]Bnv" class="lazyload">
+        
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-27</span>
-        <span><span class="icon-pencil"></span>1.4k 字</span>
-        <span><span class="icon-clock"></span>6 分钟</span>
+        <span><span class="icon-calendar"></span>2025-05-01</span>
+        <span><span class="icon-pencil"></span>1.2k 字</span>
+        <span><span class="icon-clock"></span>5 分钟</span>
       </div>
-      <h2 class="post-title">python之容器(元组、集合和字典)</h2>
+      <h2 class="post-title">[GoogleCTF2019 Quals]Bnv</h2>
       <article class="post-article">
         
-          元组元组(tuple)与列表类似，但元组是不可变的，可简单将其看作是不可变的列表，元组常用于保存不可修改的内容
-元组的创建与访问（元组用圆括号）123456t=(1,2,3,4)#t=(1,)定义元组时，如果元组中只有一个数据，这个元素后面也要加逗号print(t[1])print(t[-2])#访问t的倒数第二个元素#嵌套元组t=((1,2,3),(4,5,6))
+          这是一道国外的ctf题，考的也是xxe，但和我们之前做过的都不一样，这个题考得更细，最好还是再去深究一下xml的知识点
 
-元组其实大部分内容都与列表类似
-本文只会谈及元组所拥有的特点与用法，与列表类似的部分会选择性跳过，不记得的可以访问我上一篇文章（字符串与列表）
-修改与删除(del)上文讲到了，元组是不可修改的，所以我们只能采用重新赋值的方式操作
+这里只有一个submit，我们抓包查看
+
+发现是json格式
+根据大佬总结，存在json的地方可能存在xxe漏洞
+我们先将content-type改为xml
+然后把json数据换为一个简单的xml格式
+1234567&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt;&amp;lt;!DOCTYPE message [             &amp;lt;!ELEMENT message (#PCDATA)&amp;g
         
       </article>
     </div>
@@ -348,32 +349,97 @@
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2024/12/27/python%E4%B9%8B%E5%AE%B9%E5%99%A8(%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E5%88%97%E8%A1%A8)/" aria-label="python之容器（字符串与列表）"></a>
+      <a class="post-link" href="/2025/05/01/%5B%E5%AE%89%E6%B4%B5%E6%9D%AF%202019%5D%E4%B8%8D%E6%98%AF%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" aria-label="[安洵杯 2019]不是文件上传"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/17369576223624.jpg" data-sizes="auto" alt="python之容器（字符串与列表）" class="lazyload">
+        <img data-src="/../images/126839103p0master1200.jpg" data-sizes="auto" alt="[安洵杯 2019]不是文件上传" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-27</span>
-        <span><span class="icon-pencil"></span>688 字</span>
+        <span><span class="icon-calendar"></span>2025-05-01</span>
+        <span><span class="icon-pencil"></span>2.6k 字</span>
+        <span><span class="icon-clock"></span>11 分钟</span>
+      </div>
+      <h2 class="post-title">[安洵杯 2019]不是文件上传</h2>
+      <article class="post-article">
+        
+          
+这个题过于cs了
+一直以为是个文件上传的题，但怎么也注入不了，看题解题解说这是一个反序列化配合sql题…八竿子打不着
+题目给了源码
+ 代码审计
+upload.php
+12345678910111213141516171819&amp;lt;?phpinclude(&amp;quot;./helper.php&amp;quot;);class upload extends helper &amp;#123;	public function upload_base()&amp;#123;		$this-&amp;gt;upload();	&amp;#125;&amp;#125;if ($_FILES)&amp;#123;	if ($_FILES[&amp;quot;file
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/04/30/%5BSUCTF%202018%5Dannonymous/" aria-label="[SUCTF 2018]annonymous"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/126839103p0master1200.jpg" data-sizes="auto" alt="[SUCTF 2018]annonymous" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-04-30</span>
+        <span><span class="icon-pencil"></span>454 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
+      </div>
+      <h2 class="post-title">[SUCTF 2018]annonymous</h2>
+      <article class="post-article">
+        
+          题目源码：
+1234567891011121314 &amp;lt;?php$MY = create_function(&amp;quot;&amp;quot;,&amp;quot;die(`cat flag.php`);&amp;quot;);$hash = bin2hex(openssl_random_pseudo_bytes(32));eval(&amp;quot;function SUCTF_$hash()&amp;#123;&amp;quot;    .&amp;quot;global \$MY;&amp;quot;    .&amp;quot;\$MY();&amp;quot;    .&amp;quot;&amp;#125;&amp;quot;);if(isset($_GET[&amp;#x27;func
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/04/29/%5BSUCTF%202018%5DMultiSQL/" aria-label="[SUCTF 2018]MultiSQL"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[SUCTF 2018]MultiSQL" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-04-29</span>
+        <span><span class="icon-pencil"></span>484 字</span>
         <span><span class="icon-clock"></span>2 分钟</span>
       </div>
-      <h2 class="post-title">python之容器（字符串与列表）</h2>
+      <h2 class="post-title">[SUCTF 2018]MultiSQL</h2>
       <article class="post-article">
         
-          字符串字符串访问首先我们定义一个字符串
-1s=&amp;quot;python&amp;quot;
+          打开源码发现/user/login.php和/user/res.php路径
+随便注册然后登录
 
-访问方式有多种，我们来看最常规的几种
-12345678#访问字符串中的单个字符print(s[i])#访问字符串中的字串print(s[i:j])#从s[i]到s[j-1]print(s[:j])#从s[0]到s[j-1]print(s[i:])#从s[i]到字符串末尾print(s[i:j:z])#从s[i]到s[j-1]以z步长截取#上述方法也叫切片
+这里可以文件上传，但我试了没用，什么文件上传后缀都会变成jpg文件
+我们打开用户信息
 
-单个字符编码python使用ord()函数返回单个字符的编码，chr()函数把编码转成相应字符
-下面我们来演示一下
-123s=&amp;#x27;A&amp;#x27;p
+发现有一个参数?id=2
+根据题目意思猜测是sql注入
+解题思路：测试后发现过滤了union，select ，&amp;amp;，|，过滤了select然后存在堆叠注入的可以使用预处理注入，尝试写入shell，因为过滤了select等字符，使用char()或者16进制绕过，需要执行的语句
+解题：
+?id存在堆叠注入
+预处理语句+set设置变量：
+123set @a=&amp;quot;需要写入的sql语句&amp;quot;;prepa
         
       </article>
     </div>
@@ -383,36 +449,27 @@
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2024/12/26/python%E4%B9%8B%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/" aria-label="python之魔术方法"></a>
+      <a class="post-link" href="/2025/04/28/%5BGYCTF2020%5DEz_Express/" aria-label="[GYCTF2020]Ez_Express"></a>
     
     
     <div class="post-cover-right">
       
-        <img data-src="/../images/126839103p0master1200.jpg" data-sizes="auto" alt="python之魔术方法" class="lazyload">
+        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[GYCTF2020]Ez_Express" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-26</span>
-        <span><span class="icon-pencil"></span>401 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
+        <span><span class="icon-calendar"></span>2025-04-28</span>
+        <span><span class="icon-pencil"></span>848 字</span>
+        <span><span class="icon-clock"></span>4 分钟</span>
       </div>
-      <h2 class="post-title">python之魔术方法</h2>
+      <h2 class="post-title">[GYCTF2020]Ez_Express</h2>
       <article class="post-article">
         
-          init()构造方法关键词：
-1__init__
-
-作用：可以直接在创建对象时对类中属性赋值
-示例：
-12345678class a:    name=None#类中定义可不写    age=None    def __init__(self,name,age):        self.name=name        self.age=agex=a(&amp;quot;小米&amp;quot;,18)
-
-str()字符串方法关键字：
-1__str__
-
-此方法是当打印对象或者使用str()转换对象时被调用
-话不多说，上代码：
-12345678class person:    def __init__(se
+          这个题之前总结JS原型链污染的时候当例题kan了
+就再简单说一下思路吧
+主要js代码：
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172var express = require(&amp;#x27;express&amp;#x27;);var router = express.Router();const isObject = obj =&amp;gt; obj &amp;amp;&amp;amp; obj.co
         
       </article>
     </div>
@@ -422,30 +479,135 @@ str()字符串方法关键字：
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2024/12/25/python%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" aria-label="python之面向对象"></a>
+      <a class="post-link" href="/2025/04/27/Nginx%E6%BC%8F%E6%B4%9E/" aria-label="Nginx漏洞"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="python之面向对象" class="lazyload">
+        <img data-src="/../images/124691006_p0_master1200.jpg" data-sizes="auto" alt="Nginx漏洞" class="lazyload">
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-12-25</span>
-        <span><span class="icon-pencil"></span>246 字</span>
+        <span><span class="icon-calendar"></span>2025-04-27</span>
+        <span><span class="icon-pencil"></span>282 字</span>
         <span><span class="icon-clock"></span>1 分钟</span>
       </div>
-      <h2 class="post-title">python之面向对象</h2>
+      <h2 class="post-title">Nginx漏洞</h2>
       <article class="post-article">
         
-          类的定义12class classname:    //内容
+          该文记录我做ctf题遇到的nginx漏洞，而非全部漏洞
+ Nginx配置错误导致漏洞
+ 目录穿越漏洞
+漏洞成因：
+这个常见于Nginx做反向代理的情况，动态的部分被proxy_pass传递给后端端口，而静态文件需要Nginx来处理。
+假设静态文件存储在/home/目录下，而该目录在url中名字为files，那么就需要用alias设置目录的别名：
+123location /files &amp;#123;    alias /home/;&amp;#125;
+此时，访问http://example.com/files/readme.txt，就可以获取/home/readme.txt文件。即/files变成了/h
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/04/24/%5BGYCTF2020%5DEasyphp/" aria-label="[GYCTF2020]Easyphp"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        
+        
+          <img data-src="/images/175514388679175514388612.jpg" data-sizes="auto" alt="[GYCTF2020]Easyphp" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-04-24</span>
+        <span><span class="icon-pencil"></span>2.1k 字</span>
+        <span><span class="icon-clock"></span>10 分钟</span>
+      </div>
+      <h2 class="post-title">[GYCTF2020]Easyphp</h2>
+      <article class="post-article">
+        
+          太难了~~审代码审了一天
+前面的步骤就不说了
+直接访问www.zip下载源码
+贴两个最重要的源码：
+ 审计代码
+lib.php
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210310410510610710810911011111211311411
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/04/22/Crypto%E4%B9%8BRSA%E5%90%84%E8%80%83%E7%82%B9/" aria-label="Crypto之RSA各考点"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="Crypto之RSA各考点" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-04-22</span>
+        <span><span class="icon-pencil"></span>8.2k 字</span>
+        <span><span class="icon-clock"></span>42 分钟</span>
+      </div>
+      <h2 class="post-title">Crypto之RSA各考点</h2>
+      <article class="post-article">
+        
+          RSA相关知识点与攻击方法 - vict0r - 博客园
+ 已知p,q,e求d（rsa）
+我们导入python的gmpy2库
+12345678from gmpy2 import invertp=473398607161q=4511491e=17phi=(p-1)*(q-1)d=invert(e,phi) #求print(d)#flag&amp;#123;125631357777427553&amp;#125;
+成功得到flag
 
+ 已知p,q,e,c 求明文m --[buu rsarsa题]
+123456789101112from libnum import n2s,s2nfrom gmpy2 import 
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/04/21/Flask-Session%E4%BC%AA%E9%80%A0/" aria-label="Flask-Session伪造"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="Flask-Session伪造" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-04-21</span>
+        <span><span class="icon-pencil"></span>383 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
+      </div>
+      <h2 class="post-title">Flask-Session伪造</h2>
+      <article class="post-article">
+        
+          Session之前做到过这种题目，但是那时候好像觉得记住就行，没必要做笔记
+哈哈哈 现在忘记了&amp;#x3D;&amp;#x3D;我来做笔记了
+主要还是flask_session_cookie_manager工具的使用
+flask session伪造admin身份_flask-session-cookie-manager-CSDN博客大佬笔记
+123能够进行Flask session伪造的前提：开启session知道flask用来签名的SECRET_KEY(主要)
 
-类的对象类对象支持两种操作：实例化和属性的引用
-简单来说就是调用类和访问类的属性和方法
-举个例子：
-12345678910class class1:   a=123   b=456    def hanshu(self):#类的方法后面会讲到        return &amp;quot;hello world&amp;quot;#创建一个对象，调用类x=class1()#访问类的属性和方法print(&amp;quot;class1类的属性a,b为：&amp;quot;,x.a,x.b)print(&amp;quot;class1类的方法输出结果为：&amp;quot;,
+脚本使用：
+解密:python flask_session_cookie_manager3.py decode -c xxx -s xxx 
         
       </article>
     </div>
@@ -456,7 +618,7 @@ str()字符串方法关键字：
 
   <nav id="page-nav" data-aos="fade-up">
     
-    <a class="extend prev" rel="prev" href="/page/8/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span>
+    <a class="extend prev" rel="prev" href="/page/8/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/10/">下一页 &raquo;</a>
   </nav>
 
 
@@ -474,7 +636,7 @@ str()字符串方法关键字：
       <span class="icon-copyright"></span>
       2020-2025
       <span class="footer-info-sep rotate"></span>
-      fuboy
+      FuB0Y
     </div>
     
       <div>
@@ -485,10 +647,10 @@ str()字符串方法关键字：
     
       <div>
         <span class="icon-brush"></span>
-        115.8k
+        284k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        07:58
+        20:48
       </div>
     
     
@@ -517,14 +679,14 @@ str()字符串方法关键字：
   <div class="sidebar-wrap">
     
       <div class="sidebar-author">
-  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
-  <div class="sidebar-author-name">fuboy</div>
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
   <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">85</div>
+    <div class="sidebar-state-number">186</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -532,7 +694,7 @@ str()字符串方法关键字：
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">179</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -684,6 +846,15 @@ str()字符串方法关键字：
 </script>
 
 
+
+  
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm&#x2F;Yr2r3Dy4lfFg" crossorigin="anonymous" defer data-pjax></script>
+
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb&#x2F;GhzOouOXtZMP&#x2F;7XUzwPTstBeZFe&#x2F;+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" defer onload="renderMathInElement(document.body, {delimiters: [{left: &#39;$$&#39;, right: &#39;$$&#39;, display: true},{left: &#39;$&#39;, right: &#39;$&#39;, display: false}]});" data-pjax></script>
+
+  
 
 
 

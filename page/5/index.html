@@ -34,7 +34,7 @@
 <meta property="og:description" content="世所谓英雄者，不以挫抑而灰心，不以失败而退怯">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/banner.webp">
-<meta property="article:author" content="fuboy">
+<meta property="article:author" content="FuB0Y">
 <meta property="article:tag" content="博客">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/images/banner.webp">
@@ -49,6 +49,12 @@
 <link rel="stylesheet" href="/css/style.css">
 
   <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+    
+      
+        <link rel="preload" href="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+      
+    
   
   
   
@@ -197,14 +203,14 @@
     <div class="sidebar-wrap" data-aos="fade-up">
       
         <div class="sidebar-author">
-  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
-  <div class="sidebar-author-name">fuboy</div>
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
   <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">85</div>
+    <div class="sidebar-state-number">186</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -212,7 +218,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">179</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -272,40 +278,31 @@
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/24/%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202018%5DFakebook/" aria-label="[网鼎杯 2018]Fakebook"></a>
+      <a class="post-link" href="/2025/05/28/%5B%E8%93%9D%E5%B8%BD%E6%9D%AF%202021%5DOne%20Pointer%20PHP/" aria-label="[蓝帽杯 2021]One Pointer PHP"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[网鼎杯 2018]Fakebook" class="lazyload">
+        
+        
+          <img data-src="/images/bizhi1.png" data-sizes="auto" alt="[蓝帽杯 2021]One Pointer PHP" class="lazyload">
+        
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-24</span>
-        <span><span class="icon-pencil"></span>518 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
+        <span><span class="icon-calendar"></span>2025-05-28</span>
+        <span><span class="icon-pencil"></span>3.7k 字</span>
+        <span><span class="icon-clock"></span>20 分钟</span>
       </div>
-      <h2 class="post-title">[网鼎杯 2018]Fakebook</h2>
+      <h2 class="post-title">[蓝帽杯 2021]One Pointer PHP</h2>
       <article class="post-article">
         
-           
-这个题我看到有登录和注册还以为是sql注入，但发现根本注不了
-那就先登录进去看看吧
-
-进来之后发现no可以注入
-1230 union/**/select 1,(查询语句),3,4#//union select连在一起会被过滤，用/**/分开//查询结果只能在2处回显
-
-但经过我一顿查询
-发现毛都没有
-注意看，这里的data字段存放的是序列化字符串(后面要考)
-
-根据题解思路，说看robots.txt
-我们访问一下
-
-发现一个备份文件，我们下载下来访问
-发现一堆代码
-123456789101112131415161718192021222324252627282930313233343536
+          bypass disable_functions姿势总结-先知社区
+参考链接：[BUUOJ记录] [蓝帽杯2021] One Pointer PHP - Ye’sBlog - 博客园
+有源码附件
+add_api.php:
+12345678910111213141516&amp;lt;?phpinclude &amp;quot;user.php&amp;quot;;if($user=unserialize($_COOKIE[&amp;quot;data&amp;quot;]))&amp;#123;	$count[++$user-&amp;gt;count]=1;	if($count[]=1)&amp;#123;		$user-&amp;gt;count+=1;		s
         
       </article>
     </div>
@@ -315,26 +312,32 @@
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/23/CTFSHOW-php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" aria-label="CTFSHOW-php反序列化"></a>
+      <a class="post-link" href="/2025/05/28/%5BJMCTF%202021%5DUploadHub/" aria-label="[JMCTF 2021]UploadHub"></a>
     
     
     <div class="post-cover-right">
       
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="CTFSHOW-php反序列化" class="lazyload">
+        
+        
+          <img data-src="/images/1737907114de8a.jpg" data-sizes="auto" alt="[JMCTF 2021]UploadHub" class="lazyload">
+        
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-23</span>
-        <span><span class="icon-pencil"></span>2.7k 字</span>
-        <span><span class="icon-clock"></span>15 分钟</span>
+        <span><span class="icon-calendar"></span>2025-05-28</span>
+        <span><span class="icon-pencil"></span>842 字</span>
+        <span><span class="icon-clock"></span>4 分钟</span>
       </div>
-      <h2 class="post-title">CTFSHOW-php反序列化</h2>
+      <h2 class="post-title">[JMCTF 2021]UploadHub</h2>
       <article class="post-article">
         
-          123456789__construct()//当一个对象创建时被调用__destruct() //当一个对象销毁时被调用__toString() //当一个对象被当作一个字符串使用__sleep()//在对象在被序列化之前运行__wakeup()//将在反序列化之后立即被调用(通过序列化对象元素个数不符来绕过)__get()//获得一个类的成员变量时调用__set()//设置一个类的成员变量时调用__invoke()//调用函数的方式调用一个对象时的回应方法__call()//当调用一个对象中的不能用的方法的时候就会执行这个函数
+          一个文件上传界面
+参考链接：[JMCTF 2021]UploadHub-CSDN博客
 
-web254(代码审计)123456789101112131
+还有源码附件
+index.php:
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647&amp;lt;?php    error_reporting(0);    session_start();    include(&amp;#x27;config.php&amp;#x27;);    $upload = &amp;#x27;upload/&amp;#x27;.md5(&amp;quot;shuyu&amp;quot;.$_SERVER[&amp;
         
       </article>
     </div>
@@ -344,172 +347,264 @@ web254(代码审计)123456789101112131
     <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/23/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF/" aria-label="文件上传绕过姿势"></a>
+      <a class="post-link" href="/2025/05/28/%5BHFCTF2021%20Quals%5DUnsetme/" aria-label="[HFCTF2021 Quals]Unsetme"></a>
     
     
     <div class="post-cover-left">
       
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="文件上传绕过姿势" class="lazyload">
+        
+        
+          <img data-src="/images/1755142834147175514283467.jpg" data-sizes="auto" alt="[HFCTF2021 Quals]Unsetme" class="lazyload">
+        
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-23</span>
-        <span><span class="icon-pencil"></span>471 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
-      </div>
-      <h2 class="post-title">文件上传绕过姿势</h2>
-      <article class="post-article">
-        
-          短标签1234567891011&amp;lt;?php eval($_POST[&amp;#x27;a&amp;#x27;]) ?&amp;gt;&amp;lt;?php assert(@$_POST[&amp;#x27;a&amp;#x27;]); ?&amp;gt;&amp;lt;?=eval($_POST[1]);?&amp;gt;&amp;lt;?=eval($_POST&amp;#123;1&amp;#125;);?&amp;gt;&amp;lt;?=system(&amp;#x27;tac ../f*&amp;#x27;)?&amp;gt;&amp;lt;?=`tac ../f*`?&amp;gt;
-
-
-
-123456789101112131415161718&amp;lt;?php$fun = create_function(&amp;#x27;&amp;#
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/22/%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202020%20%E9%9D%92%E9%BE%99%E7%BB%84%5DAreUSerialz/" aria-label="[网鼎杯 2020 青龙组]AreUSerialz"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[网鼎杯 2020 青龙组]AreUSerialz" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-22</span>
-        <span><span class="icon-pencil"></span>478 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
-      </div>
-      <h2 class="post-title">[网鼎杯 2020 青龙组]AreUSerialz</h2>
-      <article class="post-article">
-        
-           题目源码：
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677&amp;lt;?phpinclude(&amp;quot;flag.php&amp;quot;);highlight_file(__FILE__);class FileHandler &amp;#123;    protected $op;    protected $filename;    protected $cont
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/21/CTFSHOW-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" aria-label="CTFSHOW-文件包含"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="CTFSHOW-文件包含" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-21</span>
-        <span><span class="icon-pencil"></span>3.1k 字</span>
-        <span><span class="icon-clock"></span>14 分钟</span>
-      </div>
-      <h2 class="post-title">CTFSHOW-文件包含</h2>
-      <article class="post-article">
-        
-           说明：
-前几题举图示例
-后面由于感官问题就不列图了
-web78(无过滤)123456if(isset($_GET[&amp;#x27;file&amp;#x27;]))&amp;#123;    $file = $_GET[&amp;#x27;file&amp;#x27;];    include($file);&amp;#125;else&amp;#123;    highlight_file(__FILE__);&amp;#125;
-
-
-我们先用data伪协议来查看flag在哪个文件中
-1?file=data://text/plain,&amp;lt;?php system(&amp;#x27;ls&amp;#x27;);?&amp;gt;
-
-发现是flag.php，那我们直接用d
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/16/%5BGXYCTF2019%5DBabySQli/" aria-label="[GXYCTF2019]BabySQli"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[GXYCTF2019]BabySQli" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-16</span>
-        <span><span class="icon-pencil"></span>408 字</span>
+        <span><span class="icon-calendar"></span>2025-05-28</span>
+        <span><span class="icon-pencil"></span>293 字</span>
         <span><span class="icon-clock"></span>1 分钟</span>
       </div>
-      <h2 class="post-title">[GXYCTF2019]BabySQli</h2>
+      <h2 class="post-title">[HFCTF2021 Quals]Unsetme</h2>
+      <article class="post-article">
+        
+           代码审计
+12345678910111213&amp;lt;?php// Kickstart the framework$f3=require(&amp;#x27;lib/base.php&amp;#x27;);   //引入base.php启动框架,并将框架实例赋值给$f3。$f3-&amp;gt;set(&amp;#x27;DEBUG&amp;#x27;,1); //设置框架的DEBUG模式为启用if ((float)PCRE_VERSION&amp;lt;8.0)     trigger_error(&amp;#x27;PCRE version is out of date&amp;#x27;); //检查PCRE(Perl兼容正则表达式)的版本是否低于8
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/05/27/%5BWMCTF2020%5DWeb%20Check%20in%202.0/" aria-label="[WMCTF2020]Web Check in 2.0"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        
+        
+          <img data-src="/images/bizhi1.png" data-sizes="auto" alt="[WMCTF2020]Web Check in 2.0" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-05-27</span>
+        <span><span class="icon-pencil"></span>818 字</span>
+        <span><span class="icon-clock"></span>4 分钟</span>
+      </div>
+      <h2 class="post-title">[WMCTF2020]Web Check in 2.0</h2>
+      <article class="post-article">
+        
+          关于file_put_contents的一些小测试 | Cyc1e’s Blog
+ 源码
+123456789101112131415//PHP 7.0.33 Apache/2.4.25error_reporting(0);$sandbox = &amp;#x27;/var/www/html/sandbox/&amp;#x27; . md5($_SERVER[&amp;#x27;REMOTE_ADDR&amp;#x27;]);@mkdir($sandbox);@chdir($sandbox);var_dump(&amp;quot;Sandbox:&amp;quot;.$sandbox);highlight_file(__FILE__);if(
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/05/27/%5B2021%E7%A5%A5%E4%BA%91%E6%9D%AF%5DPackage%20Manager%202021/" aria-label="[2021祥云杯]Package Manager 2021"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        
+        
+          <img data-src="/images/17373827994914.jpg" data-sizes="auto" alt="[2021祥云杯]Package Manager 2021" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-05-27</span>
+        <span><span class="icon-pencil"></span>733 字</span>
+        <span><span class="icon-clock"></span>3 分钟</span>
+      </div>
+      <h2 class="post-title">[2021祥云杯]Package Manager 2021</h2>
+      <article class="post-article">
+        
+          预期解我看不懂
+这里记录了两个非预期解
+祥云杯 - KKfine’s blog
+这个题有附件，下载
+里面好多ts和pug文件
+打开题目
+开局502
+后面看题解才知道是需要下载依赖
+1cnpm install
+
+有登录注册
+还有个auth
+
+ mongodb注入
+通过schema.ts可以知道用的是mongoDB数据库
+Mongoose 是一个让我们可以通过Node来操作MongoDB数据库的一个模块
+
+然后在index.ts中的/auth路由存在sql注入漏洞
+index.ts:
+123456789101112131415161718192021222324252627282930router
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/05/27/%5BXDCTF%202015%5Dfilemanager/" aria-label="[XDCTF 2015]filemanager"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        
+        
+          <img data-src="/images/17369576223624.jpg" data-sizes="auto" alt="[XDCTF 2015]filemanager" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-05-27</span>
+        <span><span class="icon-pencil"></span>827 字</span>
+        <span><span class="icon-clock"></span>3 分钟</span>
+      </div>
+      <h2 class="post-title">[XDCTF 2015]filemanager</h2>
+      <article class="post-article">
+        
+           代码审计
+/www.tar.gz下载源码
+只展示重要代码
+common是连接数据库代码
+upload.php
+有白名单
+123if (!in_array($path_parts[&amp;quot;extension&amp;quot;], array(&amp;quot;gif&amp;quot;, &amp;quot;jpg&amp;quot;, &amp;quot;png&amp;quot;, &amp;quot;zip&amp;quot;, &amp;quot;txt&amp;quot;))) &amp;#123;			exit(&amp;quot;error extension&amp;quot;);		&amp;#125;
+用basename防止目录穿越
+用pathinfo()将文件路径划分为数组
+12$
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/05/27/%5BCISCN2019%20%E5%8D%8E%E4%B8%9C%E5%8C%97%E8%B5%9B%E5%8C%BA%5DWeb2/" aria-label="[CISCN2019 华东北赛区]Web2"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        
+        
+          <img data-src="/images/1715139851115171513985117.jpg" data-sizes="auto" alt="[CISCN2019 华东北赛区]Web2" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-05-27</span>
+        <span><span class="icon-pencil"></span>611 字</span>
+        <span><span class="icon-clock"></span>3 分钟</span>
+      </div>
+      <h2 class="post-title">[CISCN2019 华东北赛区]Web2</h2>
+      <article class="post-article">
+        
+          第一次在buu刷到xss的题目，这里我的vps已经到期了，复现不了了，简单记录一下做法吧
+先扫一下目录，有以下界面
+1234567index.phpadmin.phplogin.phpregister.phppost.phpcommitbug.phpabout.php
+admin.php:
+
+post.php:
+
+经测试，post.php的投稿处存在xss漏洞
+现在解题思路清晰了
+构造xss-&amp;gt;获取admin的cookie-&amp;gt;登录admin.php
+但xss也有waf
+这里记录一下大佬们是怎么做的：
+123投稿存在XSS，但是存在一些过滤，使用Markup转码，然后eval执行JS
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/05/26/%5BNPUCTF2020%5D%E9%AA%8C%E8%AF%81%F0%9F%90%8E/" aria-label="[NPUCTF2020]验证🐎"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        
+        
+          <img data-src="/images/17369576223624.jpg" data-sizes="auto" alt="[NPUCTF2020]验证🐎" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-05-26</span>
+        <span><span class="icon-pencil"></span>1.9k 字</span>
+        <span><span class="icon-clock"></span>8 分钟</span>
+      </div>
+      <h2 class="post-title">[NPUCTF2020]验证🐎</h2>
+      <article class="post-article">
+        
+          题目界面：
+
+点击链接出现JS源码
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899// 导入所需模块const express = require(&amp;#x27;express&amp;#x27;); // Express web框架const bodyParser = req
+        
+      </article>
+    </div>
+  </div>
+</div>
+  
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/05/23/%5BGFCTF%202021%5Dez_calc/" aria-label="[GFCTF 2021]ez_calc"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        
+        
+          <img data-src="/images/175514388679175514388612.jpg" data-sizes="auto" alt="[GFCTF 2021]ez_calc" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-05-23</span>
+        <span><span class="icon-pencil"></span>2k 字</span>
+        <span><span class="icon-clock"></span>9 分钟</span>
+      </div>
+      <h2 class="post-title">[GFCTF 2021]ez_calc</h2>
       <article class="post-article">
         
           
-这一看就是一个sql注入题
-我们先来试过滤
-1234name=1&amp;#x27;=#-&amp;gt;被过滤name=1&amp;#x27;( -&amp;gt;被过滤name=1&amp;#x27;) -&amp;gt;被过滤可知=，（，）都被过滤了
+题目界面如上
+查看源码，划拉到最下面
 
-那肯定不是寻常的sql注入了，因为括号都没了，还注啥呀
-到这里也是不知道办法
-题解说看源码
-源码里有用的就这些
-1234567891011121314151617181920212223242526272829303132333435363738&amp;lt;?phprequire &amp;quot;config.php&amp;quot;;require &amp;quot;flag.php&amp;quot;;$n
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/16/%5BSUCTF%202019%5DCheckIn/" aria-label="[SUCTF 2019]CheckIn"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/17373827994914.jpg" data-sizes="auto" alt="[SUCTF 2019]CheckIn" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-16</span>
-        <span><span class="icon-pencil"></span>340 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
-      </div>
-      <h2 class="post-title">[SUCTF 2019]CheckIn</h2>
-      <article class="post-article">
-        
-           
-我们先上传一个写有一句话木马的php文件试一下
-回显说文件后缀不能有ph
-所以我们php3,php5,phhtml都不能用了
-那我们再上传一个后缀名改为jpg的一句话木马文件
+有提示，这里有个js大小写漏洞
+主要函数：
+12在Character.toUpperCase()函数中，字符ı会转变为I，字符ſ会变为S。在Character.toLowerCase()函数中，字符İ会转变为i，字符K会转变为k。
+输入admın/admin123，就可以成功登录进去了
 
-发现不能有&amp;lt;?符号
-那我们使用js
-1&amp;lt;script language=&amp;#x27;php&amp;#x27;&amp;gt; @eval($_POST[&amp;#x27;pass&amp;#x27;]);&amp;lt;/script&amp;gt;
-
-再次提交
-
-发现它后端检查了文件的标识头
-那我们就可以修改一下文件的标识头
-1gif文件：直接在文件内容开头写入GIF89a就行，一般都用这个，因为好记
-
-再次上传，上传成功
-现在就要考虑如何将上
+进去之后是一个类似计算器一样的
+源码+注释
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950// 获取请求体中的calc参数值let 
         
       </article>
     </div>
@@ -519,120 +614,29 @@ web78(无过滤)123456if(isset($_GET[&amp;#x27;file&amp;#x27;]))&amp;#123;    $f
     <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/03/15/%5B%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98%202019%5DHardSQL/" aria-label="[极客大挑战 2019]HardSQL"></a>
+      <a class="post-link" href="/2025/05/23/%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202020%20%E9%9D%92%E9%BE%99%E7%BB%84%5Dnotes/" aria-label="[网鼎杯 2020 青龙组]notes"></a>
     
     
     <div class="post-cover-right">
       
-        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[极客大挑战 2019]HardSQL" class="lazyload">
+        
+        
+          <img data-src="/images/17369576223624.jpg" data-sizes="auto" alt="[网鼎杯 2020 青龙组]notes" class="lazyload">
+        
       
     </div>
     <div class="post-info">
       <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-15</span>
-        <span><span class="icon-pencil"></span>459 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
+        <span><span class="icon-calendar"></span>2025-05-23</span>
+        <span><span class="icon-pencil"></span>1.5k 字</span>
+        <span><span class="icon-clock"></span>7 分钟</span>
       </div>
-      <h2 class="post-title">[极客大挑战 2019]HardSQL</h2>
+      <h2 class="post-title">[网鼎杯 2020 青龙组]notes</h2>
       <article class="post-article">
         
-           
-判断过滤法一(Fuzz测试)法二(自己试)：过滤了空格
-试了很多，空格只能用反引号和括号来绕过
-过滤了**&amp;#x3D;**
-可以用like来绕过
-过滤了substring与mid
-可以用right与left来绕过
-知识点：
-RIGHT 是一个字符串函数，用于从字符串的右侧提取指定数量的字符
-1RIGHT(string, length)
-
-
-string：要提取字符的字符串。
-length：要提取的字符数。如果 length 大于字符串的长度，则返回整个字符串。
-
-LEFT 是一个字符串函数，用于从字符串的左侧提取指定数量的字符。它的语法如下：
-1LEFT(string, length)
-
-
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/14/%5BMRCTF2020%5D%E4%BD%A0%E4%BC%A0%E4%BD%A0%F0%9F%90%8E%E5%91%A2/" aria-label="[MRCTF2020]你传你🐎呢"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="/../images/17384736097c9d.jpg" data-sizes="auto" alt="[MRCTF2020]你传你🐎呢" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-14</span>
-        <span><span class="icon-pencil"></span>308 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
-      </div>
-      <h2 class="post-title">[MRCTF2020]你传你🐎呢</h2>
-      <article class="post-article">
-        
-          
-判断检验方式我们发现前端是没有检验的
-所以是后端检验文件
-我们先试着上传一个php文件，里面有一句话木马–&amp;gt;上传失败
-上传php文件，抓包修改文件后缀名为png–&amp;gt;上传失败
-上传php文件，抓包修改文件后缀名和Content-Type:png 和 image&amp;#x2F;png –&amp;gt;上传成功
-所以我们猜测是对文件后缀名和Content-Type进行了校验
-如何成功解析php文件但当我们上传了文件之后发现它变成了一个png文件，无法正常解析为php文件
-所以我们需要一个外物来助它变为php文件
-这时候就想到了.user.ini文件和.htaccess文件
-这里上传.user.i
-        
-      </article>
-    </div>
-  </div>
-</div>
-  
-    <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/03/13/%5BBJDCTF2020%5DEasy%20MD5/" aria-label="[BJDCTF2020]Easy MD5"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="/../images/1737907114de8a.jpg" data-sizes="auto" alt="[BJDCTF2020]Easy MD5" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-03-13</span>
-        <span><span class="icon-pencil"></span>210 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
-      </div>
-      <h2 class="post-title">[BJDCTF2020]Easy MD5</h2>
-      <article class="post-article">
-        
-            没找到有用信息
-抓个包看看
-
-响应包里看到一个查询语句
-有个md5语法
-第一关(md5的sql注入)
-所以我们需要输入一个字符串使得它md5加密后返回’or’XXXXXXXXX(这里的XXXXX是一些乱码和不可见字符)
-这里的SQL语句会变成
-1select * from `admin` where password=&amp;#x27;&amp;#x27;or&amp;#x27;XXXXXXXXX&amp;#x27;  
-
-这里用：ffifdyop,这个MD5加密后会返回’or’6XXXXXXXXX
-第二关(md5弱比较)查看源码
-
-这里随便上传两个md5编码后是0e…的就行了
-12345678910PM1kVTMBE
+          考点：undefsafe函数导致的原型链污染
+ 源码+注释：
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210310410510610710810911011111211311411511611711811912012112212312412512
         
       </article>
     </div>
@@ -643,7 +647,7 @@ LEFT 是一个字符串函数，用于从字符串的左侧提取指定数量的
 
   <nav id="page-nav" data-aos="fade-up">
     
-    <a class="extend prev" rel="prev" href="/page/4/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/6/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/4/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/6/">下一页 &raquo;</a>
   </nav>
 
 
@@ -661,7 +665,7 @@ LEFT 是一个字符串函数，用于从字符串的左侧提取指定数量的
       <span class="icon-copyright"></span>
       2020-2025
       <span class="footer-info-sep rotate"></span>
-      fuboy
+      FuB0Y
     </div>
     
       <div>
@@ -672,10 +676,10 @@ LEFT 是一个字符串函数，用于从字符串的左侧提取指定数量的
     
       <div>
         <span class="icon-brush"></span>
-        115.8k
+        284k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        07:58
+        20:48
       </div>
     
     
@@ -704,14 +708,14 @@ LEFT 是一个字符串函数，用于从字符串的左侧提取指定数量的
   <div class="sidebar-wrap">
     
       <div class="sidebar-author">
-  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
-  <div class="sidebar-author-name">fuboy</div>
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
   <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">85</div>
+    <div class="sidebar-state-number">186</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -719,7 +723,7 @@ LEFT 是一个字符串函数，用于从字符串的左侧提取指定数量的
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">179</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -871,6 +875,15 @@ LEFT 是一个字符串函数，用于从字符串的左侧提取指定数量的
 </script>
 
 
+
+  
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm&#x2F;Yr2r3Dy4lfFg" crossorigin="anonymous" defer data-pjax></script>
+
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb&#x2F;GhzOouOXtZMP&#x2F;7XUzwPTstBeZFe&#x2F;+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" defer onload="renderMathInElement(document.body, {delimiters: [{left: &#39;$$&#39;, right: &#39;$$&#39;, display: true},{left: &#39;$&#39;, right: &#39;$&#39;, display: false}]});" data-pjax></script>
+
+  
 
 
 

